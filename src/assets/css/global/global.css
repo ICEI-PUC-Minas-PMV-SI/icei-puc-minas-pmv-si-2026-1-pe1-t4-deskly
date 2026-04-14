@@ -21,7 +21,7 @@ h1,h2,h3,h4 {
 }
 
 h1 {
-    font: var(--heading-1)
+    font: var(--heading-1);
 }
 
 h2 {
@@ -38,5 +38,5 @@ h4 {
 
 .subtitle {
     font: var(--text-sm);
-    color: var(--color-text-sm)
+    color: var(--color-text-sm);
 }
