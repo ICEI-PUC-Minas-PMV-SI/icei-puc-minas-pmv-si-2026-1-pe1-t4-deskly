@@ -1,0 +1,31 @@
+:root {
+
+    /* ===== CORES ===== */
+    --color-btn-primary: #394B67;
+    --color-heading: #212A3E;
+    --color-text-md: #5E6679;
+    --color-text-sm: rgba(94, 102, 121, 0.75);
+    --color-border-card: rgba(94, 102, 121, 0.15);
+    --color-background: #EEEEEE;
+
+    /* ===== TIPOGRAFIA ===== */
+    --main-font: "Poppins", sans-serif;
+    --heading-1: 600 2rem/1.25 var(--main-font);
+    --heading-2: 600 1.75rem/1.25 var(--main-font);
+    --heading-3: 600 1.25rem/1.25 var(--main-font);
+    --text-md: 500 1rem/1.70 var(--main-font);
+    --text-sm: 400 0.75rem/1.70 var(--main-font);
+
+    /* ===== ESPAÇAMENTOS ===== */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    /* ===== BORDAS ===== */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+
+}
