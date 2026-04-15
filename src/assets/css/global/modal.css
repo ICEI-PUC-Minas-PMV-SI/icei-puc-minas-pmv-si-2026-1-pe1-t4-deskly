@@ -1,0 +1,138 @@
+/* overlay */
+dialog {
+  border: none;
+  border-radius: 12px;
+  padding: 0;
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+}
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* header */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header img {
+  height: 20px;
+}
+
+.modal-title {
+  font: var(--heading-3);
+  color: var(--color-heading);
+  margin: 0;
+}
+
+.close-modal {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  color: var(--color-heading);
+}
+
+/* body */
+.modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 1.5rem;
+}
+
+/* input-group */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.input-group label {
+  font: var(--text-md);
+  color: var(--color-text-md);
+}
+
+.input-group input,
+.input-group select {
+  height: 38px;
+  padding: 0 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 14px;
+  color: var(--color-heading);
+  background: var(--color-background);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+  border-color: var(--color-heading);
+  background: var(--color-background);
+}
+
+/* select múltiplo de convidados */
+
+#convidados-wrapper {
+  width: 100%;
+}
+
+#convidados {
+  width: 100%;
+  box-sizing: border-box;
+  height: 130px;
+  padding: 6px;
+}
+
+#convidados option {
+  padding: 6px 8px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+#convidados option:checked {
+  background: var(--color-btn-primary);
+  color: var(--color-background);
+}
+
+.input-group small {
+  font: var(--text-sm);
+  color: var(--color-text-sm);
+}
+
+/* footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.modal-footer button {
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid #d1d5db;
+  background: var(--color-background);
+  color: var(--color-btn-primary);
+  transition: background 0.2s;
+}
+
+.modal-footer button:last-child {
+  background: var(--color-btn-primary);
+  color: var(--color-background);
+  border-color: var(--color-btn-primary);
+}
+
+.modal-footer button:hover {
+  opacity: 0.9;
+}
