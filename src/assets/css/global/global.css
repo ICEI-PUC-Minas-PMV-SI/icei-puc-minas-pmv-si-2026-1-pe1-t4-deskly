@@ -76,7 +76,7 @@ aside nav {
 aside nav ul {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 18px;
     padding: 30px 24px;
 }
 
@@ -128,6 +128,19 @@ button {
 .subtitle {
     font: var(--text-sm);
     color: var(--color-text-sm);
+}
+
+.confirmed-badge {
+    background-color: var(--color-badge-green);
+    width: 100px;
+    height: 24px;
+    font: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-green);
+    border-radius: 8px;
+    padding: 4px 12px;
+    text-align: center;
+    align-content: center;
 }
 
 

@@ -7,6 +7,8 @@
     --color-text-sm: rgba(94, 102, 121, 0.75);
     --color-border-card: rgba(94, 102, 121, 0.15);
     --color-background: #EEEEEE;
+    --color-badge-green: #D4EDDA;
+    --color-text-green: #2D6A3F;
 
     /* ===== TIPOGRAFIA ===== */
     --main-font: "Poppins", sans-serif;
@@ -14,8 +16,8 @@
     --heading-2: 600 clamp(1.25rem, 2vw, 1.75rem)/1.25 var(--main-font);
     --heading-3: 600 clamp(1rem, 1.5vw, 1.25rem)/1.25 var(--main-font);
     --heading-4: 500 clamp(0.875rem, 1.2vw, 1.125rem)/1.25 var(--main-font);
-    --text-md: 500 clamp(0.875rem, 1vw, 1rem)/1.70 var(--main-font);
-    --text-sm: 400 clamp(0.7rem, 0.8vw, 0.75rem)/1.70 var(--main-font);
+    --text-md: 500 clamp(0.875rem, 1vw, 1rem)/1.0 var(--main-font);
+    --text-sm: 400 clamp(0.7rem, 0.8vw, 0.75rem)/1.0 var(--main-font);
 
     /* ===== ESPAÇAMENTOS ===== */
     --spacing-xs: 0.5rem;
