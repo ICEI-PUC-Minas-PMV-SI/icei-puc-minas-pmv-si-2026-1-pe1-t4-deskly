@@ -138,3 +138,11 @@ dialog::backdrop {
 .modal-footer button:hover {
   opacity: 0.9;
 }
+
+@media (max-width: 768px) {
+
+  dialog {
+      max-width: 380px;
+  }
+
+}
