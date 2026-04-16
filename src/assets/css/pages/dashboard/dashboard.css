@@ -111,8 +111,8 @@
 @media (max-width: 768px) {
 
     .stats-grid {
-        gap: 8px;
-        justify-content: space-evenly;
+        gap: 24px;
+        justify-content: center;
     }
 
     .stats-card {
