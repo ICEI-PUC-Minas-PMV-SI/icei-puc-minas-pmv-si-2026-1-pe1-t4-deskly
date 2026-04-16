@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/global/global.css">
+    <link rel="stylesheet" href="assets/css/pages/SalasReuniao/SalasReuniao.css">
+    <title>Salas de Reunião</title>
+</head>
+
+<body>
+    <header>
+        <img class="logo" src="assets/icons/logo.svg" alt="Logo Deskly">
+        <div class="header-icons">
+            <button><img class="header-icon" src="assets/icons/bell.svg" alt="Sino"></button>
+            <button><img class="header-icon" src="assets/icons/user-circle.svg" alt="Perfil"></button>
+            <button type="button" id="btn-hamburguer" class="hamburguer"><img src="assets/icons/menu.svg"
+                    alt="Botão"></button>
+        </div>
+    </header>
+    <aside>
+        <nav>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Calendário</a></li>
+                <li><a href="#">Salas de Reunião</a></li>
+                <li><a href="#">Estações de Trabalho</a></li>
+                <li><a href="#">Minhas Reservas</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#">Painel Admin</a></li>
+                <li><a href="#">Ajuda</a></li>
+            </ul>
+
+        </nav>
+    </aside>
+    <main>
+        <div class="main-header">
+            <div class="titulos">
+                <h1>Salas de Reunião</h1>
+                <span class="subtitle">Clique em "Detalhes" para ver horários disponíveis</span>
+            </div>
+            <button class="botao-add-sala open-modal" data-modal="modal-reserva">+ Nova Reserva</button>
+        </div>
+
+        <section class="filtros-container">
+            <div class="campo-filtro">
+                <input type="date">
+            </div>
+
+            <div class="campo-filtro">
+                <input type="time">
+            </div>
+
+            <div class="campo-filtro">
+                <input type="time">
+            </div>
+
+            <div class="campo-filtro">
+                <select>
+                    <option>Todas as capacidades</option>
+                    <option>Até 4 pessoas</option>
+                    <option>Até 8 pessoas</option>
+                    <option>Mais de 8 pessoas</option>
+                </select>
+                <img src="assets/icons/seta.svg" alt="Imagem da Sala">
+            </div>
+
+            <button class="btn-filtrar-simples">Filtrar</button>
+        </section>
+
+        <section class="lista-salas">
+            <article class="card-sala">
+                <div class="sala-info-principal">
+                    <img src="assets/images/reservation-image-sample.png" alt="Imagem da Sala" class="sala-img">
+
+                    <div class="sala-textos">
+                        <h3>Sala Alfa</h3>
+                        <p>Capacidade: 8 pessoas · TV, Videoconferência, Lousa</p>
+                    </div>
+                </div>
+
+                <div class="sala-acoes">
+                    <span class="badge disponivel">Disponível</span>
+                    <button class="btn-detalhes">Detalhes</button>
+                    <button class="btn-reservar">Reservar</button>
+                </div>
+            </article>
+
+            <article class="card-sala">
+                <div class="sala-info-principal">
+                    <img src="assets/images/reservation-image-sample.png" alt="Imagem da Sala" class="sala-img">
+
+                    <div class="sala-textos">
+                        <h3>Sala Beta</h3>
+                        <p>Capacidade: 4 pessoas · TV, Videoconferência</p>
+                    </div>
+                </div>
+
+                <div class="sala-acoes">
+                    <span class="badge ocupada">Ocupada</span>
+                    <button class="btn-detalhes">Detalhes</button>
+                    <button class="btn-reservar desabilitado" disabled>Reservar</button>
+                </div>
+            </article>
+
+            <article class="card-sala">
+                <div class="sala-info-principal">
+                    <img src="assets/images/reservation-image-sample.png" alt="Sala Gama" class="sala-img">
+                    <div class="sala-textos">
+                        <h3>Sala Gama</h3>
+                        <p>Capacidade: 12 pessoas · TV, Videoconferência, Lousa, Ar-condicionado</p>
+                    </div>
+                </div>
+                <div class="sala-acoes">
+                    <span class="badge disponivel">Disponível</span>
+                    <button class="btn-detalhes">Detalhes</button>
+                    <button class="btn-reservar">Reservar</button>
+                </div>
+            </article>
+
+            <article class="card-sala">
+                <div class="sala-info-principal">
+                    <img src="assets/images/reservation-image-sample.png" alt="Sala Delta" class="sala-img">
+                    <div class="sala-textos">
+                        <h3>Sala Delta</h3>
+                        <p>Capacidade: 6 pessoas · Lousa</p>
+                    </div>
+                </div>
+                <div class="sala-acoes">
+                    <span class="badge inativa">Inativa</span>
+                    <button class="btn-detalhes">Detalhes</button>
+                    <button class="btn-reservar" disabled>Reservar</button>
+                </div>
+            </article>
+        </section>
+    </main>
+
+    <dialog id="modal-reserva">
+    <form action="">
+        <div class="modal-header">
+            <h3 class="modal-title">Nova Reserva</h3>
+            <button class="close-modal" data-modal="modal-reserva" type="button">
+                <img src="assets/icons/close-menu.svg" alt="Fechar">
+            </button>
+        </div>
+
+        <div class="modal-body">
+            <div class="input-group">
+                <label for="tipo-espaco">Tipo de espaço</label>
+                <select id="tipo-espaco" name="tipo-espaco">
+                    <option value="sala">Sala de Reunião</option>
+                    <option value="estacao">Estação de Trabalho</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="espaco">Espaço</label>
+                <select id="espaco" name="espaco" onchange="verificarCapacidade()">
+                    <option value="">Selecione o local</option>
+                    <option value="8">Sala Alfa – cap. 8</option>
+                    <option value="4">Sala Beta – cap. 4</option>
+                    <option value="12">Sala Gama – cap. 12</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="date">Data</label>
+                <input type="date" id="date">
+            </div>
+
+            <div class="input-row" style="display: flex; gap: 16px;">
+                <div class="input-group" style="flex: 1;">
+                    <label for="start-time">Início</label>
+                    <input type="time" id="start-time">
+                </div>
+                <div class="input-group" style="flex: 1;">
+                    <label for="ending-time">Término</label>
+                    <input type="time" id="ending-time">
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="convidados">Convidados (e-mails separados por vírgula)</label>
+                <input type="text" id="convidados" >
+                <small id="limite-msg" style="color: var(--color-text-md); margin-top: 4px; display: block;">
+                    Selecione uma sala para ver o limite de convidados.
+                </small>
+            </div>
+        </div>
+
+        <div class="modal-footer">
+            <button type="button" class="btn-cancelar close-modal" data-modal="modal-reserva">Cancelar</button>
+            <button type="button" class="btn-confirmar" onclick="confirmarReserva()">Confirmar reserva</button>
+        </div>
+    </form>
+</dialog>
+
+<script src="./assets/js/modal.js"></script>
+<script>
+    function verificarCapacidade() {
+        const selectEspaco = document.getElementById('espaco');
+        const limiteMsg = document.getElementById('limite-msg');
+        const capacidade = selectEspaco.value;
+
+        if (capacidade) {
+            limiteMsg.innerText = `Limite para este espaço: ${capacidade} convidados.`;
+            limiteMsg.style.color = "var(--color-text-md)";
+        } else {
+            limiteMsg.innerText = "Selecione uma sala para ver o limite.";
+        }
+    }
+
+    function confirmarReserva() {
+        const capacidade = parseInt(document.getElementById('espaco').value);
+        const convidadosInput = document.getElementById('convidados').value;
+        const listaConvidados = convidadosInput.split(',').filter(email => email.trim() !== "");
+
+        if (listaConvidados.length > capacidade) {
+            alert(`Erro: Você excedeu o limite de ${capacidade} convidados para esta sala.`);
+            return;
+        }
+        
+        alert("Reserva confirmada com sucesso!");
+        document.getElementById('modal-reserva').close();
+    }
+</script>
+    <script src="assets/js/menu.js"></script>
+    <script src="./assets/js/modal.js"></script>
+</body>
+
+</html>

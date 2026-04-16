@@ -1,0 +1,272 @@
+.main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: var(--spacing-lg);
+    padding: var(--spacing-md) var(--spacing-xl);
+}
+
+.titulos {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xs);
+}
+
+.botao-add-sala {
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    padding: var(--spacing-xs) var(--spacing-md);
+    border-radius: var(--radius-md);
+}
+
+.filtros-container {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding: 0 var(--spacing-xl);
+    flex-wrap: wrap;
+}
+
+.campo-filtro,
+.btn-filtrar-simples {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: transparent;
+    border: 1px solid var(--color-border-card) !important;
+    border-radius: var(--radius-md);
+
+    padding: var(--spacing-xs) var(--spacing-sm);
+    min-height: 44px;
+}
+
+.campo-filtro input,
+.campo-filtro select,
+.btn-filtrar-simples {
+    border: none;
+    background: transparent;
+    font: var(--text-md);
+    color: var(--color-text-md);
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+}
+
+.campo-filtro img {
+    height: 18px;
+    width: 18px;
+    margin-left: 10px;
+    opacity: 0.7;
+}
+
+.lista-salas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-xl);
+}
+
+.card-sala {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    transition: transform 0.2s ease;
+}
+
+.card-sala:hover {
+    background-color: rgba(94, 102, 121, 0.02);
+}
+
+.sala-info-principal {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.sala-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    background-color: #D9D9D9;
+}
+
+.sala-textos h3 {
+    font: var(--heading-3);
+    color: var(--color-heading);
+    margin: 0;
+    margin-bottom: var(--spacing-xs);
+}
+
+.sala-textos p {
+    font: var(--text-sm);
+    color: var(--color-text-md);
+    margin: 0;
+}
+
+.sala-acoes {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.badge {
+    padding: 6px 16px;
+    border-radius: var(--radius-md);
+    font: var(--text-sm);
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+}
+
+.badge.disponivel {
+    background-color: var(--color-badge-green);
+    color: var(--color-text-green);
+}
+
+.badge.ocupada {
+    background-color: #F8D7DA;
+    color: #721C24;
+}
+
+.badge.inativa {
+    background-color: var(--color-border-card);
+    color: var(--color-text-md);
+}
+
+.btn-detalhes {
+    background: transparent;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    padding: 8px 16px;
+    color: var(--color-text-md);
+    font: var(--text-sm);
+    cursor: pointer;
+}
+
+.btn-reservar {
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 8px 20px;
+    font: var(--text-sm);
+    cursor: pointer;
+}
+
+.btn-reservar:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: var(--color-border-card);
+}
+
+.lista-salas {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+    padding: var(--spacing-lg) var(--spacing-xl);
+}
+
+.card-sala {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 1px solid var(--color-border-card);
+    border-radius: 20px;
+    padding: var(--spacing-md);
+    transition: background-color 0.2s ease;
+}
+
+.card-sala:hover {
+    background-color: rgba(94, 102, 121, 0.02);
+}
+
+.sala-info-principal {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.sala-img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    background-color: #D9D9D9;
+}
+
+.sala-textos h3 {
+    font: var(--heading-3);
+    color: var(--color-heading);
+    margin: 0 0 var(--spacing-xs) 0;
+}
+
+.sala-textos p {
+    font: var(--text-sm);
+    color: var(--color-text-md);
+    margin: 0;
+}
+
+.sala-acoes {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.badge {
+    padding: 6px 16px;
+    border-radius: var(--radius-lg);
+    font: var(--text-sm);
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+}
+
+.badge.disponivel {
+    background-color: var(--color-badge-green);
+    color: var(--color-text-green);
+    border-radius: var(--radius-md);
+}
+
+.badge.inativa {
+    background-color: var(--color-border-card);
+    color: var(--color-text-md);
+}
+
+.badge.ocupada {
+    background-color: #F8D7DA;
+    color: #721C24;
+}
+
+.btn-detalhes {
+    background: transparent;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    padding: 8px 16px;
+    color: var(--color-text-md);
+    font: var(--text-sm);
+    cursor: pointer;
+}
+
+.btn-reservar {
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 8px 20px;
+    font: var(--text-sm);
+    cursor: pointer;
+}
+
+.btn-reservar:disabled {
+    background-color: transparent;
+    border: 1px solid var(--color-border-card);
+    color: var(--color-text-sm);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
