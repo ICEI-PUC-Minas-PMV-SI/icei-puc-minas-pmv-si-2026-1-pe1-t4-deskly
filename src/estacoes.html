@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="assets/css/global/global.css">
+    <link rel="stylesheet" href="assets/css/pages/estacoes/estacoes.css">
+
+    <title>Estações de Trabalho</title>
+</head>
+<body>
+
+<header>
+    <img class="logo" src="assets/icons/logo.svg">
+    <div class="header-icons">
+        <button><img class="header-icon" src="assets/icons/bell.svg"></button>
+        <button><img class="header-icon" src="assets/icons/user-circle.svg"></button>
+        <button id="btn-hamburguer" class="hamburguer">
+            <img src="assets/icons/menu.svg">
+        </button>
+    </div>
+</header>
+
+<aside>
+    <nav>
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="#">Calendário</a></li>
+            <li><a href="#">Salas de Reunião</a></li>
+            <li><a href="#">Estações de Trabalho</a></li>
+            <li><a href="#">Minhas Reservas</a></li>
+        </ul>
+        <ul>
+            <li><a href="#">Painel Admin</a></li>
+            <li><a href="#">Ajuda</a></li>
+        </ul>
+    </nav>
+</aside>
+
+<main>
+<section class="estacoes">
+
+    <!-- HEADER -->
+    <div class="estacoes-header">
+        <div>
+            <h1>Estações de Trabalho</h1>
+            <span class="subtitle">Reserve sua mesa para o dia</span>
+        </div>
+
+        <button class="fast-action-btn open-modal" data-modal="modal-1">
+            + Nova Reserva
+        </button>
+    </div>
+
+    <!-- FILTRO -->
+    <div class="filtro-data">
+
+        <div class="date-wrapper">
+            <input type="date" class="date-input">
+            <img src="assets/icons/calendar-dots.svg" class="calendar-icon">
+        </div>
+
+        <button class="btn-filtrar">Filtrar</button>
+
+    </div>
+
+    <!-- LISTA -->
+    <div class="estacoes-lista">
+
+        <!-- MESA 01 -->
+        <div class="estacao-card">
+            <div class="estacao-info">
+                <div class="estacao-icon"></div>
+                <div>
+                    <h4>Mesa 01</h4>
+                    <span class="subtitle">Área: Andar 2 - Ala A</span>
+                </div>
+            </div>
+            <div class="estacao-acoes">
+                <span class="badge disponivel">Disponível</span>
+                <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
+            </div>
+        </div>
+
+        <!-- MESA 02 -->
+        <div class="estacao-card">
+            <div class="estacao-info">
+                <div class="estacao-icon"></div>
+                <div>
+                    <h4>Mesa 02</h4>
+                    <span class="subtitle">Área: Andar 2 - Ala B</span>
+                </div>
+            </div>
+            <div class="estacao-acoes">
+                <span class="badge ocupado">Ocupado</span>
+                <button class="fast-action-btn" disabled>Reservar</button>
+            </div>
+        </div>
+
+        <!-- MESA 03 -->
+        <div class="estacao-card">
+            <div class="estacao-info">
+                <div class="estacao-icon"></div>
+                <div>
+                    <h4>Mesa 03</h4>
+                    <span class="subtitle">Área: Andar 3 - Ala C</span>
+                </div>
+            </div>
+            <div class="estacao-acoes">
+                <span class="badge inativa">Inativa</span>
+                <button class="fast-action-btn" disabled>Reservar</button>
+            </div>
+        </div>
+
+        <!-- MESA 04 -->
+        <div class="estacao-card">
+            <div class="estacao-info">
+                <div class="estacao-icon"></div>
+                <div>
+                    <h4>Mesa 04</h4>
+                    <span class="subtitle">Área: Andar 2 - Ala D</span>
+                </div>
+            </div>
+            <div class="estacao-acoes">
+                <span class="badge disponivel">Disponível</span>
+                <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
+            </div>
+        </div>
+
+        <!-- MESA 05 -->
+        <div class="estacao-card">
+            <div class="estacao-info">
+                <div class="estacao-icon"></div>
+                <div>
+                    <h4>Mesa 05</h4>
+                    <span class="subtitle">Área: Andar 3 - Ala A</span>
+                </div>
+            </div>
+            <div class="estacao-acoes">
+                <span class="badge ocupado">Ocupado</span>
+                <button class="fast-action-btn" disabled>Reservar</button>
+            </div>
+        </div>
+
+        <!-- MESA 06 -->
+        <div class="estacao-card">
+            <div class="estacao-info">
+                <div class="estacao-icon"></div>
+                <div>
+                    <h4>Mesa 06</h4>
+                    <span class="subtitle">Área: Andar 3 - Ala B</span>
+                </div>
+            </div>
+            <div class="estacao-acoes">
+                <span class="badge disponivel">Disponível</span>
+                <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
+            </div>
+        </div>
+
+        <!-- MESA 07 -->
+        <div class="estacao-card">
+            <div class="estacao-info">
+                <div class="estacao-icon"></div>
+                <div>
+                    <h4>Mesa 07</h4>
+                    <span class="subtitle">Área: Andar 1 - Ala C</span>
+                </div>
+            </div>
+            <div class="estacao-acoes">
+                <span class="badge inativa">Inativa</span>
+                <button class="fast-action-btn" disabled>Reservar</button>
+            </div>
+        </div>
+
+        <!-- MESA 08 -->
+        <div class="estacao-card">
+            <div class="estacao-info">
+                <div class="estacao-icon"></div>
+                <div>
+                    <h4>Mesa 08</h4>
+                    <span class="subtitle">Área: Andar 1 - Ala D</span>
+                </div>
+            </div>
+            <div class="estacao-acoes">
+                <span class="badge disponivel">Disponível</span>
+                <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+</main>
+
+<!-- MODAL -->
+<dialog id="modal-1">
+<form>
+
+    <div class="modal-header">
+        <h3>Nova reserva</h3>
+        <button class="close-modal" data-modal="modal-1" type="button">
+            X
+        </button>
+    </div>
+
+    <div class="modal-body">
+
+        <div class="input-group">
+            <label>Estação de trabalho</label>
+            <select>
+                <option>Mesa 01 — Andar 2 - Ala A</option>
+                <option>Mesa 02 — Andar 2 - Ala B</option>
+                <option>Mesa 03 — Andar 3 - Ala C</option>
+                <option>Mesa 04 — Andar 2 - Ala D</option>
+                <option>Mesa 05 — Andar 3 - Ala A</option>
+                <option>Mesa 06 — Andar 3 - Ala B</option>
+                <option>Mesa 07 — Andar 1 - Ala C</option>
+                <option>Mesa 08 — Andar 1 - Ala D</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <label>Data</label>
+            <input type="date">
+        </div>
+
+        <div class="input-group">
+            <label>Início</label>
+            <input type="time">
+        </div>
+
+        <div class="input-group">
+            <label>Fim</label>
+            <input type="time">
+        </div>
+
+    </div>
+
+    <div class="modal-footer">
+        <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
+        <button type="button">Confirmar</button>
+    </div>
+
+</form>
+</dialog>
+
+<script src="assets/js/menu.js"></script>
+<script src="assets/js/modal.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,225 @@
+/* CONTAINER */
+.estacoes {
+    padding: 24px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* HEADER */
+.estacoes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* FILTRO */
+.filtro-data {
+    display: flex;
+    gap: 16px;
+}
+
+/* CALENDÁRIO */
+.date-wrapper {
+    position: relative;
+    width: 260px;
+    height: 56px;
+    border: 1px solid var(--color-border-card);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    background: var(--color-background);
+}
+
+.date-wrapper:hover {
+    border-color: var(--color-heading);
+}
+
+.date-input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: transparent;
+    font: var(--text-md);
+    outline: none;
+    cursor: pointer;
+}
+
+/* ESCONDE ÍCONE PADRÃO */
+.date-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+/* ÍCONE SVG */
+.calendar-icon {
+    position: absolute;
+    right: 16px;
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+}
+
+/* BOTÃO FILTRAR */
+.btn-filtrar {
+    height: 56px;
+    padding: 0 24px;
+    border-radius: 16px;
+    border: 1px solid var(--color-border-card);
+    background: transparent;
+    cursor: pointer;
+}
+
+.btn-filtrar:hover {
+    background: var(--color-heading);
+    color: var(--color-background);
+    transition: 0.2s;
+}
+
+/* LISTA */
+.estacoes-lista {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* CARD */
+.estacao-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--color-border-card);
+    border-radius: 20px;
+    padding: 24px;
+    transition: 0.2s;
+}
+
+.estacao-card:hover {
+    border-color: var(--color-heading);
+}
+
+/* ESQUERDA */
+.estacao-info {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* QUADRADO */
+.estacao-icon {
+    width: 60px;
+    height: 60px;
+    background-color: #e5e5e5;
+    border-radius: 12px;
+}
+
+/* DIREITA */
+.estacao-acoes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* BADGE */
+.badge {
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.disponivel {
+    background-color: #d4f5e9;
+    color: #1b8f5a;
+}
+
+.ocupado {
+    background-color: #ffd6d6;
+    color: #c0392b;
+}
+
+.inativa {
+    background-color: #eee;
+    color: #777;
+}
+
+/* BOTÃO */
+.fast-action-btn {
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    padding: 12px 20px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+}
+
+.fast-action-btn:hover {
+    background: var(--color-heading);
+}
+
+/* BOTÃO DESATIVADO */
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* ================= MODAL CORRETO ================= */
+
+/* NÃO usar position fixed nem transform aqui */
+dialog {
+    border: none;
+    border-radius: 16px;
+    padding: 0;
+    width: 90%;
+    max-width: 500px;
+}
+
+/* FUNDO ESCURO */
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+/* HEADER DO MODAL */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid var(--color-border-card);
+}
+
+/* BODY */
+.modal-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* INPUT GROUP */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.input-group input,
+.input-group select {
+    height: 44px;
+    border-radius: 10px;
+    border: 1px solid var(--color-border-card);
+    padding: 0 12px;
+}
+
+/* FOOTER */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    padding: 20px 24px;
+    border-top: 1px solid var(--color-border-card);
+}
