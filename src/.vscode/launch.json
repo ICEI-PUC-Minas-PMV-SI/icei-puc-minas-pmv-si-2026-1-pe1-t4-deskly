@@ -1,0 +1,14 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "chrome",
+            "request": "launch",
+            "name": "Open estacoes.html",
+            "file": "c:\\Users\\lelem\\OneDrive\\Desktop\\Deskly\\icei-puc-minas-pmv-si-2026-1-pe1-t4-deskly\\src\\icei-puc-minas-pmv-si-2026-1-pe1-t4-deskly\\src\\estacoes.html"
+        }
+    ]
+}
