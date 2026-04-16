@@ -74,7 +74,7 @@
             </div>
             <div class="today-reservations">
                 <h3 class="dashboard-subtitle">Suas reservas de hoje</h3>
-                <div>
+                <div class="reservation-card-wrap">
                     <div class="reservation-card">
                         <div>
                             <img src="assets/images/reservation-image-sample.png" alt="Imagem da Sala">
@@ -91,8 +91,8 @@
                         <div>
                             <img src="assets/images/reservation-image-sample.png" alt="Imagem da Sala">
                             <div>
-                                <h4>Sala Alfa</h4>
-                                <span class="subtitle">10:00 – 11:30 · 3 convidados</span>
+                                <h4>Mesa 04</h4>
+                                <span class="subtitle">14:00 – 18:00 · estação individual</span>
                             </div>
                         </div>
                         <div class="confirmed-badge">
@@ -103,8 +103,8 @@
                         <div>
                             <img src="assets/images/reservation-image-sample.png" alt="Imagem da Sala">
                             <div>
-                                <h4>Sala Alfa</h4>
-                                <span class="subtitle">10:00 – 11:30 · 3 convidados</span>
+                                <h4>Sala Delta</h4>
+                                <span class="subtitle">14:00 – 15:30 · 8 convidados</span>
                             </div>
                         </div>
                         <div class="confirmed-badge">
@@ -115,10 +115,121 @@
             </div>
             <div class="fast-actions">
                 <h3 class="dashboard-subtitle">Ações rápidas</h3>
+                <div class="fast-actions-buttons-wrap">
+                    <button class="fast-action-btn open-modal" data-modal="modal-1">+ Reservar sala de reunião</button>
+                    <button class="fast-action-btn open-modal" data-modal="modal-2">+ Reservar estação de trabalho</button>
+                    <a href="my-reserves.html" class="fast-action-btn">+ Ver minhas reservas</a>
+                </div>
             </div>
         </section>
     </main>
+
+    <dialog id="modal-1">
+        <form action="">
+            <div class="modal-header">
+            <h3 class="modal-title">Nova reserva</h3>
+            <button class="close-modal" data-modal="modal-1" type="button">
+                <img src="assets/icons/close-menu.svg" alt="Fechar">
+            </button>
+            </div>
+
+            <div class="modal-body">
+
+            <div class="input-group">
+                <label for="espaco">Sala de reunião</label>
+                <select id="espaco" name="espaco" onchange="atualizarConvidados()">
+                <option value="">Selecione uma sala de reunião</option>
+                <option value="4">Sala A — cap. 4 pessoas</option>
+                <option value="8">Sala B — cap. 8 pessoas</option>
+                <option value="12">Sala C — cap. 12 pessoas</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="date">Data</label>
+                <input type="date" id="date">
+            </div>
+
+            <div class="input-group">
+                <label for="start-time">Horário de início</label>
+                <input type="time" id="start-time">
+            </div>
+
+            <div class="input-group">
+                <label for="ending-time">Horário de término</label>
+                <input type="time" id="ending-time">
+            </div>
+
+            <div class="input-group" id="convidados-wrapper" style="display: none;">
+                <label for="convidados">
+                Convidados <span id="limite-label"></span>
+                </label>
+                <select id="convidados" name="guests[]" multiple></select>
+                <small id="aviso"></small>
+            </div>
+
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
+            <button type="button" onclick="confirmar()">Confirmar</button>
+            </div>
+        </form>
+        </dialog>
+        <dialog id="modal-2">
+        <form action="">
+            <div class="modal-header">
+            <h3 class="modal-title">Nova reserva</h3>
+            <button class="close-modal" data-modal="modal-2" type="button">
+                <img src="assets/icons/close-menu.svg" alt="Fechar">
+            </button>
+            </div>
+
+            <div class="modal-body">
+
+            <div class="input-group">
+                <label for="espaco">Estação de trabalho</label>
+                <select id="espaco" name="espaco" onchange="atualizarConvidados()">
+                <option value="">Selecione uma estação de trabalho</option>
+                <option value="4">Estação A — cap. 4 pessoas</option>
+                <option value="8">Estação B — cap. 8 pessoas</option>
+                <option value="12">Estação C — cap. 12 pessoas</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="date">Data</label>
+                <input type="date" id="date">
+            </div>
+
+            <div class="input-group">
+                <label for="start-time">Horário de início</label>
+                <input type="time" id="start-time">
+            </div>
+
+            <div class="input-group">
+                <label for="ending-time">Horário de término</label>
+                <input type="time" id="ending-time">
+            </div>
+
+            <div class="input-group" id="convidados-wrapper" style="display: none;">
+                <label for="convidados">
+                Convidados <span id="limite-label"></span>
+                </label>
+                <select id="convidados" name="guests[]" multiple></select>
+                <small id="aviso"></small>
+            </div>
+
+            </div>
+
+            <div class="modal-footer">
+            <button type="button" class="close-modal" data-modal="modal-2">Cancelar</button>
+            <button type="button" onclick="confirmar()">Confirmar</button>
+            </div>
+        </form>
+        </dialog>
     
     <script src="assets/js/menu.js"></script>
+    <script src="./assets/js/modal.js"></script>
 </body>
 </html>

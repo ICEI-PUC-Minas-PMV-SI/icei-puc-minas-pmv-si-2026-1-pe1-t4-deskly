@@ -47,7 +47,7 @@
     line-height: 180%;
 }
 
-.today-reservations > div {
+.today-reservations .reservation-card-wrap {
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -62,10 +62,47 @@
     border: 1px solid var(--color-border-card);
     border-radius: 20px;
     padding: 26px;
+    cursor: pointer;
 }
 
 .reservation-card div:nth-child(1) {
     display: flex;
     align-items: center;
     gap: 24px;
+}
+
+.fast-actions-buttons-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+}
+.fast-action-btn {
+    text-align: start;
+    width: 100%;
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    padding: 14px 24px;
+    border-radius: 16px;
+    height: 50px;
+}
+
+.fast-actions-buttons-wrap .fast-action-btn:last-child {
+    background: none;
+    color: var(--color-btn-primary);
+    outline: 1px solid var(--color-border-card);
+    display: block;
+    align-content: center;
+}
+
+.fast-action-btn:hover {
+    background: var(--color-heading);
+    outline: 1px solid var(--color-border-card);
+    transition: 0.2s ease;
+}
+
+.fast-actions-buttons-wrap .fast-action-btn:last-child:hover {
+    background: var(--color-heading);
+    color: var(--color-background);
+    transition: 0.2s ease;
 }
