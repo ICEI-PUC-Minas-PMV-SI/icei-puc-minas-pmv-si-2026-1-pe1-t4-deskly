@@ -1,54 +1,41 @@
 # Introdução
 
-Imagine que você deseja apresentar este projeto para investidores que deverão decidir se investem ou não no desenvolvimento da sua ferramenta.
+A adoção do modelo de trabalho híbrido vem crescendo nos últimos anos e transformando a forma como as empresas organizam seus ambientes de trabalho. Nesse formato, os colaboradores alternam entre atividades presenciais e remotas, o que aumenta a flexibilidade, mas também muda completamente a forma de utilização dos espaços físicos. Com isso, escritórios deixam de ter uma ocupação fixa e passam a apresentar variações constantes de presença.
 
-A **Introdução** consiste das etapas: *Contextualização -- Definição do problema -- Definição dos Objetivos -- Justificativa*, e tem como função situar o seu trabalho dentro de um contexto de mercado e mostrar a importância da sua proposta para resolver a dor de um usuário.
+Esse novo cenário torna a gestão de ambientes corporativos mais complexa, principalmente no controle de salas de reunião e estações de trabalho. A ausência de previsibilidade na ocupação pode gerar conflitos de reserva, espaços ociosos e dificuldades no planejamento das equipes. Além disso, muitas empresas ainda não possuem ferramentas adequadas para visualizar e organizar esse uso de forma clara e eficiente.
 
-A Contextualização deve situar sem projeto em um determinado contexto de mercado, a fim de fornecer informações adicionais que possam ajudar a entender melhor o assunto que você irá abordar. Serve também para definir a relevância do seu assunto, uma vez que mostra o tamanho do mercado em que se está inserido. Ela pode envolver a análise de vários aspectos, como o ambiente histórico, cultural, político e social em que o problema a ser atacado surgiu.
-
-Escreva de 2 a 3 parágrafos para contetualizar o seu projeto.
+Diante disso, surge uma necessidade cada vez mais evidente no mercado corporativo: melhorar a forma como os espaços físicos são gerenciados em ambientes híbridos. Esse desafio impacta diretamente a organização interna das empresas, que precisam equilibrar flexibilidade, eficiência e melhor aproveitamento dos recursos disponíveis.
 
 ## Problema
 
-Nesse momento você deve apresentar o problema que a sua aplicação deve resolver. No entanto, **não** é a hora de comentar sobre a solução/aplicação.
+No contexto de ambientes corporativos com modelo de trabalho híbrido, a gestão dos espaços físicos enfrenta desafios relacionados ao controle e à organização do uso diário.
 
-Descreva também o contexto em que essa aplicação será usada, se  houver: empresa, tecnologias, etc. Novamente, descreva apenas o que de fato existir, pois ainda não é a hora de apresentar requisitos detalhados ou projetos.
+A variação na ocupação de salas de reunião, estações de trabalho e demais ambientes compartilhados pode ocasionar conflitos de reserva, uso simultâneo indevido de espaços e períodos de ociosidade. Essas situações prejudicam o funcionamento adequado das atividades presenciais nas empresas.
 
-Nesse momento, o grupo pode optar por fazer uso  de ferramentas como Design Thinking, que permite um olhar de ponta a ponta para o problema.
+Além disso, a ausência de um controle mais preciso sobre a ocupação dificulta o planejamento interno das equipes e reduz a eficiência na utilização dos recursos físicos disponíveis.
 
-> **Links Úteis**:
-> - [Objetivos, Problema de pesquisa e Justificativa](https://medium.com/@versioparole/objetivos-problema-de-pesquisa-e-justificativa-c98c8233b9c3)
-> - [Matriz Certezas, Suposições e Dúvidas](https://medium.com/educa%C3%A7%C3%A3o-fora-da-caixa/matriz-certezas-suposi%C3%A7%C3%B5es-e-d%C3%BAvidas-fa2263633655)
-> - [Brainstorming](https://www.euax.com.br/2018/09/brainstorming/)
+Como consequência, esses fatores impactam a organização do trabalho, a gestão dos espaços e a dinâmica operacional das empresas.
 
 ## Objetivos
 
-Aqui você deve descrever os objetivos do trabalho indicando que o objetivo geral é desenvolver um software para solucionar o problema apresentado acima. 
+O objetivo deste projeto é desenvolver um software para solucionar problemas relacionados à gestão do uso de espaços físicos em empresas que adotam o modelo de trabalho híbrido, buscando tornar sua utilização mais organizada e eficiente diante da variação na presença dos colaboradores.
 
-Apresente também alguns (pelo menos 2) objetivos específicos dependendo de onde você vai querer concentrar a sua prática investigativa, ou como você vai aprofundar no seu trabalho.
- 
-> **Links Úteis**:
-> - [Objetivo geral e objetivo específico: como fazer e quais verbos utilizar](https://blog.mettzer.com/diferenca-entre-objetivo-geral-e-objetivo-especifico/)
+Como objetivos específicos, pretende-se analisar as principais dificuldades enfrentadas no uso desses ambientes, como conflitos de reserva e desorganização na ocupação de salas e estações de trabalho. Também busca-se desenvolver funcionalidades que permitam o registro, o controle e a visualização da ocupação dos espaços, contribuindo para uma melhor organização e aproveitamento dos recursos disponíveis.
 
 ## Justificativa
 
-Descreva a importância ou a motivação para trabalhar com esta aplicação que você escolheu. Indique as razões pelas quais você escolheu seus objetivos específicos ou as razões para aprofundar em certos aspectos do software.
+A escolha deste tema se justifica pela crescente adoção do modelo de trabalho híbrido nas empresas e pelos desafios que isso trouxe para a organização e o uso dos espaços físicos. Esse cenário impacta diretamente a forma como ambientes como salas de reunião e estações de trabalho são utilizados no cotidiano corporativo.
 
-Lembre-se de pesquisar e utilizar números que justifiquem por que é importante que tal problema seja resolvido ou que mostrem o impacto do problema na vida das pessoas.
+De acordo com dados recentes, cerca de 46,2% das empresas brasileiras já adotam o modelo híbrido de trabalho (VOCÊ RH, 2025), o que aumenta a variação na presença dos colaboradores e torna a ocupação dos espaços menos previsível. Em escala global, observa-se ainda uma redução de até 30% na taxa de ocupação dos escritórios em comparação ao período anterior à pandemia (MCKINSEY & COMPANY, 2023), evidenciando a subutilização desses ambientes.
 
-O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estatísticos, que podem ser apresentados, com o objetivo de esclarecer detalhes do problema que será abordado pelo grupo.
+Esse cenário reforça a necessidade de maior controle e organização no uso dos espaços corporativos, já que a falta de previsibilidade pode gerar ineficiência na utilização dos recursos disponíveis e dificuldades no planejamento das atividades presenciais.
 
-> **Links Úteis**:
-> - [Como montar a justificativa](https://guiadamonografia.com.br/como-montar-justificativa-do-tcc/)
+Diante disso, os objetivos específicos foram definidos com foco em compreender esse contexto e abordar aspectos relacionados à organização, ao controle e à visualização do uso dos espaços, buscando atender às principais dificuldades identificadas nesse cenário.
 
 ## Público-Alvo
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações hierárquicas, etc.
+O público-alvo da aplicação é composto por colaboradores e administradores de empresas que utilizam o modelo de trabalho híbrido e necessitam organizar o uso de espaços físicos, como salas de reunião e estações de trabalho.
 
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
+Os colaboradores são os principais usuários no dia a dia, responsáveis por consultar a disponibilidade e realizar reservas de forma prática e rápida. Já os administradores desempenham um papel de gestão, sendo responsáveis por controlar e organizar a ocupação dos ambientes, garantindo um melhor aproveitamento dos recursos disponíveis.
 
-> **Links Úteis**:
-> - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
-> - [Como definir o público alvo](https://exame.com/pme/5-dicas-essenciais-para-definir-o-publico-alvo-do-seu-negocio/)
-> - [Público-alvo: o que é, tipos, como definir seu público e exemplos](https://klickpages.com.br/blog/publico-alvo-o-que-e/)
-> - [Qual a diferença entre público-alvo e persona?](https://rockcontent.com/blog/diferenca-publico-alvo-e-persona/)
+De modo geral, trata-se de um público que busca mais organização, praticidade e eficiência na utilização dos espaços compartilhados no ambiente corporativo.
