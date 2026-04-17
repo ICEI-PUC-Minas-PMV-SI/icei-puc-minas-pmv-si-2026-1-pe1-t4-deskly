@@ -1,38 +1,64 @@
 
 # Projeto de Interface
 
-Visão geral da interação do usuário pelas telas do sistema e protótipo interativo das telas com as funcionalidades que fazem parte do sistema (wireframes).
+A interface do Deskly foi projetada com foco na organização e facilidade de uso, atendendo tanto colaboradores quanto administradores. A navegação permite que os usuários realizem tarefas como visualizar salas, fazer reservas e gerenciar convidados de forma ágil.
 
- Apresente as principais interfaces da plataforma. Discuta como ela foi elaborada de forma a atender os requisitos funcionais, não funcionais e histórias de usuário abordados nas <a href="2-Especificação do Projeto.md"> Documentação de Especificação</a>.
+As telas foram desenvolvidas com base nas histórias de usuário, garantindo um fluxo eficiente para ações como o agendamento de salas. O sistema também é responsivo, apresenta bom desempenho e organiza as informações de forma clara, facilitando a tomada de decisão.
 
 ## User Flow
 
-![Exemplo de UserFlow](img/userflow.jpg)
+O fluxo de usuário do Deskly representa os caminhos desde o login até a execução das principais ações do sistema, como consultas, reservas e gerenciamento.
 
-Fluxo de usuário (User Flow) é uma técnica que permite ao desenvolvedor mapear todo fluxo de telas do site ou app. Essa técnica funciona para alinhar os caminhos e as possíveis ações que o usuário pode fazer junto com os membros de sua equipe.
+Após o acesso, o usuário navega entre as funcionalidades disponíveis de forma direta. Já os administradores possuem acessos adicionais para controle de salas, usuários e reservas. O fluxo foi estruturado para evitar etapas desnecessárias e tornar a navegação mais objetiva.
 
-> **Links Úteis**:
-> - [User Flow: O Quê É e Como Fazer?](https://medium.com/7bits/fluxo-de-usu%C3%A1rio-user-flow-o-que-%C3%A9-como-fazer-79d965872534)
-> - [User Flow vs Site Maps](http://designr.com.br/sitemap-e-user-flow-quais-as-diferencas-e-quando-usar-cada-um/)
-> - [Top 25 User Flow Tools & Templates for Smooth](https://www.mockplus.com/blog/post/user-flow-tools)
-
+![User Flow Deskly](img/UserFlow-Deskly.png)
 
 ## Wireframes
 
-São protótipos usados em design de interface para sugerir a estrutura de um site web e seu relacionamentos entre suas páginas. Um wireframe web é uma ilustração semelhante do layout de elementos fundamentais na interface e é fundamental sempre relacionar cada wireframe com o(s) requisito(s) que ele atende.
+Os wireframes do Deskly apresentam a estrutura das telas e a disposição dos elementos da interface, como menus, botões e campos de informação.
 
-### Exemplo
+Eles foram utilizados para definir o layout e a relação entre as páginas, garantindo que cada funcionalidade do sistema esteja bem posicionada e alinhada aos requisitos do projeto.
 
-A tela inicial apresenta um menu lateral com as principais seções do portal, enquanto a navigation bar, ao topo, apresenta informações de envio de imagens ou navegação pela galeria de fotos. A área central apresenta a galeria de fotos na forma de uma grade. Nesta tela, são apresentados os seguintes requisitos
+## Tela de Login
 
-![Exemplo de Wireframe](img/wireframe-example.png)
+(Resumo sobre a tela)
 
+![Wire Frame Login](img/WireFrame-Login.png)
+
+## Tela Inicial (Dashboard)
+
+(Resumo sobre a tela)
+
+![Wire Frame Inicial](img/WireFrame-Inicial.png)
+
+## Tela de Calendário
+
+(Resumo sobre a tela)
+
+![Wire Frame Calendário](img/WireFrame-Calendário.png)
+
+## Tela de Salas de Reunião
+
+A tela de Salas de Reunião permite ao usuário cadastrar, visualizar e filtrar as salas disponíveis por data, horário e capacidade. Nela, são exibidas informações como nome da sala, capacidade, recursos e status.
+
+![Wire Frame Salas de Reunião](img/WireFrame-SalasReuniao.png)
+
+## Tela de Estações de Trabalho
+
+(Resumo sobre a tela)
+
+![Wire Frame Estações de Trabalho](img/WireFrame-Estacoes.png)
+
+## Tela de Minhas Reservas
+
+(Resumo sobre a tela)
+
+![Wire Frame Minhas Reservas](img/WireFrame-Reservas.png)
+
+## Tela de Painel Admin
+
+(Resumo sobre a tela)
+
+![Wire Frame Painel Admin](img/WireFrame-PainelAdmin.png)
  
-> **Links Úteis**:
-> - [Protótipos vs Wireframes](https://www.nngroup.com/videos/prototypes-vs-wireframes-ux-projects/)
-> - [Ferramentas de Wireframes](https://rockcontent.com/blog/wireframes/)
-> - [MarvelApp](https://marvelapp.com/developers/documentation/tutorials/)
-> - [Figma](https://www.figma.com/)
-> - [Adobe XD](https://www.adobe.com/br/products/xd.html#scroll)
-> - [Axure](https://www.axure.com/edu) (Licença Educacional)
-> - [InvisionApp](https://www.invisionapp.com/) (Licença Educacional)
+
