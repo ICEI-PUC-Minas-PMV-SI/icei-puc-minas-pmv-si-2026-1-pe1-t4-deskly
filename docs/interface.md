@@ -42,6 +42,7 @@ Eles foram utilizados para definir o layout e a relação entre as páginas, gar
 A tela de Salas de Reunião permite ao usuário cadastrar, visualizar e filtrar as salas disponíveis por data, horário e capacidade. Nela, são exibidas informações como nome da sala, capacidade, recursos e status.
 
 ![Wire Frame Salas de Reunião](img/WireFrame-SalasReuniao.png)
+![Wire Frame Modal 1 - Salas de Reunião](img/WireFrame-ModalSalasReuniao1.png)   ![Wire Frame Modal 2 - Salas de Reunião](img/WireFrame-ModalSalasReuniao2.png)
 
 ## Tela de Estações de Trabalho
 
