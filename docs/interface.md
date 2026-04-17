@@ -31,20 +31,34 @@ Eles foram utilizados para definir o layout e a relação entre as páginas, gar
 
 ![Wire Frame Inicial](img/WireFrame-Inicial.png)
 
+### Modal - Tela Inicial (Dashboard)
+
+(Resumo sobre Modal)
+
 ## Tela de Calendário
 
 (Resumo sobre a tela)
 
 ![Wire Frame Calendário](img/WireFrame-Calendário.png)
 
+### Modais - Tela de Calendário
+
+(Resumo sobre Modal)
+
 ## Tela de Salas de Reunião
 
-A tela de Salas de Reunião permite visualizar e filtrar os espaços disponíveis, mostrando informações como capacidade, recursos e status.
-
-Nos modais, o usuário pode ver detalhes da sala, horários ocupados e realizar reservas, informando data, horário e convidados, com limite automático conforme a capacidade.
+(Resumo sobre a tela)
 
 ![Wire Frame Salas de Reunião](img/WireFrame-SalasReuniao.png)
-![Wire Frame Modal 1 - Salas de Reunião](img/ModalSalasReuniao1.png)   ![Wire Frame Modal 2 - Salas de Reunião](img/ModalSalasReuniao2.png)
+
+### Modais - Tela de Salas de Reunião
+
+(Resumo sobre Modal)
+
+<p align="center">
+  <img src="img/ModalSalasReuniao1.png" width="45%">
+  <img src="img/ModalSalasReuniao2.png" width="45%">
+</p>
 
 ## Tela de Estações de Trabalho
 
@@ -52,16 +66,74 @@ Nos modais, o usuário pode ver detalhes da sala, horários ocupados e realizar 
 
 ![Wire Frame Estações de Trabalho](img/WireFrame-Estacoes.png)
 
+### Modal - Tela de Estações de Trabalho
+
+(Resumo sobre Modal)
+
+![Wire Frame Modal - Salas de Reunião](img/ModalEstações.png)
+
 ## Tela de Minhas Reservas
 
 (Resumo sobre a tela)
 
 ![Wire Frame Minhas Reservas](img/WireFrame-Reservas.png)
 
-## Tela de Painel Admin
+### Modais - Tela de Minhas Reservas
+
+(Resumo sobre Modal)
+
+<p align="center">
+  <img src="img/ModalMinhasReservas1.png" width="45%">
+  <img src="img/ModalMinhasReservas2.png" width="45%">
+</p>
+<p align="center">
+  <img src="img/ModalMinhasReservas3.png" width="50%">
+</p>
+
+## Tela Painel Admin (Todas as Reservas)
 
 (Resumo sobre a tela)
 
-![Wire Frame Painel Admin](img/WireFrame-PainelAdmin.png)
- 
+![Wire Frame Painel Admin - Todas as Reservas](img/WireFrame-PainelAdmin1.png)
+
+
+### Modal - Tela Painel Admin (Todas as Reservas)
+
+(Resumo sobre Modal)
+
+![Wire Frame Painel Admin - Todas as Reservas](img/ModalPainelAdmin1.png)
+
+## Tela Painel Admin (Espaços)
+
+(Resumo sobre a tela)
+
+![Wire Frame Painel Admin - Espaços](img/WireFrame-PainelAdmin2.png)
+
+### Modais - Tela Painel Admin (Espaços)
+
+(Resumo sobre Modais)
+
+<p align="center">
+  <img src="img/ModalPainelAdmin2.png" width="45%">
+  <img src="img/ModalPainelAdmin3.png" width="45%">
+</p>
+<p align="center">
+  <img src="img/ModalPainelAdmin4.png" width="45%">
+  <img src="img/ModalPainelAdmin5.png" width="45%">
+</p>
+
+## Tela Painel Admin (Usuários)
+
+(Resumo sobre a tela)
+
+![Wire Frame Painel Admin - Usuários](img/WireFrame-PainelAdmin3.png)
+
+### Modais - Tela Painel Admin (Usuários)
+
+(Resumo sobre Modal) 
+
+<p align="center">
+  <img src="img/ModalPainelAdmin6.png" width="45%">
+  <img src="img/ModalPainelAdmin7.png" width="45%">
+</p>
 
