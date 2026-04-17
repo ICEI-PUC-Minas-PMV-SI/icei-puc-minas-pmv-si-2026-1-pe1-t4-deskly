@@ -44,7 +44,7 @@ A tela de Salas de Reunião permite visualizar e filtrar os espaços disponívei
 Nos modais, o usuário pode ver detalhes da sala, horários ocupados e realizar reservas, informando data, horário e convidados, com limite automático conforme a capacidade.
 
 ![Wire Frame Salas de Reunião](img/WireFrame-SalasReuniao.png)
-![Wire Frame Modal 1 - Salas de Reunião](img/WireFrame-ModalSalasReuniao1.png)   ![Wire Frame Modal 2 - Salas de Reunião](img/WireFrame-ModalSalasReuniao2.png)
+![Wire Frame Modal 1 - Salas de Reunião](img/ModalSalasReuniao1.png)   ![Wire Frame Modal 2 - Salas de Reunião](img/ModalSalasReuniao2.png)
 
 ## Tela de Estações de Trabalho
 
