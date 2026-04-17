@@ -1,19 +1,19 @@
 # Referências
 
-Inclua todas as referências (livros, artigos, sites, etc) utilizadas no desenvolvimento do trabalho.
+[1] - CBRE. The hybrid reality: why the office is more important than ever. 2025. Disponível em: https://www.cbre.com/insights/articles/the-hybrid-reality-why-the-office-is-more-important-than-ever
 
-> **Links Úteis**:
-> - [Formato ABNT](https://www.normastecnicas.com/referencias/)
+[2] - CNN BRASIL. Modelo de trabalho híbrido é usado por 56% das empresas no Brasil, diz estudo. 2024. Disponível em: https://www.cnnbrasil.com.br/tecnologia/modelo-de-trabalho-hibrido-e-usado-por-56-das-empresas-no-brasil-diz-estudo/
 
-Exemplos de referências bibliográficas:
+[3] - CONBOY, Kieran; MOE, Nils Brede; STRAY, Viktoria; GUNDELSBY, Jan Henrik. The Future of Hybrid Software Development: Challenging Current Assumptions. IEEE Software, v. 40, n. 2, p. 26-33, 2023. Disponível em: https://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=10043613
 
-**[1]** - _ELMASRI, Ramez; NAVATHE, Sham. **Sistemas de banco de dados**. 7. ed. São Paulo: Pearson, c2019. E-book. ISBN 9788543025001._
+[4] - ISTOÉ DINHEIRO. Trabalho híbrido é adotado por 86% das empresas no Brasil, mostra pesquisa. 2024. Disponível em: https://istoedinheiro.com.br/trabalho-hibrido-e-adotado-por-86-das-empresas-no-brasil-mostra-pesquisa
 
-**[2]** - _COPPIN, Ben. **Inteligência artificial**. Rio de Janeiro, RJ: LTC, c2010. E-book. ISBN 978-85-216-2936-8._
+[5] - MCKINSEY & COMPANY. Empty spaces and hybrid places: chapter 1. 2023. Disponível em: https://www.mckinsey.com/mgi/our-research/empty-spaces-and-hybrid-places-chapter-1
 
-**[3]** - _CORMEN, Thomas H. et al. **Algoritmos: teoria e prática**. Rio de Janeiro, RJ: Elsevier, Campus, c2012. xvi, 926 p. ISBN 9788535236996._
+[6] - SERASA EXPERIAN. Quase 40% dos brasileiros apontam trabalho híbrido ou remoto como decisivo para a carreira até 2030. 2024. Disponível em: https://www.serasaexperian.com.br/sala-de-imprensa/rh/quase-40-dos-brasileiros-apontam-trabalho-hibrido-ou-remoto-como-decisivo-para-a-carreira-ate-2030/
 
-**[4]** - _SUTHERLAND, Jeffrey Victor. **Scrum: a arte de fazer o dobro do trabalho na metade do tempo**. 2. ed. rev. São Paulo, SP: Leya, 2016. 236, [4] p. ISBN 9788544104514._
+[7] - VARTIAINEN, Matti; VANHARANTA, Hannu. True nature of hybrid work. Frontiers in Organizational Psychology, v. 2, 2024. DOI: 10.3389/forgp.2024.1448894. Disponível em: https://www.frontiersin.org/journals/organizational-psychology/articles/10.3389/forgp.2024.1448894/full
 
-**[5]** - _RUSSELL, Stuart J.; NORVIG, Peter. **Inteligência artificial**. Rio de Janeiro: Elsevier, c2013. xxi, 988 p. ISBN 9788535237016._
+[8] - VOCÊ RH. 5 gargalos que ainda desafiam empresas em modelo híbrido – e suas soluções. 2025. Disponível em: https://vocerh.abril.com.br/politicas-e-praticas/5-gargalos-que-ainda-desafiam-empresas-em-modelo-hibrido-e-suas-solucoes/
+
 
