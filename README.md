@@ -7,20 +7,22 @@
 
 `SEMESTRE: 1º`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
+O projeto Deskly consiste no desenvolvimento de um sistema web voltado à gestão de salas de reunião e estações de trabalho em ambientes corporativos que utilizam o modelo híbrido. A plataforma permite que os usuários visualizem a disponibilidade dos espaços, realizem reservas, gerenciem convidados e acompanhem suas reservas de forma simples e eficiente.
+
+Além disso, o sistema oferece funcionalidades administrativas para controle de usuários, cadastro e gerenciamento de espaços, garantindo organização, redução de conflitos de agendamento e melhor aproveitamento dos recursos disponíveis nas empresas.
 
 ## Integrantes
 
-Emanuel Miranda Galdino
-Isabela da Silva Santos
-Kauã Cristyan Gomes Silva
-Letícia Sousa Moreira
-Maria Luiza Gomes Beliene Vila
-Vitória Ferreira Leal
+• Emanuel Miranda Galdino
+• Isabela da Silva Santos
+• Kauã Cristyan Gomes Silva
+• Letícia Sousa Moreira
+• Maria Luiza Gomes Beliene Vila
+• Vitória Ferreira Leal
 
 ## Orientador
 
-Caroline Rhaian da Silva Jandre
+• Caroline Rhaian da Silva Jandre
 
 # Planejamento
 
