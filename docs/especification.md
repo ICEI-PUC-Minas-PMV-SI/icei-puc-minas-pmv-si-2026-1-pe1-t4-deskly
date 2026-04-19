@@ -12,7 +12,7 @@ As personas foram definidas com base no público-alvo do sistema Deskly, conside
 
 ---
 
-| ![Mariana Souza](./img/persona1.jpg) | **Mariana Souza** |
+| ![Mariana Souza](./img/persona1.png) | **Mariana Souza** |
 |--------------------------------------|-------------------|
 | **Idade** | **29 anos** |
 | Ocupação | Analista Administrativa |
@@ -23,7 +23,7 @@ As personas foram definidas com base no público-alvo do sistema Deskly, conside
 
 ---
 
-| ![Lucas Ferreira](./img/persona2.jpg) | **Lucas Ferreira** |
+| ![Lucas Ferreira](./img/persona2.png) | **Lucas Ferreira** |
 |--------------------------------------|-------------------|
 | **Idade** | **34 anos** |
 | Ocupação | Analista de Sistemas |
@@ -34,7 +34,7 @@ As personas foram definidas com base no público-alvo do sistema Deskly, conside
 
 ---
 
-| ![Carlos Mendes](./img/persona3.jpg) | **Carlos Mendes** |
+| ![Carlos Mendes](./img/persona3.png) | **Carlos Mendes** |
 |--------------------------------------|-------------------|
 | **Idade** | **40 anos** |
 | Ocupação | Gerente Administrativo |
