@@ -12,37 +12,54 @@ As personas foram definidas com base no público-alvo do sistema Deskly, conside
 
 ---
 
-| <th style="width: 150px;"><img src="./img/persona1.png" alt="Mariana Souza" width="100%"></th> | <th>**Mariana Souza**</th> |
-|---------------------------------------------------------------------------------------------|-------------------|
-| **Idade** | **29 anos** |
-| Ocupação | Analista Administrativa |
-| Motivações | Organizar reuniões com facilidade e evitar conflitos de agenda no trabalho |
-| Frustrações | Perder tempo procurando salas disponíveis ou enfrentar conflitos de horário |
-| Hobbies | Assistir séries, organizar eventos corporativos, leitura |
-| Aplicativos | Gmail, Google Agenda, Microsoft Teams, WhatsApp |
+<div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
+  <div style="flex: 0 0 150px;">
+    <img src="./img/persona1.png" alt="Mariana Souza" style="width: 150px; border-radius: 8px;">
+  </div>
+  <div style="flex: 1;">
+    <h2 style="margin-top: 0; border: none;">Mariana Souza</h2>
+    <p><strong>Idade:</strong> 29 anos</p>
+    <p><strong>Ocupação:</strong> Analista Administrativa</p>
+    <p><strong>Motivações:</strong> Organizar reuniões com facilidade e evitar conflitos de agenda no trabalho.</p>
+    <p><strong>Frustrações:</strong> Perder tempo procurando salas disponíveis ou enfrentar conflitos de horário.</p>
+    <p><strong>Hobbies:</strong> Assistir séries, organizar eventos corporativos, leitura.</p>
+    <p><strong>Aplicativos:</strong> Gmail, Google Agenda, Microsoft Teams, WhatsApp.</p>
+  </div>
+</div>
 
 ---
 
-| <th style="width: 150px;"><img src="./img/persona2.png" alt="Lucas Ferreira" width="100%"></th> | <th>**Lucas Ferreira**</th> |
-|---------------------------------------------------------------------------------------------|-------------------|
-| **Idade** | **34 anos** |
-| Ocupação | Analista de Sistemas |
-| Motivações | Garantir uma estação de trabalho disponível antes de ir ao escritório |
-| Frustrações | Chegar ao trabalho e não encontrar espaço disponível |
-| Hobbies | Tecnologia, jogos online, academia |
-| Aplicativos | Slack, Notion, WhatsApp, Google Calendar |
+<div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
+  <div style="flex: 0 0 150px;">
+    <img src="./img/persona2.png" alt="Lucas Ferreira" style="width: 150px; border-radius: 8px;">
+  </div>
+  <div style="flex: 1;">
+    <h2 style="margin-top: 0; border: none;">Lucas Ferreira</h2>
+    <p><strong>Idade:</strong> 34 anos</p>
+    <p><strong>Ocupação:</strong> Analista de Sistemas</p>
+    <p><strong>Motivações:</strong> Garantir uma estação de trabalho disponível antes de ir ao escritório.</p>
+    <p><strong>Frustrações:</strong> Chegar ao trabalho e não encontrar espaço disponível.</p>
+    <p><strong>Hobbies:</strong> Tecnologia, jogos online, academia.</p>
+    <p><strong>Aplicativos:</strong> Slack, Notion, WhatsApp, Google Calendar.</p>
+  </div>
+</div>
 
 ---
 
-| <th style="width: 150px;"><img src="./img/persona3.png" alt="Carlos Mendes" width="100%"></th> | <th>**Carlos Mendes**</th> |
-|---------------------------------------------------------------------------------------------|-------------------|
-|--------------------------------------|-------------------|
-| **Idade** | **40 anos** |
-| Ocupação | Gerente Administrativo |
-| Motivações | Controlar o uso dos espaços da empresa de forma eficiente |
-| Frustrações | Falta de controle sobre reservas e uso indevido dos espaços |
-| Hobbies | Futebol, leitura sobre gestão, viagens |
-| Aplicativos | Excel, Outlook, WhatsApp, sistemas corporativos |
+<div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
+  <div style="flex: 0 0 150px;">
+    <img src="./img/persona3.png" alt="Carlos Mendes" style="width: 150px; border-radius: 8px;">
+  </div>
+  <div style="flex: 1;">
+    <h2 style="margin-top: 0; border: none;">Carlos Mendes</h2>
+    <p><strong>Idade:</strong> 40 anos</p>
+    <p><strong>Ocupação:</strong> Gerente Administrativo</p>
+    <p><strong>Motivações:</strong> Controlar o uso dos espaços da empresa de forma eficiente.</p>
+    <p><strong>Frustrações:</strong> Falta de controle sobre reservas e uso indevido dos espaços.</p>
+    <p><strong>Hobbies:</strong> Futebol, leitura sobre gestão, viagens.</p>
+    <p><strong>Aplicativos:</strong> Excel, Outlook, WhatsApp, sistemas corporativos.</p>
+  </div>
+</div>
 
 ---
 
