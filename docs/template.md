@@ -1,16 +1,35 @@
 # Template padrão do site
 
-Layout padrão do site (HTML e CSS) que será utilizado em todas as páginas com a definição de identidade visual, aspectos de responsividade e iconografia.
+O Deskly utiliza um layout padrão definido em HTML e CSS que é aplicado em todas as telas do sistema, garantindo consistência visual, organização e facilidade de uso.
 
-Explique as guias de estilo utilizadas no seu projeto.
+A identidade visual foi construída com base em uma paleta de cores neutra e profissional, tipografia moderna e componentes reutilizáveis. O sistema também foi desenvolvido com foco em responsividade, permitindo uso em diferentes dispositivos.
+
+---
 
 ## Design
 
-Detalhe os layouts que serão utilizados. Apresente onde será colocado o logo do sistema. Defina os menus padrões, entre outras coisas.
+O layout do sistema segue uma estrutura padrão composta por:
+
+- **Menu lateral fixo (nav):** à esquerda com acesso às principais funcionalidades (Logo, Dashboard, Calendário, Salas, Estações, Reservas, Painel Admin e Ajuda);
+- **Barra superior (header):** contendo informações do usuário, notificações e saudação personalizada;
+- **Área central dinâmica (main):**, onde são exibidos os conteúdos principais de cada tela;
+- **Modais:** para ações como criação de reservas, edição e visualização de detalhes.
+
+![Layout Geral](img/layout-geral.png)
+
+---
 
 ## Cores
 
-Apresente a paleta de cores que será utilizada. Uma ferramenta interessante para a criação de palestas de cores é o *Adobe Color* ([https://color.adobe.com/pt/create/color-wheel](https://color.adobe.com/pt/create/color-wheel)).
+A paleta de cores do sistema foi definida utilizando tons neutros e cores de apoio para indicar estados (sucesso, erro, ações).
+
+### Cores principais
+
+![Layout Geral](img/CoresPrincipais.png)
+
+### Cores de status
+
+![Layout Geral](img/CoresStatus.png)
 
 ## Tipografia
 
