@@ -31,27 +31,43 @@ No Deskly, eles foram utilizados para definir o layout e a relação entre as p�
 A tela inicial apresenta um menu lateral com acesso às principais funcionalidades do sistema, como calendário, salas de reunião, estações de trabalho e reservas. No topo, há uma barra de navegação com informações do usuário, saudação personalizada, data atual e notificações. A área central exibe um resumo com dados importantes, como quantidade de salas disponíveis, estações livres, número de reservas do dia e membros cadastrados, além da listagem das reservas do usuário com opções de visualizar convidados, editar ou cancelar. Também há ações rápidas para criação de novas reservas.
 
 Nesta tela, são apresentados os seguintes requisitos:
-- RF-04: Visualizar e agendar espaços disponíveis por data e horário
-- RF-05: Visualizar, editar e cancelar suas reservas
-- RF-09: Visualizar a lista de convidados
-- RNF-11: Realizar uma reserva em no máximo 5 passos
+- RF-04: O sistema deve permitir o usuário visualizar e agendar salas de
+reunião e estações de trabalho disponíveis por data e horário.
+- RF-05: O sistema deve permitir ao usuário visualizar, editar e cancelar
+suas reservas.
+- RF-07: O sistema deve exibir ao usuário detalhes das salas (capacidade,
+recursos e status). 
+- RF-08: O sistema deve permitir o usuário adicionar convidados a uma
+reserva de sala de reunião.
+- RF-09: O sistema deve permitir o usuário visualizar a lista de convidados de uma reserva de sala de reunião. 
+- RNF-11: A interface deve permitir que o usuário realize uma reserva em poucos passos.
+
 
 ![Wire Frame Inicial](img/WireFrame-Inicial.png)
 
-### Modal - Tela Inicial (Dashboard)
+### Modais - Tela Inicial (Dashboard)
 
-O modal permite ao usuário realizar uma nova reserva de forma rápida e direta. Nele, o usuário pode selecionar o tipo de espaço (sala de reunião ou estação de trabalho), definir a data e o horário desejado e confirmar a ação, reduzindo a quantidade de etapas necessárias para o agendamento e atendendo ao requisito de usabilidade.
+Os modais da tela inicial permitem ao usuário realizar diferentes ações relacionadas às reservas de forma rápida e sem sair do dashboard. Entre as funcionalidades disponíveis, o usuário pode iniciar uma nova reserva informando tipo de espaço, data e horário, visualizar detalhes de reservas já realizadas, incluindo informações do espaço e convidados, além de editar ou cancelar agendamentos diretamente.
 
-![Wire Frame Modal - Inicial](img/ModalInicial.png)
+<p align="center">
+  <img src="img/ModalInicial1.png" width="45%">
+  <img src="img/ModalInicial2.png" width="45%">
+</p>
+<p align="center">
+  <img src="img/ModalInicial3.png" width="45%">
+  <img src="img/ModalInicial4.png" width="45%">
+</p>
 
 ## Tela de Calendário
 
 A tela de calendário permite ao usuário visualizar a disponibilidade dos espaços ao longo dos dias e horários. A interface apresenta um calendário interativo com navegação entre meses, exibindo reservas de salas e estações em horários específicos. O usuário pode identificar facilmente períodos livres e ocupados, além de iniciar reservas diretamente a partir da visualização.
 
 Nesta tela, são apresentados os seguintes requisitos:
-- RF-04: Visualizar e agendar espaços disponíveis por data e horário
-- RF-07: Visualizar detalhes das salas (capacidade, recursos e status)
-- RNF-11: Realizar uma reserva em no máximo 5 passos
+- RF-04: O sistema deve permitir o usuário visualizar e agendar salas de
+reunião e estações de trabalho disponíveis por data e horário.
+- RF-07: O sistema deve exibir ao usuário detalhes das salas (capacidade,
+recursos e status). 
+- RNF-11: A interface deve permitir que o usuário realize uma reserva em poucos passos.
 
 ![Wire Frame Calendário](img/WireFrame-Calendário.png)
 
@@ -69,10 +85,12 @@ Os modais do calendário permitem ao usuário visualizar os detalhes de uma rese
 A tela de salas de reunião apresenta um menu lateral para navegação e filtros no topo, permitindo selecionar data, horário e capacidade desejada. A área central exibe a lista de salas com informações como nome, capacidade, recursos disponíveis e status. O usuário pode visualizar rapidamente as opções disponíveis e iniciar uma reserva.
 
 Nesta tela, são apresentados os seguintes requisitos:
-- RF-01: Cadastrar, editar e desativar salas (visão administrativa)
-- RF-04: Visualizar e agendar salas disponíveis
-- RF-07: Visualizar detalhes das salas
-- RF-08: Adicionar convidados a uma reserva
+- RF-04: O sistema deve permitir o usuário visualizar e agendar salas de
+reunião e estações de trabalho disponíveis por data e horário.
+- RF-07: O sistema deve exibir ao usuário detalhes das salas (capacidade,
+recursos e status).
+- RF-08: O sistema deve permitir o usuário adicionar convidados a uma
+reserva de sala de reunião.
 
 ![Wire Frame Salas de Reunião](img/WireFrame-SalasReuniao.png)
 
@@ -90,8 +108,10 @@ Por meio dos modais, o usuário pode visualizar informações detalhadas da sala
 A tela de estações de trabalho permite ao usuário visualizar e reservar espaços individuais disponíveis. A interface apresenta uma lista organizada com identificação das mesas, localização e status.
 
 Nesta tela, são apresentados os seguintes requisitos:
-- RF-04: Visualizar e agendar estações de trabalho
-- RF-01: Gerenciar estações (visão administrativa)
+- RF-04: O sistema deve permitir o usuário visualizar e agendar salas de
+reunião e estações de trabalho disponíveis por data e horário.
+- RF-07: O sistema deve exibir ao usuário detalhes das salas (capacidade,
+recursos e status).
 
 ![Wire Frame Estações de Trabalho](img/WireFrame-Estacoes.png)
 
@@ -106,9 +126,12 @@ O modal permite visualizar os detalhes da estação selecionada e realizar a res
 A tela de minhas reservas apresenta ao usuário a lista de reservas realizadas, organizadas entre reservas futuras e histórico. A interface permite visualizar informações completas e realizar ações de edição ou cancelamento.
 
 Nesta tela, são apresentados os seguintes requisitos:
-- RF-05: Visualizar, editar e cancelar reservas
-- RF-09: Visualizar lista de convidados
-- RNF-03: Garantir a integridade dos dados de reservas
+- RF-05: O sistema deve permitir ao usuário visualizar, editar e cancelar
+suas reservas.
+- RF-08: O sistema deve permitir o usuário adicionar convidados a uma
+reserva de sala de reunião.
+- RF-09: O sistema deve permitir o usuário visualizar a lista de convidados de uma reserva de sala de reunião. 
+- RNF-03: O sistema deve garantir a integridade dos dados de reservas.
 
 ![Wire Frame Minhas Reservas](img/WireFrame-Reservas.png)
 
@@ -129,8 +152,11 @@ Os modais permitem visualizar os detalhes completos da reserva e a lista de conv
 A tela de todas as reservas apresenta uma visão geral dos agendamentos realizados no sistema, permitindo ao administrador visualizar, filtrar e controlar reservas.
 
 Nesta tela, são apresentados os seguintes requisitos:
-- RF-06: Visualizar, editar e cancelar todas as reservas
-- RNF-02: Controle de acesso por perfil (administrador)
+- RF-06: O sistema deve permitir ao administrador visualizar, editar e
+cancelar todas as reservas.
+- RNF-02: O sistema deve implementar controle de acesso por perfil
+(usuário/admin).
+- RNF-09: O sistema deve registrar logs de autenticação, criação, edição e exclusão de reservas.
 
 ![Wire Frame Painel Admin - Todas as Reservas](img/WireFrame-PainelAdmin1.png)
 
@@ -145,8 +171,10 @@ O modal permite visualizar os detalhes da reserva selecionada e realizar ações
 A tela de espaços permite ao administrador visualizar, cadastrar e gerenciar salas de reunião e estações de trabalho.
 
 Nesta tela, são apresentados os seguintes requisitos:
-- RF-01: Cadastrar, editar, excluir e desativar espaços
-- RNF-13: Código modular e facilidade de manutenção
+- RF-01: O sistema deve permitir ao administrador cadastrar salas de
+reunião e estações de trabalho, editar, excluí-las ou desativá-las.
+- RNF-13: O sistema deve possuir código modular e documentação para
+facilitar manutenção e evolução.
 
 ![Wire Frame Painel Admin - Espaços](img/WireFrame-PainelAdmin2.png)
 
@@ -168,9 +196,11 @@ Os modais permitem cadastrar novos espaços, editar informações existentes, at
 A tela de usuários permite ao administrador visualizar e gerenciar os usuários do sistema.
 
 Nesta tela, são apresentados os seguintes requisitos:
-- RF-02: Cadastrar usuários
-- RF-02: Remover usuários
-- RNF-02: Controle de acesso por perfil
+- RF-02: O sistema deve permitir ao administrador cadastrar usuários no
+ambiente. 
+- RNF-02: O sistema deve implementar controle de acesso por perfil
+(usuário/admin).
+- RNF-09: O sistema deve registrar logs de autenticação, criação, edição e exclusão de reservas.
 
 ![Wire Frame Painel Admin - Usuários](img/WireFrame-PainelAdmin3.png)
 
