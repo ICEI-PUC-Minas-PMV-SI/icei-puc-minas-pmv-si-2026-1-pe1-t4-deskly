@@ -22,7 +22,12 @@ No Deskly, eles foram utilizados para definir o layout e a relação entre as p�
 
 ## Tela de Login
 
-(Resumo sobre a tela)
+A tela de login permite ao usuário acessar o sistema por meio da autenticação de suas credenciais. A interface apresenta campos para inserção de e-mail e senha, além de ações como recuperação de acesso e entrada no sistema. O cadastro de usuários não é realizado diretamente nesta tela, sendo feito previamente por um administrador, que convida novos usuários para a plataforma. Após o convite, o usuário recebe as instruções de acesso e pode realizar seu primeiro login no sistema.
+
+Nesta tela, são apresentados os seguintes requisitos:
+- RF-03: O sistema deve permitir autenticação (login). 
+- RNF-01: O sistema deve possuir autenticação segura com criptografia de senhas.
+- RNF-02: O sistema deve implementar controle de acesso por perfil (usuário/admin). 
 
 ![Wire Frame Login](img/WireFrame-Login.png)
 
@@ -91,6 +96,7 @@ reunião e estações de trabalho disponíveis por data e horário.
 recursos e status).
 - RF-08: O sistema deve permitir o usuário adicionar convidados a uma
 reserva de sala de reunião.
+- RNF-11: A interface deve permitir que o usuário realize uma reserva em poucos passos.
 
 ![Wire Frame Salas de Reunião](img/WireFrame-SalasReuniao.png)
 
@@ -112,6 +118,7 @@ Nesta tela, são apresentados os seguintes requisitos:
 reunião e estações de trabalho disponíveis por data e horário.
 - RF-07: O sistema deve exibir ao usuário detalhes das salas (capacidade,
 recursos e status).
+- RNF-11: A interface deve permitir que o usuário realize uma reserva em poucos passos.
 
 ![Wire Frame Estações de Trabalho](img/WireFrame-Estacoes.png)
 
@@ -212,3 +219,9 @@ Os modais permitem cadastrar novos usuários, definir seus níveis de acesso e c
   <img src="img/ModalPainelAdmin6.png" width="45%">
   <img src="img/ModalPainelAdmin7.png" width="45%">
 </p>
+
+## Tela de Ajuda
+
+A tela de ajuda foi desenvolvida para auxiliar o usuário na utilização do sistema, reunindo informações organizadas de forma clara e acessível. A interface apresenta uma seção de dúvidas frequentes em formato expansível, permitindo que o usuário visualize respostas conforme sua necessidade. Além disso, há um campo de contato para envio de mensagens ou solicitação de suporte. 
+
+![Wire Frame Tela de Ajuda](img/WireFrame-Ajuda.png)
