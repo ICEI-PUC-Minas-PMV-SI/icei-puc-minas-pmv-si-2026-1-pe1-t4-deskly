@@ -24,7 +24,7 @@ A aplicação tem como objetivo facilitar a visualização da disponibilidade de
 
 ## Orientador
 
-• Caroline Rhaian da Silva Jandre
+* Caroline Rhaian da Silva Jandre
 
 # Planejamento
 

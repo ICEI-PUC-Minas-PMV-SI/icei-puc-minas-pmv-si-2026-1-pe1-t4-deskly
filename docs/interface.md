@@ -92,7 +92,6 @@ A tela de estações de trabalho permite ao usuário visualizar e reservar espa�
 Nesta tela, são apresentados os seguintes requisitos:
 - RF-04: Visualizar e agendar estações de trabalho
 - RF-01: Gerenciar estações (visão administrativa)
-- RNF-07: Interface responsiva
 
 ![Wire Frame Estações de Trabalho](img/WireFrame-Estacoes.png)
 
@@ -115,7 +114,7 @@ Nesta tela, são apresentados os seguintes requisitos:
 
 ### Modais - Tela de Minhas Reservas
 
-Os modais permitem visualizar os detalhes completos da reserva, editar informações como data e horário e confirmar o cancelamento. Também são utilizados para confirmação de ações, evitando alterações indevidas e garantindo consistência dos dados.
+Os modais permitem visualizar os detalhes completos da reserva e a lista de convidados, além de editar informações como data e horário e confirmar o cancelamento. Também são utilizados para confirmação de ações, evitando alterações indevidas e garantindo consistência dos dados.
 
 <p align="center">
   <img src="img/ModalMinhasReservas1.png" width="45%">
