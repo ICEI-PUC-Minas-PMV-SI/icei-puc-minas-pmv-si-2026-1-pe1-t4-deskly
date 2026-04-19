@@ -12,8 +12,8 @@ As personas foram definidas com base no público-alvo do sistema Deskly, conside
 
 ---
 
-| <img src="./img/persona1.png" width="30%"> | **Mariana Souza** |
-|--------------------------------------|-------------------|
+| <th style="width: 150px;"><img src="./img/persona1.png" alt="Mariana Souza" width="100%"></th> | <th>**Mariana Souza**</th> |
+|---------------------------------------------------------------------------------------------|-------------------|
 | **Idade** | **29 anos** |
 | Ocupação | Analista Administrativa |
 | Motivações | Organizar reuniões com facilidade e evitar conflitos de agenda no trabalho |
@@ -23,8 +23,8 @@ As personas foram definidas com base no público-alvo do sistema Deskly, conside
 
 ---
 
-| <img src="./img/persona2.png" width="30%"> | **Lucas Ferreira** |
-|--------------------------------------|-------------------|
+| <th style="width: 150px;"><img src="./img/persona2.png" alt="Lucas Ferreira" width="100%"></th> | <th>**Lucas Ferreira**</th> |
+|---------------------------------------------------------------------------------------------|-------------------|
 | **Idade** | **34 anos** |
 | Ocupação | Analista de Sistemas |
 | Motivações | Garantir uma estação de trabalho disponível antes de ir ao escritório |
@@ -34,7 +34,8 @@ As personas foram definidas com base no público-alvo do sistema Deskly, conside
 
 ---
 
-| <img src="./img/persona3.png" width="30%"> | **Carlos Mendes** |
+| <th style="width: 150px;"><img src="./img/persona3.png" alt="Carlos Mendes" width="100%"></th> | <th>**Carlos Mendes**</th> |
+|---------------------------------------------------------------------------------------------|-------------------|
 |--------------------------------------|-------------------|
 | **Idade** | **40 anos** |
 | Ocupação | Gerente Administrativo |
