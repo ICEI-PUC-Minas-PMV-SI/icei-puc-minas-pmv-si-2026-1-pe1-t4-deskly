@@ -34,41 +34,7 @@ A paleta de cores do sistema foi definida utilizando tons neutros e cores de apo
 
 A tipografia utilizada no sistema é a **Poppins**, importada do Google Fonts, garantindo boa legibilidade e aparência moderna.
 
-<div style="background-color: #EEEEEE; padding: 20px; border-radius: 8px;">
-
-<h1 style="font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 2rem; color: #212A3E; margin-bottom: 10px;">
-Título Principal (Heading 1) - 2rem
-</h1>
-
-<h2 style="font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.75rem; color: #212A3E; margin-bottom: 10px;">
-Título Secundário (Heading 2) - 1.75rem
-</h2>
-
-<h3 style="font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 1.25rem; color: #212A3E; margin-bottom: 10px;">
-Título Terciário (Heading 3) - 1.25rem
-</h3>
-
-<h4 style="font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 1.125rem; color: #212A3E; margin-bottom: 10px;">
-Título Quaternário (Heading 4) - 1.125rem
-</h4>
-
-<p style="font-family: 'Poppins', sans-serif; font-weight: 500; font-size: 1rem; color: #5E6679; margin-bottom: 10px;">
-Texto Médio (Text MD) - 1rem
-</p>
-
-<p style="font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 0.75rem; color: rgba(94, 102, 121, 0.75); margin-bottom: 10px;">
-Texto Pequeno (Text SM) - 0.75rem
-</p>
-
-<span style="font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 0.75rem; color: #2D6A3F; margin-bottom: 10px;">
-Badge Verde
-</span>
-
-<span style="font-family: 'Poppins', sans-serif; font-weight: 400; font-size: 0.75rem; color: #721C24; margin-bottom: 10px;">
-Badge Vermelhor
-</span>
-
-</div>
+![Layout Geral](img/Tipografia.png)
 
 ## Iconografia
 
