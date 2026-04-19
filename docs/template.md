@@ -41,3 +41,42 @@ A tipografia utilizada no sistema é a **Poppins**, importada do Google Fonts, g
 O sistema utiliza ícones simples e intuitivos para facilitar a compreensão das ações pelo usuário. Os ícones são utilizados principalmente em botões e ações rápidas, reforçando a usabilidade e reduzindo a necessidade de leitura.
 
 ![Layout Geral](img/Iconografia.png)
+
+## Estilo CSS Base - Padrão para todas as Telas
+
+:root {
+
+    /* ===== CORES ===== */
+    --color-btn-primary: #394B67;
+    --color-heading: #212A3E;
+    --color-text-md: #5E6679;
+    --color-text-sm: rgba(94, 102, 121, 0.75);
+    --color-border-card: rgba(94, 102, 121, 0.15);
+    --color-background: #EEEEEE;
+    --color-badge-green: #D4EDDA;
+    --color-text-green: #2D6A3F;
+    --color-text-red: #721C24;
+    --color-btn-red: #F8D7DA;
+
+    /* ===== TIPOGRAFIA ===== */
+    --main-font: "Poppins", sans-serif;
+    --heading-1: 600 clamp(1.5rem, 2.5vw, 2rem)/1.25 var(--main-font);
+    --heading-2: 600 clamp(1.25rem, 2vw, 1.75rem)/1.25 var(--main-font);
+    --heading-3: 600 clamp(1rem, 1.5vw, 1.25rem)/1.25 var(--main-font);
+    --heading-4: 500 clamp(0.875rem, 1.2vw, 1.125rem)/1.25 var(--main-font);
+    --text-md: 500 clamp(0.875rem, 1vw, 1rem)/1.0 var(--main-font);
+    --text-sm: 400 clamp(0.7rem, 0.8vw, 0.75rem)/1.0 var(--main-font);
+
+    /* ===== ESPAÇAMENTOS ===== */
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+
+    /* ===== BORDAS ===== */
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 16px;
+
+}
