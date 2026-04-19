@@ -32,9 +32,9 @@ A tela inicial apresenta um menu lateral com acesso às principais funcionalidad
 
 Nesta tela, são apresentados os seguintes requisitos:
 - RF-04: Visualizar e agendar espaços disponíveis por data e horário
-- RF-05: Visualizar, editar e cancelar suas reservas
+- RF-05: Visualizar rapidamente suas reservas
 - RF-09: Visualizar a lista de convidados
-- RNF-11: Realizar uma reserva em no máximo 5 passos
+- RNF-11: Realizar uma reserva em baseado na quantidade máxima disponível na sala
 
 ![Wire Frame Inicial](img/WireFrame-Inicial.png)
 
