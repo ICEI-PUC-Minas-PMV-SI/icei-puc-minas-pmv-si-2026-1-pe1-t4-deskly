@@ -38,15 +38,6 @@ A tipografia utilizada no sistema é a **Poppins**, importada do Google Fonts, g
 
 ## Iconografia
 
-Defina os ícones que serão utilizados e suas respectivas funções.
+O sistema utiliza ícones simples e intuitivos para facilitar a compreensão das ações pelo usuário. Os ícones são utilizados principalmente em botões e ações rápidas, reforçando a usabilidade e reduzindo a necessidade de leitura.
 
-Apresente os estilos CSS criados para cada um dos elementos apresentados.
-Outras seções podem ser adicionadas neste documento para apresentar padrões de componentes, de menus, etc.
-
-> **Links Úteis**:
->
-> -  [Como criar um guia de estilo de design da Web](https://edrodrigues.com.br/blog/como-criar-um-guia-de-estilo-de-design-da-web/#)
-> - [CSS Website Layout (W3Schools)](https://www.w3schools.com/css/css_website_layout.asp)
-> - [Website Page Layouts](http://www.cellbiol.com/bioinformatics_web_development/chapter-3-your-first-web-page-learning-html-and-css/website-page-layouts/)
-> - [Perfect Liquid Layout](https://matthewjamestaylor.com/perfect-liquid-layouts)
-> - [How and Why Icons Improve Your Web Design](https://usabilla.com/blog/how-and-why-icons-improve-you-web-design/)
+![Layout Geral](img/Iconografia.png)
