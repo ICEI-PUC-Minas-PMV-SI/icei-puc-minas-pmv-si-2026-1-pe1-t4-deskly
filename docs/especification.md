@@ -89,7 +89,7 @@ As tabelas a seguir apresentam os requisitos funcionais e não funcionais do sis
 | RNF-08 | O sistema deve suportar pelo menos 5 usuários simultâneos sem degradação de performance | Média |
 | RNF-09 | O sistema deve registrar logs de autenticação, criação, edição e exclusão de reservas | Média |
 | RNF-10 | O sistema deve ser compatível com os principais navegadores | Média |
-| RNF-11 | A interface deve permitir que o usuário realize uma reserva em no máximo 5 passos | Média |
+| RNF-11 | A interface deve permitir que o usuário realize uma reserva em poucos passos | Média |
 | RNF-12 | O sistema deve permitir escalabilidade (aumento de usuários e reservas sem degradação significativa de performance) | Baixa |
 | RNF-13 | O sistema deve possuir código modular e documentação para facilitar manutenção e evolução | Baixa |
 | RNF-14 | O sistema deve permitir integração com serviços externos via API | Baixa |
