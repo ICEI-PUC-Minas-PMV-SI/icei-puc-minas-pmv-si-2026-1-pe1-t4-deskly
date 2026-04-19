@@ -7,7 +7,7 @@
 
 `SEMESTRE: 1º`
 
-![Wire Frame Painel Admin - Usuários](img/DesklyBanner.png)
+![Banner - Deskly](img/DesklyBanner.png)
 
 O projeto consiste no desenvolvimento de um software voltado para a organização e o controle do uso de espaços físicos em empresas que adotam o modelo de trabalho híbrido. A proposta surge a partir das dificuldades enfrentadas na gestão de ambientes como salas de reunião e estações de trabalho, que possuem ocupação variável devido à alternância entre trabalho presencial e remoto.
 
