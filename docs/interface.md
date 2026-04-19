@@ -52,7 +52,7 @@ reserva de sala de reunião.
 
 ### Modais - Tela Inicial (Dashboard)
 
-Os modais da tela inicial permitem ao usuário realizar diferentes ações relacionadas às reservas de forma rápida e sem sair do dashboard. Entre as funcionalidades disponíveis, o usuário pode iniciar uma nova reserva informando tipo de espaço, data e horário, visualizar detalhes de reservas já realizadas, incluindo informações do espaço e convidados, além de editar ou cancelar agendamentos diretamente.
+Os modais da tela inicial permitem ao usuário gerenciar suas reservas de forma rápida e sem sair do dashboard. Por meio deles, é possível criar uma nova reserva informando o tipo de espaço, data, horário e convidados, visualizar e acompanhar a lista de convidados e seus status (aceito, pendente ou recusado), editar informações de uma reserva já existente, como data, horário e participantes, além de cancelar agendamentos quando necessário.
 
 <p align="center">
   <img src="img/ModalInicial1.png" width="45%">
