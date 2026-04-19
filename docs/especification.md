@@ -8,49 +8,75 @@ Essas etapas permitem compreender as necessidades dos usuários e garantir que o
 
 ## Personas
 
-### Persona 1 – Usuário comum
-
-Mariana Souza tem 29 anos, é analista administrativa em uma empresa de médio porte e utiliza frequentemente salas de reunião para encontros com sua equipe. Ela possui uma rotina dinâmica e precisa organizar seus compromissos com rapidez. Mariana busca uma ferramenta prática que permita visualizar horários disponíveis e realizar reservas sem complicações, evitando conflitos de agenda.
+As personas foram definidas com base no público-alvo do sistema Deskly, considerando usuários que utilizam espaços corporativos e administradores responsáveis pelo gerenciamento desses ambientes.
 
 ---
 
-### Persona 2 – Colaborador híbrido
-
-Lucas Ferreira tem 34 anos, trabalha no modelo híbrido e utiliza estações de trabalho apenas nos dias em que vai presencialmente à empresa. Ele precisa garantir um espaço disponível antes de se deslocar até o escritório. Lucas valoriza uma plataforma que permita reservar mesas com antecedência e visualizar a disponibilidade de forma clara.
+| ![Mariana Souza](./img/persona1.jpg) | **Mariana Souza** |
+|--------------------------------------|-------------------|
+| **Idade** | **29 anos** |
+| Ocupação | Analista Administrativa |
+| Motivações | Organizar reuniões com facilidade e evitar conflitos de agenda no trabalho |
+| Frustrações | Perder tempo procurando salas disponíveis ou enfrentar conflitos de horário |
+| Hobbies | Assistir séries, organizar eventos corporativos, leitura |
+| Aplicativos | Gmail, Google Agenda, Microsoft Teams, WhatsApp |
 
 ---
 
-### Persona 3 – Administrador do sistema
+| ![Lucas Ferreira](./img/persona2.jpg) | **Lucas Ferreira** |
+|--------------------------------------|-------------------|
+| **Idade** | **34 anos** |
+| Ocupação | Analista de Sistemas |
+| Motivações | Garantir uma estação de trabalho disponível antes de ir ao escritório |
+| Frustrações | Chegar ao trabalho e não encontrar espaço disponível |
+| Hobbies | Tecnologia, jogos online, academia |
+| Aplicativos | Slack, Notion, WhatsApp, Google Calendar |
 
-Carlos Mendes tem 40 anos e é gerente administrativo responsável pela organização dos espaços da empresa. Ele precisa controlar o uso das salas e estações, gerenciar usuários e garantir o funcionamento adequado do sistema.
+---
+
+| ![Carlos Mendes](./img/persona3.jpg) | **Carlos Mendes** |
+|--------------------------------------|-------------------|
+| **Idade** | **40 anos** |
+| Ocupação | Gerente Administrativo |
+| Motivações | Controlar o uso dos espaços da empresa de forma eficiente |
+| Frustrações | Falta de controle sobre reservas e uso indevido dos espaços |
+| Hobbies | Futebol, leitura sobre gestão, viagens |
+| Aplicativos | Excel, Outlook, WhatsApp, sistemas corporativos |
 
 ---
 
 ## Histórias de Usuários
 
-Com base na análise das personas, foram identificadas as seguintes histórias de usuários:
+Fundamentadas nas personas definidas para o projeto Deskly, foram identificadas as seguintes histórias de usuários:
 
-| EU COMO... | QUERO/DESEJO... | PARA... |
-|------------|-----------------|--------|
-| Usuário | Visualizar todas as salas disponíveis em determinado dia e horário | Escolher qual posso reservar |
-| Usuário | Visualizar detalhes das salas (capacidade, recursos) | Escolher a mais adequada |
-| Usuário | Reservar uma sala informando data e horário e receber confirmação | Garantir meu uso do espaço |
-| Usuário | Cancelar uma reserva | Liberar a sala caso eu não vá utilizá-la |
-| Usuário | Visualizar minhas reservas | Gerenciá-las |
-| Usuário | Gerenciar convidados da reserva (adicionar e remover) | Organizar a reunião |
-| Usuário | Visualizar a lista de convidados e seu status (aceito/recusado) | Planejar melhor a reunião |
-| Usuário | Ter limite automático de convidados conforme a capacidade da sala | Evitar superlotação |
-| Usuário | Criar uma conta no sistema | Acessar a plataforma |
-| Usuário | Fazer login no sistema | Acessar minhas funcionalidades |
-| Usuário | Visualizar os membros da empresa | Saber com quem posso interagir |
-| Administrador | Convidar usuários para a empresa | Formar o time |
-| Administrador | Remover usuários da empresa | Manter controle de acesso |
-| Administrador | Visualizar membros da empresa | Gerenciar o time |
-| Administrador | Cadastrar salas e mesas | Disponibilizar espaços no sistema |
-| Administrador | Editar informações dos espaços | Manter dados atualizados |
-| Administrador | Desativar espaços temporariamente | Manutenção ou indisponibilidade |
-| Administrador | Visualizar todas as reservas | Ter controle do uso dos espaços |
-| Administrador | Excluir reservas de usuários | Liberar salas quando necessário |
+| Eu como… | Quero/desejo… | Para… |
+|----------|--------------|------|
+| Mariana Souza | visualizar todas as salas disponíveis em determinado dia e horário | escolher qual posso reservar |
+| Mariana Souza | visualizar detalhes das salas (capacidade, recursos) | escolher a mais adequada |
+| Mariana Souza | reservar uma sala informando data e horário e receber confirmação | garantir meu uso do espaço |
+| Mariana Souza | cancelar uma reserva | liberar a sala caso eu não vá utilizá-la |
+| Mariana Souza | visualizar minhas reservas | gerenciá-las |
+| Mariana Souza | gerenciar convidados da reserva (adicionar e remover) | organizar a reunião |
+| Mariana Souza | visualizar a lista de convidados e seu status (aceito/recusado) | planejar melhor a reunião |
+| Mariana Souza | ter limite automático de convidados conforme a capacidade da sala | evitar superlotação |
+| Mariana Souza | fazer login no sistema | acessar minhas funcionalidades |
+| Lucas Ferreira | visualizar todas as salas disponíveis em determinado dia e horário | escolher qual posso reservar |
+| Lucas Ferreira | visualizar detalhes das salas (capacidade, recursos) | escolher a mais adequada |
+| Lucas Ferreira | reservar uma sala informando data e horário e receber confirmação | garantir meu uso do espaço |
+| Lucas Ferreira | cancelar uma reserva | liberar a sala caso eu não vá utilizá-la |
+| Lucas Ferreira | visualizar minhas reservas | gerenciá-las |
+| Lucas Ferreira | gerenciar convidados da reserva (adicionar e remover) | organizar a reunião |
+| Lucas Ferreira | visualizar a lista de convidados e seu status (aceito/recusado) | planejar melhor a reunião |
+| Lucas Ferreira | ter limite automático de convidados conforme a capacidade da sala | evitar superlotação |
+| Lucas Ferreira | fazer login no sistema | acessar minhas funcionalidades |
+| Carlos Mendes | convidar usuários para a empresa | formar o time |
+| Carlos Mendes | remover usuários da empresa | manter controle de acesso |
+| Carlos Mendes | visualizar membros da empresa | gerenciar o time |
+| Carlos Mendes | cadastrar salas e mesas | disponibilizar espaços no sistema |
+| Carlos Mendes | editar informações dos espaços | manter dados atualizados |
+| Carlos Mendes | desativar espaços temporariamente | manutenção ou indisponibilidade |
+| Carlos Mendes | visualizar todas as reservas | ter controle do uso dos espaços |
+| Carlos Mendes | excluir reservas de usuários | liberar salas quando necessário |
 
 ---
 
