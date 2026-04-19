@@ -12,7 +12,7 @@ O fluxo de usuário do Deskly representa os caminhos desde o login até a execu�
 
 Após o acesso, o usuário navega entre as funcionalidades disponíveis de forma direta. Já os administradores possuem acessos adicionais para controle de salas, usuários e reservas. O fluxo foi estruturado para evitar etapas desnecessárias e tornar a navegação mais objetiva.
 
-![User Flow Deskly](img/UserFlow-Deskly.png)
+![User Flow Deskly](img/USERFLOW-DESKTOP.jpg)
 
 ## Wireframes
 
