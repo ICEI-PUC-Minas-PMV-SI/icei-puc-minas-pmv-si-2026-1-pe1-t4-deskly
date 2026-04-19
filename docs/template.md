@@ -1,76 +1,42 @@
 # Template padrão do site
 
-O Deskly utiliza um layout padrão definido em HTML e CSS aplicado em todas as páginas, garantindo consistência visual, organização e facilidade de uso. A identidade visual foi construída com base em cores neutras, tipografia moderna e uso de ícones para facilitar a navegação.
+O Deskly utiliza um layout padrão aplicado em todas as páginas, garantindo consistência visual, organização e facilidade de uso. A identidade visual foi definida com base em tipografia moderna, uso de ícones e uma paleta de cores padronizada.
 
 ---
 
 ## Design
 
-O sistema segue um layout padrão composto por menu lateral fixo, barra superior e área central de conteúdo. O logotipo está posicionado no topo do menu lateral, permitindo fácil identificação do sistema.
+O sistema segue um layout com menu lateral fixo, barra superior e área central para exibição das informações. O logotipo fica posicionado no topo do menu lateral.
 
-A navegação foi estruturada para ser direta e intuitiva, com acesso rápido às funcionalidades principais como dashboard, calendário, salas, estações e reservas. Modais são utilizados para ações como criação, edição e exclusão, evitando mudança de tela.
+A navegação permite acesso direto às funcionalidades principais, como calendário, salas, estações e reservas. Modais são utilizados para ações como criar, editar e excluir.
 
-<div style="background:#000; padding:20px; border-radius:10px; color:white;">
-Layout Padrão - Deskly
-<br><br>
-<img src="img/layout-geral.png" width="100%">
+<div style="background:#0B0B0B; padding:20px; border-radius:16px;">
+
+<br>
+
+<img src="img/layout.png" width="100%">
+
 </div>
 
 ---
 
 ## Cores
 
-A paleta de cores foi definida para transmitir organização, clareza e profissionalismo, utilizando contrastes suaves para facilitar a leitura.
+A paleta de cores define a identidade visual do sistema e mantém consistência entre os elementos.
 
-<div style="background:#000; padding:20px; border-radius:10px; color:white;">
+<div style="background:#0B0B0B; padding:20px; border-radius:16px;">
 
-<b>Primária</b>
-<div style="display:flex; gap:15px; margin-top:10px;">
-  <div style="text-align:center;">
-    <div style="width:80px; height:30px; background:#394B67; border-radius:6px;"></div>
-    <small>#394B67</small>
-  </div>
-</div>
+### Produto
+<img src="img/cor-primaria.png" width="120">
 
-<br>
+### Background / Superfícies
+<img src="img/cores-background.png" width="300">
 
-<b>Textos</b>
-<div style="display:flex; gap:15px;">
-  <div style="text-align:center;">
-    <div style="width:80px; height:30px; background:#212A3E; border-radius:6px;"></div>
-    <small>#212A3E</small>
-  </div>
+### Textos
+<img src="img/cores-texto.png" width="200">
 
-  <div style="text-align:center;">
-    <div style="width:80px; height:30px; background:#5E6679; border-radius:6px;"></div>
-    <small>#5E6679</small>
-  </div>
-</div>
-
-<br>
-
-<b>Background</b>
-<div style="display:flex; gap:15px;">
-  <div style="text-align:center;">
-    <div style="width:80px; height:30px; background:#EEEEEE; border-radius:6px;"></div>
-    <small>#EEEEEE</small>
-  </div>
-</div>
-
-<br>
-
-<b>Status</b>
-<div style="display:flex; gap:15px;">
-  <div style="text-align:center;">
-    <div style="width:80px; height:30px; background:#D4EDDA; border-radius:6px;"></div>
-    <small>#D4EDDA</small>
-  </div>
-
-  <div style="text-align:center;">
-    <div style="width:80px; height:30px; background:#F8D7DA; border-radius:6px;"></div>
-    <small>#F8D7DA</small>
-  </div>
-</div>
+### Status
+<img src="img/cores-status.png" width="200">
 
 </div>
 
@@ -80,64 +46,67 @@ A paleta de cores foi definida para transmitir organização, clareza e profissi
 
 A tipografia utilizada no sistema é a **Poppins**, garantindo legibilidade e padronização visual.
 
-<div style="background:#000; padding:20px; border-radius:10px; color:white;">
+<div style="background:#0B0B0B; padding:20px; border-radius:16px;">
 
-<p style="font-size:32px; font-weight:600;">Heading 1 – Título de página</p>
-<p style="font-size:26px; font-weight:600;">Heading 2 – Título de seção</p>
-<p style="font-size:20px; font-weight:600;">Heading 3 – Subtítulo</p>
-<p style="font-size:16px; font-weight:500;">Heading 4 – Rótulos</p>
-<p style="font-size:14px;">Texto padrão do sistema</p>
-<p style="font-size:12px; color:#aaa;">Texto auxiliar</p>
+<p style="font-size:34px; font-weight:600; margin:0;">Título de Página (Heading 1)</p>
+<p style="font-size:26px; font-weight:600; margin:0;">Título de Seção (Heading 2)</p>
+<p style="font-size:20px; font-weight:600; margin:0;">Subtítulo (Heading 3)</p>
+<p style="font-size:16px; font-weight:500; margin:0;">Rótulos (Heading 4)</p>
+
+<br>
+
+<p style="font-size:14px; margin:0;">Texto padrão do sistema (corpo)</p>
+<p style="font-size:12px; color:#888; margin:0;">Texto auxiliar</p>
+
+<br>
+
+<img src="img/tipografia.png" width="100%">
 
 </div>
-
-A hierarquia tipográfica foi definida para facilitar a leitura e organização das informações na interface.
 
 ---
 
 ## Iconografia
 
-Os ícones são utilizados para representar ações e facilitar a navegação do usuário no sistema.
+Os ícones são utilizados para representar ações e facilitar a navegação do usuário.
 
-<div style="background:#000; padding:20px; border-radius:10px; color:white;">
+<div style="background:#0B0B0B; padding:20px; border-radius:16px;">
 
-<div style="display:flex; gap:20px; align-items:center; flex-wrap:wrap;">
+<div style="display:flex; gap:30px; flex-wrap:wrap; align-items:center;">
 
-<div style="text-align:center;">
-  <img src="img/icon-calendario.png" width="30"><br>
-  <small>Calendário</small>
+<div>
+<img src="img/icon-calendario.png" width="40"><br>
+<small>Calendário</small>
 </div>
 
-<div style="text-align:center;">
-  <img src="img/icon-notificacao.png" width="30"><br>
-  <small>Notificações</small>
+<div>
+<img src="img/icon-notificacao.png" width="40"><br>
+<small>Notificações</small>
 </div>
 
-<div style="text-align:center;">
-  <img src="img/icon-usuario.png" width="30"><br>
-  <small>Usuário</small>
+<div>
+<img src="img/icon-usuario.png" width="40"><br>
+<small>Usuário</small>
 </div>
 
-<div style="text-align:center;">
-  <img src="img/icon-add.png" width="30"><br>
-  <small>Criar</small>
+<div>
+<img src="img/icon-adicionar.png" width="40"><br>
+<small>Criar</small>
 </div>
 
-<div style="text-align:center;">
-  <img src="img/icon-editar.png" width="30"><br>
-  <small>Editar</small>
+<div>
+<img src="img/icon-editar.png" width="40"><br>
+<small>Editar</small>
 </div>
 
-<div style="text-align:center;">
-  <img src="img/icon-excluir.png" width="30"><br>
-  <small>Excluir</small>
+<div>
+<img src="img/icon-excluir.png" width="40"><br>
+<small>Excluir</small>
 </div>
 
 </div>
 
-<p style="margin-top:10px; color:#aaa;">
-Os ícones são utilizados na barra superior, filtros, botões de ação e listagens.
-</p>
+<br>
 
 </div>
 
@@ -145,11 +114,12 @@ Os ícones são utilizados na barra superior, filtros, botões de ação e lista
 
 ## Estilos CSS
 
-Os estilos foram organizados com variáveis CSS para padronização e manutenção do sistema.
+Os estilos foram definidos com variáveis para padronização e reutilização.
 
 ```css
 :root {
 
+    /* CORES */
     --color-btn-primary: #394B67;
     --color-heading: #212A3E;
     --color-text-md: #5E6679;
@@ -161,6 +131,7 @@ Os estilos foram organizados com variáveis CSS para padronização e manutenç�
     --color-text-red:#721C24;
     --color-btn-red: #F8D7DA;
 
+    /* TIPOGRAFIA */
     --main-font: "Poppins", sans-serif;
 
     --heading-1: 600 clamp(1.5rem, 2.5vw, 2rem)/1.25 var(--main-font);
@@ -170,13 +141,4 @@ Os estilos foram organizados com variáveis CSS para padronização e manutenç�
     --text-md: 500 clamp(0.875rem, 1vw, 1rem)/1 var(--main-font);
     --text-sm: 400 clamp(0.7rem, 0.8vw, 0.75rem)/1 var(--main-font);
 
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 1.5rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 3rem;
-
-    --radius-sm: 4px;
-    --radius-md: 8px;
-    --radius-lg: 16px;
 }
