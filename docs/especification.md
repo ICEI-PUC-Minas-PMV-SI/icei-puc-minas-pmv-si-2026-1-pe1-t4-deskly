@@ -28,18 +28,29 @@ Carlos Mendes tem 40 anos e é gerente administrativo responsável pela organiza
 
 ## Histórias de Usuários
 
-Com base nas personas identificadas, foram definidas as seguintes histórias de usuários:
+Com base na análise das personas, foram identificadas as seguintes histórias de usuários:
 
-| EU COMO... | QUERO/PRECISO... | PARA... |
-|------------|------------------|--------|
-| Usuário do sistema | Visualizar disponibilidade de espaços | Planejar meus compromissos |
-| Usuário do sistema | Realizar reservas | Garantir um espaço disponível |
-| Usuário do sistema | Editar ou cancelar reservas | Ajustar minha agenda |
-| Usuário do sistema | Adicionar convidados | Organizar reuniões |
-| Usuário do sistema | Visualizar minhas reservas | Acompanhar meus agendamentos |
-| Administrador | Gerenciar espaços | Controlar ambientes disponíveis |
-| Administrador | Gerenciar usuários | Controlar o acesso ao sistema |
-| Administrador | Visualizar todas as reservas | Garantir organização |
+| EU COMO... | QUERO/DESEJO... | PARA... |
+|------------|-----------------|--------|
+| Usuário | Visualizar todas as salas disponíveis em determinado dia e horário | Escolher qual posso reservar |
+| Usuário | Visualizar detalhes das salas (capacidade, recursos) | Escolher a mais adequada |
+| Usuário | Reservar uma sala informando data e horário e receber confirmação | Garantir meu uso do espaço |
+| Usuário | Cancelar uma reserva | Liberar a sala caso eu não vá utilizá-la |
+| Usuário | Visualizar minhas reservas | Gerenciá-las |
+| Usuário | Gerenciar convidados da reserva (adicionar e remover) | Organizar a reunião |
+| Usuário | Visualizar a lista de convidados e seu status (aceito/recusado) | Planejar melhor a reunião |
+| Usuário | Ter limite automático de convidados conforme a capacidade da sala | Evitar superlotação |
+| Usuário | Criar uma conta no sistema | Acessar a plataforma |
+| Usuário | Fazer login no sistema | Acessar minhas funcionalidades |
+| Usuário | Visualizar os membros da empresa | Saber com quem posso interagir |
+| Administrador | Convidar usuários para a empresa | Formar o time |
+| Administrador | Remover usuários da empresa | Manter controle de acesso |
+| Administrador | Visualizar membros da empresa | Gerenciar o time |
+| Administrador | Cadastrar salas e mesas | Disponibilizar espaços no sistema |
+| Administrador | Editar informações dos espaços | Manter dados atualizados |
+| Administrador | Desativar espaços temporariamente | Manutenção ou indisponibilidade |
+| Administrador | Visualizar todas as reservas | Ter controle do uso dos espaços |
+| Administrador | Excluir reservas de usuários | Liberar salas quando necessário |
 
 ---
 
@@ -51,16 +62,16 @@ As tabelas a seguir apresentam os requisitos funcionais e não funcionais do sis
 
 | ID | Descrição do Requisito | Prioridade |
 |----|------------------------|------------|
-| RF-01 | O sistema deve permitir ao administrador cadastrar, editar, excluir e desativar espaços | ALTA |
-| RF-02 | O sistema deve permitir ao administrador cadastrar e remover usuários | ALTA |
-| RF-03 | O sistema deve permitir autenticação de usuários (login) | ALTA |
-| RF-04 | O sistema deve permitir visualizar e agendar espaços por data e horário | ALTA |
-| RF-05 | O sistema deve permitir visualizar, editar e cancelar reservas | ALTA |
-| RF-06 | O sistema deve permitir ao administrador visualizar e controlar todas as reservas | ALTA |
-| RF-07 | O sistema deve exibir detalhes dos espaços | MÉDIA |
-| RF-08 | O sistema deve permitir adicionar convidados | MÉDIA |
-| RF-09 | O sistema deve permitir visualizar convidados | MÉDIA |
-| RF-10 | O sistema pode permitir favoritar espaços | BAIXA |
+| RF-01 | O sistema deve permitir ao administrador cadastrar salas de reunião e estações de trabalho, editar, excluí-las ou desativá-las | Alta |
+| RF-02 | O sistema deve permitir ao administrador cadastrar usuários no ambiente | Alta |
+| RF-03 | O sistema deve permitir autenticação (login) | Alta |
+| RF-04 | O sistema deve permitir o usuário visualizar e agendar salas de reunião e estações de trabalho disponíveis por data e horário | Alta |
+| RF-05 | O sistema deve permitir ao usuário visualizar, editar e cancelar suas reservas | Alta |
+| RF-06 | O sistema deve permitir ao administrador visualizar, editar e cancelar todas as reservas | Alta |
+| RF-07 | O sistema deve exibir ao usuário detalhes das salas (capacidade, recursos e status) | Média |
+| RF-08 | O sistema deve permitir o usuário adicionar convidados a uma reserva de sala de reunião | Média |
+| RF-09 | O sistema deve permitir o usuário visualizar a lista de convidados de uma reserva de sala de reunião | Média |
+| RF-10 | O sistema pode permitir favoritar salas | Baixa |
 
 ---
 
@@ -68,15 +79,20 @@ As tabelas a seguir apresentam os requisitos funcionais e não funcionais do sis
 
 | ID | Descrição do Requisito | Prioridade |
 |----|------------------------|------------|
-| RNF-01 | O sistema deve garantir autenticação segura com criptografia de senhas | ALTA |
-| RNF-02 | O sistema deve possuir controle de acesso por tipo de usuário | ALTA |
-| RNF-03 | O sistema deve garantir a integridade dos dados | ALTA |
-| RNF-06 | O sistema deve responder às requisições com agilidade | MÉDIA |
-| RNF-07 | O sistema deve ser responsivo | ALTA |
-| RNF-08 | O sistema deve suportar múltiplos usuários | MÉDIA |
-| RNF-10 | O sistema deve ser compatível com navegadores modernos | ALTA |
-| RNF-11 | O sistema deve permitir realizar reservas em no máximo 5 passos | ALTA |
-| RNF-13 | O sistema deve possuir código modular | MÉDIA |
+| RNF-01 | O sistema deve possuir autenticação segura com criptografia de senhas | Alta |
+| RNF-02 | O sistema deve implementar controle de acesso por perfil (usuário/admin) | Alta |
+| RNF-03 | O sistema deve garantir a integridade dos dados de reservas | Alta |
+| RNF-04 | O sistema deve realizar backup automático dos dados | Alta |
+| RNF-05 | O sistema deve permitir recuperação de dados em caso de falha | Alta |
+| RNF-06 | O sistema deve ter um tempo de resposta rápido e ágil. | Alta |
+| RNF-07 | O sistema deve ser responsivo (desktop, tablet e mobile) | Média |
+| RNF-08 | O sistema deve suportar pelo menos 5 usuários simultâneos sem degradação de performance | Média |
+| RNF-09 | O sistema deve registrar logs de autenticação, criação, edição e exclusão de reservas | Média |
+| RNF-10 | O sistema deve ser compatível com os principais navegadores | Média |
+| RNF-11 | A interface deve permitir que o usuário realize uma reserva em no máximo 5 passos | Média |
+| RNF-12 | O sistema deve permitir escalabilidade (aumento de usuários e reservas sem degradação significativa de performance) | Baixa |
+| RNF-13 | O sistema deve possuir código modular e documentação para facilitar manutenção e evolução | Baixa |
+| RNF-14 | O sistema deve permitir integração com serviços externos via API | Baixa |
 
 ---
 
