@@ -2,32 +2,55 @@
 # Visit https://bit.ly/cffinit to generate yours today!
 
 cff-version: 1.2.0
-title: Web Application Template
+title: Deskly - Sistema de Gestão de Espaços Corporativos
 message: >-
-  Repositório padrão para o Eixo 1 - Projeto 1: Aplicações
-  Web da PUC Minas.
+  Repositório padrão para o Eixo 1 - Projeto 1: Aplicações Web da PUC Minas. 
+  Sistema web para gestão de salas de reunião e estações de trabalho em ambientes corporativos híbridos.
 type: software
 authors:
   - given-names: Aluno 1
-    family-names: Nome Completo
-    email: aluno@pucminas.br
+    family-names: Emanuel Miranda Galdino
+    email: emanuel.galdino@sga.pucminas.br
     affiliation: PUC Minas
-  - given-names: Hugo
-    name-particle: 'B '
-    family-names: de Paula
+  - given-names: Aluno 2
+    family-names: Isabela da Silva Santos
+    email: isabela.santos.1659875@sga.pucminas.br
+    affiliation: PUC Minas
+  - given-names: Aluno 3
+    family-names: Kauã Cristyan Gomes Silva
+    email: kaua.cristyan@sga.pucminas.br
+    affiliation: PUC Minas
+  - given-names: Aluno 4
+    family-names: Letícia Souza Moreira
+    email: 1514439@sga.pucminas.br
+    affiliation: PUC Minas
+  - given-names: Aluno 5
+    family-names: Maria Luiza Gomes Beliene Vila
+    email: 1560132@sga.pucminas.br
+    affiliation: PUC Minas
+  - given-names: Aluno 6
+    family-names: Vitória Ferreira Leal
+    email: vfleal@sga.pucminas.br
+    affiliation: PUC Minas
+  - given-names: Caroline
+    name-particle: 'R '
+    family-names: da Silva Jandre
     name-suffix: Prof.
-    email: hugo@pucminas.br
+    email: caroline.jandre@sga.pucminas.br
     affiliation: PUC Minas
-    orcid: 'https://orcid.org/0000-0002-6193-3205'
+    orcid: 'https://orcid.org/0000-0002-2955-7158'
 repository-code: >-
-  https://github.com/ICEI-PUC-Minas-PMV-SI/WebApplicationProject-Template
+  https://github.com/ICEI-PUC-Minas-PMV-SI/icei-puc-minas-pmv-si-2026-1-pe1-t4-deskly.git
 abstract: >-
-  Descrever resumidamente, em um ou dois parágrafos, o
-  projeto que foi desenvolvido.
+  O Deskly é um sistema web desenvolvido para gerenciar a ocupação de espaços corporativos em ambientes de trabalho híbrido. A aplicação permite o agendamento de salas de reunião e estações de trabalho, controle de reservas, gestão de usuários e visualização da disponibilidade dos espaços. O objetivo é melhorar a organização e eficiência no uso dos recursos físicos das empresas.
 keywords:
+- Sistema Web
+  - Gestão de Espaços
+  - Trabalho Híbrido
+  - Reservas
   - Desenvolvimento Web
   - HTML
   - CSS
   - JavaScript
   - Template
-date-released: '2024-06-23'
+date-released: '2026-04-19'
