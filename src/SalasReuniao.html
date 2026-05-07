@@ -22,10 +22,10 @@
     <aside>
         <nav>
             <ul>
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="#">Calendário</a></li>
-                <li><a href="#">Salas de Reunião</a></li>
-                <li><a href="#">Estações de Trabalho</a></li>
+                <li><a href="salasReuniao.html">Salas de Reunião</a></li>
+                <li><a href="estacoes.html">Estações de Trabalho</a></li>
                 <li><a href="#">Minhas Reservas</a></li>
             </ul>
 
@@ -84,8 +84,8 @@
 
                 <div class="sala-acoes">
                     <span class="badge disponivel">Disponível</span>
-                    <button class="btn-detalhes">Detalhes</button>
-                    <button class="btn-reservar">Reservar</button>
+                    <button class="btn-detalhes open-modal" data-modal="modal-detalhes">Detalhes</button>
+                    <button class="botao-add-sala open-modal" data-modal="modal-reserva">Reservar</button>
                 </div>
             </article>
 
@@ -101,8 +101,8 @@
 
                 <div class="sala-acoes">
                     <span class="badge ocupada">Ocupada</span>
-                    <button class="btn-detalhes">Detalhes</button>
-                    <button class="btn-reservar desabilitado" disabled>Reservar</button>
+                    <button class="btn-detalhes open-modal" data-modal="modal-detalhes">Detalhes</button>
+                    <button class="botao-add-sala open-modal" data-modal="modal-reserva">Reservar</button>
                 </div>
             </article>
 
@@ -116,8 +116,8 @@
                 </div>
                 <div class="sala-acoes">
                     <span class="badge disponivel">Disponível</span>
-                    <button class="btn-detalhes">Detalhes</button>
-                    <button class="btn-reservar">Reservar</button>
+                    <button class="btn-detalhes open-modal" data-modal="modal-detalhes">Detalhes</button>
+                    <button class="botao-add-sala open-modal" data-modal="modal-reserva">Reservar</button>
                 </div>
             </article>
 
@@ -131,7 +131,7 @@
                 </div>
                 <div class="sala-acoes">
                     <span class="badge inativa">Inativa</span>
-                    <button class="btn-detalhes">Detalhes</button>
+                    <button class="btn-reservar" disabled>Detalhes</button>
                     <button class="btn-reservar" disabled>Reservar</button>
                 </div>
             </article>
@@ -139,94 +139,140 @@
     </main>
 
     <dialog id="modal-reserva">
-    <form action="">
+        <form action="">
+            <div class="modal-header">
+                <h3 class="modal-title">Nova Reserva</h3>
+                <button class="close-modal" data-modal="modal-reserva" type="button">
+                    <img src="assets/icons/close-menu.svg" alt="Fechar">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="tipo-espaco">Tipo de espaço</label>
+                    <select id="tipo-espaco" name="tipo-espaco">
+                        <option value="sala">Sala de Reunião</option>
+                        <option value="estacao">Estação de Trabalho</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="espaco">Espaço</label>
+                    <select id="espaco" name="espaco" onchange="verificarCapacidade()">
+                        <option value="">Selecione o local</option>
+                        <option value="8">Sala Alfa – cap. 8</option>
+                        <option value="4">Sala Beta – cap. 4</option>
+                        <option value="12">Sala Gama – cap. 12</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="date">Data</label>
+                    <input type="date" id="date">
+                </div>
+
+                <div class="input-row" style="display: flex; gap: 16px;">
+                    <div class="input-group" style="flex: 1;">
+                        <label for="start-time">Início</label>
+                        <input type="time" id="start-time">
+                    </div>
+                    <div class="input-group" style="flex: 1;">
+                        <label for="ending-time">Término</label>
+                        <input type="time" id="ending-time">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label for="convidados">Convidados (e-mails separados por vírgula)</label>
+                    <input type="text" id="convidados">
+                    <small id="limite-msg" style="color: var(--color-text-md); margin-top: 4px; display: block;">
+                        Selecione uma sala para ver o limite de convidados.
+                    </small>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn-cancelar close-modal" data-modal="modal-reserva">Cancelar</button>
+                <button type="button" class="btn-confirmar" onclick="confirmarReserva()">Confirmar reserva</button>
+            </div>
+        </form>
+    </dialog>
+
+    <script>
+        function verificarCapacidade() {
+            const selectEspaco = document.getElementById('espaco');
+            const limiteMsg = document.getElementById('limite-msg');
+            const capacidade = selectEspaco.value;
+
+            if (capacidade) {
+                limiteMsg.innerText = `Limite para este espaço: ${capacidade} convidados.`;
+                limiteMsg.style.color = "var(--color-text-md)";
+            } else {
+                limiteMsg.innerText = "Selecione uma sala para ver o limite.";
+            }
+        }
+
+        function confirmarReserva() {
+            const capacidade = parseInt(document.getElementById('espaco').value);
+            const convidadosInput = document.getElementById('convidados').value;
+            const listaConvidados = convidadosInput.split(',').filter(email => email.trim() !== "");
+
+            if (listaConvidados.length > capacidade) {
+                alert(`Erro: Você excedeu o limite de ${capacidade} convidados para esta sala.`);
+                return;
+            }
+
+            alert("Reserva confirmada com sucesso!");
+            document.getElementById('modal-reserva').close();
+        }
+    </script>
+
+    <dialog id="modal-detalhes">
         <div class="modal-header">
-            <h3 class="modal-title">Nova Reserva</h3>
-            <button class="close-modal" data-modal="modal-reserva" type="button">
+            <h3 class="modal-title">Sala Alfa</h3>
+            <button class="close-modal" data-modal="modal-detalhes" type="button">
                 <img src="assets/icons/close-menu.svg" alt="Fechar">
             </button>
         </div>
 
         <div class="modal-body">
-            <div class="input-group">
-                <label for="tipo-espaco">Tipo de espaço</label>
-                <select id="tipo-espaco" name="tipo-espaco">
-                    <option value="sala">Sala de Reunião</option>
-                    <option value="estacao">Estação de Trabalho</option>
-                </select>
+            <div class="detail-row">
+                <span class="detail-label">Tipo</span>
+                <span class="detail-value">Sala de Reunião</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Capacidade</span>
+                <span class="detail-value">8 pessoas</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Recursos</span>
+                <span class="detail-value">TV · Videoconferência · Lousa</span>
+            </div>
+            <div class="detail-row">
+                <span class="detail-label">Status</span>
+                <span class="detail-value status-disponivel">Disponível</span>
             </div>
 
-            <div class="input-group">
-                <label for="espaco">Espaço</label>
-                <select id="espaco" name="espaco" onchange="verificarCapacidade()">
-                    <option value="">Selecione o local</option>
-                    <option value="8">Sala Alfa – cap. 8</option>
-                    <option value="4">Sala Beta – cap. 4</option>
-                    <option value="12">Sala Gama – cap. 12</option>
-                </select>
-            </div>
+            <p class="horarios-title">Horários ocupados hoje</p>
 
-            <div class="input-group">
-                <label for="date">Data</label>
-                <input type="date" id="date">
+            <div class="horario-item">
+                <span class="horario-time">09:00 – 10:00</span>
+                <span class="horario-pessoa">· Isabela Santos</span>
             </div>
-
-            <div class="input-row" style="display: flex; gap: 16px;">
-                <div class="input-group" style="flex: 1;">
-                    <label for="start-time">Início</label>
-                    <input type="time" id="start-time">
-                </div>
-                <div class="input-group" style="flex: 1;">
-                    <label for="ending-time">Término</label>
-                    <input type="time" id="ending-time">
-                </div>
-            </div>
-
-            <div class="input-group">
-                <label for="convidados">Convidados (e-mails separados por vírgula)</label>
-                <input type="text" id="convidados" >
-                <small id="limite-msg" style="color: var(--color-text-md); margin-top: 4px; display: block;">
-                    Selecione uma sala para ver o limite de convidados.
-                </small>
+            <div class="horario-item">
+                <span class="horario-time">14:00 – 15:30</span>
+                <span class="horario-pessoa">· Letícia Moreira</span>
             </div>
         </div>
 
         <div class="modal-footer">
-            <button type="button" class="btn-cancelar close-modal" data-modal="modal-reserva">Cancelar</button>
-            <button type="button" class="btn-confirmar" onclick="confirmarReserva()">Confirmar reserva</button>
+            <button type="button" class="btn-cancelar close-modal" data-modal="modal-detalhes">Fechar</button>
+            <button type="button" class="btn-confirmar"
+                onclick="document.getElementById('modal-detalhes').close();
+                document.getElementById('modal-reserva').showModal()">Reservar este espaço</button>
         </div>
-    </form>
-</dialog>
+    </dialog>
 
-<script src="./assets/js/modal.js"></script>
-<script>
-    function verificarCapacidade() {
-        const selectEspaco = document.getElementById('espaco');
-        const limiteMsg = document.getElementById('limite-msg');
-        const capacidade = selectEspaco.value;
-
-        if (capacidade) {
-            limiteMsg.innerText = `Limite para este espaço: ${capacidade} convidados.`;
-            limiteMsg.style.color = "var(--color-text-md)";
-        } else {
-            limiteMsg.innerText = "Selecione uma sala para ver o limite.";
-        }
-    }
-
-    function confirmarReserva() {
-        const capacidade = parseInt(document.getElementById('espaco').value);
-        const convidadosInput = document.getElementById('convidados').value;
-        const listaConvidados = convidadosInput.split(',').filter(email => email.trim() !== "");
-
-        if (listaConvidados.length > capacidade) {
-            alert(`Erro: Você excedeu o limite de ${capacidade} convidados para esta sala.`);
-            return;
-        }
-        
-        alert("Reserva confirmada com sucesso!");
-        document.getElementById('modal-reserva').close();
-    }
-</script>
     <script src="assets/js/menu.js"></script>
     <script src="./assets/js/modal.js"></script>
 </body>

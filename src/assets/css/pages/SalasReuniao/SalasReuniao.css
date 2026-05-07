@@ -129,8 +129,8 @@
 }
 
 .badge.ocupada {
-    background-color: #F8D7DA;
-    color: #721C24;
+    --color-btn-red: #F8D7DA;
+    --color-text-red: #721C24;
 }
 
 .badge.inativa {
@@ -239,8 +239,8 @@
 }
 
 .badge.ocupada {
-    background-color: #F8D7DA;
-    color: #721C24;
+    --color-btn-red: #F8D7DA;
+    --color-text-red: #721C24;
 }
 
 .btn-detalhes {
@@ -269,4 +269,60 @@
     color: var(--color-text-sm);
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border-card);
+    font: var(--text-sm);
+}
+
+.detail-row:last-of-type {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: var(--color-text-md);
+    font-weight: 500;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: var(--color-heading);
+}
+
+.detail-value.status-disponivel {
+    color: var(--color-text-green);
+}
+
+.horarios-title {
+    font: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-md);
+    margin: var(--spacing-md) 0 var(--spacing-sm);
+}
+
+.horario-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    --color-btn-red: #F8D7DA;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+    font: var(--text-sm);
+}
+
+.horario-time {
+    font-weight: 700;
+    --color-text-red: #721C24;
+}
+
+.horario-pessoa {
+    color: var(--color-text-md);
 }
