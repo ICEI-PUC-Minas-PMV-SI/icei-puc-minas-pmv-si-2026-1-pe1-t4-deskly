@@ -68,8 +68,8 @@
 }
 
 .btn-filtrar:hover {
-    background: rgba(94, 102, 121, 0.05);
-    color: var(--color-heading);
+    background: transparent;
+    color: var(--color-text-md);
 }
 
 .estacoes-lista {
@@ -89,7 +89,7 @@
 }
 
 .estacao-card:hover {
-    border-color: var(--color-heading);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
 }
 
 .estacao-info {
@@ -112,26 +112,30 @@
 }
 
 .badge {
-    padding: 6px 12px;
-    border-radius: 999px;
-    font-size: 12px;
-    font-weight: 500;
+    padding: 6px 16px;
+    border-radius: var(--radius-lg);
+    font: var(--text-sm);
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
-.disponivel {
+.badge.disponivel {
     background-color: var(--color-badge-green);
     color: var(--color-text-green);
+    border-radius: var(--radius-md);
 }
 
-.ocupado {
+.badge.ocupado {
     background-color: #ffd6d6;
     color: #c0392b;
 }
 
-.inativa {
+.badge.inativa {
     background-color: var(--color-border-card);
     color: var(--color-text-md);
     border: 1px solid rgba(0, 0, 0, 0.05);
@@ -185,7 +189,7 @@ dialog {
 }
 
 dialog::backdrop {
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.15);
 }
 
 .modal-header {
@@ -194,6 +198,19 @@ dialog::backdrop {
     align-items: center;
     padding: 20px 24px;
     border-bottom: 1px solid var(--color-border-card);
+}
+
+.close-modal {
+    background: transparent;
+    border: none;
+    font-size: 28px;
+    color: var(--color-text-md);
+    cursor: pointer;
+    line-height: 1;
+}
+
+.close-modal:hover {
+    color: var(--color-heading);
 }
 
 .modal-body {
