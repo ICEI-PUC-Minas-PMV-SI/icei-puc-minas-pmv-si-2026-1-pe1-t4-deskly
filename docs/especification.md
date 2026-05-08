@@ -1,153 +1,91 @@
 # Especificações do Projeto
 
-A especificação do projeto Deskly tem como objetivo definir o problema identificado e a solução proposta sob a perspectiva do usuário. Para isso, foram utilizadas técnicas como definição de personas, criação de histórias de usuário e levantamento de requisitos funcionais e não funcionais.
+Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
 
-Essas etapas permitem compreender as necessidades dos usuários e garantir que o sistema atenda aos objetivos propostos, oferecendo uma solução eficiente para o gerenciamento de reservas de espaços corporativos.
+Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto.
 
----
+Caso deseje atribuir uma imagem a sua persona, utilize o site https://thispersondoesnotexist.com/
 
 ## Personas
 
-As personas foram definidas com base no público-alvo do sistema Deskly, considerando usuários que utilizam espaços corporativos e administradores responsáveis pelo gerenciamento desses ambientes.
+Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
 
----
+Enumere e detalhe as personas da sua solução. Para tanto, baseie-se tanto nos documentos disponibilizados na disciplina e/ou nos seguintes links:
 
-<div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
-  <div style="flex: 0 0 150px;">
-    <img src="./img/persona1.png" alt="Mariana Souza" style="width: 150px; border-radius: 8px;">
-  </div>
-  <div style="flex: 1;">
-    <h2 style="margin-top: 0; border: none;">Mariana Souza</h2>
-    <p><strong>Idade:</strong> 29 anos</p>
-    <p><strong>Ocupação:</strong> Analista Administrativa</p>
-    <p><strong>Motivações:</strong> Organizar reuniões com facilidade e evitar conflitos de agenda no trabalho.</p>
-    <p><strong>Frustrações:</strong> Perder tempo procurando salas disponíveis ou enfrentar conflitos de horário.</p>
-    <p><strong>Hobbies:</strong> Assistir séries, organizar eventos corporativos, leitura.</p>
-    <p><strong>Aplicativos:</strong> Gmail, Google Agenda, Microsoft Teams, WhatsApp.</p>
-  </div>
-</div>
-
----
-
-<div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
-  <div style="flex: 0 0 150px;">
-    <img src="./img/persona2.png" alt="Lucas Ferreira" style="width: 150px; border-radius: 8px;">
-  </div>
-  <div style="flex: 1;">
-    <h2 style="margin-top: 0; border: none;">Lucas Ferreira</h2>
-    <p><strong>Idade:</strong> 34 anos</p>
-    <p><strong>Ocupação:</strong> Analista de Sistemas</p>
-    <p><strong>Motivações:</strong> Garantir uma estação de trabalho disponível antes de ir ao escritório.</p>
-    <p><strong>Frustrações:</strong> Chegar ao trabalho e não encontrar espaço disponível.</p>
-    <p><strong>Hobbies:</strong> Tecnologia, jogos online, academia.</p>
-    <p><strong>Aplicativos:</strong> Slack, Notion, WhatsApp, Google Calendar.</p>
-  </div>
-</div>
-
----
-
-<div style="display: flex; align-items: flex-start; gap: 20px; margin-bottom: 20px;">
-  <div style="flex: 0 0 150px;">
-    <img src="./img/persona3.png" alt="Carlos Mendes" style="width: 150px; border-radius: 8px;">
-  </div>
-  <div style="flex: 1;">
-    <h2 style="margin-top: 0; border: none;">Carlos Mendes</h2>
-    <p><strong>Idade:</strong> 40 anos</p>
-    <p><strong>Ocupação:</strong> Gerente Administrativo</p>
-    <p><strong>Motivações:</strong> Controlar o uso dos espaços da empresa de forma eficiente.</p>
-    <p><strong>Frustrações:</strong> Falta de controle sobre reservas e uso indevido dos espaços.</p>
-    <p><strong>Hobbies:</strong> Futebol, leitura sobre gestão, viagens.</p>
-    <p><strong>Aplicativos:</strong> Excel, Outlook, WhatsApp, sistemas corporativos.</p>
-  </div>
-</div>
-
----
+> **Links Úteis**:
+> - [Rock Content](https://rockcontent.com/blog/personas/)
+> - [Hotmart](https://blog.hotmart.com/pt-br/como-criar-persona-negocio/)
+> - [O que é persona?](https://resultadosdigitais.com.br/blog/persona-o-que-e/)
+> - [Persona x Público-alvo](https://flammo.com.br/blog/persona-e-publico-alvo-qual-a-diferenca/)
+> - [Mapa de Empatia](https://resultadosdigitais.com.br/blog/mapa-da-empatia/)
+> - [Mapa de Stalkeholders](https://www.racecomunicacao.com.br/blog/como-fazer-o-mapeamento-de-stakeholders/)
+>
+Lembre-se que você deve ser enumerar e descrever precisamente e personalizada todos os clientes ideais que sua solução almeja.
 
 ## Histórias de Usuários
 
-Fundamentadas nas personas definidas para o projeto Deskly, foram identificadas as seguintes histórias de usuários:
+Com base na análise das personas forma identificadas as seguintes histórias de usuários:
 
-| Eu como… | Quero/desejo… | Para… |
-|----------|--------------|------|
-| Mariana Souza | visualizar todas as salas disponíveis em determinado dia e horário | escolher qual posso reservar |
-| Mariana Souza | visualizar detalhes das salas (capacidade, recursos) | escolher a mais adequada |
-| Mariana Souza | reservar uma sala informando data e horário e receber confirmação | garantir meu uso do espaço |
-| Mariana Souza | cancelar uma reserva | liberar a sala caso eu não vá utilizá-la |
-| Mariana Souza | visualizar minhas reservas | gerenciá-las |
-| Mariana Souza | gerenciar convidados da reserva (adicionar e remover) | organizar a reunião |
-| Mariana Souza | visualizar a lista de convidados e seu status (aceito/recusado) | planejar melhor a reunião |
-| Mariana Souza | ter limite automático de convidados conforme a capacidade da sala | evitar superlotação |
-| Mariana Souza | fazer login no sistema | acessar minhas funcionalidades |
-| Lucas Ferreira | visualizar todas as salas disponíveis em determinado dia e horário | escolher qual posso reservar |
-| Lucas Ferreira | visualizar detalhes das salas (capacidade, recursos) | escolher a mais adequada |
-| Lucas Ferreira | reservar uma sala informando data e horário e receber confirmação | garantir meu uso do espaço |
-| Lucas Ferreira | cancelar uma reserva | liberar a sala caso eu não vá utilizá-la |
-| Lucas Ferreira | visualizar minhas reservas | gerenciá-las |
-| Lucas Ferreira | gerenciar convidados da reserva (adicionar e remover) | organizar a reunião |
-| Lucas Ferreira | visualizar a lista de convidados e seu status (aceito/recusado) | planejar melhor a reunião |
-| Lucas Ferreira | ter limite automático de convidados conforme a capacidade da sala | evitar superlotação |
-| Lucas Ferreira | fazer login no sistema | acessar minhas funcionalidades |
-| Carlos Mendes | convidar usuários para a empresa | formar o time |
-| Carlos Mendes | remover usuários da empresa | manter controle de acesso |
-| Carlos Mendes | visualizar membros da empresa | gerenciar o time |
-| Carlos Mendes | cadastrar salas e mesas | disponibilizar espaços no sistema |
-| Carlos Mendes | editar informações dos espaços | manter dados atualizados |
-| Carlos Mendes | desativar espaços temporariamente | manutenção ou indisponibilidade |
-| Carlos Mendes | visualizar todas as reservas | ter controle do uso dos espaços |
-| Carlos Mendes | excluir reservas de usuários | liberar salas quando necessário |
+|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
+|--------------------|------------------------------------|----------------------------------------|
+|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
+|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
 
----
+Apresente aqui as histórias de usuário que são relevantes para o projeto de sua solução. As Histórias de Usuário consistem em uma ferramenta poderosa para a compreensão e elicitação dos requisitos funcionais e não funcionais da sua aplicação. Se possível, agrupe as histórias de usuário por contexto, para facilitar consultas recorrentes à essa parte do documento.
+
+> **Links Úteis**:
+> - [Histórias de usuários com exemplos e template](https://www.atlassian.com/br/agile/project-management/user-stories)
+> - [Como escrever boas histórias de usuário (User Stories)](https://medium.com/vertice/como-escrever-boas-users-stories-hist%C3%B3rias-de-usu%C3%A1rios-b29c75043fac)
+> - [User Stories: requisitos que humanos entendem](https://www.luiztools.com.br/post/user-stories-descricao-de-requisitos-que-humanos-entendem/)
+> - [Histórias de Usuários: mais exemplos](https://www.reqview.com/doc/user-stories-example.html)
+> - [9 Common User Story Mistakes](https://airfocus.com/blog/user-story-mistakes/)
 
 ## Requisitos
 
-As tabelas a seguir apresentam os requisitos funcionais e não funcionais do sistema Deskly.
+As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto.
 
 ### Requisitos Funcionais
 
-| ID | Descrição do Requisito | Prioridade |
-|----|------------------------|------------|
-| RF-01 | O sistema deve permitir ao administrador cadastrar salas de reunião e estações de trabalho, editar, excluí-las ou desativá-las | Alta |
-| RF-02 | O sistema deve permitir ao administrador cadastrar usuários no ambiente | Alta |
-| RF-03 | O sistema deve permitir autenticação (login) | Alta |
-| RF-04 | O sistema deve permitir o usuário visualizar e agendar salas de reunião e estações de trabalho disponíveis por data e horário | Alta |
-| RF-05 | O sistema deve permitir ao usuário visualizar, editar e cancelar suas reservas | Alta |
-| RF-06 | O sistema deve permitir ao administrador visualizar, editar e cancelar todas as reservas | Alta |
-| RF-07 | O sistema deve exibir ao usuário detalhes das salas (capacidade, recursos e status) | Média |
-| RF-08 | O sistema deve permitir o usuário adicionar convidados a uma reserva de sala de reunião | Média |
-| RF-09 | O sistema deve permitir o usuário visualizar a lista de convidados de uma reserva de sala de reunião | Média |
-| RF-10 | O sistema pode permitir favoritar salas | Baixa |
+|ID    | Descrição do Requisito  | Prioridade | 
+|------|-----------------------------------------|----| 
+|RF-001| A aplicação deve permitir que o usuário gerencie suas tarefas | ALTA |  
+|RF-002| A aplicação deve permitir a emissão de um relatório de tarefas realizadas no mês   | MÉDIA | 
 
----
 
-### Requisitos Não Funcionais
+### Requisitos não Funcionais
 
-| ID | Descrição do Requisito | Prioridade |
-|----|------------------------|------------|
-| RNF-01 | O sistema deve possuir autenticação segura com criptografia de senhas | Alta |
-| RNF-02 | O sistema deve implementar controle de acesso por perfil (usuário/admin) | Alta |
-| RNF-03 | O sistema deve garantir a integridade dos dados de reservas | Alta |
-| RNF-04 | O sistema deve realizar backup automático dos dados | Alta |
-| RNF-05 | O sistema deve permitir recuperação de dados em caso de falha | Alta |
-| RNF-06 | O sistema deve ter um tempo de resposta rápido e ágil. | Alta |
-| RNF-07 | O sistema deve ser responsivo (desktop, tablet e mobile) | Média |
-| RNF-08 | O sistema deve suportar pelo menos 5 usuários simultâneos sem degradação de performance | Média |
-| RNF-09 | O sistema deve registrar logs de autenticação, criação, edição e exclusão de reservas | Média |
-| RNF-10 | O sistema deve ser compatível com os principais navegadores | Média |
-| RNF-11 | A interface deve permitir que o usuário realize uma reserva em poucos passos | Média |
-| RNF-12 | O sistema deve permitir escalabilidade (aumento de usuários e reservas sem degradação significativa de performance) | Baixa |
-| RNF-13 | O sistema deve possuir código modular e documentação para facilitar manutenção e evolução | Baixa |
-| RNF-14 | O sistema deve permitir integração com serviços externos via API | Baixa |
+|ID     | Descrição do Requisito  |Prioridade |
+|-------|-------------------------|----|
+|RNF-001| A aplicação deve ser responsiva | MÉDIA | 
+|RNF-002| A aplicação deve processar requisições do usuário em no máximo 3s |  BAIXA | 
 
----
+Com base nas Histórias de Usuário, enumere os requisitos da sua solução. Classifique esses requisitos em dois grupos:
+
+- [Requisitos Funcionais
+ (RF)](https://pt.wikipedia.org/wiki/Requisito_funcional):
+ correspondem a uma funcionalidade que deve estar presente na
+  plataforma (ex: cadastro de usuário).
+- [Requisitos Não Funcionais
+  (RNF)](https://pt.wikipedia.org/wiki/Requisito_n%C3%A3o_funcional):
+  correspondem a uma característica técnica, seja de usabilidade,
+  desempenho, confiabilidade, segurança ou outro (ex: suporte a
+  dispositivos iOS e Android).
+Lembre-se que cada requisito deve corresponder à uma e somente uma
+característica alvo da sua solução. Além disso, certifique-se de que
+todos os aspectos capturados nas Histórias de Usuário foram cobertos.
 
 ## Restrições
 
-O projeto Deskly está sujeito às seguintes restrições:
+O projeto está restrito pelos itens apresentados na tabela a seguir.
 
-| ID | Restrição |
-|----|-----------|
-| 01 | O projeto deve ser entregue dentro do prazo definido pela disciplina |
-| 02 | O sistema deve ser desenvolvido utilizando HTML, CSS, PHP e MySQL |
-| 03 | O escopo do sistema está limitado aos requisitos definidos no projeto |
+|ID| Restrição                                             |
+|--|-------------------------------------------------------|
+|01| O projeto deverá ser entregue até o final do semestre |
+|02| Não pode ser desenvolvido um módulo de backend        |
 
----
+
+Enumere as restrições à sua solução. Lembre-se de que as restrições geralmente limitam a solução candidata.
+
+> **Links Úteis**:
+> - [O que são Requisitos Funcionais e Requisitos Não Funcionais?](https://codificar.com.br/requisitos-funcionais-nao-funcionais/)
+> - [O que são requisitos funcionais e requisitos não funcionais?](https://analisederequisitos.com.br/requisitos-funcionais-e-requisitos-nao-funcionais-o-que-sao/)
