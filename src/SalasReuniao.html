@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="assets/css/global/global.css">
-    <link rel="stylesheet" href="assets/css/pages/SalasReuniao/SalasReuniao.css">
+    <link rel="stylesheet" href="assets/css/pages/salasReuniao/salasReuniao.css">
     <title>Salas de Reunião</title>
 </head>
 
@@ -47,11 +48,11 @@
 
         <section class="filtros-container">
             <div class="campo-filtro">
-                <input type="date">
+                <input type="date" placeholder="dd/mm/aaaa">
             </div>
 
             <div class="campo-filtro">
-                <input type="time">
+                <input type="time" >
             </div>
 
             <div class="campo-filtro">
@@ -85,7 +86,7 @@
                 <div class="sala-acoes">
                     <span class="badge disponivel">Disponível</span>
                     <button class="btn-detalhes open-modal" data-modal="modal-detalhes">Detalhes</button>
-                    <button class="botao-add-sala open-modal" data-modal="modal-reserva">Reservar</button>
+                    <button class="btn-reservar open-modal" data-modal="modal-reserva">Reservar</button>
                 </div>
             </article>
 
@@ -102,7 +103,7 @@
                 <div class="sala-acoes">
                     <span class="badge ocupada">Ocupada</span>
                     <button class="btn-detalhes open-modal" data-modal="modal-detalhes">Detalhes</button>
-                    <button class="botao-add-sala open-modal" data-modal="modal-reserva">Reservar</button>
+                    <button class="btn-reservar open-modal" data-modal="modal-reserva">Reservar</button>
                 </div>
             </article>
 
@@ -117,7 +118,7 @@
                 <div class="sala-acoes">
                     <span class="badge disponivel">Disponível</span>
                     <button class="btn-detalhes open-modal" data-modal="modal-detalhes">Detalhes</button>
-                    <button class="botao-add-sala open-modal" data-modal="modal-reserva">Reservar</button>
+                    <button class="btn-reservar open-modal" data-modal="modal-reserva">Reservar</button>
                 </div>
             </article>
 
@@ -131,8 +132,8 @@
                 </div>
                 <div class="sala-acoes">
                     <span class="badge inativa">Inativa</span>
-                    <button class="btn-reservar" disabled>Detalhes</button>
-                    <button class="btn-reservar" disabled>Reservar</button>
+                    <button class="btn-detalhes" disabled>Detalhes</button>
+                    <button class="btn-reservar open-modal" disabled>Reservar</button>
                 </div>
             </article>
         </section>
@@ -267,14 +268,24 @@
 
         <div class="modal-footer">
             <button type="button" class="btn-cancelar close-modal" data-modal="modal-detalhes">Fechar</button>
-            <button type="button" class="btn-confirmar"
-                onclick="document.getElementById('modal-detalhes').close();
+            <button type="button" class="btn-confirmar" onclick="document.getElementById('modal-detalhes').close();
                 document.getElementById('modal-reserva').showModal()">Reservar este espaço</button>
         </div>
     </dialog>
 
     <script src="assets/js/menu.js"></script>
     <script src="./assets/js/modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+    <script>
+        flatpickr('input[type="date"]', {
+            locale: 'pt',
+            dateFormat: 'd/m/Y',
+            disableMobile: true,
+            placeholder: 'dd/mm/aaaa',
+            monthSelectorType: 'static'
+        });
+    </script>
 </body>
 
 </html>

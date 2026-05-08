@@ -15,8 +15,13 @@
 .botao-add-sala {
     background-color: var(--color-btn-primary);
     color: var(--color-background);
-    padding: var(--spacing-xs) var(--spacing-md);
+    padding: 10px var(--spacing-md);
     border-radius: var(--radius-md);
+}
+
+.botao-add-sala:hover {
+    background: var(--color-heading);
+    transition: 0.2s ease;
 }
 
 .filtros-container {
@@ -31,11 +36,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     background-color: transparent;
     border: 1px solid var(--color-border-card) !important;
     border-radius: var(--radius-md);
-
     padding: var(--spacing-xs) var(--spacing-sm);
     min-height: 44px;
 }
@@ -50,6 +53,11 @@
     outline: none;
     cursor: pointer;
     appearance: none;
+}
+
+.btn-filtrar-simples:hover {
+    background: var(--color-border-card);
+    color: var(--color-text-md);
 }
 
 .campo-filtro img {
@@ -72,118 +80,9 @@
     justify-content: space-between;
     background-color: transparent;
     border: 1px solid var(--color-border-card);
-    border-radius: var(--radius-lg);
-    padding: var(--spacing-md);
-    transition: transform 0.2s ease;
-}
-
-.card-sala:hover {
-    background-color: rgba(94, 102, 121, 0.02);
-}
-
-.sala-info-principal {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-}
-
-.sala-img {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    border-radius: var(--radius-md);
-    background-color: #D9D9D9;
-}
-
-.sala-textos h3 {
-    font: var(--heading-3);
-    color: var(--color-heading);
-    margin: 0;
-    margin-bottom: var(--spacing-xs);
-}
-
-.sala-textos p {
-    font: var(--text-sm);
-    color: var(--color-text-md);
-    margin: 0;
-}
-
-.sala-acoes {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.badge {
-    padding: 6px 16px;
-    border-radius: var(--radius-md);
-    font: var(--text-sm);
-    font-weight: 600;
-    text-align: center;
-    min-width: 100px;
-}
-
-.badge.disponivel {
-    background-color: var(--color-badge-green);
-    color: var(--color-text-green);
-}
-
-.badge.ocupada {
-    --color-btn-red: #F8D7DA;
-    --color-text-red: #721C24;
-}
-
-.badge.inativa {
-    background-color: var(--color-border-card);
-    color: var(--color-text-md);
-}
-
-.btn-detalhes {
-    background: transparent;
-    border: 1px solid var(--color-border-card);
-    border-radius: var(--radius-md);
-    padding: 8px 16px;
-    color: var(--color-text-md);
-    font: var(--text-sm);
-    cursor: pointer;
-}
-
-.btn-reservar {
-    background-color: var(--color-btn-primary);
-    color: var(--color-background);
-    border: none;
-    border-radius: var(--radius-md);
-    padding: 8px 20px;
-    font: var(--text-sm);
-    cursor: pointer;
-}
-
-.btn-reservar:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-    background-color: var(--color-border-card);
-}
-
-.lista-salas {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    padding: var(--spacing-lg) var(--spacing-xl);
-}
-
-.card-sala {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: transparent;
-    border: 1px solid var(--color-border-card);
     border-radius: 20px;
     padding: var(--spacing-md);
     transition: background-color 0.2s ease;
-}
-
-.card-sala:hover {
-    background-color: rgba(94, 102, 121, 0.02);
 }
 
 .sala-info-principal {
@@ -220,7 +119,7 @@
 
 .badge {
     padding: 6px 16px;
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-md);
     font: var(--text-sm);
     font-weight: 600;
     text-align: center;
@@ -230,7 +129,11 @@
 .badge.disponivel {
     background-color: var(--color-badge-green);
     color: var(--color-text-green);
-    border-radius: var(--radius-md);
+}
+
+.badge.ocupada {
+    background-color: var(--color-badge-red);
+    color: var(--color-text-red);
 }
 
 .badge.inativa {
@@ -238,19 +141,33 @@
     color: var(--color-text-md);
 }
 
-.badge.ocupada {
-    --color-btn-red: #F8D7DA;
-    --color-text-red: #721C24;
-}
-
 .btn-detalhes {
     background: transparent;
     border: 1px solid var(--color-border-card);
     border-radius: var(--radius-md);
-    padding: 8px 16px;
+    padding: 10px var(--spacing-sm);
     color: var(--color-text-md);
     font: var(--text-sm);
     cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-detalhes:hover {
+    background: var(--color-border-card);
+    color: var(--color-text-md);
+}
+
+.btn-detalhes:disabled {
+    background-color: transparent;
+    border: 1px solid var(--color-border-card);
+    color: var(--color-text-sm);
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.btn-detalhes:disabled:hover {
+    background: transparent;
+    outline: none;
 }
 
 .btn-reservar {
@@ -258,9 +175,16 @@
     color: var(--color-background);
     border: none;
     border-radius: var(--radius-md);
-    padding: 8px 20px;
+    padding: 10px var(--spacing-sm);
     font: var(--text-sm);
     cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-reservar:hover {
+    background: var(--color-heading);
+    outline: 1px solid var(--color-border-card);
+    transition: 0.2s ease;
 }
 
 .btn-reservar:disabled {
@@ -269,6 +193,11 @@
     color: var(--color-text-sm);
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+.btn-reservar:disabled:hover {
+    background: transparent;
+    outline: none;
 }
 
 .detail-row {
@@ -311,7 +240,7 @@
     display: flex;
     align-items: center;
     gap: var(--spacing-sm);
-    --color-btn-red: #F8D7DA;
+    background-color: var(--color-badge-red);
     border-radius: var(--radius-md);
     padding: var(--spacing-xs) var(--spacing-sm);
     margin-bottom: var(--spacing-xs);
@@ -320,9 +249,123 @@
 
 .horario-time {
     font-weight: 700;
-    --color-text-red: #721C24;
+    color: var(--color-text-red);
 }
 
 .horario-pessoa {
     color: var(--color-text-md);
+}
+
+/* Calendário */
+.flatpickr-calendar {
+    background: var(--color-background);
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    font-family: var(--main-font);
+}
+
+.flatpickr-months {
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px solid var(--color-border-card);
+}
+
+.flatpickr-month {
+    color: var(--color-heading);
+}
+
+.flatpickr-current-month {
+    font: var(--heading-4);
+    color: var(--color-heading);
+}
+
+.flatpickr-monthDropdown-months,
+.numInputWrapper input {
+    font: var(--text-md);
+    color: var(--color-heading);
+    background: transparent;
+}
+
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: var(--color-heading);
+}
+
+.flatpickr-prev-month:hover svg,
+.flatpickr-next-month:hover svg {
+    fill: var(--color-btn-primary);
+}
+
+.flatpickr-weekday {
+    font: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-md);
+}
+
+.flatpickr-day {
+    font: var(--text-sm);
+    color: var(--color-heading);
+    border-radius: var(--radius-md);
+    border: none;
+}
+
+.flatpickr-day:hover {
+    background: var(--color-border-card);
+    color: var(--color-heading);
+    border: none;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+}
+
+.flatpickr-day.today {
+    border: 1px solid var(--color-btn-primary);
+    color: var(--color-btn-primary);
+    font-weight: 600;
+}
+
+.flatpickr-day.today:hover {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
+}
+
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+    color: var(--color-text-sm);
+}
+
+.flatpickr-day.flatpickr-disabled {
+    color: var(--color-text-sm);
+    opacity: 0.4;
+}
+
+.flatpickr-input::placeholder {
+    color: var(--color-text-md);
+    font: var(--text-md);
+}
+
+.flatpickr-monthDropdown-months {
+    background: var(--color-background);
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    color: var(--color-heading);
+    font: var(--text-md);
+    padding: var(--spacing-xs);
+}
+
+.flatpickr-monthDropdown-months option {
+    background: var(--color-background);
+    color: var(--color-heading);
+    font: var(--text-sm);
+    padding: var(--spacing-xs);
+}
+
+.flatpickr-monthDropdown-months option:checked,
+.flatpickr-monthDropdown-months option:hover {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
 }
