@@ -4,8 +4,228 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Admin</title>
+    <link rel="stylesheet" href="assets/css/global/global.css">
+    <link rel="stylesheet" href="assets/css/pages/painelAdmin/painelAdmin.css">
 </head>
 <body>
+    <header>
+        <img class="logo" src="assets/icons/logo.svg" alt="Logo Deskly">
+        <div class="header-icons">
+            <button><img class="header-icon" src="assets/icons/bell.svg" alt="Sino"></button>
+            <button><img class="header-icon" src="assets/icons/user-circle.svg" alt="Perfil"></button>
+            <button type="button" id="btn-hamburguer" class="hamburguer"><img src="assets/icons/menu.svg" alt="Botão"></button>
+        </div>
+    </header>
+
+    <aside>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="">Calendário</a></li>
+                <li><a href="SalasReuniao.html">Salas de Reunião</a></li>
+                <li><a href="estacoes.html">Estações de Trabalho</a></li>
+                <li><a href="">Minhas Reservas</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="#">Painel Admin</a></li>
+                <li><a href="#">Ajuda</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <section class="painel-admin">
+            <div class="painel-admin-header">
+                <div class="painel-admin-title">
+                    <h1>Painel Admin</h1>
+                    <span class="subtitle">Gerencie espaços, reservas e usuários</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="tabs">
+            <ul class="tabs-list">
+                <li class="tab active">Todas as reservas</li>
+                <li class="tab">Espaços</li>
+                <li class="tab">Usuários</li>
+
+                <div class="tab-indicator"></div>
+            </ul>
+        </nav>
+
+        <section class="filtros-container">
+            <div class="campo-filtro">
+                <input type="date">
+            </div>
+
+            <div class="campo-filtro">
+                <select>
+                    <option>Todas as capacidades</option>
+                    <option>Até 4 pessoas</option>
+                    <option>Até 8 pessoas</option>
+                    <option>Mais de 8 pessoas</option>
+                </select>
+                <img src="assets/icons/seta.svg" alt="Imagem da Sala">
+            </div>
+
+            <button class="btn-filtrar-simples">Filtrar</button>
+        </section>
+
+        <section class="tabela-container">
+            <table class="tabela-reservas">
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Espaço</th>
+                        <th>Data</th>
+                        <th>Horário</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Emanuel Miranda</td>
+                        <td>Sala Alfa</td>
+                        <td>30/03/2026</td>
+                        <td>11:00h - 11:30h</td>
+                        <td><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Isabela Santos</td>
+                        <td>Sala Beta</td>
+                        <td>05/04/2026</td>
+                        <td>11:40h - 12:10h</td>
+                        <td><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Kauã Silva</td>
+                        <td>Mesa 02</td>
+                        <td>10/04/2026</td>
+                        <td>12:30h - 13:00h</td>
+                        <td><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Letícia Moreira</td>
+                        <td>Sala Gama</td>
+                        <td>12/04/2026</td>
+                        <td>13:00h - 13:30h</td>
+                        <td><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>Vitória Leal</td>
+                        <td>Mesa 03</td>
+                        <td>13/04/2026</td>
+                        <td>13:40h - 14:00h</td>
+                        <td><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <dialog id="modal-nova-reserva">
+        <form action="">
+            <div class="modal-header">
+                <h3 class="modal-title">Nova reserva</h3>
+                <button class="close-modal" data-modal="modal-nova-reserva" type="button">
+                    <img src="assets/icons/close-menu.svg" alt="Fechar">
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="input-group">
+                    <label for="espaco">Espaço</label>
+                    <select id="espaco" name="espaco" onchange="atualizarConvidados()">
+                        <option value="">Selecione um espaço</option>
+                        <option value="4">Sala A — cap. 4 pessoas</option>
+                        <option value="8">Sala B — cap. 8 pessoas</option>
+                        <option value="12">Sala C — cap. 12 pessoas</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="date">Data</label>
+                    <input type="date" id="date">
+                </div>
+
+                <div class="input-group">
+                    <label for="start-time">Horário de início</label>
+                    <input type="time" id="start-time">
+                </div>
+
+                <div class="input-group">
+                    <label for="ending-time">Horário de término</label>
+                    <input type="time" id="ending-time">
+                </div>
+
+                <div class="input-group" id="convidados-wrapper" style="display: none;">
+                    <label for="convidados">
+                        Convidados <span id="limite-label"></span>
+                    </label>
+                    <select id="convidados" name="guests[]" multiple></select>
+                    <small id="aviso"></small>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="close-modal" data-modal="modal-nova-reserva">Cancelar</button>
+                <button type="button" class="btn-excluir open-modal" data-modal="modal-confirmacao" onclick="confirmar()">Confirmar</button>
+            </div>
+        </form>
+    </dialog>
+
+    <dialog id="modal-confirmacao">
+        <div class="modal-confirmacao-header">
+            <h3 class="modal-confirmacao-titulo">Excluir Reserva</h3>
+            <button type="button" class="modal-confirmacao-fechar" data-modal="modal-confirmacao">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+            </button>
+        </div>
     
+        <div class="modal-confirmacao-body">
+            <p class="modal-confirmacao-descricao">
+            Deseja excluir a reserva de <strong>Isabela Santos</strong>?
+            </p>
+        
+            <div class="modal-confirmacao-detalhes">
+            <div class="modal-confirmacao-linha">
+                <span class="modal-confirmacao-label">Espaço</span>
+                <span class="modal-confirmacao-valor">Sala Beta</span>
+            </div>
+            <div class="modal-confirmacao-linha">
+                <span class="modal-confirmacao-label">Data</span>
+                <span class="modal-confirmacao-valor">30/03/2026</span>
+            </div>
+            <div class="modal-confirmacao-linha">
+                <span class="modal-confirmacao-label">Horário</span>
+                <span class="modal-confirmacao-valor">09:00h – 10:00h</span>
+            </div>
+            </div>
+        
+            <p class="modal-confirmacao-aviso">A sala será liberada para novas reservas</p>
+        </div>
+        
+        <div class="modal-confirmacao-footer">
+            <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-confirmacao">Cancelar</button>
+            <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Confirmar</button>
+        </div>
+    </dialog>
+
+    <script src="assets/js/menu.js"></script>
+    <script src="./assets/js/painelAdmin/modalExcluirReserva.js"></script>
 </body>
 </html>
