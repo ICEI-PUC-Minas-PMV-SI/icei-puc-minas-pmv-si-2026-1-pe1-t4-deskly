@@ -1,0 +1,183 @@
+@import "../../global/global.css";
+@import "../painelAdmin/partials/modalExcluirReserva.css";
+
+main {
+    padding: 24px 50px;
+}
+
+.painel-admin {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.painel-admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filtros-container {
+    display: flex;
+    gap: var(--spacing-sm);
+    padding-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.campo-filtro,
+.btn-filtrar-simples {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background-color: transparent;
+    border: 1px solid var(--color-border-card) !important;
+    border-radius: var(--radius-md);
+
+    padding: var(--spacing-xs) var(--spacing-sm);
+    min-height: 44px;
+}
+
+.campo-filtro input,
+.campo-filtro select,
+.btn-filtrar-simples {
+    border: none;
+    background: transparent;
+    font: var(--text-md);
+    color: var(--color-text-md);
+    outline: none;
+    cursor: pointer;
+    appearance: none;
+}
+
+.campo-filtro img {
+    height: 18px;
+    width: 18px;
+    margin-left: 10px;
+    opacity: 0.7;
+}
+
+.tabs {
+    margin-top: 20px;
+}
+
+/* AGORA quem controla tudo é esse cara */
+.tabs-list {
+    position: relative; /* 🔥 ESSENCIAL */
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tab {
+    padding: 12px 0;
+    cursor: pointer;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.tab.active {
+    color: #111827;
+}
+
+/* linha escura */
+.tab-indicator {
+    position: absolute;
+    bottom: 0;
+    height: 3px;
+    width: 0;
+    background-color: #111827;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.tabela-container {
+    margin-top: 20px;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+.tabela-reservas {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-reservas th {
+    text-align: left;
+    padding: 12px 18px;
+    font-size: var(--heading-1);
+}
+
+.tabela-reservas td {
+    padding: 16px 18px;
+    font-size: var(--text-md);
+    border-top: 1px solid #f1f5f9;
+}
+
+/* badge de status */
+.status {
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.status.confirmado {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+/* botão excluir */
+.btn-excluir {
+    background-color: #334155;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.btn-excluir:hover {
+    background-color: #1e293b;
+}
+
+@media (max-width: 768px) {
+
+    body {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "main";
+    }
+
+    .logo {
+        content: url('../icons/logo-mobile.svg');
+    }
+
+    aside {
+        position: fixed;
+        top: 112px; /* altura do seu header */
+        left: 0;
+        width: 75%;
+        max-width: 320px;
+        height: calc(100dvh - 112px);
+        z-index: 100;
+        background-color: var(--color-background);
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+    aside.aberto {
+        transform: translateX(0);
+    }
+
+    .hamburguer {
+        display: block;
+    }
+}
