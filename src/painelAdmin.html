@@ -46,15 +46,14 @@
 
         <nav class="tabs">
             <ul class="tabs-list">
-                <li class="tab active">Todas as reservas</li>
-                <li class="tab">Espaços</li>
-                <li class="tab">Usuários</li>
-
+                <li class="tab active" data-tab="reservas">Todas as reservas</li>
+                <li class="tab" data-tab="espacos">Espaços</li>
+                <li class="tab" data-tab="usuarios">Usuários</li>
                 <div class="tab-indicator"></div>
             </ul>
         </nav>
 
-        <section class="filtros-container">
+        <section class="filtros-container" data-tab-content="reservas">
             <div class="campo-filtro">
                 <input type="date">
             </div>
@@ -72,7 +71,7 @@
             <button class="btn-filtrar-simples">Filtrar</button>
         </section>
 
-        <section class="tabela-container">
+        <section class="tabela-container" data-tab-content="reservas">
             <table class="tabela-reservas">
                 <thead>
                     <tr>
@@ -93,7 +92,6 @@
                         <td><span class="status confirmado">Confirmado</span></td>
                         <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
-
                     <tr>
                         <td>Isabela Santos</td>
                         <td>Sala Beta</td>
@@ -102,7 +100,6 @@
                         <td><span class="status confirmado">Confirmado</span></td>
                         <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
-
                     <tr>
                         <td>Kauã Silva</td>
                         <td>Mesa 02</td>
@@ -111,7 +108,6 @@
                         <td><span class="status confirmado">Confirmado</span></td>
                         <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
-
                     <tr>
                         <td>Letícia Moreira</td>
                         <td>Sala Gama</td>
@@ -120,7 +116,6 @@
                         <td><span class="status confirmado">Confirmado</span></td>
                         <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
-
                     <tr>
                         <td>Vitória Leal</td>
                         <td>Mesa 03</td>
@@ -132,42 +127,50 @@
                 </tbody>
             </table>
         </section>
+
+        <section class="espacos-container" data-tab-content="espacos">
+
+        </section>
+
+        <section class="usuarios-container" data-tab-content="usuarios">
+
+        </section>
     </main>
 
     <dialog id="modal-confirmacao">
         <div class="modal-confirmacao-header">
             <h3 class="modal-confirmacao-titulo">Excluir Reserva</h3>
             <button type="button" class="modal-confirmacao-fechar" data-modal="modal-confirmacao">
-            <svg id="btn-fechar-modal" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
+                <svg id="btn-fechar-modal" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/>
+                    <line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
             </button>
         </div>
-    
+
         <div class="modal-confirmacao-body">
             <p class="modal-confirmacao-descricao">
-            Deseja excluir a reserva de <strong>Isabela Santos</strong>?
+                Deseja excluir a reserva de <strong>Isabela Santos</strong>?
             </p>
-        
+
             <div class="modal-confirmacao-detalhes">
-            <div class="modal-confirmacao-linha">
-                <span class="modal-confirmacao-label">Espaço</span>
-                <span class="modal-confirmacao-valor">Sala Beta</span>
+                <div class="modal-confirmacao-linha">
+                    <span class="modal-confirmacao-label">Espaço</span>
+                    <span class="modal-confirmacao-valor">Sala Beta</span>
+                </div>
+                <div class="modal-confirmacao-linha">
+                    <span class="modal-confirmacao-label">Data</span>
+                    <span class="modal-confirmacao-valor">30/03/2026</span>
+                </div>
+                <div class="modal-confirmacao-linha">
+                    <span class="modal-confirmacao-label">Horário</span>
+                    <span class="modal-confirmacao-valor">09:00h – 10:00h</span>
+                </div>
             </div>
-            <div class="modal-confirmacao-linha">
-                <span class="modal-confirmacao-label">Data</span>
-                <span class="modal-confirmacao-valor">30/03/2026</span>
-            </div>
-            <div class="modal-confirmacao-linha">
-                <span class="modal-confirmacao-label">Horário</span>
-                <span class="modal-confirmacao-valor">09:00h – 10:00h</span>
-            </div>
-            </div>
-        
+
             <p class="modal-confirmacao-aviso">A sala será liberada para novas reservas</p>
         </div>
-        
+
         <div class="modal-confirmacao-footer">
             <button type="button" class="modal-confirmacao-btn-cancelar" id="modal-confirmacao-btn-cancelar" data-modal="modal-confirmacao">Cancelar</button>
             <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Confirmar</button>
