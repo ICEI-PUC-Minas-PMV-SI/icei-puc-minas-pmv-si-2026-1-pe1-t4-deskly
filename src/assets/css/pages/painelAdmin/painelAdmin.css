@@ -143,6 +143,20 @@ main {
     background-color: #1e293b;
 }
 
+[data-tab-content] {
+    display: none;
+}
+
+.filtros-container[data-tab-content].active {
+    display: flex;
+}
+
+.tabela-container[data-tab-content].active,
+.espacos-container[data-tab-content].active,
+.usuarios-container[data-tab-content].active {
+    display: block;
+}
+
 @media (max-width: 768px) {
 
     body {
