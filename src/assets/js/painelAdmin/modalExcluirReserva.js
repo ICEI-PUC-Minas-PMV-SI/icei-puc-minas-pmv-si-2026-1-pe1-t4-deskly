@@ -7,8 +7,16 @@ document.querySelectorAll(".open-modal").forEach(btn => {
     })
 })
 
+document.getElementById("btn-fechar-modal").addEventListener("click", () => {
+    modalConfirmacao.close()
+})
+
 document.getElementById("btn-confirmar-exclusao").addEventListener("click", () => {
-    console.log("reserva excluída")
+    /* Adicionar lógica para apgar oa reserva */
+    modalConfirmacao.close()
+})
+
+document.getElementById("modal-confirmacao-btn-cancelar").addEventListener("click", () => {
     modalConfirmacao.close()
 })
 
