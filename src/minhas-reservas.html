@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="assets/css/global/global.css">
+        <link rel="stylesheet" href="assets/css/pages/estacoes/estacoes.css">
+
+        <title>Minhas Reservas</title>
+    </head>
+    <body>
+        <header>
+            <img class="logo" src="assets/icons/logo.svg">
+            <div class="header-icons">
+                <button><img class="header-icon" src="assets/icons/bell.svg"></button>
+                <button><img class="header-icon" src="assets/icons/user-circle.svg"></button>
+                <button id="btn-hamburguer" class="hamburguer">
+                    <img src="assets/icons/menu.svg">
+                </button>
+            </div>
+        </header>
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#">Calendário</a></li>
+                    <li><a href="SalasReuniao.html">Salas de Reunião</a></li>
+                    <li><a href="estacoes.html">Estações de Trabalho</a></li>
+                    <li><a href="minhas-reservas.html">Minhas Reservas</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">Painel Admin</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="estacoes">
+            <section style="display: flex; flex-direction: column; gap: 24px;">
+                <div>
+                    <h1 style="font-size: 2rem;">Minhas Reservas</h1>
+                    <span class="subtitle">Gerencie seus agendamentos</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; gap: 18px; width: 364px;">
+                    <select style="width: 173px">
+                        <option>Todos os tipos</option>
+                        <option>Salas de Reunião</option>
+                        <option>Estações de Trabalho</option>
+                    </select>
+                    <select style="width: 173px">
+                        <option>Qualquer status</option>
+                        <option>Confirmadas</option>
+                        <option>Canceladas</option>
+                    </select>
+                </div>
+            </section>
+
+            <section style="display: flex; flex-direction: column; width: 100%; row-gap: 16px;">
+                <div style="border-bottom: 2px solid #AAAAAA; padding-bottom: 16px;">
+                    <h3 style="font-size: 1.25rem;">Próximas</h3>
+                </div>
+                <table style="width: 100%; border: 2px solid #AAAAAA; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #AAAAAA;">
+                            <th style="padding: 8px 16px; text-align: left;">Espaço</th>
+                            <th style="padding: 8px 16px; text-align: left;">Data</th>
+                            <th style="padding: 8px 16px; text-align: left;">Horário</th>
+                            <th style="padding: 8px 16px; text-align: left;">Convidados</th>
+                            <th style="padding: 8px 16px; text-align: left;">Status</th>
+                            <th style="padding: 8px 16px; text-align: left;">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 2px solid #AAAAAA;">
+                            <td style="padding: 8px 16px;">Sala Alfa</td>
+                            <td style="padding: 8px 16px;">30/03/2026</td>
+                            <td style="padding: 8px 16px; white-space: nowrap;">10:00 – 11:30</td>
+                            <td style="padding: 8px 16px; max-height: 38.67px;"><button>3 / 8 →</button></td>
+                            <td style="padding: 8px 16px;">Confirmada</td>
+                            <td style="padding: 8px 16px; white-space: nowrap;">
+                                <button>Editar</button>
+                                <button style="margin-left: 8px;">Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr style="border-bottom: 2px solid #AAAAAA;">
+                            <td style="padding: 8px 16px;">Mesa 04</td>
+                            <td style="padding: 8px 16px;">30/03/2026</td>
+                            <td style="padding: 8px 16px; white-space: nowrap;">14:00 – 18:00</td>
+                            <td style="padding: 8px 16px; height: 38.67px;">—</td>
+                            <td style="padding: 8px 16px;">Confirmada</td>
+                            <td style="padding: 8px 16px; white-space: nowrap;">
+                                <button>Editar</button>
+                                <button style="margin-left: 8px;">Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 16px;">Sala Beta</td>
+                            <td style="padding: 8px 16px;">02/04/2026</td>
+                            <td style="padding: 8px 16px; white-space: nowrap;">09:00 – 10:00</td>
+                            <td style="padding: 8px 16px; max-height: 38.67px;"><button>1 / 4 →</button></td>
+                            <td style="padding: 8px 16px;">Confirmada</td>
+                            <td style="padding: 8px 16px; white-space: nowrap;">
+                                <button>Editar</button>
+                                <button style="margin-left: 8px;">Cancelar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section style="display: flex; flex-direction: column; width: 100%; row-gap: 16px;">
+                <div style="border-bottom: 2px solid #AAAAAA; padding-bottom: 16px;">
+                    <h3 style="font-size: 1.25rem;">Passadas</h3>
+                </div>
+                <table style="width: 100%; border: 2px solid #AAAAAA; border-collapse: collapse;">
+                    <thead>
+                        <tr style="border-bottom: 2px solid #AAAAAA;">
+                            <th style="padding: 8px 16px; text-align: left;">Espaço</th>
+                            <th style="padding: 8px 16px; text-align: left;">Data</th>
+                            <th style="padding: 8px 16px; text-align: left;">Horário</th>
+                            <th style="padding: 8px 16px; text-align: left;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr style="border-bottom: 2px solid #AAAAAA;">
+                            <td style="padding: 8px 16px;">Sala Gama</td>
+                            <td style="padding: 8px 16px;">20/03/2026</td>
+                            <td style="padding: 8px 16px;">15:00 – 16:00</td>
+                            <td style="padding: 8px 16px; height: 38.67px;">Concluída</td>
+                        </tr>
+                        <tr style="border-bottom: 2px solid #AAAAAA;">
+                            <td style="padding: 8px 16px;">Mesa 01</td>
+                            <td style="padding: 8px 16px;">18/03/2026</td>
+                            <td style="padding: 8px 16px;">08:00 – 12:00</td>
+                            <td style="padding: 8px 16px; height: 38.67px;">Concluída</td>
+                        </tr>
+                        <tr>
+                            <td style="padding: 8px 16px;">Sala Alfa</td>
+                            <td style="padding: 8px 16px;">17/03/2026</td>
+                            <td style="padding: 8px 16px;">10:00 – 12:00</td>
+                            <td style="padding: 8px 16px; height: 38.67px;">Concluída</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </main>
+
+        <dialog id="modal-1">
+            <form>
+
+                <div class="modal-header">
+                    <h3>Nova reserva</h3>
+                    <button class="close-modal" data-modal="modal-1" type="button">
+                        X
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="input-group">
+                        <label>Estação de trabalho</label>
+                        <select>
+                            <option>Mesa 01 — Andar 2 - Ala A</option>
+                            <option>Mesa 02 — Andar 2 - Ala B</option>
+                            <option>Mesa 03 — Andar 3 - Ala C</option>
+                            <option>Mesa 04 — Andar 2 - Ala D</option>
+                            <option>Mesa 05 — Andar 3 - Ala A</option>
+                            <option>Mesa 06 — Andar 3 - Ala B</option>
+                            <option>Mesa 07 — Andar 1 - Ala C</option>
+                            <option>Mesa 08 — Andar 1 - Ala D</option>
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label>Data</label>
+                        <input type="date">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Início</label>
+                        <input type="time">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Fim</label>
+                        <input type="time">
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
+                    <button type="button">Confirmar</button>
+                </div>
+
+            </form>
+        </dialog>
+
+        <script src="assets/js/menu.js"></script>
+        <script src="assets/js/modal.js"></script>
+    </body>
+</html>
