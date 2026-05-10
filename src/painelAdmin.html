@@ -26,7 +26,6 @@
                 <li><a href="estacoes.html">Estações de Trabalho</a></li>
                 <li><a href="">Minhas Reservas</a></li>
             </ul>
-
             <ul>
                 <li><a href="#">Painel Admin</a></li>
                 <li><a href="#">Ajuda</a></li>
@@ -57,7 +56,6 @@
             <div class="campo-filtro">
                 <input type="date">
             </div>
-
             <div class="campo-filtro">
                 <select>
                     <option>Todas as capacidades</option>
@@ -65,10 +63,9 @@
                     <option>Até 8 pessoas</option>
                     <option>Mais de 8 pessoas</option>
                 </select>
-                <img src="assets/icons/seta.svg" alt="Imagem da Sala">
+                <img src="assets/icons/seta.svg" alt="Seta">
             </div>
-
-            <button class="btn-filtrar-simples">Filtrar</button>
+            <button class="btn-action">Filtrar</button>
         </section>
 
         <section class="tabela-container" data-tab-content="reservas">
@@ -90,7 +87,7 @@
                         <td>30/03/2026</td>
                         <td>11:00h - 11:30h</td>
                         <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td><button class="btn-action open-modal" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
                     <tr>
                         <td>Isabela Santos</td>
@@ -98,7 +95,7 @@
                         <td>05/04/2026</td>
                         <td>11:40h - 12:10h</td>
                         <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td><button class="btn-action open-modal" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
                     <tr>
                         <td>Kauã Silva</td>
@@ -106,7 +103,7 @@
                         <td>10/04/2026</td>
                         <td>12:30h - 13:00h</td>
                         <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td><button class="btn-action open-modal" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
                     <tr>
                         <td>Letícia Moreira</td>
@@ -114,7 +111,7 @@
                         <td>12/04/2026</td>
                         <td>13:00h - 13:30h</td>
                         <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td><button class="btn-action open-modal" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
                     <tr>
                         <td>Vitória Leal</td>
@@ -122,18 +119,202 @@
                         <td>13/04/2026</td>
                         <td>13:40h - 14:00h</td>
                         <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td><button class="btn-action open-modal" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
                 </tbody>
             </table>
         </section>
 
         <section class="espacos-container" data-tab-content="espacos">
+            <div class="aba-header">
+                <h2>Salas de Reunião</h2>
+                <button class="btn-action cadastrar-espaco">+ Cadastrar Espaço</button>
+            </div>
 
+            <div class="tabela-container">
+                <table class="tabela-reservas">
+                    <thead>
+                        <tr>
+                            <th>Espaço</th>
+                            <th>Capacidade</th>
+                            <th>Recursos</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sala Alfa</td>
+                            <td>8</td>
+                            <td>Tv, Sala</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sala Beta</td>
+                            <td>4</td>
+                            <td>Videoconferência, Ar</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesa 02</td>
+                            <td>2</td>
+                            <td>Lousa, Ar</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sala Gama</td>
+                            <td>16</td>
+                            <td>Videoconferência</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesa 03</td>
+                            <td>6</td>
+                            <td>Tv, lousa e Ar</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action btn-outline">Ativar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="aba-header">
+                <h2>Estações de Trabalho</h2>
+            </div>
+
+            <div class="tabela-container">
+                <table class="tabela-reservas">
+                    <thead>
+                        <tr>
+                            <th>Espaço</th>
+                            <th>Área</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sala Alfa</td>
+                            <td>Andar 2 - Ala A</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sala Beta</td>
+                            <td>Andar 2 - Ala A</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesa 02</td>
+                            <td>Andar 3 - Ala B</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sala Gama</td>
+                            <td>Andar 3 - Ala B</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesa 03</td>
+                            <td>Andar 2 - Ala B</td>
+                            <td><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action">Editar</button>
+                                <button class="btn-action btn-outline">Ativar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
         <section class="usuarios-container" data-tab-content="usuarios">
+            <div class="aba-header">
+                <div class="usuarios-busca">
+                    <input type="text" class="input-busca" placeholder="Buscar colaborador...">
+                    <button class="btn-action">Buscar</button>
+                </div>
+                <button class="btn-action">+ Convidar usuário</button>
+            </div>
 
+            <div class="tabela-container">
+                <table class="tabela-reservas">
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>E-mail</th>
+                            <th>Perfil</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Emanuel Miranda</td>
+                            <td>emanuel@deskly.com</td>
+                            <td>Admin</td>
+                            <td><button class="btn-action">Excluir</button></td>
+                        </tr>
+                        <tr>
+                            <td>Isabela Santos</td>
+                            <td>isabela@deskly.com</td>
+                            <td>Usuário</td>
+                            <td><button class="btn-action">Excluir</button></td>
+                        </tr>
+                        <tr>
+                            <td>Kauã Silva</td>
+                            <td>kaua@deskly.com</td>
+                            <td>Usuário</td>
+                            <td><button class="btn-action">Excluir</button></td>
+                        </tr>
+                        <tr>
+                            <td>Letícia Moreira</td>
+                            <td>leticia@deskly.com</td>
+                            <td>Usuário</td>
+                            <td><button class="btn-action">Excluir</button></td>
+                        </tr>
+                        <tr>
+                            <td>Vitória Leal</td>
+                            <td>vitoria@deskly.com</td>
+                            <td>Usuário</td>
+                            <td><button class="btn-action">Excluir</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
     </main>
 
@@ -141,18 +322,16 @@
         <div class="modal-confirmacao-header">
             <h3 class="modal-confirmacao-titulo">Excluir Reserva</h3>
             <button type="button" class="modal-confirmacao-fechar" data-modal="modal-confirmacao">
-                <svg id="btn-fechar-modal" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"/>
                     <line x1="6" y1="6" x2="18" y2="18"/>
                 </svg>
             </button>
         </div>
-
         <div class="modal-confirmacao-body">
             <p class="modal-confirmacao-descricao">
                 Deseja excluir a reserva de <strong>Isabela Santos</strong>?
             </p>
-
             <div class="modal-confirmacao-detalhes">
                 <div class="modal-confirmacao-linha">
                     <span class="modal-confirmacao-label">Espaço</span>
@@ -167,12 +346,10 @@
                     <span class="modal-confirmacao-valor">09:00h – 10:00h</span>
                 </div>
             </div>
-
             <p class="modal-confirmacao-aviso">A sala será liberada para novas reservas</p>
         </div>
-
         <div class="modal-confirmacao-footer">
-            <button type="button" class="modal-confirmacao-btn-cancelar" id="modal-confirmacao-btn-cancelar" data-modal="modal-confirmacao">Cancelar</button>
+            <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-confirmacao">Cancelar</button>
             <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Confirmar</button>
         </div>
     </dialog>
