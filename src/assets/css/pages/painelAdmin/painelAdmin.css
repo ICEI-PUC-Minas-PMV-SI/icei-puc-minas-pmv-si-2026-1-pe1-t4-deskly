@@ -61,9 +61,8 @@ main {
     margin-top: 20px;
 }
 
-/* AGORA quem controla tudo é esse cara */
 .tabs-list {
-    position: relative; /* 🔥 ESSENCIAL */
+    position: relative; 
     display: flex;
     gap: 32px;
     list-style: none;
@@ -83,7 +82,6 @@ main {
     color: #111827;
 }
 
-/* linha escura */
 .tab-indicator {
     position: absolute;
     bottom: 0;
@@ -118,7 +116,6 @@ main {
     border-top: 1px solid #f1f5f9;
 }
 
-/* badge de status */
 .status {
     padding: 8px 14px;
     border-radius: 999px;
@@ -131,7 +128,6 @@ main {
     color: #166534;
 }
 
-/* botão excluir */
 .btn-excluir {
     background-color: #334155;
     color: #fff;
@@ -162,7 +158,7 @@ main {
 
     aside {
         position: fixed;
-        top: 112px; /* altura do seu header */
+        top: 112px; 
         left: 0;
         width: 75%;
         max-width: 320px;
