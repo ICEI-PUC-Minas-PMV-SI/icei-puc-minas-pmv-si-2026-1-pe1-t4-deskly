@@ -191,6 +191,78 @@ main {
     background: transparent;
 }
 
+dialog {
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    padding-bottom: 32px;
+    background-color: var(--color-background);
+    color: var(--color-heading);
+}
+
+.modal-campo input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.modal-campo label {
+    font: var(--text-sm);
+    font-weight: 500;
+    color: #4B5563;
+}
+
+.modal-campo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.modal-campo label {
+    font: var(--text-sm);
+    color: var(--color-text-md);
+    font-weight: 500;
+}
+
+.modal-campo input {
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    min-height: 44px;
+    background: transparent;
+    outline: none;
+    font: var(--text-md);
+    color: var(--color-text-md);
+}
+
+.modal-campo-row {
+    display: flex;
+    gap: 16px;
+}
+
+.modal-campo-row .modal-campo, .modal-campo-row .input-group {
+    flex: 1;
+}
+
+.modal-confirmacao-btn-danger {
+    background-color: #b91c1c;
+}
+
+.modal-confirmacao-btn-danger:hover {
+    background-color: #991b1b;
+    opacity: 1;
+}
+
+.btn-ativar-confirmar {
+    background-color: var(--color-text-green) !important;
+    border-color: var(--color-text-green) !important;
+    color: #fff !important;
+}
+
+.btn-ativar-confirmar:hover {
+    opacity: 0.85;
+}
+
 @media (max-width: 768px) {
 
     body {
