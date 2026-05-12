@@ -61,14 +61,20 @@
     height: 56px;
     padding: 0 24px;
     border-radius: 16px;
+
     border: 1px solid var(--color-border-card);
     background: transparent;
+
     cursor: pointer;
     color: var(--color-text-md);
+
+    font-weight: 500;
+
+    transition: 0.2s;
 }
 
 .btn-filtrar:hover {
-    background: transparent;
+    background: var(--color-border-card);
     color: var(--color-text-md);
 }
 
@@ -146,25 +152,40 @@
     border-radius: var(--radius-md);
     background-color: var(--color-btn-primary);
     color: var(--color-background);
-    border: none;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
     cursor: pointer;
     font: var(--text-md);
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
 }
 
+.btn-primary:hover {
+    background: var(--color-heading);
+}
+
 .fast-action-btn {
-    padding: 6px 14px;
-    border-radius: var(--radius-md);
+    height: 38px;
+    padding: 0 18px;
+    min-width: 90px;
+
+    border-radius: 12px;
+
     background-color: var(--color-btn-primary);
     color: var(--color-background);
+
     border: none;
     cursor: pointer;
+
     font: var(--text-sm);
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
+
     white-space: nowrap;
 }
 
