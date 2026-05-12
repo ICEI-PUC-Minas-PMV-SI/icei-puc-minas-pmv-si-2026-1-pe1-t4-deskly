@@ -151,11 +151,16 @@
 .badge.ocupado {
     background-color: #ffd6d6;
     color: #c0392b;
+    border-radius: var(--radius-md);
 }
 
 .badge.inativa {
     background-color: var(--color-border-card);
     color: var(--color-text-md);
+<<<<<<< HEAD
+=======
+    border-radius: var(--radius-md);
+>>>>>>> leticia-estacoes
 }
 
 .btn-primary {
