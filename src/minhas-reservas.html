@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         
         <link rel="stylesheet" href="assets/css/global/global.css">
-        <link rel="stylesheet" href="assets/css/pages/estacoes/estacoes.css">
+        <link rel="stylesheet" href="assets/css/pages/minhas-reservas/minhas-reservas.css">
 
         <title>Minhas Reservas</title>
     </head>
@@ -20,6 +20,7 @@
                 </button>
             </div>
         </header>
+
         <aside>
             <nav>
                 <ul>
@@ -35,128 +36,140 @@
                 </ul>
             </nav>
         </aside>
-        <main class="estacoes">
-            <section style="display: flex; flex-direction: column; gap: 24px;">
-                <div>
-                    <h1 style="font-size: 2rem;">Minhas Reservas</h1>
-                    <span class="subtitle">Gerencie seus agendamentos</span>
-                </div>
-                <div style="display: flex; justify-content: space-between; gap: 18px; width: 364px;">
-                    <select style="width: 173px">
-                        <option>Todos os tipos</option>
-                        <option>Salas de Reunião</option>
-                        <option>Estações de Trabalho</option>
-                    </select>
-                    <select style="width: 173px">
-                        <option>Qualquer status</option>
-                        <option>Confirmadas</option>
-                        <option>Canceladas</option>
-                    </select>
-                </div>
+
+        <main class="reservas">
+
+            <!-- Cabeçalho + filtros -->
+            <section>
+                <h1>Minhas Reservas</h1>
+                <span class="subtitle">Gerencie seus agendamentos</span>
             </section>
 
-            <section style="display: flex; flex-direction: column; width: 100%; row-gap: 16px;">
-                <div style="border-bottom: 2px solid #AAAAAA; padding-bottom: 16px;">
-                    <h3 style="font-size: 1.25rem;">Próximas</h3>
+            <div class="reservas-filtros">
+                <div class="custom-select">
+                    <button class="custom-select-trigger" type="button">
+                        <span class="custom-select-label">Todos os tipos</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <ul class="custom-select-dropdown">
+                        <li class="custom-select-option" data-value="todos">Todos os tipos</li>
+                        <li class="custom-select-option" data-value="salas">Salas de Reunião</li>
+                        <li class="custom-select-option" data-value="estacoes">Estações de Trabalho</li>
+                    </ul>
                 </div>
-                <table style="width: 100%; border: 2px solid #AAAAAA; border-collapse: collapse;">
+                <div class="custom-select">
+                    <button class="custom-select-trigger" type="button">
+                        <span class="custom-select-label">Qualquer status</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <ul class="custom-select-dropdown">
+                        <li class="custom-select-option" data-value="todos">Qualquer status</li>
+                        <li class="custom-select-option" data-value="confirmadas">Confirmadas</li>
+                        <li class="custom-select-option" data-value="canceladas">Canceladas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Próximas reservas -->
+            <section class="reservas-secao">
+                <h3 class="reservas-secao-titulo">Próximas</h3>
+                <div class="reservas-table-wrapper">
+                <table class="reservas-table">
                     <thead>
-                        <tr style="border-bottom: 2px solid #AAAAAA;">
-                            <th style="padding: 8px 16px; text-align: left;">Espaço</th>
-                            <th style="padding: 8px 16px; text-align: left;">Data</th>
-                            <th style="padding: 8px 16px; text-align: left;">Horário</th>
-                            <th style="padding: 8px 16px; text-align: left;">Convidados</th>
-                            <th style="padding: 8px 16px; text-align: left;">Status</th>
-                            <th style="padding: 8px 16px; text-align: left;">Ações</th>
+                        <tr>
+                            <th>Espaço</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Convidados</th>
+                            <th>Status</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 2px solid #AAAAAA;">
-                            <td style="padding: 8px 16px;">Sala Alfa</td>
-                            <td style="padding: 8px 16px;">30/03/2026</td>
-                            <td style="padding: 8px 16px; white-space: nowrap;">10:00 – 11:30</td>
-                            <td style="padding: 8px 16px; max-height: 38.67px;"><button>3 / 8 →</button></td>
-                            <td style="padding: 8px 16px;">Confirmada</td>
-                            <td style="padding: 8px 16px; white-space: nowrap;">
-                                <button>Editar</button>
-                                <button style="margin-left: 8px;">Cancelar</button>
-                            </td>
-                        </tr>
-                        <tr style="border-bottom: 2px solid #AAAAAA;">
-                            <td style="padding: 8px 16px;">Mesa 04</td>
-                            <td style="padding: 8px 16px;">30/03/2026</td>
-                            <td style="padding: 8px 16px; white-space: nowrap;">14:00 – 18:00</td>
-                            <td style="padding: 8px 16px; height: 38.67px;">—</td>
-                            <td style="padding: 8px 16px;">Confirmada</td>
-                            <td style="padding: 8px 16px; white-space: nowrap;">
-                                <button>Editar</button>
-                                <button style="margin-left: 8px;">Cancelar</button>
+                        <tr>
+                            <td>Sala Alfa</td>
+                            <td>30/03/2026</td>
+                            <td class="col-nowrap">10:00 – 11:30</td>
+                            <td><button class="btn-convidados">3 / 8 →</button></td>
+                            <td><span class="badge badge-confirmada">Confirmada</span></td>
+                            <td class="col-nowrap">
+                                <button class="btn-editar">Editar</button>
+                                <button class="btn-cancelar">Cancelar</button>
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 8px 16px;">Sala Beta</td>
-                            <td style="padding: 8px 16px;">02/04/2026</td>
-                            <td style="padding: 8px 16px; white-space: nowrap;">09:00 – 10:00</td>
-                            <td style="padding: 8px 16px; max-height: 38.67px;"><button>1 / 4 →</button></td>
-                            <td style="padding: 8px 16px;">Confirmada</td>
-                            <td style="padding: 8px 16px; white-space: nowrap;">
-                                <button>Editar</button>
-                                <button style="margin-left: 8px;">Cancelar</button>
+                            <td>Sala Beta</td>
+                            <td>30/03/2026</td>
+                            <td class="col-nowrap">09:00 – 10:00</td>
+                            <td><button class="btn-convidados">1 / 4 →</button></td>
+                            <td><span class="badge badge-confirmada">Confirmada</span></td>
+                            <td class="col-nowrap">
+                                <button class="btn-editar">Editar</button>
+                                <button class="btn-cancelar">Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesa 04</td>
+                            <td>30/03/2026</td>
+                            <td class="col-nowrap">14:00 – 18:00</td>
+                            <td>—</td>
+                            <td><span class="badge badge-confirmada">Confirmada</span></td>
+                            <td class="col-nowrap">
+                                <button class="btn-editar">Editar</button>
+                                <button class="btn-cancelar">Cancelar</button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </section>
 
-            <section style="display: flex; flex-direction: column; width: 100%; row-gap: 16px;">
-                <div style="border-bottom: 2px solid #AAAAAA; padding-bottom: 16px;">
-                    <h3 style="font-size: 1.25rem;">Passadas</h3>
-                </div>
-                <table style="width: 100%; border: 2px solid #AAAAAA; border-collapse: collapse;">
+            <!-- Histórico -->
+            <section class="reservas-secao">
+                <h3 class="reservas-secao-titulo">Histórico</h3>
+                <div class="reservas-table-wrapper">
+                <table class="reservas-table">
                     <thead>
-                        <tr style="border-bottom: 2px solid #AAAAAA;">
-                            <th style="padding: 8px 16px; text-align: left;">Espaço</th>
-                            <th style="padding: 8px 16px; text-align: left;">Data</th>
-                            <th style="padding: 8px 16px; text-align: left;">Horário</th>
-                            <th style="padding: 8px 16px; text-align: left;">Status</th>
+                        <tr>
+                            <th>Espaço</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr style="border-bottom: 2px solid #AAAAAA;">
-                            <td style="padding: 8px 16px;">Sala Gama</td>
-                            <td style="padding: 8px 16px;">20/03/2026</td>
-                            <td style="padding: 8px 16px;">15:00 – 16:00</td>
-                            <td style="padding: 8px 16px; height: 38.67px;">Concluída</td>
-                        </tr>
-                        <tr style="border-bottom: 2px solid #AAAAAA;">
-                            <td style="padding: 8px 16px;">Mesa 01</td>
-                            <td style="padding: 8px 16px;">18/03/2026</td>
-                            <td style="padding: 8px 16px;">08:00 – 12:00</td>
-                            <td style="padding: 8px 16px; height: 38.67px;">Concluída</td>
+                        <tr>
+                            <td>Sala Alfa</td>
+                            <td>10/03/2026</td>
+                            <td class="col-nowrap">13:00 – 14:30</td>
+                            <td><span class="badge badge-cancelada">Cancelada</span></td>
                         </tr>
                         <tr>
-                            <td style="padding: 8px 16px;">Sala Alfa</td>
-                            <td style="padding: 8px 16px;">17/03/2026</td>
-                            <td style="padding: 8px 16px;">10:00 – 12:00</td>
-                            <td style="padding: 8px 16px; height: 38.67px;">Concluída</td>
+                            <td>Mesa 01</td>
+                            <td>18/03/2026</td>
+                            <td class="col-nowrap">08:00 – 12:00</td>
+                            <td><span class="badge badge-concluida">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sala Gama</td>
+                            <td>20/03/2026</td>
+                            <td class="col-nowrap">15:00 – 16:00</td>
+                            <td><span class="badge badge-concluida">Concluída</span></td>
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </section>
+
         </main>
 
         <dialog id="modal-1">
             <form>
-
                 <div class="modal-header">
                     <h3>Nova reserva</h3>
-                    <button class="close-modal" data-modal="modal-1" type="button">
-                        X
-                    </button>
+                    <button class="close-modal" data-modal="modal-1" type="button">X</button>
                 </div>
-
                 <div class="modal-body">
-
                     <div class="input-group">
                         <label>Estação de trabalho</label>
                         <select>
@@ -170,33 +183,53 @@
                             <option>Mesa 08 — Andar 1 - Ala D</option>
                         </select>
                     </div>
-
                     <div class="input-group">
                         <label>Data</label>
                         <input type="date">
                     </div>
-
                     <div class="input-group">
                         <label>Início</label>
                         <input type="time">
                     </div>
-
                     <div class="input-group">
                         <label>Fim</label>
                         <input type="time">
                     </div>
-
                 </div>
-
                 <div class="modal-footer">
                     <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
                     <button type="button">Confirmar</button>
                 </div>
-
             </form>
         </dialog>
 
         <script src="assets/js/menu.js"></script>
         <script src="assets/js/modal.js"></script>
+        <script>
+            document.querySelectorAll('.custom-select').forEach(select => {
+                const trigger = select.querySelector('.custom-select-trigger');
+                const label = select.querySelector('.custom-select-label');
+                const options = select.querySelectorAll('.custom-select-option');
+
+                trigger.addEventListener('click', () => {
+                    const isOpen = select.classList.contains('open');
+                    document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
+                    if (!isOpen) select.classList.add('open');
+                });
+
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        label.textContent = option.textContent;
+                        select.classList.remove('open');
+                    });
+                });
+            });
+
+            document.addEventListener('click', e => {
+                if (!e.target.closest('.custom-select')) {
+                    document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
+                }
+            });
+        </script>
     </body>
 </html>
