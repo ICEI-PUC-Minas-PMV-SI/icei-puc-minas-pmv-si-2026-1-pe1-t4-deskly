@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="assets/css/global/global.css">
-    <link rel="stylesheet" href="assets/css/pages/salasReuniao/salasReuniao.css">
+    <link rel="stylesheet" href="assets/css/pages/salas-reuniao/salas-reuniao.css">
+
     <title>Salas de Reunião</title>
 </head>
 
@@ -25,25 +26,26 @@
             <ul>
                 <li><a href="dashboard.html">Dashboard</a></li>
                 <li><a href="#">Calendário</a></li>
-                <li><a href="salasReuniao.html">Salas de Reunião</a></li>
+                <li><a href="salas-reuniao.html">Salas de Reunião</a></li>
                 <li><a href="estacoes.html">Estações de Trabalho</a></li>
                 <li><a href="#">Minhas Reservas</a></li>
             </ul>
 
             <ul>
-                <li><a href="#">Painel Admin</a></li>
+                <li><a href="painelAdmin.html">Painel Admin</a></li>
                 <li><a href="ajuda.html">Ajuda</a></li>
             </ul>
 
         </nav>
     </aside>
     <main>
-        <div class="main-header">
+        <div class="salas-header">
             <div class="titulos">
                 <h1>Salas de Reunião</h1>
-                <span class="subtitle">Clique em "Detalhes" para ver horários disponíveis</span>
+                <p>Clique em "Detalhes" para ver horários disponíveis</p>
             </div>
-            <button class="botao-add-sala open-modal" data-modal="modal-reserva">+ Nova Reserva</button>
+
+            <button class="botao-add-sala">+ Nova Reserva</button>
         </div>
 
         <section class="filtros-container">
@@ -52,7 +54,7 @@
             </div>
 
             <div class="campo-filtro">
-                <input type="time" >
+                <input type="time">
             </div>
 
             <div class="campo-filtro">
