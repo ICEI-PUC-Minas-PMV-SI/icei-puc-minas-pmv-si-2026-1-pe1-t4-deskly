@@ -6,6 +6,7 @@
     
     <link rel="stylesheet" href="assets/css/global/global.css">
     <link rel="stylesheet" href="assets/css/pages/estacoes/estacoes.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
     <title>Estações de Trabalho</title>
 </head>
@@ -55,9 +56,9 @@
     <div class="filtro-data">
 
         <div class="date-wrapper">
-            <input type="date" class="date-input">
-            <img src="assets/icons/calendar-dots.svg" class="calendar-icon">
-        </div>
+            <input type="text" class="date-input" placeholder="dd/mm/aaaa">
+    <img src="assets/icons/calendar-dots.svg" class="calendar-icon">
+</div>
 
         <button class="btn-filtrar">Filtrar</button>
 
@@ -235,6 +236,17 @@
 
 <script src="assets/js/menu.js"></script>
 <script src="assets/js/modal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+    <script>
+        flatpickr('.date-input', {
+            locale: 'pt',
+            dateFormat: 'd/m/Y',
+            disableMobile: true,
+            placeholder: 'dd/mm/aaaa',
+            monthSelectorType: 'static'
+        });
+    </script>
 
 </body>
 </html>
