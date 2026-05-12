@@ -139,12 +139,13 @@
 .badge.ocupado {
     background-color: #ffd6d6;
     color: #c0392b;
+    border-radius: var(--radius-md);
 }
 
 .badge.inativa {
     background-color: var(--color-border-card);
     color: var(--color-text-md);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: var(--radius-md);
 }
 
 .btn-primary {
