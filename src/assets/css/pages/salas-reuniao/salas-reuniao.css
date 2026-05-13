@@ -19,9 +19,8 @@ main {
 
 .titulos p {
     font: var(--text-sm);
-    color: var(--color-text-md);
+    color: var(--color-text-sm); 
     margin: 0;
-    opacity: 0.9;
 }
 
 .filtros-container {
@@ -111,7 +110,7 @@ main {
 
 .sala-textos p {
     font: var(--text-sm);
-    color: var(--color-text-md);
+    color: var(--color-text-sm);
     margin: 0;
     opacity: 0.9;
 }
@@ -132,6 +131,7 @@ main {
     border-radius: var(--radius-md);
     border: 1px solid rgba(255, 255, 255, 0.15);
     cursor: pointer;
+    font-weight: 400; /* <--- Adicione isso aqui para igualar a Estações */
     transition: 0.2s ease;
 }
 
