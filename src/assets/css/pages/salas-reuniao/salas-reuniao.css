@@ -189,7 +189,6 @@ button.btn-reservar:disabled {
     padding: 6px var(--spacing-sm);
     border-radius: var(--radius-md);
     font: var(--text-sm);
-    font-weight: 600;
     text-align: center;
     min-width: 100px;
     display: inline-flex;
@@ -399,4 +398,21 @@ button.btn-reservar:disabled {
 .flatpickr-monthDropdown-months option:hover {
     background: var(--color-btn-primary);
     color: var(--color-background);
+}
+
+#modal-reserva, 
+#modal-detalhes {
+    overflow: visible;
+}
+
+#modal-reserva .modal-body, 
+#modal-detalhes .modal-body {
+    overflow: visible;
+}
+
+.flatpickr-calendar.static {
+    z-index: 9999;
+    position: absolute;
+    top: 100%;
+    left: 0;
 }

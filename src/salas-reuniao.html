@@ -17,10 +17,10 @@
         <div class="header-icons">
             <button><img class="header-icon" src="assets/icons/bell.svg" alt="Sino"></button>
             <button><img class="header-icon" src="assets/icons/user-circle.svg" alt="Perfil"></button>
-            <button type="button" id="btn-hamburguer" class="hamburguer"><img src="assets/icons/menu.svg"
-                    alt="Botão"></button>
+            <button type="button" id="btn-hamburguer" class="hamburguer"><img src="assets/icons/menu.svg" alt="Botão"></button>
         </div>
     </header>
+    
     <aside>
         <nav>
             <ul>
@@ -35,9 +35,9 @@
                 <li><a href="painelAdmin.html">Painel Admin</a></li>
                 <li><a href="ajuda.html">Ajuda</a></li>
             </ul>
-
         </nav>
     </aside>
+    
     <main>
         <div class="salas-header">
             <div class="titulos">
@@ -49,7 +49,7 @@
 
         <section class="filtros-container">
             <div class="campo-filtro">
-                <input type="date" placeholder="dd/mm/aaaa">
+                <input type="text" class="date-input" placeholder="dd/mm/aaaa">
             </div>
 
             <div class="campo-filtro">
@@ -76,44 +76,37 @@
         <section class="lista-salas">
             <article class="card-sala">
                 <div class="sala-info-principal">
-                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=300&q=80"
-                        alt="Foto da Sala Alfa" class="sala-img">
-
+                    <img src="assets/images/sala1.png" alt="Foto da Sala Alfa" class="sala-img">
                     <div class="sala-textos">
                         <h3>Sala Alfa</h3>
                         <p>Capacidade: 8 pessoas · TV, Videoconferência, Lousa</p>
                     </div>
                 </div>
-
                 <div class="sala-acoes">
                     <span class="badge disponivel">Disponível</span>
-                    <button class="btn-detalhes open-modal" data-modal="modal-details">Detalhes</button>
+                    <button class="btn-detalhes open-modal" data-modal="modal-detalhes">Detalhes</button>
                     <button class="btn-reservar open-modal" data-modal="modal-reserva">Reservar</button>
                 </div>
             </article>
 
             <article class="card-sala">
                 <div class="sala-info-principal">
-                    <img src="https://images.unsplash.com/photo-1497215728101-856f4ea42174?auto=format&fit=crop&w=300&q=80"
-                        alt="Foto da Sala Beta" class="sala-img">
-
+                    <img src="assets/images/sala2.png" alt="Foto da Sala Beta" class="sala-img">
                     <div class="sala-textos">
                         <h3>Sala Beta</h3>
                         <p>Capacidade: 4 pessoas · TV, Videoconferência</p>
                     </div>
                 </div>
-
                 <div class="sala-acoes">
                     <span class="badge ocupada">Ocupada</span>
-                    <button class="btn-detalhes open-modal" data-modal="modal-details">Detalhes</button>
+                    <button class="btn-detalhes open-modal" data-modal="modal-detalhes">Detalhes</button>
                     <button class="btn-reservar open-modal" data-modal="modal-reserva">Reservar</button>
                 </div>
             </article>
 
             <article class="card-sala">
                 <div class="sala-info-principal">
-                    <img src="https://images.unsplash.com/photo-1542744094-3a31f103e35f?auto=format&fit=crop&w=300&q=80"
-                        alt="Foto da Sala Gama" class="sala-img">
+                    <img src="assets/images/sala3.png" alt="Foto da Sala Gama" class="sala-img">
                     <div class="sala-textos">
                         <h3>Sala Gama</h3>
                         <p>Capacidade: 12 pessoas · TV, Videoconferência, Lousa, Ar-condicionado</p>
@@ -121,15 +114,14 @@
                 </div>
                 <div class="sala-acoes">
                     <span class="badge disponivel">Disponível</span>
-                    <button class="btn-detalhes open-modal" data-modal="modal-details">Detalhes</button>
+                    <button class="btn-detalhes open-modal" data-modal="modal-detalhes">Detalhes</button>
                     <button class="btn-reservar open-modal" data-modal="modal-reserva">Reservar</button>
                 </div>
             </article>
 
             <article class="card-sala">
                 <div class="sala-info-principal">
-                    <img src="https://images.unsplash.com/photo-1517502884422-41eaaced0168?auto=format&fit=crop&w=300&q=80"
-                        alt="Foto da Sala Delta" class="sala-img">
+                    <img src="assets/images/sala4.png" alt="Foto da Sala Delta" class="sala-img">
                     <div class="sala-textos">
                         <h3>Sala Delta</h3>
                         <p>Capacidade: 6 pessoas · Lousa</p>
@@ -172,9 +164,9 @@
                     </select>
                 </div>
 
-                <div class="input-group">
-                    <label for="date">Data</label>
-                    <input type="date" id="date">
+                <div class="input-group" style="position: relative;">
+                    <label for="modal-date">Data</label>
+                    <input type="text" id="modal-date" class="modal-date-input" placeholder="dd/mm/aaaa">
                 </div>
 
                 <div class="input-row" style="display: flex; gap: 16px;">
@@ -203,35 +195,6 @@
             </div>
         </form>
     </dialog>
-
-    <script>
-        function verificarCapacidade() {
-            const selectEspaco = document.getElementById('espaco');
-            const limiteMsg = document.getElementById('limite-msg');
-            const capacidade = selectEspaco.value;
-
-            if (capacidade) {
-                limiteMsg.innerText = `Limite para este espaço: ${capacidade} convidados.`;
-                limiteMsg.style.color = "var(--color-text-md)";
-            } else {
-                limiteMsg.innerText = "Selecione uma sala para ver o limite.";
-            }
-        }
-
-        function confirmarReserva() {
-            const capacidade = parseInt(document.getElementById('espaco').value);
-            const convidadosInput = document.getElementById('convidados').value;
-            const listaConvidados = convidadosInput.split(',').filter(email => email.trim() !== "");
-
-            if (listaConvidados.length > capacidade) {
-                alert(`Erro: Você excedeu o limite de ${capacidade} convidados para esta sala.`);
-                return;
-            }
-
-            alert("Reserva confirmada com sucesso!");
-            document.getElementById('modal-reserva').close();
-        }
-    </script>
 
     <dialog id="modal-detalhes">
         <div class="modal-header">
@@ -273,8 +236,7 @@
 
         <div class="modal-footer">
             <button type="button" class="btn-cancelar close-modal" data-modal="modal-detalhes">Fechar</button>
-            <button type="button" class="btn-confirmar" onclick="document.getElementById('modal-detalhes').close();
-                document.getElementById('modal-reserva').showModal()">Reservar este espaço</button>
+            <button type="button" class="btn-confirmar" onclick="document.getElementById('modal-detalhes').close(); document.getElementById('modal-reserva').showModal()">Reservar este espaço</button>
         </div>
     </dialog>
 
@@ -282,14 +244,56 @@
     <script src="./assets/js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+    
     <script>
-        flatpickr('input[type="date"]', {
+        flatpickr('.date-input', {
             locale: 'pt',
             dateFormat: 'd/m/Y',
             disableMobile: true,
             placeholder: 'dd/mm/aaaa',
             monthSelectorType: 'static'
         });
+
+        flatpickr('.modal-date-input', {
+            locale: 'pt',
+            dateFormat: 'd/m/Y',
+            disableMobile: true,
+            placeholder: 'dd/mm/aaaa',
+            monthSelectorType: 'static',
+            static: true 
+        });
+
+        function verificarCapacidade() {
+            const selectEspaco = document.getElementById('espaco');
+            const limiteMsg = document.getElementById('limite-msg');
+            const capacidade = selectEspaco.value;
+
+            if (capacidade) {
+                limiteMsg.innerText = `Limite para este espaço: ${capacidade} convidados.`;
+                limiteMsg.style.color = "var(--color-text-md)";
+            } else {
+                limiteMsg.innerText = "Selecione uma sala para ver o limite.";
+            }
+        }
+
+        function confirmarReserva() {
+            const capacitySelect = document.getElementById('espaco');
+            if(!capacitySelect.value) {
+                alert("Por favor, selecione uma sala.");
+                return;
+            }
+            const capacidade = parseInt(capacitySelect.value);
+            const convidadosInput = document.getElementById('convidados').value;
+            const listaConvidados = convidadosInput.split(',').filter(email => email.trim() !== "");
+
+            if (listaConvidados.length > capacidade) {
+                alert(`Erro: Você excedeu o limite de ${capacidade} convidados para esta sala.`);
+                return;
+            }
+
+            alert("Reserva confirmada com sucesso!");
+            document.getElementById('modal-reserva').close();
+        }
     </script>
 </body>
 
