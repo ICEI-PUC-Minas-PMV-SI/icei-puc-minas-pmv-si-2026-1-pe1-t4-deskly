@@ -16,11 +16,14 @@
         <img class="logo" src="assets/icons/logo.svg" alt="Logo Deskly">
         <div class="header-icons">
             <button><img class="header-icon" src="assets/icons/bell.svg" alt="Sino"></button>
-            <button><img class="header-icon" src="assets/icons/user-circle.svg" alt="Perfil"></button>
-            <button type="button" id="btn-hamburguer" class="hamburguer"><img src="assets/icons/menu.svg" alt="Botão"></button>
+            <a href="perfil.html" class="header-profile-link">
+                <img class="header-icon" src="assets/icons/user-circle.svg" alt="Perfil">
+            </a>
+            <button type="button" id="btn-hamburguer" class="hamburguer"><img src="assets/icons/menu.svg"
+                    alt="Botão"></button>
         </div>
     </header>
-    
+
     <aside>
         <nav>
             <ul>
@@ -37,7 +40,7 @@
             </ul>
         </nav>
     </aside>
-    
+
     <main>
         <div class="salas-header">
             <div class="titulos">
@@ -236,7 +239,9 @@
 
         <div class="modal-footer">
             <button type="button" class="btn-cancelar close-modal" data-modal="modal-detalhes">Fechar</button>
-            <button type="button" class="btn-confirmar" onclick="document.getElementById('modal-detalhes').close(); document.getElementById('modal-reserva').showModal()">Reservar este espaço</button>
+            <button type="button" class="btn-confirmar"
+                onclick="document.getElementById('modal-detalhes').close(); document.getElementById('modal-reserva').showModal()">Reservar
+                este espaço</button>
         </div>
     </dialog>
 
@@ -244,7 +249,7 @@
     <script src="./assets/js/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-    
+
     <script>
         flatpickr('.date-input', {
             locale: 'pt',
@@ -260,7 +265,7 @@
             disableMobile: true,
             placeholder: 'dd/mm/aaaa',
             monthSelectorType: 'static',
-            static: true 
+            static: true
         });
 
         function verificarCapacidade() {
@@ -278,7 +283,7 @@
 
         function confirmarReserva() {
             const capacitySelect = document.getElementById('espaco');
-            if(!capacitySelect.value) {
+            if (!capacitySelect.value) {
                 alert("Por favor, selecione uma sala.");
                 return;
             }
