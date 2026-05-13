@@ -155,7 +155,9 @@ main {
 }
 
 .btn-action:hover {
-    opacity: 0.85;
+    background: var(--color-heading);
+    outline: 1px solid var(--color-border-card);
+    transition: 0.2s ease;
 }
 
 .btn-outline {
