@@ -1,15 +1,41 @@
-.main-header {
+main {
+    padding: 24px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.salas-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: var(--spacing-lg);
-    padding: var(--spacing-md) var(--spacing-xl);
+    align-items: center;
+    width: 100%;
 }
 
 .titulos {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-xs);
+}
+
+.titulos p {
+    font: var(--text-sm);
+    color: var(--color-text-md);
+    margin: 0;
+    opacity: 0.9;
+}
+
+.filtros-container {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    padding: 0;
+}
+
+.lista-salas {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0;
 }
 
 .botao-add-sala {
@@ -22,13 +48,6 @@
 .botao-add-sala:hover {
     background: var(--color-heading);
     transition: 0.2s ease;
-}
-
-.filtros-container {
-    display: flex;
-    gap: var(--spacing-sm);
-    padding: 0 var(--spacing-xl);
-    flex-wrap: wrap;
 }
 
 .campo-filtro,
@@ -65,80 +84,6 @@
     width: 18px;
     margin-left: 10px;
     opacity: 0.7;
-}
-
-.lista-salas {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-md);
-    padding: var(--spacing-lg) var(--spacing-xl);
-}
-
-.card-sala {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: transparent;
-    border: 1px solid var(--color-border-card);
-    border-radius: 20px;
-    padding: var(--spacing-md);
-    transition: background-color 0.2s ease;
-}
-
-.sala-info-principal {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-md);
-}
-
-.sala-img {
-    width: 60px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: var(--radius-md);
-    background-color: #D9D9D9;
-}
-
-.sala-textos h3 {
-    font: var(--heading-3);
-    color: var(--color-heading);
-    margin: 0 0 var(--spacing-xs) 0;
-}
-
-.sala-textos p {
-    font: var(--text-sm);
-    color: var(--color-text-md);
-    margin: 0;
-}
-
-.sala-acoes {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-sm);
-}
-
-.badge {
-    padding: 6px 16px;
-    border-radius: var(--radius-md);
-    font: var(--text-sm);
-    font-weight: 600;
-    text-align: center;
-    min-width: 100px;
-}
-
-.badge.disponivel {
-    background-color: var(--color-badge-green);
-    color: var(--color-text-green);
-}
-
-.badge.ocupada {
-    background-color: var(--color-badge-red);
-    color: var(--color-text-red);
-}
-
-.badge.inativa {
-    background-color: var(--color-border-card);
-    color: var(--color-text-md);
 }
 
 .btn-detalhes {
@@ -200,6 +145,76 @@
     outline: none;
 }
 
+.card-sala {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--color-border-card);
+    border-radius: 20px;
+    padding: 24px;
+    transition: 0.2s;
+}
+
+.sala-info-principal {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.sala-img {
+    width: 60px;
+    height: 60px;
+    background-color: #D9D9D9;
+    border-radius: 12px;
+}
+
+.sala-textos h3 {
+    font: var(--heading-4);
+    color: var(--color-heading);
+}
+
+.sala-textos p {
+    font: var(--text-sm);
+    color: var(--color-text-md);
+    margin: 0;
+    opacity: 0.9;
+}
+
+.sala-acoes {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.badge {
+    padding: 6px 16px;
+    font: var(--text-sm);
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge.disponivel {
+    background-color: var(--color-badge-green);
+    color: var(--color-text-green);
+    border-radius: var(--radius-md);
+}
+
+.badge.ocupada {
+    background-color: var(--color-badge-red);
+    color: var(--color-text-red);
+    border-radius: var(--radius-md);
+}
+
+.badge.inativa {
+    background-color: var(--color-border-card);
+    color: var(--color-text-md);
+    border-radius: var(--radius-md);
+}
+
 .detail-row {
     display: flex;
     justify-content: space-between;
@@ -257,6 +272,7 @@
 }
 
 /* Calendário */
+
 .flatpickr-calendar {
     background: var(--color-background);
     border: 1px solid var(--color-border-card);
