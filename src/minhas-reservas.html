@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link rel="stylesheet" href="assets/css/global/global.css">
+        <link rel="stylesheet" href="assets/css/pages/minhas-reservas/minhas-reservas.css">
+
+        <title>Minhas Reservas</title>
+    </head>
+    <body>
+        <header>
+            <img class="logo" src="assets/icons/logo.svg">
+            <div class="header-icons">
+                <button><img class="header-icon" src="assets/icons/bell.svg"></button>
+                <button><img class="header-icon" src="assets/icons/user-circle.svg"></button>
+                <button id="btn-hamburguer" class="hamburguer">
+                    <img src="assets/icons/menu.svg">
+                </button>
+            </div>
+        </header>
+
+        <aside>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="#">Calendário</a></li>
+                    <li><a href="SalasReuniao.html">Salas de Reunião</a></li>
+                    <li><a href="estacoes.html">Estações de Trabalho</a></li>
+                    <li><a href="minhas-reservas.html">Minhas Reservas</a></li>
+                </ul>
+                <ul>
+                    <li><a href="#">Painel Admin</a></li>
+                    <li><a href="#">Ajuda</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="reservas">
+
+            <!-- Cabeçalho + filtros -->
+            <section>
+                <h1>Minhas Reservas</h1>
+                <span class="subtitle">Gerencie seus agendamentos</span>
+            </section>
+
+            <div class="reservas-filtros">
+                <div class="custom-select">
+                    <button class="custom-select-trigger" type="button">
+                        <span class="custom-select-label">Todos os tipos</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <ul class="custom-select-dropdown">
+                        <li class="custom-select-option" data-value="todos">Todos os tipos</li>
+                        <li class="custom-select-option" data-value="salas">Salas de Reunião</li>
+                        <li class="custom-select-option" data-value="estacoes">Estações de Trabalho</li>
+                    </ul>
+                </div>
+                <div class="custom-select">
+                    <button class="custom-select-trigger" type="button">
+                        <span class="custom-select-label">Qualquer status</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+                    </button>
+                    <ul class="custom-select-dropdown">
+                        <li class="custom-select-option" data-value="todos">Qualquer status</li>
+                        <li class="custom-select-option" data-value="confirmadas">Confirmadas</li>
+                        <li class="custom-select-option" data-value="canceladas">Canceladas</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Próximas reservas -->
+            <section class="reservas-secao">
+                <h3 class="reservas-secao-titulo">Próximas</h3>
+                <div class="reservas-table-wrapper">
+                <table class="reservas-table">
+                    <thead>
+                        <tr>
+                            <th>Espaço</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Convidados</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sala Alfa</td>
+                            <td>30/03/2026</td>
+                            <td class="col-nowrap">10:00 – 11:30</td>
+                            <td><button class="btn-convidados"
+                                data-espaco="Sala Alfa" data-capacidade="8"
+                                data-data="30/03/2026" data-horario="10:00 – 11:30"
+                                data-convidados='[{"email":"joao@empresa.com","status":"pendente"},{"email":"maria@empresa.com","status":"aceito"},{"email":"carlos@empresa.com","status":"recusado"}]'
+                            >3 / 8 →</button></td>
+                            <td><span class="badge badge-confirmada">Confirmada</span></td>
+                            <td class="col-nowrap">
+                                <button class="btn-editar"
+                                    data-espaco="Sala Alfa" data-data="30/03/2026" data-inicio="10:00" data-fim="11:30"
+                                    data-convidados='[{"email":"joao@empresa.com","status":"pendente"},{"email":"maria@empresa.com","status":"aceito"},{"email":"carlos@empresa.com","status":"recusado"}]'
+                                >Editar</button>
+                                <button class="btn-cancelar" data-espaco="Sala Alfa" data-data="30/03/2026" data-horario="10:00 – 11:30">Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Sala Beta</td>
+                            <td>30/03/2026</td>
+                            <td class="col-nowrap">09:00 – 10:00</td>
+                            <td><button class="btn-convidados"
+                                data-espaco="Sala Beta" data-capacidade="4"
+                                data-data="30/03/2026" data-horario="09:00 – 10:00"
+                                data-convidados='[{"email":"ana@empresa.com","status":"aceito"}]'
+                            >1 / 4 →</button></td>
+                            <td><span class="badge badge-confirmada">Confirmada</span></td>
+                            <td class="col-nowrap">
+                                <button class="btn-editar"
+                                    data-espaco="Sala Beta" data-data="30/03/2026" data-inicio="09:00" data-fim="10:00"
+                                    data-convidados='[{"email":"ana@empresa.com","status":"aceito"}]'
+                                >Editar</button>
+                                <button class="btn-cancelar" data-espaco="Sala Beta" data-data="30/03/2026" data-horario="09:00 – 10:00">Cancelar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Mesa 04</td>
+                            <td>30/03/2026</td>
+                            <td class="col-nowrap">14:00 – 18:00</td>
+                            <td>—</td>
+                            <td><span class="badge badge-confirmada">Confirmada</span></td>
+                            <td class="col-nowrap">
+                                <button class="btn-editar"
+                                    data-espaco="Mesa 04" data-data="30/03/2026" data-inicio="14:00" data-fim="18:00"
+                                    data-convidados='[]'
+                                >Editar</button>
+                                <button class="btn-cancelar" data-espaco="Mesa 04" data-data="30/03/2026" data-horario="14:00 – 18:00">Cancelar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </section>
+
+            <!-- Histórico -->
+            <section class="reservas-secao">
+                <h3 class="reservas-secao-titulo">Histórico</h3>
+                <div class="reservas-table-wrapper">
+                <table class="reservas-table">
+                    <thead>
+                        <tr>
+                            <th>Espaço</th>
+                            <th>Data</th>
+                            <th>Horário</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sala Alfa</td>
+                            <td>10/03/2026</td>
+                            <td class="col-nowrap">13:00 – 14:30</td>
+                            <td><span class="badge badge-cancelada">Cancelada</span></td>
+                        </tr>
+                        <tr>
+                            <td>Mesa 01</td>
+                            <td>18/03/2026</td>
+                            <td class="col-nowrap">08:00 – 12:00</td>
+                            <td><span class="badge badge-concluida">Concluída</span></td>
+                        </tr>
+                        <tr>
+                            <td>Sala Gama</td>
+                            <td>20/03/2026</td>
+                            <td class="col-nowrap">15:00 – 16:00</td>
+                            <td><span class="badge badge-concluida">Concluída</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </section>
+
+        </main>
+
+        <dialog id="modal-1">
+            <form>
+                <div class="modal-header">
+                    <h3>Nova reserva</h3>
+                    <button class="close-modal" data-modal="modal-1" type="button">X</button>
+                </div>
+                <div class="modal-body">
+                    <div class="input-group">
+                        <label>Estação de trabalho</label>
+                        <select>
+                            <option>Mesa 01 — Andar 2 - Ala A</option>
+                            <option>Mesa 02 — Andar 2 - Ala B</option>
+                            <option>Mesa 03 — Andar 3 - Ala C</option>
+                            <option>Mesa 04 — Andar 2 - Ala D</option>
+                            <option>Mesa 05 — Andar 3 - Ala A</option>
+                            <option>Mesa 06 — Andar 3 - Ala B</option>
+                            <option>Mesa 07 — Andar 1 - Ala C</option>
+                            <option>Mesa 08 — Andar 1 - Ala D</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Data</label>
+                        <input type="date">
+                    </div>
+                    <div class="input-group">
+                        <label>Início</label>
+                        <input type="time">
+                    </div>
+                    <div class="input-group">
+                        <label>Fim</label>
+                        <input type="time">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
+                    <button type="button">Confirmar</button>
+                </div>
+            </form>
+        </dialog>
+
+        <dialog id="modal-editar">
+            <div class="modal-header">
+                <h3 class="modal-title">Editar Reserva</h3>
+                <button type="button" class="close-modal" data-modal="modal-editar">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-body">
+                <div class="input-group">
+                    <label>Espaço</label>
+                    <input type="text" id="editar-espaco">
+                </div>
+
+                <div class="input-row">
+                    <div class="input-group">
+                        <label>Data</label>
+                        <input type="text" id="editar-data">
+                    </div>
+                    <div class="input-group">
+                        <label>Início</label>
+                        <input type="text" id="editar-inicio">
+                    </div>
+                </div>
+
+                <div class="input-group">
+                    <label>Término</label>
+                    <input type="text" id="editar-fim">
+                </div>
+
+                <div class="input-group">
+                    <label>Convidados</label>
+                    <div class="modal-convidados-lista" id="editar-lista"></div>
+                </div>
+
+                <div class="input-group">
+                    <label>Adicionar convidado</label>
+                    <div class="conv-adicionar-row">
+                        <input type="email" id="editar-novo-convidado" placeholder="email@empresa.com">
+                        <button type="button" class="conv-adicionar-btn">Adicionar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="close-modal" data-modal="modal-editar">Cancelar</button>
+                <button type="button">Confirmar</button>
+            </div>
+        </dialog>
+
+        <dialog id="modal-convidados">
+            <div class="modal-detalhe-header">
+                <h3 class="modal-detalhe-titulo" id="conv-titulo"></h3>
+                <button type="button" class="modal-detalhe-fechar close-modal" data-modal="modal-convidados">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-detalhe-body">
+                <p class="modal-convidados-subtitulo" id="conv-subtitulo"></p>
+                <div class="modal-convidados-lista" id="conv-lista"></div>
+                <p class="modal-convidados-rodape" id="conv-rodape"></p>
+            </div>
+
+            <div class="modal-detalhe-footer">
+                <button type="button" class="modal-detalhe-btn-cancelar close-modal" data-modal="modal-convidados">Cancelar</button>
+                <button type="button" class="modal-detalhe-btn-confirmar">Confirmar</button>
+            </div>
+        </dialog>
+
+        <dialog id="modal-cancelar-reserva">
+            <div class="modal-detalhe-header">
+                <h3 class="modal-detalhe-titulo">Cancelar Reserva</h3>
+                <button type="button" class="modal-detalhe-fechar close-modal" data-modal="modal-cancelar-reserva">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+
+            <div class="modal-detalhe-body">
+                <p class="modal-detalhe-descricao">
+                    Tem certeza que deseja cancelar esta reserva?
+                </p>
+
+                <div class="modal-detalhe-linhas">
+                    <div class="modal-detalhe-linha">
+                        <span class="modal-detalhe-label">Espaço</span>
+                        <span class="modal-detalhe-valor" id="modal-cancelar-espaco"></span>
+                    </div>
+                    <div class="modal-detalhe-linha">
+                        <span class="modal-detalhe-label">Data</span>
+                        <span class="modal-detalhe-valor" id="modal-cancelar-data"></span>
+                    </div>
+                    <div class="modal-detalhe-linha">
+                        <span class="modal-detalhe-label">Horário</span>
+                        <span class="modal-detalhe-valor" id="modal-cancelar-horario"></span>
+                    </div>
+                </div>
+
+                <p class="modal-detalhe-aviso">O espaço será liberado para outros colaboradores.</p>
+            </div>
+
+            <div class="modal-detalhe-footer">
+                <button type="button" class="modal-detalhe-btn-cancelar close-modal" data-modal="modal-cancelar-reserva">Cancelar</button>
+                <button type="button" class="modal-detalhe-btn-confirmar">Confirmar</button>
+            </div>
+        </dialog>
+
+        <script src="assets/js/menu.js"></script>
+        <script src="assets/js/modal.js"></script>
+        <script>
+            const statusClasse = { pendente: 'badge-concluida', aceito: 'badge-confirmada', recusado: 'badge-cancelada' };
+            const modalEditar = document.getElementById('modal-editar');
+
+            document.querySelectorAll('.btn-editar').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const convidados = JSON.parse(btn.dataset.convidados);
+
+                    document.getElementById('editar-espaco').value  = btn.dataset.espaco;
+                    document.getElementById('editar-data').value    = btn.dataset.data;
+                    document.getElementById('editar-inicio').value  = btn.dataset.inicio;
+                    document.getElementById('editar-fim').value     = btn.dataset.fim;
+
+                    document.getElementById('editar-lista').innerHTML = convidados.map(c => `
+                        <div class="modal-convidados-item">
+                            <span>${c.email}</span>
+                            <span class="badge ${statusClasse[c.status]}">${statusLabel[c.status]}</span>
+                        </div>
+                    `).join('');
+
+                    modalEditar.showModal();
+                });
+            });
+
+
+            const statusLabel  = { pendente: 'Pendente', aceito: 'Aceito', recusado: 'Recusado' };
+            const modalConv = document.getElementById('modal-convidados');
+
+            document.querySelectorAll('.btn-convidados').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const convidados = JSON.parse(btn.dataset.convidados);
+                    const capacidade = Number(btn.dataset.capacidade);
+
+                    document.getElementById('conv-titulo').textContent = `Convidados - ${btn.dataset.espaco}`;
+                    document.getElementById('conv-subtitulo').textContent =
+                        `${btn.dataset.data} · ${btn.dataset.horario} · Capacidade: ${capacidade}`;
+
+                    document.getElementById('conv-lista').innerHTML = convidados.map(c => `
+                        <div class="modal-convidados-item">
+                            <span>${c.email}</span>
+                            <span class="badge ${statusClasse[c.status]}">${statusLabel[c.status]}</span>
+                        </div>
+                    `).join('');
+
+                    const vagas = capacidade - convidados.length;
+                    document.getElementById('conv-rodape').textContent =
+                        `${convidados.length} / ${capacidade} convidados · ${vagas} vaga${vagas !== 1 ? 's' : ''} restante${vagas !== 1 ? 's' : ''}`;
+
+                    modalConv.showModal();
+                });
+            });
+
+            const modal = document.getElementById('modal-cancelar-reserva');
+
+            document.querySelectorAll('.btn-cancelar').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.getElementById('modal-cancelar-espaco').textContent = btn.dataset.espaco;
+                    document.getElementById('modal-cancelar-data').textContent = btn.dataset.data;
+                    document.getElementById('modal-cancelar-horario').textContent = btn.dataset.horario;
+                    modal.showModal();
+                });
+            });
+        </script>
+        <script>
+            document.querySelectorAll('.custom-select').forEach(select => {
+                const trigger = select.querySelector('.custom-select-trigger');
+                const label = select.querySelector('.custom-select-label');
+                const options = select.querySelectorAll('.custom-select-option');
+
+                trigger.addEventListener('click', () => {
+                    const isOpen = select.classList.contains('open');
+                    document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
+                    if (!isOpen) select.classList.add('open');
+                });
+
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        label.textContent = option.textContent;
+                        select.classList.remove('open');
+                    });
+                });
+            });
+
+            document.addEventListener('click', e => {
+                if (!e.target.closest('.custom-select')) {
+                    document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
+                }
+            });
+        </script>
+    </body>
+</html>
