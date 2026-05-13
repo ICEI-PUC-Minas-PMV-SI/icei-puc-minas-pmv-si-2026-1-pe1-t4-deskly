@@ -157,7 +157,7 @@ main {
 }
 
 .btn-action {
-    padding: 10px 20px;
+    padding: 10px var(--spacing-md);
     border-radius: var(--radius-md);
     background-color: var(--color-btn-primary);
     color: var(--color-background);
@@ -174,6 +174,10 @@ main {
     background: var(--color-heading);
     outline: 1px solid var(--color-border-card);
     transition: 0.2s ease;
+}
+
+.btn-action-principal {
+    padding: 1rem var(--spacing-md);
 }
 
 .btn-outline {
