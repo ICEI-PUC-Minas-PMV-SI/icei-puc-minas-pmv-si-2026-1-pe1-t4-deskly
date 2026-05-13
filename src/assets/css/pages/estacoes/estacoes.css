@@ -1,8 +1,8 @@
 .estacoes {
-    padding: 24px 50px;
+    padding: var(--spacing-md) var(--spacing-xl);
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: var(--spacing-md);
 }
 
 .estacoes-header {
@@ -22,16 +22,12 @@
     position: relative;
     width: 260px;
     min-height: 44px;
-
     border: 1px solid var(--color-border-card);
     border-radius: var(--radius-md);
-
     display: flex;
     align-items: center;
-
     padding: var(--spacing-xs) var(--spacing-sm);
     background: var(--color-background);
-
     overflow: hidden;
 }
 
@@ -41,7 +37,6 @@
     background: transparent;
     border: none;
     outline: none;
-
     color: var(--color-text-md);
     font: var(--text-md);
 }
@@ -56,7 +51,7 @@
 
 .calendar-icon {
     position: absolute;
-    right: 16px;
+    right: var(--spacing-sm);
     width: 20px;
     height: 20px;
     pointer-events: none;
@@ -66,19 +61,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-
     background-color: transparent;
-    border: 1px solid var(--color-border-card) !important;
+    border: 1px solid var(--color-border-card);
     border-radius: var(--radius-md);
-
     padding: var(--spacing-xs) var(--spacing-sm);
     min-height: 44px;
-
     cursor: pointer;
-
     font: var(--text-md);
     color: var(--color-text-md);
-
     transition: 0.2s ease;
 }
 
@@ -89,7 +79,7 @@
 .estacoes-lista {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--spacing-sm);
 }
 
 .estacao-card {
@@ -97,9 +87,9 @@
     justify-content: space-between;
     align-items: center;
     border: 1px solid var(--color-border-card);
-    border-radius: 20px;
-    padding: 24px;
-    transition: 0.2s;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    transition: 0.2s ease;
 }
 
 .estacao-card:hover {
@@ -109,81 +99,40 @@
 .estacao-info {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: var(--spacing-lg);
 }
 
 .estacao-icon {
-    width: 60px;
-    height: 60px;
-    background-color: #e5e5e5;
-    border-radius: 12px;
+     width: 110px;         
+    height: 75px;          
+    border-radius: var(--radius-md); 
+    object-fit: cover;     
+    object-position: center; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); 
 }
 
 .estacao-acoes {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
-
-.badge {
-    padding: 6px 16px;
-    border-radius: var(--radius-md);
-
-    font: var(--text-sm);
-    font-weight: 600;
-
-    text-align: center;
-
-    min-width: 100px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-
-    line-height: 1;
-}
-
-.badge.disponivel {
-    background-color: var(--color-badge-green);
-    color: var(--color-text-green);
-}
-
-.badge.ocupado {
-    background-color: #ffd6d6;
-    color: #c0392b;
-    border-radius: var(--radius-md);
-}
-
-.badge.inativa {
-    background-color: var(--color-border-card);
-    color: var(--color-text-md);
-<<<<<<< HEAD
-=======
-    border-radius: var(--radius-md);
->>>>>>> leticia-estacoes
+    gap: var(--spacing-xs);
 }
 
 .btn-primary {
     background-color: var(--color-btn-primary);
     color: var(--color-background);
-
     padding: 10px var(--spacing-md);
     border-radius: var(--radius-md);
-
     border: 1px solid rgba(255, 255, 255, 0.15);
-
     cursor: pointer;
-
     font-weight: 400;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: 0.2s ease;
 }
 
 .btn-primary:hover {
     background: var(--color-heading);
-    transition: 0.2s ease;
 }
 
 .fast-action-btn {
@@ -195,7 +144,6 @@
     font: var(--text-sm);
     cursor: pointer;
     transition: 0.2s ease;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -214,69 +162,34 @@
     opacity: 0.6;
 }
 
-dialog {
-    border: none;
-    border-radius: 16px;
-    padding: 0;
-    width: 90%;
-    max-width: 500px;
-}
-
-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.15);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
+.badge {
+    padding: 6px var(--spacing-sm);
+    border-radius: var(--radius-md);
+    font: var(--text-sm);
+    text-align: center;
+    min-width: 100px;
+    display: inline-flex;
     align-items: center;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--color-border-card);
-}
-
-.close-modal {
-    background: transparent;
-    border: none;
-    font-size: 28px;
-    color: var(--color-text-md);
-    cursor: pointer;
+    justify-content: center;
     line-height: 1;
 }
 
-.close-modal:hover {
-    color: var(--color-heading);
+.badge.disponivel {
+    background-color: var(--color-badge-green);
+    color: var(--color-text-green);
 }
 
-.modal-body {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.badge.ocupado {
+    background-color: var(--color-badge-red);
+    color: var(--color-text-red);
 }
 
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.badge.inativa {
+    background-color: var(--color-border-card);
+    color: var(--color-text-md);
 }
 
-.input-group input,
-.input-group select {
-    height: 44px;
-    border-radius: 10px;
-    border: 1px solid var(--color-border-card);
-    padding: 0 12px;
-}
-
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    padding: 20px 24px;
-    border-top: 1px solid var(--color-border-card);
-}
-
-/* Flatpickr (mantido só o atual, sem duplicações antigas) */
+/* Calendário*/
 .flatpickr-calendar {
     background: var(--color-background);
     border: 1px solid var(--color-border-card);
@@ -306,14 +219,26 @@ dialog::backdrop {
     background: transparent;
 }
 
-.flatpickr-prev-month svg,
-.flatpickr-next-month svg {
-    fill: var(--color-heading);
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    color: var(--color-text-md);
+    fill: var(--color-text-md);
+    transition: all 0.2s ease;
 }
 
-.flatpickr-prev-month:hover svg,
-.flatpickr-next-month:hover svg {
-    fill: var(--color-btn-primary);
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: var(--color-text-md);
+    transition: fill 0.2s ease;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover,
+.flatpickr-calendar .flatpickr-prev-month:hover svg,
+.flatpickr-calendar .flatpickr-next-month:hover svg {
+    color: var(--color-heading);
+    fill: var(--color-heading);
+    background: transparent; 
 }
 
 .flatpickr-weekday {
@@ -325,8 +250,13 @@ dialog::backdrop {
 .flatpickr-day {
     font: var(--text-sm);
     color: var(--color-heading);
-    border-radius: var(--radius-md);
+    border-radius: 50%; 
     border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; 
+    box-sizing: border-box;
 }
 
 .flatpickr-day:hover {
@@ -344,6 +274,7 @@ dialog::backdrop {
 
 .flatpickr-day.today {
     border: 1px solid var(--color-btn-primary);
+    border-radius: 50%;
     color: var(--color-btn-primary);
     font-weight: 600;
 }
@@ -388,4 +319,21 @@ dialog::backdrop {
 .flatpickr-monthDropdown-months option:hover {
     background: var(--color-btn-primary);
     color: var(--color-background);
+}
+
+#modal-reserva, 
+#modal-1 {
+    overflow: visible;
+}
+
+#modal-reserva .modal-body, 
+#modal-1 .modal-body {
+    overflow: visible;
+}
+
+.flatpickr-calendar.static {
+    z-index: 9999;
+    position: absolute;
+    top: 100%;
+    left: 0;
 }
