@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="assets/css/global/global.css">
     <link rel="stylesheet" href="assets/css/pages/calendario/calendario.css">
     <title>Calendário</title>
@@ -68,7 +69,6 @@
         </section>
     </main>
 
-    <!-- Modal: Nova / Editar reserva -->
     <dialog id="modal">
         <form>
             <div class="modal-header">
@@ -90,9 +90,9 @@
                         <option value="Estação C">Estação C</option>
                     </select>
                 </div>
-                <div class="input-group">
+                <div class="input-group" style="position: relative;">
                     <label for="data">Data</label>
-                    <input type="date" id="data">
+                    <input type="text" id="data" class="modal-date-input" placeholder="dd/mm/aaaa">
                 </div>
                 <div class="input-group">
                     <label for="inicio">Horário de início</label>
@@ -126,7 +126,6 @@
         </form>
     </dialog>
 
-    <!-- Modal: Visualizar reserva -->
     <dialog id="viewModal">
         <div>
             <div class="modal-header">
@@ -151,5 +150,19 @@
 
     <script src="assets/js/menu.js"></script>
     <script src="assets/js/calendario.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+    <script>
+        flatpickr('.modal-date-input', {
+            locale: 'pt',
+            dateFormat: 'd/m/Y',
+            disableMobile: true,
+            placeholder: 'dd/mm/aaaa',
+            monthSelectorType: 'static',
+            static: true
+        });
+    </script>
 </body>
 </html>
