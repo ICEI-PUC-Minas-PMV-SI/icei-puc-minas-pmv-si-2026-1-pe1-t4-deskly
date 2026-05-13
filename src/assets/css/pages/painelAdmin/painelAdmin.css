@@ -193,16 +193,6 @@ main {
     background: transparent;
 }
 
-dialog {
-    width: 100%;
-    max-width: 500px;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    padding-bottom: 32px;
-    background-color: var(--color-background);
-    color: var(--color-heading);
-}
-
 .modal-campo input {
     width: 100%;
     box-sizing: border-box;
