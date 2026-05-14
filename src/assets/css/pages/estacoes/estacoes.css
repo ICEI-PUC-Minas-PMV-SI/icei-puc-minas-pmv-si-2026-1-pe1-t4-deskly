@@ -189,7 +189,6 @@
     color: var(--color-text-md);
 }
 
-/* Calendário*/
 .flatpickr-calendar {
     background: var(--color-background);
     border: 1px solid var(--color-border-card);
@@ -336,4 +335,220 @@
     position: absolute;
     top: 100%;
     left: 0;
+}
+
+@media (max-width: 1024px) {
+
+    .estacao-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .estacao-acoes {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .fast-action-btn,
+    .badge {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .date-wrapper {
+        width: 100%;
+    }
+
+    .btn-filtrar {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .estacoes {
+        padding: var(--spacing-md);
+    }
+
+    .estacoes-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .filtro-data {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .date-wrapper,
+    .btn-filtrar {
+        width: 100%;
+    }
+
+    .estacao-info {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .estacao-icon {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+    }
+
+    .estacao-acoes {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .badge,
+    .fast-action-btn {
+        width: 100%;
+    }
+
+    .notification-container {
+        position: relative;
+    }
+
+    .notification-menu {
+        position: fixed;
+        top: 95px;
+        left: 10px;
+        right: 10px;
+        width: auto;
+        max-width: 360px;
+        margin: 0 auto;
+        max-height: 70vh;
+        overflow: hidden;
+        z-index: 9999;
+        border-radius: var(--radius-md);
+    }
+
+    .notification-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 12px;
+    }
+
+    .notification-header h3 {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .notification-footer {
+        padding: 10px 12px;
+    }
+
+    .notification-footer button,
+    .notification-footer a {
+        font-size: 13px;
+        font-weight: 500;
+    }
+
+    .notification-list {
+        max-height: 55vh;
+        overflow-y: auto;
+    }
+
+    .notification-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 10px;
+        min-height: 52px;
+    }
+
+    .notification-content {
+        display: flex;
+        flex-direction: column;
+        gap: 3px;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .notification-text {
+        font-size: 14px;
+        line-height: 1.3;
+        font-weight: 500;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+    }
+
+    .notification-time {
+        font-size: 12px;
+        opacity: 0.75;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .estacoes {
+        padding: var(--spacing-sm);
+    }
+
+    .estacao-card {
+        padding: var(--spacing-sm);
+    }
+
+    .estacao-info {
+        gap: var(--spacing-sm);
+    }
+
+    .estacao-icon {
+        border-radius: var(--radius-sm);
+    }
+
+    .badge,
+    .fast-action-btn,
+    .btn-primary,
+    .btn-filtrar {
+        font-size: 14px;
+    }
+
+    .notification-menu {
+        left: 8px;
+        right: 8px;
+        top: 90px;
+        max-height: 65vh;
+    }
+
+    .notification-header h3 {
+        font-size: 14px;
+        font-weight: 500;
+        margin: 0;
+    }
+
+    .notification-footer button,
+    .notification-footer a {
+        font-size: 12px;
+        font-weight: 500;
+    }
+
+    .notification-list {
+        max-height: 50vh;
+    }
+
+    .notification-item {
+        padding: 10px 10px;
+        min-height: 50px;
+    }
+
+    .notification-text {
+        font-size: 13px;
+    }
+
+    .notification-time {
+        font-size: 11px;
+    }
 }
