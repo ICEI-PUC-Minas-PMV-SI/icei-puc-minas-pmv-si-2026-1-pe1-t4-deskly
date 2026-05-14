@@ -3,6 +3,7 @@
 
 main {
     padding: 24px 50px;
+    overflow-x: hidden;
 }
 
 .painel-admin {
@@ -123,7 +124,6 @@ main {
 .tabela-reservas {
     width: 100%;
     border-collapse: collapse;
-    min-width: 520px;    
 }
 
 .tabela-reservas th {
@@ -132,14 +132,12 @@ main {
     font: var(--text-md);
     color: var(--color-heading);
     font-weight: 600;
-    white-space: nowrap;
 }
 
 .tabela-reservas td {
     padding: 16px 18px;
     font: var(--text-md);
     border-top: 1px solid var(--color-border-card);
-    white-space: nowrap;
 }
 
 .status {
@@ -157,7 +155,7 @@ main {
 }
 
 .btn-action {
-    padding: 10px 20px;
+    padding: 10px var(--spacing-md);
     border-radius: var(--radius-md);
     background-color: var(--color-btn-primary);
     color: var(--color-background);
@@ -174,6 +172,10 @@ main {
     background: var(--color-heading);
     outline: 1px solid var(--color-border-card);
     transition: 0.2s ease;
+}
+
+.btn-action-principal {
+    padding: 1rem var(--spacing-md);
 }
 
 .btn-outline {
@@ -271,17 +273,33 @@ main {
 
 @media (max-width: 1024px) {
     main {
-        padding: 24px 32px;
+        padding: 24px 16px;
     }
 
     .tabela-reservas th,
     .tabela-reservas td {
-        padding: 12px 14px;
+        padding: 10px 10px;
+        white-space: normal;
+        font-size: clamp(0.7rem, 1.2vw, 0.875rem);
+    }
+    
+    .tabela-container {
+        overflow-x: hidden;
+    }
+
+    .tabela-reservas {
+        min-width: unset;
+    }
+
+    .tabela-reservas .btn-action {
+        padding: 8px clamp(8px, 1.5vw, 16px);
+        font-size: clamp(0.7rem, 1.2vw, 0.875rem);
     }
 }
 
 @media (max-width: 768px) {
     body {
+        overflow-x: hidden;
         grid-template-columns: 1fr;
         grid-template-areas:
             "header"
@@ -412,6 +430,8 @@ main {
         padding: 14px 16px;
         gap: 8px;
         background-color: var(--color-background);
+        min-width: 0;        
+        overflow: hidden;  
     }
 
     .tabela-reservas td {
@@ -442,17 +462,28 @@ main {
         margin-top: 4px;
         padding-top: 10px;
         border-top: 1px solid var(--color-border-card);
-        justify-content: flex-end;
+        justify-content: stretch;
     }
 
     .tabela-reservas td:last-child::before {
         display: none;
     }
 
+    .tabela-reservas td:last-child .btn-action {
+        flex: 1;                     
+        justify-content: center;
+    }
+
     .tabela-reservas .btn-action {
         padding: 7px 14px;
         font-size: 0.8125rem;
         flex: 0 0 auto;
+    }
+
+    .aba-header .btn-action {
+        width: 100%;
+        justify-content: center;
+        padding: 10px var(--spacing-md); 
     }
 }
 
