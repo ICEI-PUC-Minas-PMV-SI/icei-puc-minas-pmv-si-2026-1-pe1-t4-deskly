@@ -430,6 +430,8 @@ main {
         padding: 14px 16px;
         gap: 8px;
         background-color: var(--color-background);
+        min-width: 0;        
+        overflow: hidden;  
     }
 
     .tabela-reservas td {
@@ -460,11 +462,16 @@ main {
         margin-top: 4px;
         padding-top: 10px;
         border-top: 1px solid var(--color-border-card);
-        justify-content: flex-end;
+        justify-content: stretch;
     }
 
     .tabela-reservas td:last-child::before {
         display: none;
+    }
+
+    .tabela-reservas td:last-child .btn-action {
+        flex: 1;                     
+        justify-content: center;
     }
 
     .tabela-reservas .btn-action {
