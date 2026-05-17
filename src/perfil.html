@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/global/global.css">
+    <link rel="stylesheet" href="assets/css/pages/perfil/perfil.css">
+
+    <title>Meu Perfil</title>
+</head>
+
+<body>
+    <header>
+        <img class="logo" src="assets/icons/logo.svg" alt="Logo Deskly">
+        <div class="header-icons">
+            <button><img class="header-icon" src="assets/icons/bell.svg" alt="Sino"></button>
+            <a href="perfil.html" class="header-profile-link">
+                <img class="header-icon" src="assets/icons/user-circle.svg" alt="Perfil">
+            </a>
+            <button type="button" id="btn-hamburguer" class="hamburguer"><img src="assets/icons/menu.svg"
+                    alt="Botão"></button>
+        </div>
+    </header>
+
+    <aside>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="calendario.html">Calendário</a></li>
+                <li><a href="salas-reuniao.html">Salas de Reunião</a></li>
+                <li><a href="estacoes.html">Estações de Trabalho</a></li>
+                <li><a href="minhas-reservas.html">Minhas Reservas</a></li>
+            </ul>
+
+            <ul>
+                <li><a href="painelAdmin.html">Painel Admin</a></li>
+                <li><a href="ajuda.html">Ajuda</a></li>
+            </ul>
+        </nav>
+    </aside>
+
+    <main>
+        <div class="perfil-header">
+            <div class="titulos">
+                <h1>Meu Perfil</h1>
+                <p>Gerencie suas informações pessoais e preferências do sistema</p>
+            </div>
+        </div>
+
+        <section class="perfil-container">
+            <div class="perfil-sidebar">
+                <div class="card-perfil-resumo">
+                    <div class="avatar-container">
+                        <div class="perfil-avatar-placeholder">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                        </div>
+                        <button class="btn-alterar-foto">
+                            <img src="assets/icons/camera.svg" alt="Alterar foto">
+                        </button>
+                    </div>
+                    <h2>Isabela Santos</h2>
+                    <p class="user-role">Engenheira de Software</p>
+                    <span class="badge disponivel">Admin</span>
+                </div>
+            </div>
+
+            <div class="perfil-conteudo">
+                <div class="card-perfil-dados">
+                    <h3 class="secao-titulo">Informações Pessoais</h3>
+
+                    <form class="perfil-form">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="nome">Nome Completo</label>
+                                <input type="text" id="nome" value="Isabela Santos">
+                            </div>
+                            <div class="input-group">
+                                <label for="email">E-mail Corporativo</label>
+                                <input type="email" id="email" value="isabela.santos@deskly.com" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="departamento">Departamento</label>
+                                <input type="text" id="departamento" value="Tecnologia & Produto" disabled>
+                            </div>
+                            <div class="input-group">
+                                <label for="telefone">Telefone</label>
+                                <input type="text" id="telefone" value="(11) 99999-1234">
+                            </div>
+                        </div>
+
+                        <h3 class="secao-titulo" style="margin-top: var(--spacing-lg);">Segurança</h3>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="senha-atual">Senha Atual</label>
+                                <input type="password" id="senha-atual" placeholder="••••••••">
+                            </div>
+                            <div class="input-group">
+                                <label for="nova-senha">Nova Senha</label>
+                                <input type="password" id="nova-senha" placeholder="Nova senha">
+                            </div>
+                        </div>
+
+                        <div class="form-acoes">
+                            <button type="button" class="btn-detalhes">Descartar alterações</button>
+                            <button type="submit" class="btn-reservar">Salvar Alterações</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="assets/js/menu.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,362 @@
+.calendar-page {
+    height: 100%;
+    width: 100%;
+    padding: 24px 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ── Cabeçalho da página ── */
+.calendar-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-lg);
+    padding: 8px 16px;
+}
+
+.calendar-nav button {
+    background: none;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    padding: 6px 12px;
+    cursor: pointer;
+    color: var(--color-text-md);
+    font: var(--text-md);
+    transition: 0.2s ease;
+}
+
+.calendar-nav button:hover {
+    background: var(--color-btn-primary);
+    color: #fff;
+    border-color: var(--color-btn-primary);
+}
+
+#mesLabel {
+    font: var(--heading-3);
+    color: var(--color-heading);
+    min-width: 180px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+/* ── Wrapper da grade ── */
+.calendar-grid-wrapper {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+}
+
+/* ── Cabeçalho dos dias da semana ── */
+.week-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.week-header span {
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--color-text-sm);
+    padding: 6px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* ── Grade do calendário ── */
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+/* ── Células de dia ── */
+.day {
+    min-height: 110px;
+    padding: 8px;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-card);
+    background: #fff;
+    cursor: pointer;
+    overflow: hidden;
+    transition: border-color 0.2s ease;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--color-text-md);
+}
+
+.day:hover {
+    border-color: var(--color-btn-primary);
+}
+
+.day.today {
+    outline: 2px solid var(--color-btn-primary);
+    outline-offset: -1px;
+}
+
+/* ── Evento dentro do dia ── */
+.event {
+    font-size: 10px;
+    padding: 6px 8px;
+    border-radius: var(--radius-sm);
+    margin-top: 5px;
+    background: #EEF2FF;
+    color: var(--color-heading);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    cursor: pointer;
+    transition: filter 0.15s ease;
+}
+
+.event:hover {
+    filter: brightness(0.95);
+}
+
+.event strong {
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--color-heading);
+}
+
+.small {
+    font-size: 9px;
+    color: var(--color-text-sm);
+}
+
+/* ── Tags de convidados (modal view) ── */
+.tag {
+    display: inline-block;
+    background: #EEF2FF;
+    color: var(--color-heading);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 4px 4px 0 0;
+}
+
+/* ── Botão excluir (viewModal) ── */
+.btn-delete {
+    background: none;
+    color: var(--color-text-red);
+    padding: 8px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--color-badge-red);
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.btn-delete:hover {
+    background: var(--color-badge-red);
+}
+
+/* ── Responsivo ── */
+@media (max-width: 768px) {
+    .calendar-page {
+        padding: 16px;
+    }
+
+    .calendar-page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .calendar-nav {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    #mesLabel {
+        min-width: unset;
+        flex: 1;
+    }
+
+    .calendar-grid-wrapper {
+        padding: 10px;
+    }
+
+    .week-header,
+    #calendar {
+        gap: 4px;
+    }
+
+    .week-header span {
+        font-size: 9px;
+        padding: 3px 0;
+    }
+
+    .day {
+        min-height: 52px;
+        padding: 4px;
+        border-radius: 6px;
+        font-size: 11px;
+    }
+
+    .event {
+        display: none;
+    }
+
+    .day.has-event::after {
+        content: '';
+        display: block;
+        width: 5px;
+        height: 5px;
+        background: var(--color-btn-primary);
+        border-radius: 50%;
+        margin: 3px auto 0;
+    }
+}
+
+/* ── Modal (igual ao dashboard) ── */
+dialog {
+    border: none;
+    border-radius: 12px;
+    padding: 0;
+    width: 100%;
+    max-width: 480px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    margin: auto;
+    background: #fff;
+}
+
+dialog::backdrop {
+    background: rgba(0, 0, 0, 0.45);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.modal-header img {
+    height: 20px;
+}
+
+.modal-title {
+    font: var(--heading-3);
+    color: var(--color-heading);
+    margin: 0;
+}
+
+.close-modal {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    color: var(--color-heading);
+}
+
+.modal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 1.5rem;
+    max-height: 60vh;
+    overflow-y: auto;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input-group label {
+    font: var(--text-md);
+    color: var(--color-text-md);
+}
+
+.input-group input,
+.input-group select {
+    height: 38px;
+    padding: 0 10px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--color-heading);
+    background: var(--color-background);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    border-color: var(--color-heading);
+}
+
+.input-group small {
+    font: var(--text-sm);
+    color: var(--color-text-sm);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.modal-footer button {
+    padding: 8px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    border: 1px solid #d1d5db;
+    background: var(--color-background);
+    color: var(--color-btn-primary);
+    transition: opacity 0.2s;
+}
+
+.modal-footer button:last-child {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
+    border-color: var(--color-btn-primary);
+}
+
+.modal-footer button:hover {
+    opacity: 0.9;
+}
+
+.tag {
+    display: inline-block;
+    background: #EEF2FF;
+    color: var(--color-heading);
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin: 4px 4px 0 0;
+}
+
+#viewModal p {
+    font: var(--text-sm);
+    color: var(--color-text-md);
+    margin: 4px 0;
+}
+
+@media (max-width: 768px) {
+    dialog {
+        max-width: 380px;
+    }
+}
