@@ -1,240 +1,311 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="assets/css/global/global.css">
     <link rel="stylesheet" href="assets/css/pages/estacoes/estacoes.css">
 
     <title>Estações de Trabalho</title>
 </head>
+
 <body>
 
-<header>
-    <img class="logo" src="assets/icons/logo.svg">
-    <div class="header-icons">
-        <button><img class="header-icon" src="assets/icons/bell.svg"></button>
-        <button><img class="header-icon" src="assets/icons/user-circle.svg"></button>
-        <button id="btn-hamburguer" class="hamburguer">
-            <img src="assets/icons/menu.svg">
-        </button>
-    </div>
-</header>
+    <header>
+        <img class="logo" src="assets/icons/logo.svg">
+        <div class="header-icons">
+<div class="notification-container">
 
-<aside>
-    <nav>
-        <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="#">Calendário</a></li>
-            <li><a href="#">Salas de Reunião</a></li>
-            <li><a href="#">Estações de Trabalho</a></li>
-            <li><a href="#">Minhas Reservas</a></li>
-        </ul>
-        <ul>
-            <li><a href="#">Painel Admin</a></li>
-            <li><a href="#">Ajuda</a></li>
-        </ul>
-    </nav>
-</aside>
+    <button class="notification-btn">
 
-<main>
-<section class="estacoes">
+        <img
+            class="header-icon"
+            src="assets/icons/bell.svg"
+            alt="Notificações"
+        >
 
-    <div class="estacoes-header">
-        <div>
-            <h1>Estações de Trabalho</h1>
-            <span class="subtitle">Reserve sua mesa para o dia</span>
+        <span class="notification-badge">3</span>
+
+    </button>
+
+    <div class="notification-menu">
+
+        <div class="notification-header">
+
+            <h3>Notificações</h3>
+
+            <span class="notification-clear">
+                Limpar todas
+            </span>
+
         </div>
 
-        <button class="btn-primary open-modal" data-modal="modal-1">
-            + Nova Reserva
-        </button>
-    </div>
+        <div class="notification-list">
 
-    <div class="filtro-data">
+            <div class="notification-item">
 
-        <div class="date-wrapper">
-            <input type="date" class="date-input">
-            <img src="assets/icons/calendar-dots.svg" class="calendar-icon">
-        </div>
+                <div class="notification-dot"></div>
 
-        <button class="btn-filtrar">Filtrar</button>
+                <div class="notification-content">
 
-    </div>
+                    <span class="notification-text">
+                        Reserva confirmada na Sala Alfa
+                    </span>
 
-    <div class="estacoes-lista">
+                    <span class="notification-time">
+                        Há 5 minutos
+                    </span>
 
-        <div class="estacao-card">
-            <div class="estacao-info">
-                <div class="estacao-icon"></div>
-                <div>
-                    <h4>Mesa 01</h4>
-                    <span class="subtitle">Área: Andar 2 - Ala A</span>
                 </div>
+
             </div>
-            <div class="estacao-acoes">
-                <span class="badge disponivel">Disponível</span>
-                <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
+
+            <div class="notification-item">
+
+                <div class="notification-dot"></div>
+
+                <div class="notification-content">
+
+                    <span class="notification-text">
+                        Sua reunião começa às 10h
+                    </span>
+
+                    <span class="notification-time">
+                        Há 20 minutos
+                    </span>
+
+                </div>
+
             </div>
+
+            <div class="notification-item">
+
+                <div class="notification-dot"></div>
+
+                <div class="notification-content">
+
+                    <span class="notification-text">
+                        Mesa 04 disponível
+                    </span>
+
+                    <span class="notification-time">
+                        Agora mesmo
+                    </span>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="estacao-card">
-            <div class="estacao-info">
-                <div class="estacao-icon"></div>
-                <div>
-                    <h4>Mesa 02</h4>
-                    <span class="subtitle">Área: Andar 2 - Ala B</span>
-                </div>
-            </div>
-            <div class="estacao-acoes">
-                <span class="badge ocupado">Ocupada</span>
-                <button class="fast-action-btn" disabled>Reservar</button>
-            </div>
-        </div>
+        <div class="notification-footer">
 
-        <div class="estacao-card">
-            <div class="estacao-info">
-                <div class="estacao-icon"></div>
-                <div>
-                    <h4>Mesa 03</h4>
-                    <span class="subtitle">Área: Andar 3 - Ala C</span>
-                </div>
-            </div>
-            <div class="estacao-acoes">
-                <span class="badge inativa">Inativa</span>
-                <button class="fast-action-btn" disabled>Reservar</button>
-            </div>
-        </div>
+            <span>
+                Ver todas as notificações
+            </span>
 
-        <div class="estacao-card">
-            <div class="estacao-info">
-                <div class="estacao-icon"></div>
-                <div>
-                    <h4>Mesa 04</h4>
-                    <span class="subtitle">Área: Andar 2 - Ala D</span>
-                </div>
-            </div>
-            <div class="estacao-acoes">
-                <span class="badge disponivel">Disponível</span>
-                <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
-            </div>
-        </div>
+            <span class="notification-arrow">
+                ›
+            </span>
 
-        <div class="estacao-card">
-            <div class="estacao-info">
-                <div class="estacao-icon"></div>
-                <div>
-                    <h4>Mesa 05</h4>
-                    <span class="subtitle">Área: Andar 3 - Ala A</span>
-                </div>
-            </div>
-            <div class="estacao-acoes">
-                <span class="badge ocupado">Ocupada</span>
-                <button class="fast-action-btn" disabled>Reservar</button>
-            </div>
-        </div>
-
-        <div class="estacao-card">
-            <div class="estacao-info">
-                <div class="estacao-icon"></div>
-                <div>
-                    <h4>Mesa 06</h4>
-                    <span class="subtitle">Área: Andar 3 - Ala B</span>
-                </div>
-            </div>
-            <div class="estacao-acoes">
-                <span class="badge disponivel">Disponível</span>
-                <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
-            </div>
-        </div>
-
-        <div class="estacao-card">
-            <div class="estacao-info">
-                <div class="estacao-icon"></div>
-                <div>
-                    <h4>Mesa 07</h4>
-                    <span class="subtitle">Área: Andar 1 - Ala C</span>
-                </div>
-            </div>
-            <div class="estacao-acoes">
-                <span class="badge inativa">Inativa</span>
-                <button class="fast-action-btn" disabled>Reservar</button>
-            </div>
-        </div>
-
-        <div class="estacao-card">
-            <div class="estacao-info">
-                <div class="estacao-icon"></div>
-                <div>
-                    <h4>Mesa 08</h4>
-                    <span class="subtitle">Área: Andar 1 - Ala D</span>
-                </div>
-            </div>
-            <div class="estacao-acoes">
-                <span class="badge disponivel">Disponível</span>
-                <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
-            </div>
         </div>
 
     </div>
 
-</section>
-</main>
-
-<dialog id="modal-1">
-<form>
-
-    <div class="modal-header">
-        <h3>Nova reserva</h3>
-        <button class="close-modal" data-modal="modal-1" type="button">
-    ×
-</button>
-    </div>
-
-    <div class="modal-body">
-
-        <div class="input-group">
-            <label>Estação de trabalho</label>
-            <select>
-                <option>Mesa 01 — Andar 2 - Ala A</option>
-                <option>Mesa 02 — Andar 2 - Ala B</option>
-                <option>Mesa 03 — Andar 3 - Ala C</option>
-                <option>Mesa 04 — Andar 2 - Ala D</option>
-                <option>Mesa 05 — Andar 3 - Ala A</option>
-                <option>Mesa 06 — Andar 3 - Ala B</option>
-                <option>Mesa 07 — Andar 1 - Ala C</option>
-                <option>Mesa 08 — Andar 1 - Ala D</option>
-            </select>
+</div>
+            <button><img class="header-icon" src="assets/icons/user-circle.svg"></button>
+            <button id="btn-hamburguer" class="hamburguer">
+                <img src="assets/icons/menu.svg">
+            </button>
         </div>
+    </header>
 
-        <div class="input-group">
-            <label>Data</label>
-            <input type="date">
-        </div>
+    <aside>
+        <nav>
+            <ul>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="calendario.html">Calendário</a></li>
+                <li><a href="salas-reuniao.html">Salas de Reunião</a></li>
+                <li><a href="estacoes.html">Estações de Trabalho</a></li>
+                <li><a href="minhas-reservas.html">Minhas Reservas</a></li>
+            </ul>
+            <ul>
+                <li><a href="painelAdmin.html">Painel Admin</a></li>
+                <li><a href="ajuda.html">Ajuda</a></li>
+            </ul>
+        </nav>
+    </aside>
 
-        <div class="input-group">
-            <label>Início</label>
-            <input type="time">
-        </div>
+    <main>
+        <section class="estacoes">
 
-        <div class="input-group">
-            <label>Fim</label>
-            <input type="time">
-        </div>
+            <div class="estacoes-header">
+                <div>
+                    <h1>Estações de Trabalho</h1>
+                    <span class="subtitle">Reserve sua mesa para o dia</span>
+                </div>
 
-    </div>
+                <button class="btn-primary open-modal" data-modal="modal-1">
+                    + Nova Reserva
+                </button>
+            </div>
 
-    <div class="modal-footer">
-        <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
-        <button type="button">Confirmar</button>
-    </div>
+            <div class="filtro-data">
 
-</form>
-</dialog>
+                <div class="date-wrapper">
+                    <input type="text" class="date-input" placeholder="dd/mm/aaaa">
+                    <img src="assets/icons/calendar-dots.svg" class="calendar-icon">
+                </div>
 
-<script src="assets/js/menu.js"></script>
-<script src="assets/js/modal.js"></script>
+                <button class="btn-filtrar">Filtrar</button>
+
+            </div>
+
+            <div class="estacoes-lista">
+
+                <div class="estacao-card">
+                    <div class="estacao-info">
+                        <img class="estacao-icon"
+                            src="assets/images/Mesa 01.png"
+                            alt="Mesa 01">
+                        <div>
+                            <h4>Mesa 01</h4>
+                            <span class="subtitle">Área: Andar 1 - Ala A</span>
+                        </div>
+                    </div>
+                    <div class="estacao-acoes">
+                        <span class="badge disponivel">Disponível</span>
+                        <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
+                    </div>
+                </div>
+
+                <div class="estacao-card">
+                    <div class="estacao-info">
+                        <img class="estacao-icon"
+                            src="assets/images/Mesa 02.png"
+                            alt="Mesa 02">
+                        <div>
+                            <h4>Mesa 02</h4>
+                            <span class="subtitle">Área: Andar 2 - Ala B</span>
+                        </div>
+                    </div>
+                    <div class="estacao-acoes">
+                        <span class="badge ocupado">Ocupada</span>
+                        <button class="fast-action-btn" disabled>Reservar</button>
+                    </div>
+                </div>
+
+                <div class="estacao-card">
+                    <div class="estacao-info">
+                        <img class="estacao-icon"
+                            src="assets/images/Mesa 03.png"
+                            alt="Mesa 03">
+                        <div>
+                            <h4>Mesa 03</h4>
+                            <span class="subtitle">Área: Andar 3 - Ala C</span>
+                        </div>
+                    </div>
+                    <div class="estacao-acoes">
+                        <span class="badge inativa">Inativa</span>
+                        <button class="fast-action-btn" disabled>Reservar</button>
+                    </div>
+                </div>
+
+                <div class="estacao-card">
+                    <div class="estacao-info">
+                        <img class="estacao-icon"
+                            src="assets/images/Mesa 04.png"
+                            alt="Mesa 04">
+                        <div>
+                            <h4>Mesa 04</h4>
+                            <span class="subtitle">Área: Andar 4 - Ala D</span>
+                        </div>
+                    </div>
+                    <div class="estacao-acoes">
+                        <span class="badge disponivel">Disponível</span>
+                        <button class="fast-action-btn open-modal" data-modal="modal-1">Reservar</button>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </main>
+
+    <dialog id="modal-1">
+        <form>
+
+            <div class="modal-header">
+                <h3>Nova reserva</h3>
+                <button class="close-modal" data-modal="modal-1" type="button">
+                    ×
+                </button>
+            </div>
+
+            <div class="modal-body">
+
+                <div class="input-group">
+                    <label>Estação de trabalho</label>
+                    <select>
+                        <option>Mesa 01 — Andar 1 - Ala A</option>
+                        <option>Mesa 02 — Andar 2 - Ala B</option>
+                        <option>Mesa 03 — Andar 3 - Ala C</option>
+                        <option>Mesa 04 — Andar 4 - Ala D</option>
+                    </select>
+                </div>
+
+                <div class="input-group" style="position: relative;">
+                    <label>Data</label>
+                    <input type="text" class="modal-date-input" placeholder="dd/mm/aaaa">
+                </div>
+
+                <div class="input-group">
+                    <label>Início</label>
+                    <input type="time">
+                </div>
+
+                <div class="input-group">
+                    <label>Fim</label>
+                    <input type="time">
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
+                <button type="button">Confirmar</button>
+            </div>
+
+        </form>
+    </dialog>
+
+    <script src="assets/js/notificacoes.js"></script>
+    <script src="assets/js/menu.js"></script>
+    <script src="assets/js/modal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+    
+    <script>
+        flatpickr('.date-input', {
+            locale: 'pt',
+            dateFormat: 'd/m/Y',
+            disableMobile: true,
+            placeholder: 'dd/mm/aaaa',
+            monthSelectorType: 'static'
+        });
+
+        flatpickr('.modal-date-input', {
+            locale: 'pt',
+            dateFormat: 'd/m/Y',
+            disableMobile: true,
+            placeholder: 'dd/mm/aaaa',
+            monthSelectorType: 'static',
+            static: true 
+        });
+    </script>
 
 </body>
-</html>
+
+</html

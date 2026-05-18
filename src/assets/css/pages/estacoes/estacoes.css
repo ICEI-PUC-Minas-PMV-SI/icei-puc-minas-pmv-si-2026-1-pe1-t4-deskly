@@ -1,8 +1,8 @@
 .estacoes {
-    padding: 24px 50px;
+    padding: var(--spacing-md) var(--spacing-xl);
     display: flex;
     flex-direction: column;
-    gap: 24px;
+    gap: var(--spacing-md);
 }
 
 .estacoes-header {
@@ -13,22 +13,21 @@
 
 .filtro-data {
     display: flex;
-    gap: 16px;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+    padding: 0;
 }
 
 .date-wrapper {
     position: relative;
     width: 260px;
-    height: 56px;
+    min-height: 44px;
     border: 1px solid var(--color-border-card);
-    border-radius: 16px;
+    border-radius: var(--radius-md);
     display: flex;
     align-items: center;
-    padding: 0 16px;
+    padding: var(--spacing-xs) var(--spacing-sm);
     background: var(--color-background);
-}
-
-.date-wrapper {
     overflow: hidden;
 }
 
@@ -39,6 +38,7 @@
     border: none;
     outline: none;
     color: var(--color-text-md);
+    font: var(--text-md);
 }
 
 .date-input::-webkit-calendar-picker-indicator {
@@ -51,31 +51,35 @@
 
 .calendar-icon {
     position: absolute;
-    right: 16px;
+    right: var(--spacing-sm);
     width: 20px;
     height: 20px;
     pointer-events: none;
 }
 
 .btn-filtrar {
-    height: 56px;
-    padding: 0 24px;
-    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
     border: 1px solid var(--color-border-card);
-    background: transparent;
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    min-height: 44px;
     cursor: pointer;
+    font: var(--text-md);
     color: var(--color-text-md);
+    transition: 0.2s ease;
 }
 
 .btn-filtrar:hover {
-    background: transparent;
-    color: var(--color-text-md);
+    background: var(--color-border-card);
 }
 
 .estacoes-lista {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: var(--spacing-sm);
 }
 
 .estacao-card {
@@ -83,9 +87,9 @@
     justify-content: space-between;
     align-items: center;
     border: 1px solid var(--color-border-card);
-    border-radius: 20px;
-    padding: 24px;
-    transition: 0.2s;
+    border-radius: var(--radius-lg);
+    padding: var(--spacing-md);
+    transition: 0.2s ease;
 }
 
 .estacao-card:hover {
@@ -95,73 +99,51 @@
 .estacao-info {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: var(--spacing-lg);
 }
 
 .estacao-icon {
-    width: 60px;
-    height: 60px;
-    background-color: #e5e5e5;
-    border-radius: 12px;
+     width: 110px;         
+    height: 75px;          
+    border-radius: var(--radius-md); 
+    object-fit: cover;     
+    object-position: center; 
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06); 
 }
 
 .estacao-acoes {
     display: flex;
     align-items: center;
-    gap: 12px;
-}
-
-.badge {
-    padding: 6px 16px;
-    border-radius: var(--radius-lg);
-    font: var(--text-sm);
-    font-weight: 600;
-    text-align: center;
-    min-width: 100px;
-
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.badge.disponivel {
-    background-color: var(--color-badge-green);
-    color: var(--color-text-green);
-    border-radius: var(--radius-md);
-}
-
-.badge.ocupado {
-    background-color: #ffd6d6;
-    color: #c0392b;
-}
-
-.badge.inativa {
-    background-color: var(--color-border-card);
-    color: var(--color-text-md);
-    border: 1px solid rgba(0, 0, 0, 0.05);
+    gap: var(--spacing-xs);
 }
 
 .btn-primary {
-    padding: 12px 24px;
-    border-radius: var(--radius-md);
     background-color: var(--color-btn-primary);
     color: var(--color-background);
-    border: none;
+    padding: 10px var(--spacing-md);
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     cursor: pointer;
-    font: var(--text-md);
+    font-weight: 400;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    transition: 0.2s ease;
+}
+
+.btn-primary:hover {
+    background: var(--color-heading);
 }
 
 .fast-action-btn {
-    padding: 6px 14px;
-    border-radius: var(--radius-md);
     background-color: var(--color-btn-primary);
     color: var(--color-background);
     border: none;
-    cursor: pointer;
+    border-radius: var(--radius-md);
+    padding: 10px var(--spacing-sm);
     font: var(--text-sm);
+    cursor: pointer;
+    transition: 0.2s ease;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -180,64 +162,256 @@
     opacity: 0.6;
 }
 
-dialog {
-    border: none;
-    border-radius: 16px;
-    padding: 0;
-    width: 90%;
-    max-width: 500px;
-}
-
-dialog::backdrop {
-    background: rgba(0, 0, 0, 0.15);
-}
-
-.modal-header {
-    display: flex;
-    justify-content: space-between;
+.badge {
+    padding: 6px var(--spacing-sm);
+    border-radius: var(--radius-md);
+    font: var(--text-sm);
+    text-align: center;
+    min-width: 100px;
+    display: inline-flex;
     align-items: center;
-    padding: 20px 24px;
-    border-bottom: 1px solid var(--color-border-card);
-}
-
-.close-modal {
-    background: transparent;
-    border: none;
-    font-size: 28px;
-    color: var(--color-text-md);
-    cursor: pointer;
+    justify-content: center;
     line-height: 1;
 }
 
-.close-modal:hover {
+.badge.disponivel {
+    background-color: var(--color-badge-green);
+    color: var(--color-text-green);
+}
+
+.badge.ocupado {
+    background-color: var(--color-badge-red);
+    color: var(--color-text-red);
+}
+
+.badge.inativa {
+    background-color: var(--color-border-card);
+    color: var(--color-text-md);
+}
+
+.flatpickr-calendar {
+    background: var(--color-background);
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    font-family: var(--main-font);
+}
+
+.flatpickr-months {
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px solid var(--color-border-card);
+}
+
+.flatpickr-month {
     color: var(--color-heading);
 }
 
-.modal-body {
-    padding: 24px;
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.flatpickr-current-month {
+    font: var(--heading-4);
+    color: var(--color-heading);
 }
 
-.input-group {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+.flatpickr-monthDropdown-months,
+.numInputWrapper input {
+    font: var(--text-md);
+    color: var(--color-heading);
+    background: transparent;
 }
 
-.input-group input,
-.input-group select {
-    height: 44px;
-    border-radius: 10px;
+.flatpickr-prev-month,
+.flatpickr-next-month {
+    color: var(--color-text-md);
+    fill: var(--color-text-md);
+    transition: all 0.2s ease;
+}
+
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: var(--color-text-md);
+    transition: fill 0.2s ease;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover,
+.flatpickr-calendar .flatpickr-prev-month:hover svg,
+.flatpickr-calendar .flatpickr-next-month:hover svg {
+    color: var(--color-heading);
+    fill: var(--color-heading);
+    background: transparent; 
+}
+
+.flatpickr-weekday {
+    font: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-md);
+}
+
+.flatpickr-day {
+    font: var(--text-sm);
+    color: var(--color-heading);
+    border-radius: 50%; 
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; 
+    box-sizing: border-box;
+}
+
+.flatpickr-day:hover {
+    background: var(--color-border-card);
+    color: var(--color-heading);
+    border: none;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+}
+
+.flatpickr-day.today {
+    border: 1px solid var(--color-btn-primary);
+    border-radius: 50%;
+    color: var(--color-btn-primary);
+    font-weight: 600;
+}
+
+.flatpickr-day.today:hover {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
+}
+
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+    color: var(--color-text-sm);
+}
+
+.flatpickr-day.flatpickr-disabled {
+    color: var(--color-text-sm);
+    opacity: 0.4;
+}
+
+.flatpickr-input::placeholder {
+    color: var(--color-text-md);
+    font: var(--text-md);
+}
+
+.flatpickr-monthDropdown-months {
+    background: var(--color-background);
     border: 1px solid var(--color-border-card);
-    padding: 0 12px;
+    border-radius: var(--radius-md);
+    color: var(--color-heading);
+    font: var(--text-md);
+    padding: var(--spacing-xs);
 }
 
-.modal-footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-    padding: 20px 24px;
-    border-top: 1px solid var(--color-border-card);
+.flatpickr-monthDropdown-months option {
+    background: var(--color-background);
+    color: var(--color-heading);
+    font: var(--text-sm);
+    padding: var(--spacing-xs);
+}
+
+.flatpickr-monthDropdown-months option:checked,
+.flatpickr-monthDropdown-months option:hover {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
+}
+
+#modal-reserva, 
+#modal-1 {
+    overflow: visible;
+}
+
+#modal-reserva .modal-body, 
+#modal-1 .modal-body {
+    overflow: visible;
+}
+
+.flatpickr-calendar.static {
+    z-index: 9999;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+@media (max-width: 1024px) {
+
+    .estacao-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .estacao-acoes {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .fast-action-btn,
+    .badge {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .date-wrapper {
+        width: 100%;
+    }
+
+    .btn-filtrar {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .estacoes {
+        padding: var(--spacing-md);
+    }
+
+    .estacoes-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .btn-primary {
+        width: 100%;
+    }
+
+    .filtro-data {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .date-wrapper,
+    .btn-filtrar {
+        width: 100%;
+    }
+
+    .estacao-info {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .estacao-icon {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+    }
+
+    .estacao-acoes {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+    }
+
+    .badge,
+    .fast-action-btn {
+        width: 100%;
+    }
 }

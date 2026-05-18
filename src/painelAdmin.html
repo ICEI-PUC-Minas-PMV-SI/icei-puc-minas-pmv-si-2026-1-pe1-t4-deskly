@@ -16,24 +16,23 @@
             <button type="button" id="btn-hamburguer" class="hamburguer"><img src="assets/icons/menu.svg" alt="Botão"></button>
         </div>
     </header>
-
+ 
     <aside>
         <nav>
             <ul>
                 <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="">Calendário</a></li>
+                <li><a href="calendario.html">Calendário</a></li>
                 <li><a href="SalasReuniao.html">Salas de Reunião</a></li>
                 <li><a href="estacoes.html">Estações de Trabalho</a></li>
-                <li><a href="">Minhas Reservas</a></li>
+                <li><a href="minhas-reservas.html">Minhas Reservas</a></li>
             </ul>
-
             <ul>
                 <li><a href="#">Painel Admin</a></li>
-                <li><a href="#">Ajuda</a></li>
+                <li><a href="ajuda.html">Ajuda</a></li>
             </ul>
         </nav>
     </aside>
-
+ 
     <main>
         <section class="painel-admin">
             <div class="painel-admin-header">
@@ -43,22 +42,20 @@
                 </div>
             </div>
         </section>
-
+ 
         <nav class="tabs">
             <ul class="tabs-list">
-                <li class="tab active">Todas as reservas</li>
-                <li class="tab">Espaços</li>
-                <li class="tab">Usuários</li>
-
+                <li class="tab active" data-tab="reservas">Todas as reservas</li>
+                <li class="tab" data-tab="espacos">Espaços</li>
+                <li class="tab" data-tab="usuarios">Usuários</li>
                 <div class="tab-indicator"></div>
             </ul>
         </nav>
-
-        <section class="filtros-container">
+ 
+        <section class="filtros-container" data-tab-content="reservas">
             <div class="campo-filtro">
                 <input type="date">
             </div>
-
             <div class="campo-filtro">
                 <select>
                     <option>Todas as capacidades</option>
@@ -66,13 +63,12 @@
                     <option>Até 8 pessoas</option>
                     <option>Mais de 8 pessoas</option>
                 </select>
-                <img src="assets/icons/seta.svg" alt="Imagem da Sala">
+                <img src="assets/icons/seta.svg" alt="Seta">
             </div>
-
-            <button class="btn-filtrar-simples">Filtrar</button>
+            <button class="btn-action">Filtrar</button>
         </section>
-
-        <section class="tabela-container">
+ 
+        <section class="tabela-container" data-tab-content="reservas">
             <table class="tabela-reservas">
                 <thead>
                     <tr>
@@ -86,146 +82,402 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Emanuel Miranda</td>
-                        <td>Sala Alfa</td>
-                        <td>30/03/2026</td>
-                        <td>11:00h - 11:30h</td>
-                        <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td data-label="Usuário">Emanuel Miranda</td>
+                        <td data-label="Espaço">Sala Alfa</td>
+                        <td data-label="Data">30/03/2026</td>
+                        <td data-label="Horário">11:00h - 11:30h</td>
+                        <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
-
                     <tr>
-                        <td>Isabela Santos</td>
-                        <td>Sala Beta</td>
-                        <td>05/04/2026</td>
-                        <td>11:40h - 12:10h</td>
-                        <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td data-label="Usuário">Isabela Santos</td>
+                        <td data-label="Espaço">Sala Beta</td>
+                        <td data-label="Data">05/04/2026</td>
+                        <td data-label="Horário">11:40h - 12:10h</td>
+                        <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
-
                     <tr>
-                        <td>Kauã Silva</td>
-                        <td>Mesa 02</td>
-                        <td>10/04/2026</td>
-                        <td>12:30h - 13:00h</td>
-                        <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td data-label="Usuário">Kauã Silva</td>
+                        <td data-label="Espaço">Mesa 02</td>
+                        <td data-label="Data">10/04/2026</td>
+                        <td data-label="Horário">12:30h - 13:00h</td>
+                        <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
-
                     <tr>
-                        <td>Letícia Moreira</td>
-                        <td>Sala Gama</td>
-                        <td>12/04/2026</td>
-                        <td>13:00h - 13:30h</td>
-                        <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td data-label="Usuário">Letícia Moreira</td>
+                        <td data-label="Espaço">Sala Gama</td>
+                        <td data-label="Data">12/04/2026</td>
+                        <td data-label="Horário">13:00h - 13:30h</td>
+                        <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
-
                     <tr>
-                        <td>Vitória Leal</td>
-                        <td>Mesa 03</td>
-                        <td>13/04/2026</td>
-                        <td>13:40h - 14:00h</td>
-                        <td><span class="status confirmado">Confirmado</span></td>
-                        <td><button class="btn-excluir open-modal" data-modal="modal-confirmacao">Excluir</button></td>
+                        <td data-label="Usuário">Vitória Leal</td>
+                        <td data-label="Espaço">Mesa 03</td>
+                        <td data-label="Data">13/04/2026</td>
+                        <td data-label="Horário">13:40h - 14:00h</td>
+                        <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                        <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
                     </tr>
                 </tbody>
             </table>
         </section>
+ 
+        <section class="espacos-container" data-tab-content="espacos">
+            <div class="aba-header">
+                <h2>Salas de Reunião</h2>
+                <button class="btn-action btn-action-principal" data-modal="modal-cadastrar-espaco">+ Cadastrar Espaço</button>
+            </div>
+ 
+            <div class="tabela-container">
+                <table class="tabela-reservas">
+                    <thead>
+                        <tr>
+                            <th>Espaço</th>
+                            <th>Capacidade</th>
+                            <th>Recursos</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Espaço">Sala Alfa</td>
+                            <td data-label="Capacidade">8</td>
+                            <td data-label="Recursos">Tv, Sala</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Alfa">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Espaço">Sala Beta</td>
+                            <td data-label="Capacidade">4</td>
+                            <td data-label="Recursos">Videoconferência, Ar</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Beta">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Espaço">Mesa 02</td>
+                            <td data-label="Capacidade">2</td>
+                            <td data-label="Recursos">Lousa, Ar</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Mesa 02">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Espaço">Sala Gama</td>
+                            <td data-label="Capacidade">16</td>
+                            <td data-label="Recursos">Videoconferência</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Gama">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Espaço">Mesa 03</td>
+                            <td data-label="Capacidade">6</td>
+                            <td data-label="Recursos">Tv, lousa e Ar</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action btn-outline" data-modal="modal-ativar-espaco" data-nome="Mesa 03">Ativar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+ 
+            <div class="aba-header">
+                <h2>Estações de Trabalho</h2>
+            </div>
+ 
+            <div class="tabela-container">
+                <table class="tabela-reservas">
+                    <thead>
+                        <tr>
+                            <th>Espaço</th>
+                            <th>Área</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Espaço">Sala Alfa</td>
+                            <td data-label="Área">Andar 2 - Ala A</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Alfa">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Espaço">Sala Beta</td>
+                            <td data-label="Área">Andar 2 - Ala A</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Beta">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Espaço">Mesa 02</td>
+                            <td data-label="Área">Andar 3 - Ala B</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Mesa 02">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Espaço">Sala Gama</td>
+                            <td data-label="Área">Andar 3 - Ala B</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Gama">Desativar</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td data-label="Espaço">Mesa 03</td>
+                            <td data-label="Área">Andar 2 - Ala B</td>
+                            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
+                            <td>
+                                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
+                                <button class="btn-action btn-outline" data-modal="modal-ativar-espaco" data-nome="Mesa 03">Ativar</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+ 
+        <section class="usuarios-container" data-tab-content="usuarios">
+            <div class="aba-header">
+                <div class="usuarios-busca">
+                    <input type="text" class="input-busca" placeholder="Buscar colaborador...">
+                    <button class="btn-action">Buscar</button>
+                </div>
+                <button class="btn-action btn-action-principal" data-modal="modal-convidar-usuario">+ Convidar usuário</button>
+            </div>
+ 
+            <div class="tabela-container">
+                <table class="tabela-reservas">
+                    <thead>
+                        <tr>
+                            <th>Usuário</th>
+                            <th>E-mail</th>
+                            <th>Perfil</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-label="Usuário">Emanuel Miranda</td>
+                            <td data-label="E-mail">emanuel@deskly.com</td>
+                            <td data-label="Perfil">Admin</td>
+                            <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Emanuel Miranda">Excluir</button></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Usuário">Isabela Santos</td>
+                            <td data-label="E-mail">isabela@deskly.com</td>
+                            <td data-label="Perfil">Usuário</td>
+                            <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Isabela Santos">Excluir</button></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Usuário">Kauã Silva</td>
+                            <td data-label="E-mail">kaua@deskly.com</td>
+                            <td data-label="Perfil">Usuário</td>
+                            <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Kauã Silva">Excluir</button></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Usuário">Letícia Moreira</td>
+                            <td data-label="E-mail">leticia@deskly.com</td>
+                            <td data-label="Perfil">Usuário</td>
+                            <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Letícia Moreira">Excluir</button></td>
+                        </tr>
+                        <tr>
+                            <td data-label="Usuário">Vitória Leal</td>
+                            <td data-label="E-mail">vitoria@deskly.com</td>
+                            <td data-label="Perfil">Usuário</td>
+                            <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Vitória Leal">Excluir</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
     </main>
-
-    <dialog id="modal-nova-reserva">
-        <form action="">
-            <div class="modal-header">
-                <h3 class="modal-title">Nova reserva</h3>
-                <button class="close-modal" data-modal="modal-nova-reserva" type="button">
-                    <img src="assets/icons/close-menu.svg" alt="Fechar">
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <div class="input-group">
-                    <label for="espaco">Espaço</label>
-                    <select id="espaco" name="espaco" onchange="atualizarConvidados()">
-                        <option value="">Selecione um espaço</option>
-                        <option value="4">Sala A — cap. 4 pessoas</option>
-                        <option value="8">Sala B — cap. 8 pessoas</option>
-                        <option value="12">Sala C — cap. 12 pessoas</option>
-                    </select>
-                </div>
-
-                <div class="input-group">
-                    <label for="date">Data</label>
-                    <input type="date" id="date">
-                </div>
-
-                <div class="input-group">
-                    <label for="start-time">Horário de início</label>
-                    <input type="time" id="start-time">
-                </div>
-
-                <div class="input-group">
-                    <label for="ending-time">Horário de término</label>
-                    <input type="time" id="ending-time">
-                </div>
-
-                <div class="input-group" id="convidados-wrapper" style="display: none;">
-                    <label for="convidados">
-                        Convidados <span id="limite-label"></span>
-                    </label>
-                    <select id="convidados" name="guests[]" multiple></select>
-                    <small id="aviso"></small>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" class="close-modal" data-modal="modal-nova-reserva">Cancelar</button>
-                <button type="button" class="btn-excluir open-modal" data-modal="modal-confirmacao" onclick="confirmar()">Confirmar</button>
-            </div>
-        </form>
-    </dialog>
-
+ 
     <dialog id="modal-confirmacao">
         <div class="modal-confirmacao-header">
             <h3 class="modal-confirmacao-titulo">Excluir Reserva</h3>
             <button type="button" class="modal-confirmacao-fechar" data-modal="modal-confirmacao">
-            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"/>
-                <line x1="6" y1="6" x2="18" y2="18"/>
-            </svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
             </button>
         </div>
-    
         <div class="modal-confirmacao-body">
-            <p class="modal-confirmacao-descricao">
-            Deseja excluir a reserva de <strong>Isabela Santos</strong>?
-            </p>
-        
+            <p class="modal-confirmacao-descricao">Deseja excluir a reserva de <strong>Isabela Santos</strong>?</p>
             <div class="modal-confirmacao-detalhes">
-            <div class="modal-confirmacao-linha">
-                <span class="modal-confirmacao-label">Espaço</span>
-                <span class="modal-confirmacao-valor">Sala Beta</span>
+                <div class="modal-confirmacao-linha">
+                    <span class="modal-confirmacao-label">Espaço</span>
+                    <span class="modal-confirmacao-valor">Sala Beta</span>
+                </div>
+                <div class="modal-confirmacao-linha">
+                    <span class="modal-confirmacao-label">Data</span>
+                    <span class="modal-confirmacao-valor">30/03/2026</span>
+                </div>
+                <div class="modal-confirmacao-linha">
+                    <span class="modal-confirmacao-label">Horário</span>
+                    <span class="modal-confirmacao-valor">09:00h – 10:00h</span>
+                </div>
             </div>
-            <div class="modal-confirmacao-linha">
-                <span class="modal-confirmacao-label">Data</span>
-                <span class="modal-confirmacao-valor">30/03/2026</span>
-            </div>
-            <div class="modal-confirmacao-linha">
-                <span class="modal-confirmacao-label">Horário</span>
-                <span class="modal-confirmacao-valor">09:00h – 10:00h</span>
-            </div>
-            </div>
-        
             <p class="modal-confirmacao-aviso">A sala será liberada para novas reservas</p>
         </div>
-        
         <div class="modal-confirmacao-footer">
             <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-confirmacao">Cancelar</button>
             <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Confirmar</button>
         </div>
     </dialog>
-
+ 
+    <dialog id="modal-cadastrar-espaco">
+        <div class="modal-header">
+            <h3 class="modal-title">Cadastrar Espaço</h3>
+            <button type="button" class="close-modal" data-modal="modal-cadastrar-espaco">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="input-group"><label>Tipo</label><input type="text"></div>
+            <div class="input-group"><label>Nome</label><input type="text"></div>
+            <div class="modal-campo-row">
+                <div class="input-group"><label>Capacidade (pessoas)</label><input type="number"></div>
+                <div class="input-group"><label>Status inicial</label><input type="text"></div>
+            </div>
+            <div class="input-group"><label>Recursos (separados por vírgula)</label><input type="text"></div>
+            <div class="input-group"><label>Área / Localização</label><input type="text"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-modal="modal-cadastrar-espaco">Cancelar</button>
+            <button type="button">Confirmar</button>
+        </div>
+    </dialog>
+ 
+    <dialog id="modal-editar-espaco">
+        <div class="modal-header">
+            <h3 class="modal-title">Editar Espaço</h3>
+            <button type="button" class="close-modal" data-modal="modal-editar-espaco">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="input-group"><label>Nome</label><input type="text"></div>
+            <div class="modal-campo-row">
+                <div class="input-group"><label>Data</label><input type="date"></div>
+                <div class="input-group"><label>Horário de Início</label><input type="time"></div>
+            </div>
+            <div class="input-group"><label>Convidados (e-mail, separado por vírgula)</label><input type="text"></div>
+            <div class="input-group"><label>Convidados (e-mail, separado por vírgula)</label><input type="text"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-modal="modal-editar-espaco">Cancelar</button>
+            <button type="button">Confirmar</button>
+        </div>
+    </dialog>
+ 
+    <dialog id="modal-desativar-espaco">
+        <div class="modal-confirmacao-header">
+            <h3 class="modal-confirmacao-titulo">Desativar Espaço</h3>
+            <button type="button" class="modal-confirmacao-fechar" data-modal="modal-desativar-espaco">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-confirmacao-body">
+            <p class="modal-confirmacao-descricao">Deseja desativar temporariamente <strong class="modal-desativar-nome"></strong>?</p>
+            <p class="modal-confirmacao-aviso">Reservas existentes não serão afetadas. Nenhuma nova reserva poderá ser feita enquanto o espaço estiver inativo.</p>
+        </div>
+        <div class="modal-confirmacao-footer">
+            <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-desativar-espaco">Cancelar</button>
+            <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-desativar">Desativar</button>
+        </div>
+    </dialog>
+ 
+    <dialog id="modal-ativar-espaco">
+        <div class="modal-header">
+            <h3 class="modal-title">Ativar Espaço</h3>
+            <button type="button" class="close-modal" data-modal="modal-ativar-espaco">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-confirmacao-descricao">Deseja ativar temporariamente <strong class="modal-ativar-nome"></strong>?</p>
+            <p class="modal-confirmacao-aviso">Reservas existentes não serão afetadas. Novas reservas poderão ser feitas normalmente enquanto o espaço estiver ativo.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-modal="modal-ativar-espaco">Cancelar</button>
+            <button type="button" class="btn-ativar-confirmar" id="btn-confirmar-ativar">Ativar</button>
+        </div>
+    </dialog>
+ 
+    <dialog id="modal-remover-usuario">
+        <div class="modal-header">
+            <h3 class="modal-title">Remover Usuário</h3>
+            <button type="button" class="close-modal" data-modal="modal-remover-usuario">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p class="modal-confirmacao-descricao">Deseja remover <strong class="modal-remover-nome"></strong> da empresa?</p>
+            <p class="modal-confirmacao-aviso">O acesso será revogado imediatamente. As reservas futuras deste usuário serão mantidas até cancelamento manual.</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-modal="modal-remover-usuario">Cancelar</button>
+            <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-remover">Remover</button>
+        </div>
+    </dialog>
+ 
+    <dialog id="modal-convidar-usuario">
+        <div class="modal-header">
+            <h3 class="modal-title">Convidar Usuário</h3>
+            <button type="button" class="close-modal" data-modal="modal-convidar-usuario">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+                </svg>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="input-group"><label>E-mail</label><input type="email"></div>
+            <div class="input-group"><label>Perfil</label><input type="text"></div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" data-modal="modal-convidar-usuario">Cancelar</button>
+            <button type="button" id="btn-confirmar-convidar">Confirmar</button>
+        </div>
+    </dialog>
+ 
     <script src="assets/js/menu.js"></script>
     <script src="./assets/js/painelAdmin/modalExcluirReserva.js"></script>
+    <script src="./assets/js/painelAdmin/tabs.js"></script>
 </body>
 </html>
