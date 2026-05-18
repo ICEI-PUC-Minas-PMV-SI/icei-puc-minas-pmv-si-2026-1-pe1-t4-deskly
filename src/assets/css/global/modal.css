@@ -329,6 +329,60 @@ dialog::backdrop {
 
 @media (max-width: 768px) {
   dialog {
-      max-width: 380px;
+      max-width: calc(100vw - 32px);
+      margin: auto 16px;
+  }
+
+  .modal-header,
+  .modal-detalhe-header {
+      padding: 1rem;
+  }
+
+  .modal-body,
+  .modal-detalhe-body {
+      padding: 1rem;
+      gap: 10px;
+  }
+
+  .modal-footer,
+  .modal-detalhe-footer {
+      padding: 0.75rem 1rem;
+  }
+
+  .modal-title,
+  .modal-detalhe-titulo {
+      font-size: 0.9375rem;
+  }
+
+  .input-row {
+      grid-template-columns: 1fr;
+  }
+
+  .input-group label {
+      font-size: 0.8125rem;
+  }
+
+  .input-group input,
+  .input-group select {
+      font-size: 0.8125rem;
+      width: 100%;
+      box-sizing: border-box;
+  }
+
+  .conv-adicionar-row {
+      flex-wrap: wrap;
+  }
+
+  .conv-adicionar-row input {
+      min-width: 0;
+      width: 100%;
+      flex: 1 1 100%;
+  }
+
+  .modal-footer button,
+  .modal-detalhe-btn-cancelar,
+  .modal-detalhe-btn-confirmar {
+      font-size: 0.8125rem;
+      padding: 8px 14px;
   }
 }
