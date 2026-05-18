@@ -64,7 +64,7 @@
 .reservas-secao-titulo {
     font-size: 1.25rem;
     padding-bottom: 16px;
-    border-bottom: 2px solid var(--color-border-card);
+    border-bottom: 1px solid var(--color-border-card);
 }
 
 .reservas-table-wrapper {
@@ -83,9 +83,10 @@
 .reservas-table th {
     padding: 12px 16px;
     text-align: left;
-    font: var(--heading-3);
+    font: var(--text-md);
+    font-weight: 600;
     color: var(--color-heading);
-    border-bottom: 2px solid var(--color-border-card);
+    border-bottom: 1px solid var(--color-border-card);
 }
 
 .reservas-table tbody tr { height: 60px; }
