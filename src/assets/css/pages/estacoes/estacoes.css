@@ -366,6 +366,47 @@
     }
 }
 
+@media (max-width: 1024px) {
+
+    .estacao-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .estacao-acoes {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+
+    .badge {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .fast-action-btn {
+        flex: 1;
+        justify-content: center;
+    }
+
+    .date-wrapper {
+        width: 100%;
+    }
+
+    .btn-filtrar {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .filtro-horarios {
+        width: 100%;
+    }
+
+    .filtro-horarios .date-wrapper {
+        flex: 1;
+    }
+}
+
 @media (max-width: 768px) {
 
     .estacoes {
@@ -392,6 +433,26 @@
         width: 100%;
     }
 
+    .estacao-icon {
+        width: 110px;
+        height: 75px;
+        flex-shrink: 0;
+    }
+
+    .estacao-acoes {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+    }
+
+    .badge {
+        width: 100%;
+    }
+}
+
+@media (max-width: 410px) {
+
     .estacao-info {
         flex-direction: column;
         align-items: flex-start;
@@ -400,18 +461,7 @@
 
     .estacao-icon {
         width: 100%;
-        max-width: 320px;
+        max-width: 100%;
         height: auto;
-    }
-
-    .estacao-acoes {
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-    }
-
-    .badge,
-    .fast-action-btn {
-        width: 100%;
     }
 }

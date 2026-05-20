@@ -132,7 +132,6 @@ main {
     border: 1px solid rgba(255, 255, 255, 0.15);
     cursor: pointer;
     font-weight: 400;
-    /* <--- Adicione isso aqui para igualar a Estações */
     transition: 0.2s ease;
 }
 
@@ -267,6 +266,11 @@ button.btn-reservar:disabled {
 
 .horario-pessoa {
     color: var(--color-text-md);
+}
+
+.filtro-horarios {
+    display: flex;
+    gap: var(--spacing-sm);
 }
 
 /* Calendário*/
@@ -426,18 +430,6 @@ button.btn-reservar:disabled {
         gap: var(--spacing-md);
     }
 
-    .sala-info-principal {
-        flex-direction: column;
-        align-items: flex-start;
-        width: 100%;
-    }
-
-    .sala-img {
-        width: 100%;
-        max-width: 100%;
-        height: auto;
-    }
-
     .sala-acoes {
         width: 100%;
         flex-wrap: wrap;
@@ -450,7 +442,7 @@ button.btn-reservar:disabled {
 
     .btn-reservar,
     .btn-detalhes {
-        flex: 1;                  /* lado a lado, dividindo o espaço */
+        flex: 1;
         justify-content: center;
     }
 
@@ -461,5 +453,72 @@ button.btn-reservar:disabled {
     .btn-filtrar-simples {
         width: 100%;
         justify-content: center;
+    }
+
+    .filtro-horarios {
+        width: 100%;
+    }
+
+    .filtro-horarios .campo-filtro {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+
+    main {
+        padding: var(--spacing-md);
+    }
+
+    .salas-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-md);
+    }
+
+    .botao-add-sala {
+        width: 100%;
+    }
+
+    .filtros-container {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .campo-filtro,
+    .btn-filtrar-simples {
+        width: 100%;
+    }
+
+    .sala-img {
+        width: 110px;
+        height: 75px;
+        flex-shrink: 0;
+    }
+
+    .sala-acoes {
+        flex-direction: row;      
+        flex-wrap: wrap;
+        align-items: center;
+        width: 100%;
+    }
+
+    .badge {
+        width: 100%;
+    }
+}
+
+@media (max-width: 410px) {
+
+    .sala-info-principal {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+
+    .sala-img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
     }
 }
