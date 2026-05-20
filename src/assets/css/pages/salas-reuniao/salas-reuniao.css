@@ -60,11 +60,50 @@ main {
     color: var(--color-text-md);
 }
 
-.campo-filtro img {
+.campo-filtro {
+    position: relative;
+    overflow: hidden;
+}
+
+.date-input {
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--color-text-md);
+    font: var(--text-md);
+    width: 100%;
+}
+
+.date-input::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.calendar-icon {
+    position: absolute;
+    right: var(--spacing-sm);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
+.campo-filtro input[type="time"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    right: var(--spacing-sm);
+    opacity: 0.6;
+}
+
+.campo-filtro img:not(.calendar-icon) {
     height: 18px;
     width: 18px;
-    margin-left: 10px;
     opacity: 0.7;
+    pointer-events: none;
 }
 
 .lista-salas {
