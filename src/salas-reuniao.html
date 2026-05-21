@@ -244,37 +244,6 @@
             static: true
         });
 
-        function verificarCapacidade() {
-            const selectEspaco = document.getElementById('espaco');
-            const limiteMsg = document.getElementById('limite-msg');
-            const capacidade = selectEspaco.value;
-
-            if (capacidade) {
-                limiteMsg.innerText = `Limite para este espaço: ${capacidade} convidados.`;
-                limiteMsg.style.color = "var(--color-text-md)";
-            } else {
-                limiteMsg.innerText = "Selecione uma sala para ver o limite.";
-            }
-        }
-
-        function confirmarReserva() {
-            const capacitySelect = document.getElementById('espaco');
-            if (!capacitySelect.value) {
-                alert("Por favor, selecione uma sala.");
-                return;
-            }
-            const capacidade = parseInt(capacitySelect.value);
-            const convidadosInput = document.getElementById('convidados').value;
-            const listaConvidados = convidadosInput.split(',').filter(email => email.trim() !== "");
-
-            if (listaConvidados.length > capacidade) {
-                alert(`Erro: Você excedeu o limite de ${capacidade} convidados para esta sala.`);
-                return;
-            }
-
-            alert("Reserva confirmada com sucesso!");
-            document.getElementById('modal-reserva').close();
-        }
     </script>
 </body>
 
