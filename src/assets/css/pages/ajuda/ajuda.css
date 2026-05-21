@@ -1,5 +1,10 @@
 body {
     min-width: 380px;
+    overflow-x: hidden;
+}
+
+main {
+    min-width: 380px;
 }
 
 .main-header {
