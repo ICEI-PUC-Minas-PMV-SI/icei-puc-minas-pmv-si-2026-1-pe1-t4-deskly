@@ -50,7 +50,7 @@ form {
 }
 
 .field label {
-    font: var(--text-sm);
+    font: var(--text-md);
     color: var(--color-text-md);
 }
 
