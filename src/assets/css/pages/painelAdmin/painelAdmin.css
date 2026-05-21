@@ -155,7 +155,7 @@ main {
 }
 
 .btn-action {
-    padding: 10px var(--spacing-md);
+    padding: 10px 16px;
     border-radius: var(--radius-md);
     background-color: var(--color-btn-primary);
     color: var(--color-background);
