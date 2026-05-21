@@ -78,6 +78,16 @@ Os modais da tela inicial permitem ao usuário gerenciar suas reservas de forma 
   <img src="img/ModalInicial4.png" width="45%">
 </p>
 
+## Tela de Perfil 
+
+A tela de perfil permite ao usuário visualizar e gerenciar suas informações pessoais e preferências do sistema. Também possibilita a alteração de senha de forma simples e segura. A interface foi desenvolvida para oferecer uma experiência intuitiva, organizada e acessível, permitindo que o usuário atualize seus dados rapidamente dentro da plataforma.
+
+Nesta tela, são apresentados os seguintes requisitos:
+- RNF-01: O sistema deve possuir autenticação segura com criptografia de senhas.
+- RNF-11: A interface deve permitir que o usuário altere suas informações em poucos passos, garantindo praticidade e usabilidade.
+
+![Wire Frame Inicial](img/WireFrame-Perfil.png)
+
 ## Tela de Calendário
 
 A tela de calendário permite ao usuário visualizar a disponibilidade dos espaços ao longo dos dias e horários. A interface apresenta um calendário interativo com navegação entre meses, exibindo reservas de salas e estações em horários específicos. O usuário pode identificar facilmente períodos livres e ocupados, além de iniciar reservas diretamente a partir da visualização.
