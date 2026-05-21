@@ -1,0 +1,150 @@
+@import './variables.css';
+
+body {
+    display: flex;
+    background-color: var(--color-background);
+}
+
+.login-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+    min-height: 100dvh;
+}
+
+.login-banner {
+    overflow: hidden;
+}
+
+.login-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: var(--spacing-md);
+    padding: var(--spacing-xl) clamp(2rem, 8vw, 5rem);
+    background: #fff;
+}
+
+.login-form .logo {
+    height: 36px;
+    align-self: flex-start;
+    margin-bottom: var(--spacing-sm);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.field label {
+    font: var(--text-sm);
+    color: var(--color-text-md);
+}
+
+.field input {
+    height: 40px;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    padding: 0 var(--spacing-sm);
+    background: var(--color-background);
+    color: var(--color-heading);
+    outline: none;
+    transition: border-color 0.2s;
+}
+
+.field input:focus {
+    border-color: var(--color-btn-primary);
+}
+
+.form-options {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font: var(--text-sm);
+    color: var(--color-text-md);
+}
+
+.toggle input {
+    display: none;
+}
+
+.slider {
+    width: 36px;
+    height: 20px;
+    background: var(--color-border-card);
+    border-radius: 50px;
+    position: relative;
+    transition: background 0.2s;
+    flex-shrink: 0;
+}
+
+.slider::after {
+    content: '';
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 50%;
+    top: 3px;
+    left: 3px;
+    transition: left 0.2s;
+}
+
+.toggle input:checked + .slider {
+    background: var(--color-btn-primary);
+}
+
+.toggle input:checked + .slider::after {
+    left: 19px;
+}
+
+.form-options a {
+    font: var(--text-sm);
+    color: var(--color-text-md);
+    text-decoration: underline;
+}
+
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--radius-md);
+    background: var(--color-btn-primary);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+button[type="submit"]:hover {
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .login-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .login-banner {
+        display: none;
+    }
+}
