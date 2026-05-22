@@ -5,24 +5,24 @@ body {
     background-color: var(--color-background);
 }
 
-.login-wrapper {
+.recuperarsenha-wrapper {
     display: grid;
     grid-template-columns: 3fr 2fr;
     width: 100%;
     min-height: 100dvh;
 }
 
-.login-banner {
+.recuperarsenha-banner {
     overflow: hidden;
 }
 
-.login-banner img {
+.recuperarsenha-banner img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.login-form {
+.recuperarsenha-form {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,30 +31,30 @@ body {
     background: #fff;
 }
 
-.login-form .logo {
+.recuperarsenha-logo {
     height: 36px;
     align-self: flex-start;
     margin-bottom: var(--spacing-sm);
 }
 
-form {
+.recuperarsenha-form form {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
 }
 
-.field {
+.recuperarsenha-field {
     display: flex;
     flex-direction: column;
     gap: 6px;
 }
 
-.field label {
+.recuperarsenha-field label {
     font: var(--text-md);
     color: var(--color-text-md);
 }
 
-.field input {
+.recuperarsenha-field input {
     height: 40px;
     border: 1px solid var(--color-border-card);
     border-radius: var(--radius-md);
@@ -65,17 +65,17 @@ form {
     transition: border-color 0.2s;
 }
 
-.field input:focus {
+.recuperarsenha-field input:focus {
     border-color: var(--color-btn-primary);
 }
 
-.form-options {
+.recuperarsenha-options {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.toggle {
+.recuperarsenha-toggle {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -84,11 +84,11 @@ form {
     color: var(--color-text-md);
 }
 
-.toggle input {
+.recuperarsenha-toggle input {
     display: none;
 }
 
-.slider {
+.recuperarsenha-slider {
     width: 36px;
     height: 20px;
     background: var(--color-border-card);
@@ -98,7 +98,7 @@ form {
     flex-shrink: 0;
 }
 
-.slider::after {
+.recuperarsenha-slider::after {
     content: '';
     position: absolute;
     width: 14px;
@@ -110,21 +110,15 @@ form {
     transition: left 0.2s;
 }
 
-.toggle input:checked + .slider {
+.recuperarsenha-toggle input:checked + .recuperarsenha-slider {
     background: var(--color-btn-primary);
 }
 
-.toggle input:checked + .slider::after {
+.recuperarsenha-toggle input:checked + .recuperarsenha-slider::after {
     left: 19px;
 }
 
-.form-options a {
-    font: var(--text-sm);
-    color: var(--color-text-md);
-    text-decoration: underline;
-}
-
-button[type="submit"] {
+.recuperarsenha-button {
     width: 100%;
     padding: 12px;
     border-radius: var(--radius-md);
@@ -135,29 +129,29 @@ button[type="submit"] {
     transition: opacity 0.2s;
 }
 
-button[type="submit"]:hover {
+.recuperarsenha-button:hover {
     opacity: 0.9;
 }
 
 @media (max-width: 768px) {
 
-    .login-wrapper {
+    .recuperarsenha-wrapper {
         grid-template-columns: 1fr;
         grid-template-rows: 220px 1fr;
     }
 
-    .login-banner {
+    .recuperarsenha-banner {
         display: block;
         height: 220px;
     }
 
-    .login-banner img {
+    .recuperarsenha-banner img {
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
 
-    .login-form {
+    .recuperarsenha-form {
         padding: var(--spacing-xl) var(--spacing-md);
     }
 }
