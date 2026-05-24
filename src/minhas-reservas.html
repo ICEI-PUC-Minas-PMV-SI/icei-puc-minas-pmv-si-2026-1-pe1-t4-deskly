@@ -10,32 +10,8 @@
         <title>Minhas Reservas</title>
     </head>
     <body>
-        <header>
-            <img class="logo" src="assets/icons/logo.svg">
-            <div class="header-icons">
-                <button><img class="header-icon" src="assets/icons/bell.svg"></button>
-                <button><img class="header-icon" src="assets/icons/user-circle.svg"></button>
-                <button id="btn-hamburguer" class="hamburguer">
-                    <img src="assets/icons/menu.svg">
-                </button>
-            </div>
-        </header>
-
-        <aside>
-            <nav>
-                <ul>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="calendario.html">Calendário</a></li>
-                    <li><a href="salas-reuniao.html">Salas de Reunião</a></li>
-                    <li><a href="estacoes.html">Estações de Trabalho</a></li>
-                    <li><a href="minhas-reservas.html">Minhas Reservas</a></li>
-                </ul>
-                <ul>
-                    <li><a href="painelAdmin.html">Painel Admin</a></li>
-                    <li><a href="ajuda.html">Ajuda</a></li>
-                </ul>
-            </nav>
-        </aside>
+        <header id="header"></header>
+        <aside id="aside"></aside>
 
         <main class="reservas">
 
@@ -57,6 +33,7 @@
                         <li class="custom-select-option" data-value="estacoes">Estações de Trabalho</li>
                     </ul>
                 </div>
+                
                 <div class="custom-select">
                     <button class="custom-select-trigger" type="button">
                         <span class="custom-select-label">Qualquer status</span>
