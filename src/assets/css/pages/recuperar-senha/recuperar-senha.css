@@ -7,19 +7,16 @@ body {
 
 .recuperarsenha-wrapper {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 2fr 2fr;
     width: 100%;
     min-height: 100dvh;
 }
 
 .recuperarsenha-banner {
     overflow: hidden;
-}
-
-.recuperarsenha-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    background-image: url('../../../images/banner-recuperar-senha.png');
+    background-size: cover;
+    background-position: center center;
 }
 
 .recuperarsenha-form {
@@ -137,21 +134,41 @@ body {
 
     .recuperarsenha-wrapper {
         grid-template-columns: 1fr;
-        grid-template-rows: 220px 1fr;
+        grid-template-rows: auto auto;
+        gap: 0;
     }
 
     .recuperarsenha-banner {
-        display: block;
-        height: 220px;
-    }
-
-    .recuperarsenha-banner img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        min-height: 45vh;
     }
 
     .recuperarsenha-form {
+        height: auto;
+        overflow-y: visible;
         padding: var(--spacing-xl) var(--spacing-md);
+        justify-content: flex-start;
+    }
+
+    .recuperarsenha-form .logo {
+        display: block;
+    }
+}
+
+@media (max-width: 350px) {
+
+    .recuperarsenha-banner {
+        min-height: 40vh;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .recuperarsenha-wrapper {
+        min-width: 320px;
+        overflow-x: hidden;
+    }
+
+    .recuperarsenha-form {
+        min-width: 320px;
     }
 }

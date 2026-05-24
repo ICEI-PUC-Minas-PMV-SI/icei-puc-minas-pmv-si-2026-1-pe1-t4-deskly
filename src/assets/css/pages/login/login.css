@@ -7,19 +7,16 @@ body {
 
 .login-wrapper {
     display: grid;
-    grid-template-columns: 3fr 2fr;
+    grid-template-columns: 2fr 2fr;
     width: 100%;
     min-height: 100dvh;
 }
 
 .login-banner {
     overflow: hidden;
-}
-
-.login-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    background-image: url('../../../images/banner-login.png');
+    background-size: cover;
+    background-position: center center;
 }
 
 .login-form {
@@ -32,7 +29,10 @@ body {
 }
 
 .login-form .logo {
+    display: block;
     height: 36px;
+    width: auto;
+    max-width: 150px;
     align-self: flex-start;
     margin-bottom: var(--spacing-sm);
 }
@@ -143,21 +143,60 @@ button[type="submit"]:hover {
 
     .login-wrapper {
         grid-template-columns: 1fr;
-        grid-template-rows: 220px 1fr;
+        grid-template-rows: auto auto;
+        gap: 0;
     }
 
     .login-banner {
-        display: block;
-        height: 220px;
-    }
-
-    .login-banner img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
+        min-height: 45vh;
     }
 
     .login-form {
+        height: auto;
+        overflow-y: visible;
         padding: var(--spacing-xl) var(--spacing-md);
+        justify-content: flex-start;
+    }
+
+    .login-form .logo {
+        display: block;
+    }
+
+    .login-form .logo {
+        display: block;
+        height: 36px;
+        width: auto;
+        max-width: 150px;
+}
+}
+
+@media (max-width: 350px) {
+
+    .login-banner {
+        min-height: 40vh;
+    }
+}
+
+@media (max-width: 320px) {
+
+    .login-wrapper {
+        min-width: 320px;
+        overflow-x: hidden;
+         min-height: 100dvh;
+    }
+
+    .login-form {
+        min-width: 320px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .login-form .logo {
+        content: url('../../../icons/logo.svg');
+        display: block;
+        height: 36px;
+        width: auto;
+        max-width: 150px;
     }
 }
