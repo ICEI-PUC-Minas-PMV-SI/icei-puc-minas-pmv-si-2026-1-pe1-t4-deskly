@@ -166,6 +166,19 @@
 
 .modal-detalhe-btn-confirmar:hover { opacity: 0.8; }
 
+.modal-detalhe-btn-confirmar-cancelamento {
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    padding: 6px 16px;
+    border-radius: 6px;
+    font: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.modal-detalhe-btn-confirmar:hover { opacity: 0.8; }
+
 @media (max-width: 768px) {
     .reservas { padding: 24px 16px; gap: 32px; }
 

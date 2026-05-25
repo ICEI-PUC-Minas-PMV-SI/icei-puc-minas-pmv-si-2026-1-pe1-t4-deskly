@@ -134,7 +134,7 @@ main {
     height: 18px;
     width: 18px;
     margin-left: 10px;
-    opacity: 0.7;
+    opacity: 0.6;
     flex-shrink: 0;
 }
 
@@ -506,6 +506,26 @@ main {
     background: var(--color-btn-primary);
     color: var(--color-background);
 }
+
+#modal-reserva, 
+#modal-1,
+#modal-editar-espaco {
+    overflow: visible;
+}
+
+#modal-reserva .modal-body, 
+#modal-1 .modal-body,
+#modal-editar-espaco .modal-body {
+    overflow: visible;
+}
+
+.flatpickr-calendar.static {
+    z-index: 9999;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
 
 @media (max-width: 768px) {
     body {
