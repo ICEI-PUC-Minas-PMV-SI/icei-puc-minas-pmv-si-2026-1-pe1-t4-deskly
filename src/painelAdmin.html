@@ -40,14 +40,17 @@
         <input type="date" placeholder="dd/mm/aaaa" />
         <img src="assets/icons/calendar-dots.svg" class="calendar-icon">
       </div>
-      <div class="campo-filtro">
-        <select>
-          <option>Todas as capacidades</option>
-          <option>Até 4 pessoas</option>
-          <option>Até 8 pessoas</option>
-          <option>Mais de 8 pessoas</option>
-        </select>
-        <img src="assets/icons/seta.svg" alt="Seta" />
+      <div class="custom-select">
+        <button class="custom-select-trigger" type="button">
+          <span class="custom-select-label">Todas as capacidades</span>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <ul class="custom-select-dropdown">
+          <li class="custom-select-option" data-value="todos">Todas as capacidades</li>
+          <li class="custom-select-option" data-value="4">Até 4 pessoas</li>
+          <li class="custom-select-option" data-value="8">Até 8 pessoas</li>
+          <li class="custom-select-option" data-value="8+">Mais de 8 pessoas</li>
+        </ul>
       </div>
       <button class="btn-action">Filtrar</button>
     </section>
@@ -648,6 +651,7 @@
     </div>
   </dialog>
 
+  <script src="assets/js/painelAdmin/customSelect.js"></script>
   <script src="assets/js/partes/menu.js"></script>
   <script src="./assets/js/painelAdmin/modalExcluirReserva.js"></script>
   <script src="./assets/js/painelAdmin/tabs.js"></script>
