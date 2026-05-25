@@ -1,5 +1,7 @@
 const headerHTML = `
-<img class="logo" src="assets/icons/logo.svg" alt="Logo Deskly">
+<a href="dashboard.html">
+    <img class="logo" src="assets/icons/logo.svg" alt="Logo Deskly">
+</a>
 
 <div class="header-icons">
     <div class="notification-container">
