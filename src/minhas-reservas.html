@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link rel="stylesheet" href="assets/css/global/global.css">
         <link rel="stylesheet" href="assets/css/pages/minhas-reservas/minhas-reservas.css">
 
@@ -15,7 +15,6 @@
 
         <main class="reservas">
 
-            <!-- Cabeçalho + filtros -->
             <section>
                 <h1>Minhas Reservas</h1>
                 <span class="subtitle">Gerencie seus agendamentos</span>
@@ -48,7 +47,6 @@
                 <button class="btn-filtrar-simples">Filtrar</button>
             </div>
 
-            <!-- Próximas reservas -->
             <section class="reservas-secao">
                 <h3 class="reservas-secao-titulo">Próximas</h3>
                 <div class="reservas-table-wrapper">
@@ -119,7 +117,6 @@
                 </div>
             </section>
 
-            <!-- Histórico -->
             <section class="reservas-secao">
                 <h3 class="reservas-secao-titulo">Histórico</h3>
                 <div class="reservas-table-wrapper">
@@ -180,7 +177,7 @@
                     </div>
                     <div class="input-group">
                         <label>Data</label>
-                        <input type="date">
+                        <input type="text" id="modal-1-date" class="modal-date-input" placeholder="dd/mm/aaaa"> 
                     </div>
                     <div class="input-group">
                         <label>Início</label>
@@ -218,7 +215,7 @@
                 <div class="input-row">
                     <div class="input-group">
                         <label>Data</label>
-                        <input type="text" id="editar-data">
+                        <input type="text" id="editar-data" class="modal-date-input" placeholder="dd/mm/aaaa"> 
                     </div>
                     <div class="input-group">
                         <label>Início</label>
@@ -286,9 +283,7 @@
             </div>
 
             <div class="modal-detalhe-body">
-                <p class="modal-detalhe-descricao">
-                    Tem certeza que deseja cancelar esta reserva?
-                </p>
+                <p class="modal-detalhe-descricao">Tem certeza que deseja cancelar esta reserva?</p>
 
                 <div class="modal-detalhe-linhas">
                     <div class="modal-detalhe-linha">
@@ -316,6 +311,18 @@
 
         <script src="assets/js/partes/menu.js"></script>
         <script src="assets/js/modal/modal.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+        <script>
+            flatpickr('.modal-date-input', {
+                locale: 'pt',
+                dateFormat: 'd/m/Y',
+                disableMobile: true,
+                placeholder: 'dd/mm/aaaa',
+                monthSelectorType: 'static',
+                static: true
+            });
+        </script>
         <script>
             const statusClasse = { pendente: 'badge-concluida', aceito: 'badge-confirmada', recusado: 'badge-cancelada' };
             const modalEditar = document.getElementById('modal-editar');
@@ -339,7 +346,6 @@
                     modalEditar.showModal();
                 });
             });
-
 
             const statusLabel  = { pendente: 'Pendente', aceito: 'Aceito', recusado: 'Recusado' };
             const modalConv = document.getElementById('modal-convidados');
