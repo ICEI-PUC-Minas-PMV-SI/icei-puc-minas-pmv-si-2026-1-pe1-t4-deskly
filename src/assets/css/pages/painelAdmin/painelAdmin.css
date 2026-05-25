@@ -537,7 +537,7 @@ main {
     }
 
     .logo {
-        content: url('../icons/logo-mobile.svg');
+        content: url('../../../icons/logo-mobile.svg');
     }
 
     aside {
