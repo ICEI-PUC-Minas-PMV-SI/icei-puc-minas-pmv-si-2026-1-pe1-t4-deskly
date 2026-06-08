@@ -30,16 +30,24 @@
                 </button>
             </div>
 
-            <div class="filtro-data">
+           <div class="filtro-data">
 
-                <div class="date-wrapper">
-                    <input type="text" class="date-input" placeholder="dd/mm/aaaa">
-                    <img src="assets/icons/calendar-dots.svg" class="calendar-icon">
-                </div>
+    <div class="date-wrapper">
+        <input type="text" class="date-input" placeholder="dd/mm/aaaa">
+        <img src="assets/icons/calendar-dots.svg" class="calendar-icon">
+    </div>
 
-                <button class="btn-filtrar">Filtrar</button>
+<div class="time-wrapper">
+    <input type="time" class="filtro-inicio">
+</div>
 
-            </div>
+<div class="time-wrapper">
+    <input type="time" class="filtro-fim">
+</div>
+
+    <button class="btn-filtrar">Filtrar</button>
+
+</div>
 
             <div class="estacoes-lista">
 
@@ -160,6 +168,7 @@
     </dialog>
 
     <script src="assets/js/partes/menu.js"></script>
+    <script src="assets/js/partes/notificacoes.js"></script>
     <script src="assets/js/modal/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
@@ -182,6 +191,8 @@
             static: true 
         });
     </script>
+
+     <script src="assets/js/estacoes/estacoes.js"></script>
 
 </body>
 

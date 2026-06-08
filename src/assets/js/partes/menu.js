@@ -40,10 +40,10 @@ const headerHTML = `
                 </div>
             </div>
 
-            <div class="notification-footer">
-                <span>Ver todas as notificações</span>
-                <span class="notification-arrow"></span>
-            </div>
+            <div class="notification-footer ver-todas-notificacoes">
+    <span>Ver todas as notificações</span>
+    <span class="notification-arrow"></span>
+</div>
         </div>
     </div>
 
