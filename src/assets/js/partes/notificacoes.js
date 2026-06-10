@@ -3,10 +3,7 @@ function obterNotificacoes() {
 }
 
 function salvarNotificacoes(notificacoes) {
-    localStorage.setItem(
-        "notificacoes",
-        JSON.stringify(notificacoes)
-    );
+    localStorage.setItem("notificacoes", JSON.stringify(notificacoes));
 }
 
 function adicionarNotificacao(mensagem) {
@@ -33,63 +30,119 @@ function carregarNotificacoes() {
 
     lista.innerHTML = "";
 
-    const notificacoesVisiveis = notificacoes.slice(0, 5);
-
-    notificacoesVisiveis.forEach(notificacao => {
+    notificacoes.slice(0, 5).forEach(notificacao => {
         lista.innerHTML += `
             <div class="notification-item">
                 <div class="notification-dot"></div>
+
                 <div class="notification-content">
-                    <span class="notification-text">
-                        ${notificacao.mensagem}
-                    </span>
-                    <span class="notification-time">
-                        ${notificacao.tempo}
-                    </span>
+                    <span class="notification-text">${notificacao.mensagem}</span>
+                    <span class="notification-time">${notificacao.tempo}</span>
                 </div>
             </div>
         `;
     });
 
     badge.textContent = notificacoes.length;
-
-    badge.style.display =
-        notificacoes.length > 0 ? "flex" : "none";
+    badge.style.display = notificacoes.length > 0 ? "flex" : "none";
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+function abrirModalNotificacoes() {
+    const modal = document.getElementById("modalNotificacoes");
+    const lista = document.getElementById("listaTodasNotificacoes");
+
+    if (!modal || !lista) return;
+
+    const notificacoes = obterNotificacoes();
+
+    lista.innerHTML = "";
+
+    if (notificacoes.length === 0) {
+        lista.innerHTML = `
+            <div class="modal-notificacao-item">
+                <div class="modal-notificacao-dot"></div>
+
+                <div class="modal-notificacao-conteudo">
+                    <span class="modal-notificacao-texto">Nenhuma notificação encontrada.</span>
+                    <span class="modal-notificacao-tempo">Quando houver reservas, elas aparecerão aqui.</span>
+                </div>
+            </div>
+        `;
+    } else {
+        notificacoes.forEach(notificacao => {
+            lista.innerHTML += `
+                <div class="modal-notificacao-item">
+                    <div class="modal-notificacao-dot"></div>
+
+                    <div class="modal-notificacao-conteudo">
+                        <span class="modal-notificacao-texto">${notificacao.mensagem}</span>
+                        <span class="modal-notificacao-tempo">${notificacao.tempo}</span>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    modal.classList.add("ativo");
+}
+
+function fecharModalNotificacoes() {
+    const modal = document.getElementById("modalNotificacoes");
+
+    if (modal) {
+        modal.classList.remove("ativo");
+    }
+}
+
+function limparNotificacoes() {
+    localStorage.removeItem("notificacoes");
 
     carregarNotificacoes();
 
+    const listaModal = document.getElementById("listaTodasNotificacoes");
+
+    if (listaModal) {
+        listaModal.innerHTML = `
+            <div class="modal-notificacao-item">
+                <div class="modal-notificacao-dot"></div>
+
+                <div class="modal-notificacao-conteudo">
+                    <span class="modal-notificacao-texto">Nenhuma notificação encontrada.</span>
+                    <span class="modal-notificacao-tempo">Quando houver reservas, elas aparecerão aqui.</span>
+                </div>
+            </div>
+        `;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    carregarNotificacoes();
+
     const btnLimpar = document.querySelector(".notification-clear");
+    const btnFecharModal = document.getElementById("fecharModalNotificacoes");
+    const modal = document.getElementById("modalNotificacoes");
 
     if (btnLimpar) {
-        btnLimpar.addEventListener("click", () => {
-            localStorage.removeItem("notificacoes");
-            carregarNotificacoes();
+        btnLimpar.addEventListener("click", limparNotificacoes);
+    }
+
+    if (btnFecharModal) {
+        btnFecharModal.addEventListener("click", fecharModalNotificacoes);
+    }
+
+    if (modal) {
+        modal.addEventListener("click", event => {
+            if (event.target === modal) {
+                fecharModalNotificacoes();
+            }
         });
     }
 });
 
-document.addEventListener("click", (event) => {
-
+document.addEventListener("click", event => {
     const btnVerTodas = event.target.closest(".ver-todas-notificacoes");
 
     if (!btnVerTodas) return;
 
-    const notificacoes = obterNotificacoes();
-
-    if (notificacoes.length === 0) {
-        alert("Nenhuma notificação encontrada.");
-        return;
-    }
-
-    let mensagem = "TODAS AS NOTIFICAÇÕES\n\n";
-
-    notificacoes.forEach((notificacao, index) => {
-        mensagem += `${index + 1}. ${notificacao.mensagem}\n`;
-        mensagem += `${notificacao.tempo}\n\n`;
-    });
-
-    alert(mensagem);
+    abrirModalNotificacoes();
 });

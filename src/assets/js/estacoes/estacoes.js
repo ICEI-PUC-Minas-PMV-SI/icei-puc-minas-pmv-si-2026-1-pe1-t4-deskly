@@ -1,4 +1,4 @@
-const botoesReservar = document.querySelectorAll(".fast-action-btn:not(:disabled)");
+const botoesReservar = document.querySelectorAll(".fast-action-btn");
 const btnNovaReserva = document.querySelector(".btn-primary.open-modal");
 const btnConfirmar = document.querySelector(".modal-footer button:last-child");
 const btnFiltrar = document.querySelector(".btn-filtrar");
@@ -14,9 +14,37 @@ const horarios = document.querySelectorAll('#modal-1 input[type="time"]');
 const inputInicio = horarios[0];
 const inputFim = horarios[1];
 
-let cardSelecionado = null;
-
 const opcoesOriginais = Array.from(selectEstacao.options).map(option => option.textContent);
+
+document.querySelectorAll(".estacao-card").forEach(card => {
+    const badge = card.querySelector(".badge");
+
+    if (badge.textContent.trim().toLowerCase() === "inativa") {
+        card.dataset.inativa = "true";
+    } else {
+        card.dataset.inativa = "false";
+    }
+});
+
+function mostrarToast(titulo, mensagem, tipo = "aviso") {
+    const container = document.getElementById("toast-container");
+
+    if (!container) return;
+
+    const toast = document.createElement("div");
+    toast.className = `toast ${tipo}`;
+
+    toast.innerHTML = `
+        <strong>${titulo}</strong>
+        <span>${mensagem}</span>
+    `;
+
+    container.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 4000);
+}
 
 function buscarReservas() {
     return JSON.parse(localStorage.getItem("reservasEstacoes")) || [];
@@ -26,8 +54,25 @@ function salvarReservas(reservas) {
     localStorage.setItem("reservasEstacoes", JSON.stringify(reservas));
 }
 
+function converterHorarioParaMinutos(horario) {
+    const [horas, minutos] = horario.split(":").map(Number);
+    return horas * 60 + minutos;
+}
+
 function horariosConflitam(inicio1, fim1, inicio2, fim2) {
-    return inicio1 < fim2 && fim1 > inicio2;
+    const i1 = converterHorarioParaMinutos(inicio1);
+    const f1 = converterHorarioParaMinutos(fim1);
+    const i2 = converterHorarioParaMinutos(inicio2);
+    const f2 = converterHorarioParaMinutos(fim2);
+
+    return i1 < f2 && f1 > i2;
+}
+
+function obterNomeEstacaoPeloCard(card) {
+    const nomeMesa = card.querySelector("h4").textContent.trim();
+    const area = card.querySelector(".subtitle").textContent.replace("Área: ", "").trim();
+
+    return `${nomeMesa} — ${area}`;
 }
 
 function atualizarSelectTodasEstacoes() {
@@ -36,6 +81,7 @@ function atualizarSelectTodasEstacoes() {
     opcoesOriginais.forEach(opcao => {
         const option = document.createElement("option");
         option.textContent = opcao;
+        option.value = opcao;
         selectEstacao.appendChild(option);
     });
 }
@@ -45,23 +91,29 @@ function atualizarSelectUmaEstacao(estacao) {
 
     const option = document.createElement("option");
     option.textContent = estacao;
+    option.value = estacao;
     selectEstacao.appendChild(option);
 }
 
 botoesReservar.forEach(botao => {
     botao.addEventListener("click", () => {
-        cardSelecionado = botao.closest(".estacao-card");
+        if (botao.disabled) return;
 
-        const nomeMesa = cardSelecionado.querySelector("h4").textContent;
-        const area = cardSelecionado.querySelector(".subtitle").textContent.replace("Área: ", "");
-        const estacao = `${nomeMesa} — ${area}`;
+        const card = botao.closest(".estacao-card");
+
+        if (card.dataset.inativa === "true") return;
+
+        const estacao = obterNomeEstacaoPeloCard(card);
 
         atualizarSelectUmaEstacao(estacao);
+
+        if (!modal.open) {
+            modal.showModal();
+        }
     });
 });
 
 btnNovaReserva.addEventListener("click", () => {
-    cardSelecionado = null;
     atualizarSelectTodasEstacoes();
 });
 
@@ -72,12 +124,12 @@ btnConfirmar.addEventListener("click", () => {
     const fim = inputFim.value;
 
     if (!estacao || !data || !inicio || !fim) {
-        alert("Preencha todos os campos.");
+        mostrarToast("Campos obrigatórios", "Preencha todos os campos da reserva.", "erro");
         return;
     }
 
     if (inicio >= fim) {
-        alert("O horário de início precisa ser menor que o horário de fim.");
+        mostrarToast("Horário inválido", "O horário de início precisa ser menor que o horário de fim.", "erro");
         return;
     }
 
@@ -90,34 +142,34 @@ btnConfirmar.addEventListener("click", () => {
     });
 
     if (horarioIndisponivel) {
-        alert("Essa estação já está reservada nesse horário.");
+        mostrarToast("Horário indisponível", "Essa estação já está reservada nesse horário.", "erro");
         return;
     }
 
     const novaReserva = {
         id: Date.now(),
-        estacao: estacao,
-        data: data,
-        inicio: inicio,
-        fim: fim
+        estacao,
+        data,
+        inicio,
+        fim
     };
 
     reservas.push(novaReserva);
     salvarReservas(reservas);
 
-    adicionarNotificacao(
-        `Reserva confirmada para ${estacao} no dia ${data}, das ${inicio} às ${fim}.`
-    );
+    if (typeof adicionarNotificacao === "function") {
+        adicionarNotificacao(
+            `Reserva confirmada para ${estacao} no dia ${data}, das ${inicio} às ${fim}.`
+        );
+    }
 
-    alert("Reserva realizada com sucesso!");
+    mostrarToast("Reserva confirmada", "Sua reserva foi realizada com sucesso!", "sucesso");
 
     inputDataModal.value = "";
     inputInicio.value = "";
     inputFim.value = "";
 
     modal.close();
-
-    aplicarFiltro();
 });
 
 function aplicarFiltro() {
@@ -127,26 +179,28 @@ function aplicarFiltro() {
     const reservas = buscarReservas();
 
     document.querySelectorAll(".estacao-card").forEach(card => {
-        const nomeMesa = card.querySelector("h4").textContent;
-        const area = card.querySelector(".subtitle").textContent.replace("Área: ", "");
-        const estacao = `${nomeMesa} — ${area}`;
-
         const badge = card.querySelector(".badge");
         const botao = card.querySelector(".fast-action-btn");
 
-        if (badge.classList.contains("inativa")) {
+        if (card.dataset.inativa === "true") {
+            badge.textContent = "Inativa";
+            badge.className = "badge inativa";
+            botao.disabled = true;
             return;
         }
+
+        const estacao = obterNomeEstacaoPeloCard(card);
 
         const reservadaNoPeriodo = reservas.some(reserva => {
             if (reserva.estacao !== estacao) return false;
             if (reserva.data !== dataFiltro) return false;
 
-            if (inicioFiltro && fimFiltro) {
-                return horariosConflitam(inicioFiltro, fimFiltro, reserva.inicio, reserva.fim);
-            }
-
-            return true;
+            return horariosConflitam(
+                inicioFiltro,
+                fimFiltro,
+                reserva.inicio,
+                reserva.fim
+            );
         });
 
         if (reservadaNoPeriodo) {
@@ -162,11 +216,17 @@ function aplicarFiltro() {
 }
 
 btnFiltrar.addEventListener("click", () => {
+    const dataFiltro = inputFiltroData.value;
     const inicioFiltro = inputFiltroInicio.value;
     const fimFiltro = inputFiltroFim.value;
 
-    if (inicioFiltro && fimFiltro && inicioFiltro >= fimFiltro) {
-        alert("O horário inicial do filtro precisa ser menor que o horário final.");
+    if (!dataFiltro || !inicioFiltro || !fimFiltro) {
+        mostrarToast("Filtro incompleto", "Preencha a data, horário inicial e horário final.", "erro");
+        return;
+    }
+
+    if (inicioFiltro >= fimFiltro) {
+        mostrarToast("Horário inválido", "O horário inicial do filtro precisa ser menor que o horário final.", "erro");
         return;
     }
 

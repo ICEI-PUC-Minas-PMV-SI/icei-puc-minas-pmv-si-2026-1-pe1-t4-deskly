@@ -4,56 +4,69 @@ const headerHTML = `
 </a>
 
 <div class="header-icons">
+
     <div class="notification-container">
+
         <button class="notification-btn">
             <img class="header-icon" src="assets/icons/bell.svg" alt="Notificações">
-            <span class="notification-badge">3</span>
+            <span class="notification-badge"></span>
         </button>
 
         <div class="notification-menu">
+
             <div class="notification-header">
                 <h3>Notificações</h3>
                 <span class="notification-clear">Limpar todas</span>
             </div>
 
             <div class="notification-list">
-                <div class="notification-item">
-                    <div class="notification-dot"></div>
-                    <div class="notification-content">
-                        <span class="notification-text">Reserva confirmada na Sala Alfa</span>
-                        <span class="notification-time">Há 5 minutos</span>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <div class="notification-dot"></div>
-                    <div class="notification-content">
-                        <span class="notification-text">Sua reunião começa às 10h</span>
-                        <span class="notification-time">Há 20 minutos</span>
-                    </div>
-                </div>
-                <div class="notification-item">
-                    <div class="notification-dot"></div>
-                    <div class="notification-content">
-                        <span class="notification-text">Mesa 04 disponível</span>
-                        <span class="notification-time">Agora mesmo</span>
-                    </div>
-                </div>
+
             </div>
 
             <div class="notification-footer ver-todas-notificacoes">
-    <span>Ver todas as notificações</span>
-    <span class="notification-arrow"></span>
-</div>
+                <span>Ver todas as notificações</span>
+                <span class="notification-arrow"></span>
+            </div>
+
         </div>
+
     </div>
 
     <a href="perfil.html" class="header-profile-link">
-        <img class="header-icon" src="assets/icons/user-circle.svg" alt="Perfil">
+        <img class="header-icon"
+             src="assets/icons/user-circle.svg"
+             alt="Perfil">
     </a>
 
-    <button type="button" id="btn-hamburguer" class="hamburguer">
-        <img src="assets/icons/menu.svg" alt="Botão">
+    <button type="button"
+            id="btn-hamburguer"
+            class="hamburguer">
+        <img src="assets/icons/menu.svg"
+             alt="Botão">
     </button>
+
+</div>
+
+<div class="modal-notificacoes-overlay" id="modalNotificacoes">
+
+    <div class="modal-notificacoes">
+
+        <div class="modal-notificacoes-header">
+            <h3>Todas as notificações</h3>
+
+            <button type="button"
+                    id="fecharModalNotificacoes">
+                ×
+            </button>
+        </div>
+
+        <div class="modal-notificacoes-lista"
+             id="listaTodasNotificacoes">
+
+        </div>
+
+    </div>
+
 </div>
 `;
 
