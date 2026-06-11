@@ -1,12 +1,8 @@
-// ─── Sessão ──────────────────────────────────────────────────────
-
 function obterSessao() {
     return JSON.parse(sessionStorage.getItem("usuarioLogado"))
         || JSON.parse(localStorage.getItem("usuarioLogado"))
         || null;
 }
-
-// ─── Usuários ────────────────────────────────────────────────────
 
 function buscarUsuarios() {
     return JSON.parse(localStorage.getItem("usuarios")) || [];
@@ -16,22 +12,16 @@ function salvarUsuarios(usuarios) {
     localStorage.setItem("usuarios", JSON.stringify(usuarios));
 }
 
-// ─── Elementos ───────────────────────────────────────────────────
-
 const inputNome       = document.getElementById("nome");
 const inputEmail      = document.getElementById("email");
 const inputTelefone   = document.getElementById("telefone");
 const inputSenhaAtual = document.getElementById("senha-atual");
 const inputNovaSenha  = document.getElementById("nova-senha");
-
 const nomeExibido     = document.querySelector(".card-perfil-resumo h2");
 const roleExibido     = document.querySelector(".card-perfil-resumo .user-role");
 const badgePerfil     = document.querySelector(".card-perfil-resumo .badge");
-
 const btnSalvar       = document.querySelector(".btn-reservar[type='submit']");
 const btnDescartar    = document.querySelector(".btn-detalhes");
-
-// ─── Carregar perfil ─────────────────────────────────────────────
 
 function carregarPerfil() {
     const sessao = obterSessao();
@@ -51,8 +41,6 @@ function carregarPerfil() {
     badgePerfil.className   = "badge " + (usuario.perfil === "Admin" ? "disponivel" : "ocupado");
 }
 
-// ─── Salvar alterações ───────────────────────────────────────────
-
 btnSalvar.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -62,7 +50,6 @@ btnSalvar.addEventListener("click", (e) => {
     const usuarios = buscarUsuarios();
     let index      = usuarios.findIndex(u => u.id === sessao.id);
 
-    // Se não estiver no array ainda, cria o registro com base na sessão
     if (index === -1) {
         usuarios.push({ ...sessao, telefone: "", senha: "" });
         index = usuarios.length - 1;
@@ -78,7 +65,6 @@ btnSalvar.addEventListener("click", (e) => {
         return;
     }
 
-    // ── Alteração de senha (opcional) ────────────────────────────
     if (senhaAtual || novaSenha) {
         if (!senhaAtual || !novaSenha) {
             mostrarToast("Campos de senha", "Preencha a senha atual e a nova senha.", "erro");
@@ -103,7 +89,6 @@ btnSalvar.addEventListener("click", (e) => {
 
     salvarUsuarios(usuarios);
 
-    // Atualiza sessão com novo nome
     const novaSessao = { ...sessao, nome: novoNome };
     if (sessionStorage.getItem("usuarioLogado")) sessionStorage.setItem("usuarioLogado", JSON.stringify(novaSessao));
     if (localStorage.getItem("usuarioLogado"))   localStorage.setItem("usuarioLogado",   JSON.stringify(novaSessao));
@@ -115,16 +100,12 @@ btnSalvar.addEventListener("click", (e) => {
     mostrarToast("Salvo", "Suas alterações foram salvas com sucesso!", "sucesso");
 });
 
-// ─── Descartar alterações ────────────────────────────────────────
-
 btnDescartar.addEventListener("click", () => {
     carregarPerfil();
     inputSenhaAtual.value = "";
     inputNovaSenha.value  = "";
     mostrarToast("Descartado", "As alterações foram descartadas.", "aviso");
 });
-
-// ─── Toast ───────────────────────────────────────────────────────
 
 function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
@@ -137,7 +118,5 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
 
     setTimeout(() => toast.remove(), 4000);
 }
-
-// ─── Inicializar ─────────────────────────────────────────────────
 
 document.addEventListener("DOMContentLoaded", carregarPerfil);
