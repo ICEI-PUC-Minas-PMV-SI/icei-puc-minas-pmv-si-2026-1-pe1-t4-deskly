@@ -28,7 +28,8 @@
                     <div class="avatar-container">
                         <div class="perfil-avatar-placeholder">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                stroke-linejoin="round">
                                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                                 <circle cx="12" cy="7" r="4"></circle>
                             </svg>
@@ -37,9 +38,9 @@
                             <img src="assets/icons/camera.svg" alt="Alterar foto">
                         </button>
                     </div>
-                    <h2>Isabela Santos</h2>
-                    <p class="user-role">Engenheira de Software</p>
-                    <span class="badge disponivel">Admin</span>
+                    <h2>—</h2>
+                    <p class="user-role">—</p>
+                    <span class="badge disponivel">—</span>
                 </div>
             </div>
 
@@ -51,22 +52,22 @@
                         <div class="form-row">
                             <div class="input-group">
                                 <label for="nome">Nome Completo</label>
-                                <input type="text" id="nome" value="Isabela Santos">
+                                <input type="text" id="nome">
                             </div>
                             <div class="input-group">
                                 <label for="email">E-mail Corporativo</label>
-                                <input type="email" id="email" value="isabela.santos@deskly.com" disabled>
+                                <input type="email" id="email" disabled>
                             </div>
                         </div>
 
                         <div class="form-row">
                             <div class="input-group">
                                 <label for="departamento">Departamento</label>
-                                <input type="text" id="departamento" value="Tecnologia & Produto" disabled>
+                                <input type="text" id="departamento" disabled>
                             </div>
                             <div class="input-group">
                                 <label for="telefone">Telefone</label>
-                                <input type="text" id="telefone" value="(11) 99999-1234">
+                                <input type="text" id="telefone">
                             </div>
                         </div>
 
@@ -93,7 +94,11 @@
         </section>
     </main>
 
+    <div id="toast-container"></div>
+
     <script src="assets/js/partes/menu.js"></script>
+    <script src="assets/js/partes/notificacoes.js"></script>
+    <script src="assets/js/perfil/perfil.js"></script>
 </body>
 
 </html>
