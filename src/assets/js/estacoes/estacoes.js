@@ -54,6 +54,34 @@ function salvarReservas(reservas) {
     localStorage.setItem("reservasEstacoes", JSON.stringify(reservas));
 }
 
+function buscarReservasSistema() {
+    return JSON.parse(localStorage.getItem("reservasSistema")) || [];
+}
+
+function salvarReservasSistema(reservas) {
+    localStorage.setItem("reservasSistema", JSON.stringify(reservas));
+}
+
+function salvarReservaNoSistema(reserva) {
+    const reservasSistema = buscarReservasSistema();
+
+    const reservaSistema = {
+        id: reserva.id,
+        usuario: "Letícia Moreira",
+        tipo: "Estação de Trabalho",
+        espaco: reserva.estacao,
+        data: reserva.data,
+        inicio: reserva.inicio,
+        fim: reserva.fim,
+        horario: `${reserva.inicio} – ${reserva.fim}`,
+        convidados: "-",
+        status: "Confirmada"
+    };
+
+    reservasSistema.unshift(reservaSistema);
+    salvarReservasSistema(reservasSistema);
+}
+
 function converterHorarioParaMinutos(horario) {
     const [horas, minutos] = horario.split(":").map(Number);
     return horas * 60 + minutos;
@@ -156,6 +184,7 @@ btnConfirmar.addEventListener("click", () => {
 
     reservas.push(novaReserva);
     salvarReservas(reservas);
+    salvarReservaNoSistema(novaReserva);
 
     if (typeof adicionarNotificacao === "function") {
         adicionarNotificacao(
@@ -232,3 +261,39 @@ btnFiltrar.addEventListener("click", () => {
 
     aplicarFiltro();
 });
+
+function aplicarStatusEspacosEstacoes() {
+    const espacos = JSON.parse(localStorage.getItem("espacosSistema")) || [];
+
+    document.querySelectorAll(".estacao-card").forEach(card => {
+        const nomeMesa = card.querySelector("h4").textContent.trim();
+
+        const espaco = espacos.find(item =>
+            item.tipo === "Estação de Trabalho" &&
+            item.nome === nomeMesa
+        );
+
+        if (!espaco) return;
+
+        const badge = card.querySelector(".badge");
+        const botao = card.querySelector(".fast-action-btn");
+
+        if (espaco.status === "Inativo") {
+            card.dataset.inativa = "true";
+
+            badge.textContent = "Inativa";
+            badge.className = "badge inativa";
+
+            botao.disabled = true;
+        } else {
+            card.dataset.inativa = "false";
+
+            badge.textContent = "Disponível";
+            badge.className = "badge disponivel";
+
+            botao.disabled = false;
+        }
+    });
+}
+
+aplicarStatusEspacosEstacoes();
