@@ -17,30 +17,57 @@ const inputConvidados = document.getElementById("convidados");
 
 function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
-
     if (!container) return;
 
     const toast = document.createElement("div");
     toast.className = `toast ${tipo}`;
-    toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;
+    toast.innerHTML = `
+        <strong>${titulo}</strong>
+        <span>${mensagem}</span>
+    `;
 
     container.appendChild(toast);
 
-    setTimeout(() => toast.remove(), 4000);
+    setTimeout(() => {
+        toast.remove();
+    }, 4000);
 }
 
-function converterHorarioParaMinutos(horario) {
-    const [horas, minutos] = horario.split(":").map(Number);
-    return horas * 60 + minutos;
+function buscarEspacosSistema() {
+    return JSON.parse(localStorage.getItem("espacosSistema")) || [];
 }
 
-function horariosConflitam(inicio1, fim1, inicio2, fim2) {
-    const i1 = converterHorarioParaMinutos(inicio1);
-    const f1 = converterHorarioParaMinutos(fim1);
-    const i2 = converterHorarioParaMinutos(inicio2);
-    const f2 = converterHorarioParaMinutos(fim2);
+function salvarEspacosSistema(espacos) {
+    localStorage.setItem("espacosSistema", JSON.stringify(espacos));
+}
 
-    return i1 < f2 && f1 > i2;
+function criarEspacosPadraoSalas() {
+    if (localStorage.getItem("espacosSistema")) return;
+
+    const espacosPadrao = [
+        { id: 1, tipo: "Sala de Reunião", nome: "Sala Alfa", capacidade: 8, recursos: "TV, Videoconferência, Lousa", area: "-", status: "Ativo", imagem: "" },
+        { id: 2, tipo: "Sala de Reunião", nome: "Sala Beta", capacidade: 4, recursos: "TV, Videoconferência", area: "-", status: "Ativo", imagem: "" },
+        { id: 3, tipo: "Sala de Reunião", nome: "Sala Gama", capacidade: 12, recursos: "TV, Videoconferência, Lousa, Ar-condicionado", area: "-", status: "Ativo", imagem: "" },
+        { id: 4, tipo: "Sala de Reunião", nome: "Sala Delta", capacidade: 6, recursos: "Lousa", area: "-", status: "Inativo", imagem: "" },
+
+        { id: 5, tipo: "Estação de Trabalho", nome: "Mesa 01", capacidade: "-", recursos: "-", area: "Andar 1 - Ala A", status: "Ativo", imagem: "" },
+        { id: 6, tipo: "Estação de Trabalho", nome: "Mesa 02", capacidade: "-", recursos: "-", area: "Andar 2 - Ala B", status: "Ativo", imagem: "" },
+        { id: 7, tipo: "Estação de Trabalho", nome: "Mesa 03", capacidade: "-", recursos: "-", area: "Andar 3 - Ala C", status: "Inativo", imagem: "" },
+        { id: 8, tipo: "Estação de Trabalho", nome: "Mesa 04", capacidade: "-", recursos: "-", area: "Andar 4 - Ala D", status: "Ativo", imagem: "" }
+    ];
+
+    salvarEspacosSistema(espacosPadrao);
+}
+
+function imagemPadraoSala(nomeSala) {
+    const imagens = {
+        "Sala Alfa": "assets/images/Sala1.png",
+        "Sala Beta": "assets/images/Sala2.png",
+        "Sala Gama": "assets/images/Sala3.png",
+        "Sala Delta": "assets/images/Sala4.png"
+    };
+
+    return imagens[nomeSala] || "assets/images/Sala1.png";
 }
 
 function buscarReservas() {
@@ -59,12 +86,113 @@ function salvarReservasSistema(reservas) {
     localStorage.setItem("reservasSistema", JSON.stringify(reservas));
 }
 
+function obterUsuarioLogado() {
+    return JSON.parse(localStorage.getItem("usuarioLogado"));
+}
+
+function converterHorarioParaMinutos(horario) {
+    const [horas, minutos] = horario.split(":").map(Number);
+    return horas * 60 + minutos;
+}
+
+function horariosConflitam(inicio1, fim1, inicio2, fim2) {
+    const i1 = converterHorarioParaMinutos(inicio1);
+    const f1 = converterHorarioParaMinutos(fim1);
+    const i2 = converterHorarioParaMinutos(inicio2);
+    const f2 = converterHorarioParaMinutos(fim2);
+
+    return i1 < f2 && f1 > i2;
+}
+
+function obterContainerSalas() {
+    return document.querySelector(".lista-salas");
+}
+
+function gerarCardsSalasDoSistema() {
+    criarEspacosPadraoSalas();
+
+    const container = obterContainerSalas();
+    if (!container) return;
+
+    const salas = buscarEspacosSistema().filter(espaco =>
+        espaco.tipo === "Sala de Reunião"
+    );
+
+    container.innerHTML = "";
+
+    salas.forEach(sala => {
+        const classeBadge = sala.status === "Inativo" ? "inativa" : "disponivel";
+        const textoBadge = sala.status === "Inativo" ? "Inativa" : "Disponível";
+        const disabled = sala.status === "Inativo" ? "disabled" : "";
+        const imagem = sala.imagem || imagemPadraoSala(sala.nome);
+
+        container.innerHTML += `
+            <article class="card-sala"
+                     data-sala="${sala.nome}"
+                     data-capacidade="${sala.capacidade}"
+                     data-inativa="${sala.status === "Inativo"}">
+
+                <div class="sala-info-principal">
+                    <img src="${imagem}"
+                         alt="Foto da ${sala.nome}"
+                         class="sala-img">
+
+                    <div class="sala-textos">
+                        <h3>${sala.nome}</h3>
+                        <p>Capacidade: ${sala.capacidade} pessoas · ${sala.recursos}</p>
+                    </div>
+                </div>
+
+                <div class="sala-acoes">
+                    <span class="badge ${classeBadge}">${textoBadge}</span>
+
+                    <button type="button"
+                            class="btn-detalhes"
+                            ${disabled}>
+                        Detalhes
+                    </button>
+
+                    <button type="button"
+                            class="btn-reservar"
+                            ${disabled}>
+                        Reservar
+                    </button>
+                </div>
+            </article>
+        `;
+    });
+
+    atualizarSelectSalas();
+}
+
+function atualizarSelectSalas() {
+    const salas = buscarEspacosSistema().filter(espaco =>
+        espaco.tipo === "Sala de Reunião" && espaco.status === "Ativo"
+    );
+
+    selectEspaco.innerHTML = `<option value="">Selecione o local</option>`;
+
+    salas.forEach(sala => {
+        const option = document.createElement("option");
+        option.value = sala.nome;
+        option.textContent = `${sala.nome} – cap. ${sala.capacidade}`;
+        selectEspaco.appendChild(option);
+    });
+}
+
 function salvarReservaNoSistema(reserva) {
     const reservasSistema = buscarReservasSistema();
+    const usuarioLogado = obterUsuarioLogado();
+
+    if (!usuarioLogado) {
+        mostrarToast("Usuário não encontrado", "Faça login novamente para realizar a reserva.", "erro");
+        return;
+    }
 
     const reservaSistema = {
         id: reserva.id,
-        usuario: "Letícia Moreira",
+        usuarioId: usuarioLogado.id,
+        usuario: usuarioLogado.nome,
         tipo: "Sala de Reunião",
         espaco: reserva.sala,
         data: reserva.data,
@@ -79,22 +207,31 @@ function salvarReservaNoSistema(reserva) {
     salvarReservasSistema(reservasSistema);
 }
 
-document.querySelectorAll(".btn-reservar").forEach(botao => {
-    botao.addEventListener("click", () => {
-        if (botao.disabled) return;
+document.addEventListener("click", event => {
+    const botaoReservar = event.target.closest(".btn-reservar");
+    const botaoDetalhes = event.target.closest(".btn-detalhes");
 
-        const card = botao.closest(".card-sala");
+    if (botaoReservar) {
+        if (botaoReservar.disabled) return;
 
-        if (card.dataset.inativa === "true") return;
+        const card = botaoReservar.closest(".card-sala");
+        if (!card || card.dataset.inativa === "true") return;
 
-        const nomeSala = card.dataset.sala;
-
-        preencherSelectComSala(nomeSala);
+        preencherSelectComSala(card.dataset.sala);
 
         if (!modalReserva.open) {
             modalReserva.showModal();
         }
-    });
+    }
+
+    if (botaoDetalhes) {
+        if (botaoDetalhes.disabled) return;
+
+        const card = botaoDetalhes.closest(".card-sala");
+        if (!card) return;
+
+        abrirModalDetalhes(card);
+    }
 });
 
 btnNovaReserva.addEventListener("click", () => {
@@ -105,17 +242,15 @@ selectEspaco.addEventListener("change", verificarCapacidade);
 
 function verificarCapacidade() {
     const limiteMsg = document.getElementById("limite-msg");
+    const salas = buscarEspacosSistema();
 
-    const capacidades = {
-        "Sala Alfa": 8,
-        "Sala Beta": 4,
-        "Sala Gama": 12
-    };
+    const sala = salas.find(espaco =>
+        espaco.tipo === "Sala de Reunião" &&
+        espaco.nome === selectEspaco.value
+    );
 
-    const cap = capacidades[selectEspaco.value];
-
-    if (cap) {
-        limiteMsg.textContent = `Limite de ${cap} convidados para este espaço.`;
+    if (sala) {
+        limiteMsg.textContent = `Limite de ${sala.capacidade} convidados para este espaço.`;
     } else {
         limiteMsg.textContent = "Selecione uma sala para ver o limite de convidados.";
     }
@@ -137,6 +272,13 @@ btnConfirmar.addEventListener("click", () => {
         return;
     }
 
+    const usuarioLogado = obterUsuarioLogado();
+
+    if (!usuarioLogado) {
+        mostrarToast("Usuário não encontrado", "Faça login novamente para realizar a reserva.", "erro");
+        return;
+    }
+
     const reservas = buscarReservas();
 
     const horarioIndisponivel = reservas.some(reserva =>
@@ -152,6 +294,8 @@ btnConfirmar.addEventListener("click", () => {
 
     const novaReserva = {
         id: Date.now(),
+        usuarioId: usuarioLogado.id,
+        usuario: usuarioLogado.nome,
         sala,
         data,
         inicio,
@@ -179,7 +323,6 @@ btnConfirmar.addEventListener("click", () => {
     selectEspaco.value = "";
 
     verificarCapacidade();
-
     modalReserva.close();
 });
 
@@ -194,7 +337,7 @@ btnFiltrar.addEventListener("click", () => {
     }
 
     if (inicioFiltro >= fimFiltro) {
-        mostrarToast("Horário inválido", "O horário inicial do filtro precisa ser menor que o horário final.", "erro");
+        mostrarToast("Horário inválido", "O horário inicial precisa ser menor que o horário final.", "erro");
         return;
     }
 
@@ -233,17 +376,9 @@ function aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro) {
             btnReservar.disabled = false;
         }
     });
+
+    aplicarStatusEspacosSalas();
 }
-
-document.querySelectorAll(".btn-detalhes").forEach(botao => {
-    botao.addEventListener("click", () => {
-        if (botao.disabled) return;
-
-        const card = botao.closest(".card-sala");
-
-        abrirModalDetalhes(card);
-    });
-});
 
 function abrirModalDetalhes(card) {
     const nomeSala = card.dataset.sala;
@@ -327,11 +462,12 @@ function preencherSelectComSala(nomeSala) {
 
 function restaurarSelectCompleto() {
     selectEspaco.value = "";
+    atualizarSelectSalas();
     verificarCapacidade();
 }
 
 function aplicarStatusEspacosSalas() {
-    const espacos = JSON.parse(localStorage.getItem("espacosSistema")) || [];
+    const espacos = buscarEspacosSistema();
 
     document.querySelectorAll(".card-sala").forEach(card => {
         const nomeSala = card.dataset.sala;
@@ -367,4 +503,5 @@ function aplicarStatusEspacosSalas() {
     });
 }
 
+gerarCardsSalasDoSistema();
 aplicarStatusEspacosSalas();
