@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://127.0.0.1:5500; connect-src 'self' http://127.0.0.1:5500; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://www.gstatic.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
   <title>Painel Admin</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <link rel="stylesheet" href="assets/css/global/global.css" />
@@ -140,7 +140,7 @@
             </tr>
           </thead>
           <tbody id="tabelaUsuariosAdmin">
-            </tbody>
+          </tbody>
         </table>
       </div>
     </section>
@@ -369,16 +369,41 @@
         </svg>
       </button>
     </div>
+
     <div class="modal-body">
-      <div class="input-group"><label>E-mail</label><input type="email" /></div>
-      <div class="input-group"><label>Perfil</label><input type="text" /></div>
+
+      <div class="input-group">
+        <label for="convidar-email">E-mail do colaborador</label>
+        <input type="email" id="convidar-email" placeholder="colaborador@empresa.com" autocomplete="off" />
+        <span class="msg-erro-modal" id="erro-convidar-email"
+          style="display:none; color:#EF4444; font-size:0.78rem; margin-top:4px;">
+          Informe um e-mail válido.
+        </span>
+      </div>
+
+      <div class="input-group">
+        <label for="convidar-perfil">Nível de acesso</label>
+        <select id="convidar-perfil">
+          <option value="">Selecione o perfil...</option>
+          <option value="usuario">Usuário — pode fazer reservas</option>
+          <option value="admin">Admin — acesso total ao painel</option>
+        </select>
+        <span class="msg-erro-modal" id="erro-convidar-perfil"
+          style="display:none; color:#EF4444; font-size:0.78rem; margin-top:4px;">
+          Selecione um perfil.
+        </span>
+      </div>
+
     </div>
+
     <div class="modal-footer">
       <button type="button" data-modal="modal-convidar-usuario">Cancelar</button>
-      <button type="button" id="btn-confirmar-convidar">Confirmar</button>
+      <button type="button" id="btn-confirmar-convidar">Enviar convite</button>
     </div>
   </dialog>
 
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="assets/js/painelAdmin/painelAdminUsuarios.js"></script>
   <script src="assets/js/painelAdmin/customSelect.js"></script>
   <script src="assets/js/partes/menu.js"></script>
   <script src="assets/js/partes/notificacoes.js"></script>
@@ -386,7 +411,6 @@
   <script src="./assets/js/painelAdmin/tabs.js"></script>
   <script src="./assets/js/painelAdmin/painelAdminReservas.js"></script>
   <script src="./assets/js/painelAdmin/painelAdminEspacos.js"></script>
-
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
