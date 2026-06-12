@@ -11,6 +11,9 @@
 </head>
 
 <body>
+
+  <div id="toast-container"></div>
+  
   <header id="header"></header>
   <aside id="aside"></aside>
 
@@ -212,31 +215,123 @@
       <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Confirmar</button>
     </div>
   </dialog>
+  
+<dialog id="modal-cadastrar-espaco">
 
-  <dialog id="modal-cadastrar-espaco">
-    <div class="modal-header">
-      <h3 class="modal-title">Cadastrar Espaço</h3>
-      <button type="button" class="close-modal" data-modal="modal-cadastrar-espaco">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
-      </button>
+  <div class="modal-header">
+    <h3 class="modal-title">Cadastrar Espaço</h3>
+
+    <button type="button"
+            class="close-modal"
+            data-modal="modal-cadastrar-espaco">
+      ×
+    </button>
+  </div>
+
+  <div class="modal-body">
+
+    <div class="input-group">
+      <label>Tipo</label>
+
+      <select id="cadastroTipoEspaco">
+        <option value="">Selecione</option>
+        <option value="Sala de Reunião">Sala de Reunião</option>
+        <option value="Estação de Trabalho">Estação de Trabalho</option>
+      </select>
     </div>
-    <div class="modal-body">
-      <div class="input-group"><label>Tipo</label><input type="text" /></div>
-      <div class="input-group"><label>Nome</label><input type="text" /></div>
-      <div class="modal-campo-row">
-        <div class="input-group"><label>Capacidade (pessoas)</label><input type="number" /></div>
-        <div class="input-group"><label>Status inicial</label><input type="text" /></div>
+
+    <div id="camposCadastroEspaco">
+
+      <div class="input-group">
+        <label>Nome</label>
+        <input type="text" id="cadastroNomeEspaco">
       </div>
-      <div class="input-group"><label>Recursos (separados por vírgula)</label><input type="text" /></div>
-      <div class="input-group"><label>Área / Localização</label><input type="text" /></div>
+
+      <!-- CAMPOS DA SALA -->
+
+      <div class="modal-campo-row" id="grupoSalaCadastro">
+
+        <div class="input-group">
+          <label>Capacidade</label>
+          <input type="number" id="cadastroCapacidadeEspaco">
+        </div>
+
+        <div class="input-group">
+          <label>Recursos</label>
+          <input type="text" id="cadastroRecursosEspaco">
+        </div>
+
+      </div>
+
+      <!-- CAMPOS DA ESTAÇÃO -->
+
+      <div class="input-group" id="grupoEstacaoCadastro">
+
+        <label>Área / Localização</label>
+
+        <input type="text"
+               id="cadastroAreaEspaco">
+
+      </div>
+
+      <!-- STATUS -->
+
+      <div class="input-group">
+
+        <label>Status inicial</label>
+
+        <select id="cadastroStatusEspaco">
+          <option value="Ativo">Ativo</option>
+          <option value="Inativo">Inativo</option>
+        </select>
+
+      </div>
+
+      <!-- IMAGEM -->
+
+      <div class="input-group">
+
+        <label>Imagem do espaço</label>
+
+        <label class="upload-imagem-label"
+               for="cadastroImagemEspaco">
+
+          <span id="nomeImagemEspaco">
+            Escolher imagem
+          </span>
+
+        </label>
+
+        <input type="file"
+               id="cadastroImagemEspaco"
+               accept="image/*"
+               hidden>
+
+      </div>
+
     </div>
-    <div class="modal-footer">
-      <button type="button" data-modal="modal-cadastrar-espaco">Cancelar</button>
-      <button type="button">Confirmar</button>
-    </div>
-  </dialog>
+
+  </div>
+
+  <div class="modal-footer">
+
+    <button type="button"
+            data-modal="modal-cadastrar-espaco">
+
+      Cancelar
+
+    </button>
+
+    <button type="button"
+            id="btn-confirmar-cadastro-espaco">
+
+      Confirmar
+
+    </button>
+
+  </div>
+
+</dialog>
 
   <dialog id="modal-editar-espaco">
     <div class="modal-header">

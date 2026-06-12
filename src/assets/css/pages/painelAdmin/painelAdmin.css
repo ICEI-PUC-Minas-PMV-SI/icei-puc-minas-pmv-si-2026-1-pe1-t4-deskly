@@ -747,6 +747,45 @@ main {
     }
 }
 
+.upload-imagem-label {
+    min-height: 44px;
+    border: 1px dashed var(--color-border-card);
+    border-radius: var(--radius-md);
+    background-color: transparent;
+    color: var(--color-text-md);
+    font: var(--text-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    transition: 0.2s ease;
+}
+
+.upload-imagem-label:hover {
+    border-color: var(--color-heading);
+    color: var(--color-heading);
+}
+
+#grupoEstacaoCadastro {
+    display: block !important;
+    width: 100%;
+}
+
+#grupoEstacaoCadastro label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+#grupoEstacaoCadastro input {
+    display: block;
+    width: 100%;
+}
+
+#camposCadastroEspaco {
+    display: none;
+}
+
 @media (max-width: 480px) {
     main {
         padding: 16px 12px;
@@ -775,5 +814,149 @@ main {
 
     h2 {
         font-size: 1.0625rem;
+    }
+}
+
+#modal-cadastrar-espaco {
+    width: 420px !important;
+    max-width: 95vw !important;
+    overflow-x: hidden !important;
+}
+
+#modal-cadastrar-espaco .modal-body {
+    overflow-x: hidden !important;
+}
+
+#modal-cadastrar-espaco #camposCadastroEspaco {
+    display: flex;
+    flex-direction: column !important;
+    gap: 10px !important;
+}
+
+#modal-cadastrar-espaco #grupoSalaCadastro {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+    width: 100% !important;
+}
+
+#modal-cadastrar-espaco #grupoSalaCadastro .input-group {
+    width: 100% !important;
+    flex: none !important;
+}
+
+#modal-cadastrar-espaco .input-group {
+    width: 100% !important;
+}
+
+#modal-cadastrar-espaco input,
+#modal-cadastrar-espaco select,
+#modal-cadastrar-espaco .upload-imagem-label {
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+#modal-cadastrar-espaco {
+    width: 420px !important;
+    max-width: 95vw !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+#modal-cadastrar-espaco .modal-footer {
+    display: flex;
+    gap: 12px;
+}
+
+@media (max-width: 768px) {
+
+    #modal-cadastrar-espaco {
+        width: calc(100vw - 32px) !important;
+    }
+
+    #modal-cadastrar-espaco .modal-footer {
+        flex-direction: column !important;
+    }
+
+    #modal-cadastrar-espaco .modal-footer button {
+        width: 100% !important;
+    }
+}
+
+#toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    width: 340px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border-card);
+    border-left: 5px solid var(--color-btn-primary);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    animation: toastEntrada .3s ease, toastSaida .3s ease 3.7s forwards;
+}
+
+.toast strong {
+    display: block;
+    color: var(--color-heading);
+    font: var(--text-md);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.toast span {
+    color: var(--color-text-md);
+    font: var(--text-sm);
+}
+
+.toast.sucesso {
+    border-left-color: var(--color-text-green);
+}
+
+.toast.erro {
+    border-left-color: var(--color-text-red);
+}
+
+.toast.aviso {
+    border-left-color: var(--color-btn-primary);
+}
+
+@keyframes toastEntrada {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toastSaida {
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
+
+@media (max-width: 768px) {
+    #toast-container {
+        top: 16px;
+        left: 16px;
+        right: 16px;
+    }
+
+    .toast {
+        width: 100%;
     }
 }

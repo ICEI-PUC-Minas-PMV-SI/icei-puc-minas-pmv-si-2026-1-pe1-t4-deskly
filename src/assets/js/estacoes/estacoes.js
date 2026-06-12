@@ -1,4 +1,3 @@
-const botoesReservar = document.querySelectorAll(".fast-action-btn");
 const btnNovaReserva = document.querySelector(".btn-primary.open-modal");
 const btnConfirmar = document.querySelector(".modal-footer button:last-child");
 const btnFiltrar = document.querySelector(".btn-filtrar");
@@ -13,18 +12,6 @@ const inputFiltroFim = document.querySelector(".filtro-fim");
 const horarios = document.querySelectorAll('#modal-1 input[type="time"]');
 const inputInicio = horarios[0];
 const inputFim = horarios[1];
-
-const opcoesOriginais = Array.from(selectEstacao.options).map(option => option.textContent);
-
-document.querySelectorAll(".estacao-card").forEach(card => {
-    const badge = card.querySelector(".badge");
-
-    if (badge.textContent.trim().toLowerCase() === "inativa") {
-        card.dataset.inativa = "true";
-    } else {
-        card.dataset.inativa = "false";
-    }
-});
 
 function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
@@ -46,6 +33,10 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     }, 4000);
 }
 
+function buscarEspacosSistema() {
+    return JSON.parse(localStorage.getItem("espacosSistema")) || [];
+}
+
 function buscarReservas() {
     return JSON.parse(localStorage.getItem("reservasEstacoes")) || [];
 }
@@ -62,12 +53,95 @@ function salvarReservasSistema(reservas) {
     localStorage.setItem("reservasSistema", JSON.stringify(reservas));
 }
 
+function gerarCardsEstacoesDoSistema() {
+    const lista = document.querySelector(".estacoes-lista");
+    const espacos = buscarEspacosSistema();
+
+    if (!lista) return;
+
+    const estacoes = espacos.filter(espaco =>
+        espaco.tipo === "Estação de Trabalho"
+    );
+
+    lista.innerHTML = "";
+
+    estacoes.forEach(espaco => {
+        const imagem = espaco.imagem || `assets/images/${espaco.nome}.png`;
+        const classeBadge = espaco.status === "Inativo" ? "inativa" : "disponivel";
+        const textoBadge = espaco.status === "Inativo" ? "Inativa" : "Disponível";
+        const disabled = espaco.status === "Inativo" ? "disabled" : "";
+
+        lista.innerHTML += `
+            <div class="estacao-card" data-inativa="${espaco.status === "Inativo"}">
+                <div class="estacao-info">
+                    <img class="estacao-icon" src="${imagem}" alt="${espaco.nome}">
+                    <div>
+                        <h4>${espaco.nome}</h4>
+                        <span class="subtitle">Área: ${espaco.area}</span>
+                    </div>
+                </div>
+
+                <div class="estacao-acoes">
+                    <span class="badge ${classeBadge}">${textoBadge}</span>
+                    <button class="fast-action-btn open-modal"
+                            data-modal="modal-1"
+                            ${disabled}>
+                        Reservar
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+
+    atualizarSelectTodasEstacoes();
+}
+
+function atualizarSelectTodasEstacoes() {
+    const espacos = buscarEspacosSistema();
+
+    const estacoes = espacos.filter(espaco =>
+        espaco.tipo === "Estação de Trabalho"
+    );
+
+    selectEstacao.innerHTML = "";
+
+    estacoes.forEach(espaco => {
+        const option = document.createElement("option");
+        option.textContent = `${espaco.nome} — ${espaco.area}`;
+        option.value = `${espaco.nome} — ${espaco.area}`;
+        selectEstacao.appendChild(option);
+    });
+}
+
+function atualizarSelectUmaEstacao(estacao) {
+    selectEstacao.innerHTML = "";
+
+    const option = document.createElement("option");
+    option.textContent = estacao;
+    option.value = estacao;
+    selectEstacao.appendChild(option);
+}
+
+function obterNomeEstacaoPeloCard(card) {
+    const nomeMesa = card.querySelector("h4").textContent.trim();
+    const area = card.querySelector(".subtitle").textContent.replace("Área: ", "").trim();
+
+    return `${nomeMesa} — ${area}`;
+}
+
 function salvarReservaNoSistema(reserva) {
     const reservasSistema = buscarReservasSistema();
+    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+    if (!usuarioLogado) {
+        mostrarToast("Usuário não encontrado", "Faça login novamente para realizar a reserva.", "erro");
+        return;
+    }
 
     const reservaSistema = {
         id: reserva.id,
-        usuario: "Letícia Moreira",
+        usuarioId: usuarioLogado.id,
+        usuario: usuarioLogado.nome,
         tipo: "Estação de Trabalho",
         espaco: reserva.estacao,
         data: reserva.data,
@@ -96,49 +170,24 @@ function horariosConflitam(inicio1, fim1, inicio2, fim2) {
     return i1 < f2 && f1 > i2;
 }
 
-function obterNomeEstacaoPeloCard(card) {
-    const nomeMesa = card.querySelector("h4").textContent.trim();
-    const area = card.querySelector(".subtitle").textContent.replace("Área: ", "").trim();
+document.addEventListener("click", event => {
+    const botao = event.target.closest(".fast-action-btn");
 
-    return `${nomeMesa} — ${area}`;
-}
+    if (!botao) return;
+    if (botao.disabled) return;
 
-function atualizarSelectTodasEstacoes() {
-    selectEstacao.innerHTML = "";
+    const card = botao.closest(".estacao-card");
 
-    opcoesOriginais.forEach(opcao => {
-        const option = document.createElement("option");
-        option.textContent = opcao;
-        option.value = opcao;
-        selectEstacao.appendChild(option);
-    });
-}
+    if (!card) return;
+    if (card.dataset.inativa === "true") return;
 
-function atualizarSelectUmaEstacao(estacao) {
-    selectEstacao.innerHTML = "";
+    const estacao = obterNomeEstacaoPeloCard(card);
 
-    const option = document.createElement("option");
-    option.textContent = estacao;
-    option.value = estacao;
-    selectEstacao.appendChild(option);
-}
+    atualizarSelectUmaEstacao(estacao);
 
-botoesReservar.forEach(botao => {
-    botao.addEventListener("click", () => {
-        if (botao.disabled) return;
-
-        const card = botao.closest(".estacao-card");
-
-        if (card.dataset.inativa === "true") return;
-
-        const estacao = obterNomeEstacaoPeloCard(card);
-
-        atualizarSelectUmaEstacao(estacao);
-
-        if (!modal.open) {
-            modal.showModal();
-        }
-    });
+    if (!modal.open) {
+        modal.showModal();
+    }
 });
 
 btnNovaReserva.addEventListener("click", () => {
@@ -163,11 +212,11 @@ btnConfirmar.addEventListener("click", () => {
 
     const reservas = buscarReservas();
 
-    const horarioIndisponivel = reservas.some(reserva => {
-        return reserva.estacao === estacao &&
-            reserva.data === data &&
-            horariosConflitam(inicio, fim, reserva.inicio, reserva.fim);
-    });
+    const horarioIndisponivel = reservas.some(reserva =>
+        reserva.estacao === estacao &&
+        reserva.data === data &&
+        horariosConflitam(inicio, fim, reserva.inicio, reserva.fim)
+    );
 
     if (horarioIndisponivel) {
         mostrarToast("Horário indisponível", "Essa estação já está reservada nesse horário.", "erro");
@@ -220,17 +269,16 @@ function aplicarFiltro() {
 
         const estacao = obterNomeEstacaoPeloCard(card);
 
-        const reservadaNoPeriodo = reservas.some(reserva => {
-            if (reserva.estacao !== estacao) return false;
-            if (reserva.data !== dataFiltro) return false;
-
-            return horariosConflitam(
+        const reservadaNoPeriodo = reservas.some(reserva =>
+            reserva.estacao === estacao &&
+            reserva.data === dataFiltro &&
+            horariosConflitam(
                 inicioFiltro,
                 fimFiltro,
                 reserva.inicio,
                 reserva.fim
-            );
-        });
+            )
+        );
 
         if (reservadaNoPeriodo) {
             badge.textContent = "Ocupada";
@@ -242,6 +290,8 @@ function aplicarFiltro() {
             botao.disabled = false;
         }
     });
+
+    aplicarStatusEspacosEstacoes();
 }
 
 btnFiltrar.addEventListener("click", () => {
@@ -263,7 +313,7 @@ btnFiltrar.addEventListener("click", () => {
 });
 
 function aplicarStatusEspacosEstacoes() {
-    const espacos = JSON.parse(localStorage.getItem("espacosSistema")) || [];
+    const espacos = buscarEspacosSistema();
 
     document.querySelectorAll(".estacao-card").forEach(card => {
         const nomeMesa = card.querySelector("h4").textContent.trim();
@@ -296,4 +346,5 @@ function aplicarStatusEspacosEstacoes() {
     });
 }
 
+gerarCardsEstacoesDoSistema();
 aplicarStatusEspacosEstacoes();
