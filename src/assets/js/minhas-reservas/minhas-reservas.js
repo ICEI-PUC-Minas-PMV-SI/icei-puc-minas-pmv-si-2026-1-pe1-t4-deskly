@@ -1,28 +1,176 @@
 const statusClasse = { pendente: 'badge-concluida', aceito: 'badge-confirmada', recusado: 'badge-cancelada' };
 const statusLabel  = { pendente: 'Pendente', aceito: 'Aceito', recusado: 'Recusado' };
 
+// --- Toast ---
+
+function mostrarToast(titulo, mensagem, tipo = 'aviso') {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = `toast ${tipo}`;
+    toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;
+    container.appendChild(toast);
+    setTimeout(() => toast.remove(), 4000);
+}
+
 // --- Modal: Editar Reserva ---
 
 const modalEditar = document.getElementById('modal-editar');
+let linhaParaEditar = null;
+let convidadosEditando = [];
+let capacidadeEditando = Infinity;
+
+function renderizarConvidadosEdicao() {
+    const contador = document.getElementById('editar-contador-convidados');
+    if (contador) {
+        contador.textContent = capacidadeEditando !== Infinity
+            ? `${convidadosEditando.length} / ${capacidadeEditando}`
+            : convidadosEditando.length;
+    }
+
+    const lista = document.getElementById('editar-lista');
+    lista.innerHTML = convidadosEditando.map((c, i) => `
+        <div class="modal-convidados-item">
+            <span>${c.email}</span>
+            <div class="convidado-acoes">
+                <span class="badge ${statusClasse[c.status]}">${statusLabel[c.status]}</span>
+                <button type="button" class="btn-remover-convidado" data-index="${i}" title="Remover convidado">×</button>
+            </div>
+        </div>
+    `).join('');
+
+    lista.querySelectorAll('.btn-remover-convidado').forEach(btn => {
+        btn.addEventListener('click', () => {
+            convidadosEditando.splice(Number(btn.dataset.index), 1);
+            renderizarConvidadosEdicao();
+        });
+    });
+}
+
+function popularSelectEspaco(espacoAtual, tipoFiltro, fallbackCapacidade) {
+    const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema')) || [];
+    const opcoes = espacosSistema.filter(e => e.tipo === tipoFiltro && e.status === 'Ativo');
+    const select = document.getElementById('editar-espaco');
+
+    if (opcoes.length > 0) {
+        select.innerHTML = opcoes.map(e =>
+            `<option value="${e.nome}" ${e.nome === espacoAtual ? 'selected' : ''}>${e.nome}</option>`
+        ).join('');
+    } else {
+        select.innerHTML = `<option value="${espacoAtual}">${espacoAtual}</option>`;
+    }
+
+    const encontrado = espacosSistema.find(e => e.nome === select.value);
+    capacidadeEditando = (encontrado && typeof encontrado.capacidade === 'number')
+        ? encontrado.capacidade
+        : fallbackCapacidade;
+}
 
 document.querySelectorAll('.btn-editar').forEach(btn => {
     btn.addEventListener('click', () => {
-        const convidados = JSON.parse(btn.dataset.convidados);
+        convidadosEditando = JSON.parse(btn.dataset.convidados);
+        linhaParaEditar    = btn.closest('tr');
 
-        document.getElementById('editar-espaco').value = btn.dataset.espaco;
+        const espacoAtual = btn.dataset.espaco;
+        const ehMesa      = espacoAtual.toLowerCase().includes('mesa');
+        const tipoFiltro  = ehMesa ? 'Estação de Trabalho' : 'Sala de Reunião';
+
+        const btnConv          = linhaParaEditar.querySelector('.btn-convidados');
+        const fallbackCapacidade = btnConv ? Number(btnConv.dataset.capacidade) : Infinity;
+        popularSelectEspaco(espacoAtual, tipoFiltro, fallbackCapacidade);
+
         document.getElementById('editar-data').value   = btn.dataset.data;
         document.getElementById('editar-inicio').value = btn.dataset.inicio;
         document.getElementById('editar-fim').value    = btn.dataset.fim;
 
-        document.getElementById('editar-lista').innerHTML = convidados.map(c => `
-            <div class="modal-convidados-item">
-                <span>${c.email}</span>
-                <span class="badge ${statusClasse[c.status]}">${statusLabel[c.status]}</span>
-            </div>
-        `).join('');
+        document.getElementById('editar-grupo-convidados').style.display = ehMesa ? 'none' : '';
+        document.getElementById('editar-grupo-adicionar').style.display  = ehMesa ? 'none' : '';
 
+        renderizarConvidadosEdicao();
         modalEditar.showModal();
     });
+});
+
+document.getElementById('editar-espaco').addEventListener('change', () => {
+    const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema')) || [];
+    const selecionado = espacosSistema.find(e => e.nome === document.getElementById('editar-espaco').value);
+    if (selecionado && typeof selecionado.capacidade === 'number') {
+        capacidadeEditando = selecionado.capacidade;
+        renderizarConvidadosEdicao();
+    }
+});
+
+document.querySelector('.conv-adicionar-btn').addEventListener('click', () => {
+    const input = document.getElementById('editar-novo-convidado');
+    const email = input.value.trim();
+
+    if (!email) return;
+
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        mostrarToast('E-mail inválido', 'Digite um e-mail válido antes de adicionar.', 'erro');
+        return;
+    }
+
+    if (convidadosEditando.some(c => c.email === email)) {
+        mostrarToast('E-mail repetido', 'Verifique novamente.', 'erro');
+        return;
+    }
+
+    if (capacidadeEditando !== Infinity && convidadosEditando.length >= capacidadeEditando) {
+        mostrarToast('Capacidade máxima', `Capacidade máxima da sala atingida (${capacidadeEditando}).`, 'erro');
+        return;
+    }
+
+    convidadosEditando.push({ email, status: 'pendente' });
+    input.value = '';
+    renderizarConvidadosEdicao();
+});
+
+document.querySelector('#modal-editar .btn-confirmar').addEventListener('click', () => {
+    if (!linhaParaEditar) return;
+
+    const espaco = document.getElementById('editar-espaco').value.trim();
+    const data   = document.getElementById('editar-data').value.trim();
+    const inicio = document.getElementById('editar-inicio').value.trim();
+    const fim    = document.getElementById('editar-fim').value.trim();
+
+    if (inicio && fim && inicio >= fim) {
+        mostrarToast('Horário inválido', 'O horário de início precisa ser menor que o horário de fim.', 'erro');
+        return;
+    }
+
+    const horario = `${inicio} – ${fim}`;
+
+    linhaParaEditar.querySelector('td[data-label="Espaço"]').textContent              = espaco;
+    linhaParaEditar.querySelector('td[data-label="Data"]').textContent                = data;
+    linhaParaEditar.querySelector('.col-nowrap[data-label="Horário"]').textContent    = horario;
+
+    const btnConv = linhaParaEditar.querySelector('.btn-convidados');
+    if (btnConv) {
+        btnConv.textContent          = `${convidadosEditando.length} / ${capacidadeEditando} →`;
+        btnConv.dataset.convidados   = JSON.stringify(convidadosEditando);
+        btnConv.dataset.espaco       = espaco;
+        btnConv.dataset.data         = data;
+        btnConv.dataset.horario      = horario;
+    }
+
+    const btnEdit = linhaParaEditar.querySelector('.btn-editar');
+    btnEdit.dataset.espaco     = espaco;
+    btnEdit.dataset.data       = data;
+    btnEdit.dataset.inicio     = inicio;
+    btnEdit.dataset.fim        = fim;
+    btnEdit.dataset.convidados = JSON.stringify(convidadosEditando);
+
+    const btnCancel = linhaParaEditar.querySelector('.btn-cancelar');
+    if (btnCancel) {
+        btnCancel.dataset.espaco  = espaco;
+        btnCancel.dataset.data    = data;
+        btnCancel.dataset.horario = horario;
+    }
+
+    linhaParaEditar = null;
+    modalEditar.close();
+    mostrarToast('Reserva atualizada', 'As alterações foram salvas com sucesso!', 'sucesso');
 });
 
 // --- Modal: Convidados ---
@@ -32,7 +180,12 @@ const modalConv = document.getElementById('modal-convidados');
 document.querySelectorAll('.btn-convidados').forEach(btn => {
     btn.addEventListener('click', () => {
         const convidados = JSON.parse(btn.dataset.convidados);
-        const capacidade = Number(btn.dataset.capacidade);
+
+        const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema')) || [];
+        const espacoAdmin    = espacosSistema.find(e => e.nome === btn.dataset.espaco);
+        const capacidade     = (espacoAdmin && typeof espacoAdmin.capacidade === 'number')
+            ? espacoAdmin.capacidade
+            : Number(btn.dataset.capacidade);
 
         document.getElementById('conv-titulo').textContent = `Convidados - ${btn.dataset.espaco}`;
         document.getElementById('conv-subtitulo').textContent =
@@ -87,7 +240,14 @@ document.querySelector('.modal-detalhe-btn-confirmar-cancelamento').addEventList
     linhaParaCancelar.remove();
     linhaParaCancelar = null;
 
+    if (typeof adicionarNotificacao === 'function') {
+        adicionarNotificacao(
+            `Reserva cancelada: ${espaco} no dia ${data}, das ${horario}.`
+        );
+    }
+
     modalCancelar.close();
+    mostrarToast('Reserva cancelada', 'Sua reserva foi cancelada com sucesso.', 'erro');
 });
 
 // --- Filtros (custom select) ---
