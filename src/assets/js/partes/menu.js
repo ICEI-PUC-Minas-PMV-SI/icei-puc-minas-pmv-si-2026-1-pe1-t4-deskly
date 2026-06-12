@@ -1,3 +1,9 @@
+const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+
+const linkPainelAdmin = usuarioLogado?.perfil === "Admin"
+    ? `<li><a href="painelAdmin.html">Painel Admin</a></li>`
+    : "";
+
 const headerHTML = `
 <a href="dashboard.html">
     <img class="logo" src="assets/icons/logo.svg" alt="Logo Deskly">
@@ -79,8 +85,9 @@ const asideHTML = `
         <li><a href="estacoes.html">Estações de Trabalho</a></li>
         <li><a href="minhas-reservas.html">Minhas Reservas</a></li>
     </ul>
+
     <ul>
-        <li><a href="painelAdmin.html">Painel Admin</a></li>
+        ${linkPainelAdmin}
         <li><a href="ajuda.html">Ajuda</a></li>
     </ul>
 </nav>
@@ -92,13 +99,15 @@ document.querySelector('#aside').innerHTML = asideHTML;
 const btnHamburguer = document.getElementById('btn-hamburguer');
 const aside = document.querySelector('aside');
 
-btnHamburguer.addEventListener('click', function() {
+btnHamburguer.addEventListener('click', function () {
     aside.classList.toggle('aberto');
 
     if (aside.classList.contains('aberto')) {
-        btnHamburguer.innerHTML = '<img src="assets/icons/close-menu.svg" alt="Fechar menu">';
+        btnHamburguer.innerHTML =
+            '<img src="assets/icons/close-menu.svg" alt="Fechar menu">';
     } else {
-        btnHamburguer.innerHTML = '<img src="assets/icons/menu.svg" alt="Abrir menu">';
+        btnHamburguer.innerHTML =
+            '<img src="assets/icons/menu.svg" alt="Abrir menu">';
     }
 });
 
@@ -123,7 +132,10 @@ notificationBtn.addEventListener("click", () => {
 });
 
 document.addEventListener("click", (e) => {
-    if (!notificationMenu.contains(e.target) && !notificationBtn.contains(e.target)) {
+    if (
+        !notificationMenu.contains(e.target) &&
+        !notificationBtn.contains(e.target)
+    ) {
         notificationMenu.classList.remove("active");
     }
 });
