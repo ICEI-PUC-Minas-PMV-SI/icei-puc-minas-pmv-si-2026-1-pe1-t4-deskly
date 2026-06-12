@@ -722,6 +722,31 @@ main {
     }
 }
 
+.espacos-container .aba-header:not(:first-child) {
+    margin-top: 24px;
+}
+
+.status.inativo {
+    background-color: var(--color-border-card);
+    color: var(--color-text-md);
+}
+
+@media (min-width: 769px) and (max-width: 1300px) {
+    .espacos-container td[data-label="Ações"] {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 4px;
+        align-items: center;
+    }
+
+    .espacos-container td[data-label="Ações"] .btn-action {
+        padding: 7px 9px;
+        font-size: 12px;
+        min-width: auto;
+    }
+}
+
 @media (max-width: 480px) {
     main {
         padding: 16px 12px;

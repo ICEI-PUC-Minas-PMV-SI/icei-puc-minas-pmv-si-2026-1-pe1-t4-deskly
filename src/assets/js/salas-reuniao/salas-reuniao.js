@@ -2,8 +2,10 @@ const btnNovaReserva = document.querySelector(".botao-add-sala");
 const btnConfirmar = document.getElementById("btn-confirmar-reserva");
 const btnFiltrar = document.querySelector(".btn-filtrar-simples");
 const btnReservarDosDetalhes = document.getElementById("btn-reservar-dos-detalhes");
+
 const modalReserva = document.getElementById("modal-reserva");
 const modalDetalhes = document.getElementById("modal-detalhes");
+
 const selectEspaco = document.getElementById("espaco");
 const inputDataModal = document.querySelector(".modal-date-input");
 const inputFiltroData = document.querySelector(".date-input");
@@ -15,11 +17,13 @@ const inputConvidados = document.getElementById("convidados");
 
 function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
+
     if (!container) return;
 
     const toast = document.createElement("div");
     toast.className = `toast ${tipo}`;
     toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;
+
     container.appendChild(toast);
 
     setTimeout(() => toast.remove(), 4000);
@@ -35,6 +39,7 @@ function horariosConflitam(inicio1, fim1, inicio2, fim2) {
     const f1 = converterHorarioParaMinutos(fim1);
     const i2 = converterHorarioParaMinutos(inicio2);
     const f2 = converterHorarioParaMinutos(fim2);
+
     return i1 < f2 && f1 > i2;
 }
 
@@ -46,17 +51,49 @@ function salvarReservas(reservas) {
     localStorage.setItem("reservasSalas", JSON.stringify(reservas));
 }
 
+function buscarReservasSistema() {
+    return JSON.parse(localStorage.getItem("reservasSistema")) || [];
+}
+
+function salvarReservasSistema(reservas) {
+    localStorage.setItem("reservasSistema", JSON.stringify(reservas));
+}
+
+function salvarReservaNoSistema(reserva) {
+    const reservasSistema = buscarReservasSistema();
+
+    const reservaSistema = {
+        id: reserva.id,
+        usuario: "Letícia Moreira",
+        tipo: "Sala de Reunião",
+        espaco: reserva.sala,
+        data: reserva.data,
+        inicio: reserva.inicio,
+        fim: reserva.fim,
+        horario: `${reserva.inicio} – ${reserva.fim}`,
+        convidados: reserva.convidados || "-",
+        status: "Confirmada"
+    };
+
+    reservasSistema.unshift(reservaSistema);
+    salvarReservasSistema(reservasSistema);
+}
+
 document.querySelectorAll(".btn-reservar").forEach(botao => {
     botao.addEventListener("click", () => {
         if (botao.disabled) return;
 
         const card = botao.closest(".card-sala");
+
         if (card.dataset.inativa === "true") return;
 
         const nomeSala = card.dataset.sala;
+
         preencherSelectComSala(nomeSala);
 
-        if (!modalReserva.open) modalReserva.showModal();
+        if (!modalReserva.open) {
+            modalReserva.showModal();
+        }
     });
 });
 
@@ -68,7 +105,13 @@ selectEspaco.addEventListener("change", verificarCapacidade);
 
 function verificarCapacidade() {
     const limiteMsg = document.getElementById("limite-msg");
-    const capacidades = { "Sala Alfa": 8, "Sala Beta": 4, "Sala Gama": 12 };
+
+    const capacidades = {
+        "Sala Alfa": 8,
+        "Sala Beta": 4,
+        "Sala Gama": 12
+    };
+
     const cap = capacidades[selectEspaco.value];
 
     if (cap) {
@@ -117,8 +160,9 @@ btnConfirmar.addEventListener("click", () => {
     };
 
     reservas.push(novaReserva);
-    salvarReservas(novaReserva.id ? reservas : reservas);
+
     salvarReservas(reservas);
+    salvarReservaNoSistema(novaReserva);
 
     if (typeof adicionarNotificacao === "function") {
         adicionarNotificacao(
@@ -133,6 +177,7 @@ btnConfirmar.addEventListener("click", () => {
     inputFim.value = "";
     inputConvidados.value = "";
     selectEspaco.value = "";
+
     verificarCapacidade();
 
     modalReserva.close();
@@ -195,6 +240,7 @@ document.querySelectorAll(".btn-detalhes").forEach(botao => {
         if (botao.disabled) return;
 
         const card = botao.closest(".card-sala");
+
         abrirModalDetalhes(card);
     });
 });
@@ -208,48 +254,70 @@ function abrirModalDetalhes(card) {
     const recursos = textos.replace(/Capacidade: \d+ pessoas · /, "");
 
     document.getElementById("detalhes-titulo").textContent = nomeSala;
+
     document.getElementById("detalhes-capacidade").textContent =
         capacidadeMatch ? `${capacidadeMatch[1]} pessoas` : "—";
+
     document.getElementById("detalhes-recursos").textContent = recursos;
 
     const statusEl = document.getElementById("detalhes-status");
+
     statusEl.textContent = badge.textContent.trim();
     statusEl.className = "detail-value";
-    if (badge.classList.contains("disponivel")) statusEl.classList.add("status-disponivel");
-    else if (badge.classList.contains("ocupada")) statusEl.classList.add("status-ocupada");
-    else statusEl.classList.add("status-inativa");
+
+    if (badge.classList.contains("disponivel")) {
+        statusEl.classList.add("status-disponivel");
+    } else if (badge.classList.contains("ocupada")) {
+        statusEl.classList.add("status-ocupada");
+    } else {
+        statusEl.classList.add("status-inativa");
+    }
 
     const hoje = new Date().toLocaleDateString("pt-BR");
     const reservas = buscarReservas();
     const reservasHoje = reservas.filter(r => r.sala === nomeSala && r.data === hoje);
 
     const container = document.getElementById("detalhes-horarios");
+
     container.innerHTML = "";
 
     if (reservasHoje.length === 0) {
-        container.innerHTML = `<p style="color: var(--color-text-md); font-size: 14px;">Nenhuma reserva para hoje.</p>`;
+        container.innerHTML = `
+            <p style="color: var(--color-text-md); font-size: 14px;">
+                Nenhuma reserva para hoje.
+            </p>
+        `;
     } else {
         reservasHoje.forEach(r => {
             const item = document.createElement("div");
             item.className = "horario-item";
+
             item.innerHTML = `
                 <span class="horario-time">${r.inicio} – ${r.fim}</span>
                 ${r.convidados ? `<span class="horario-pessoa">· ${r.convidados}</span>` : ""}
             `;
+
             container.appendChild(item);
         });
     }
 
     btnReservarDosDetalhes.dataset.sala = nomeSala;
 
-    if (!modalDetalhes.open) modalDetalhes.showModal();
+    if (!modalDetalhes.open) {
+        modalDetalhes.showModal();
+    }
 }
 
 btnReservarDosDetalhes.addEventListener("click", () => {
     const nomeSala = btnReservarDosDetalhes.dataset.sala;
+
     modalDetalhes.close();
+
     preencherSelectComSala(nomeSala);
-    if (!modalReserva.open) modalReserva.showModal();
+
+    if (!modalReserva.open) {
+        modalReserva.showModal();
+    }
 });
 
 function preencherSelectComSala(nomeSala) {
@@ -261,3 +329,42 @@ function restaurarSelectCompleto() {
     selectEspaco.value = "";
     verificarCapacidade();
 }
+
+function aplicarStatusEspacosSalas() {
+    const espacos = JSON.parse(localStorage.getItem("espacosSistema")) || [];
+
+    document.querySelectorAll(".card-sala").forEach(card => {
+        const nomeSala = card.dataset.sala;
+
+        const espaco = espacos.find(item =>
+            item.tipo === "Sala de Reunião" &&
+            item.nome === nomeSala
+        );
+
+        if (!espaco) return;
+
+        const badge = card.querySelector(".badge");
+        const btnReservar = card.querySelector(".btn-reservar");
+        const btnDetalhes = card.querySelector(".btn-detalhes");
+
+        if (espaco.status === "Inativo") {
+            card.dataset.inativa = "true";
+
+            badge.textContent = "Inativa";
+            badge.className = "badge inativa";
+
+            btnReservar.disabled = true;
+            btnDetalhes.disabled = true;
+        } else {
+            card.dataset.inativa = "false";
+
+            badge.textContent = "Disponível";
+            badge.className = "badge disponivel";
+
+            btnReservar.disabled = false;
+            btnDetalhes.disabled = false;
+        }
+    });
+}
+
+aplicarStatusEspacosSalas();

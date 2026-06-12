@@ -54,207 +54,84 @@
     </section>
 
     <section class="tabela-container" data-tab-content="reservas">
-      <table class="tabela-reservas">
-        <thead>
-          <tr>
-            <th>Usuário</th>
-            <th>Espaço</th>
-            <th>Data</th>
-            <th>Horário</th>
-            <th>Status</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td data-label="Usuário">Emanuel Miranda</td>
-            <td data-label="Espaço">Sala Alfa</td>
-            <td data-label="Data">30/03/2026</td>
-            <td data-label="Horário">11:00h - 11:30h</td>
-            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-            <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
-          </tr>
-          <tr>
-            <td data-label="Usuário">Isabela Santos</td>
-            <td data-label="Espaço">Sala Beta</td>
-            <td data-label="Data">05/04/2026</td>
-            <td data-label="Horário">11:40h - 12:10h</td>
-            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-            <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
-          </tr>
-          <tr>
-            <td data-label="Usuário">Kauã Silva</td>
-            <td data-label="Espaço">Mesa 02</td>
-            <td data-label="Data">10/04/2026</td>
-            <td data-label="Horário">12:30h - 13:00h</td>
-            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-            <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
-          </tr>
-          <tr>
-            <td data-label="Usuário">Letícia Moreira</td>
-            <td data-label="Espaço">Sala Gama</td>
-            <td data-label="Data">12/04/2026</td>
-            <td data-label="Horário">13:00h - 13:30h</td>
-            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-            <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
-          </tr>
-          <tr>
-            <td data-label="Usuário">Vitória Leal</td>
-            <td data-label="Espaço">Mesa 03</td>
-            <td data-label="Data">13/04/2026</td>
-            <td data-label="Horário">13:40h - 14:00h</td>
-            <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-            <td><button class="btn-action" data-modal="modal-confirmacao">Excluir</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+  <table class="tabela-reservas">
+    <thead>
+      <tr>
+        <th>Usuário</th>
+        <th>Espaço</th>
+        <th>Data</th>
+        <th>Horário</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+
+    <tbody id="tabelaReservasAdmin">
+
+    </tbody>
+
+  </table>
+</section>
 
     <section class="espacos-container" data-tab-content="espacos">
-      <div class="aba-header">
-        <h2>Salas de Reunião</h2>
-        <button class="btn-action btn-action-principal" data-modal="modal-cadastrar-espaco">+ Cadastrar Espaço</button>
-      </div>
 
-      <div class="tabela-container">
-        <table class="tabela-reservas">
-          <thead>
-            <tr>
-              <th>Espaço</th>
-              <th>Capacidade</th>
-              <th>Recursos</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label="Espaço">Sala Alfa</td>
-              <td data-label="Capacidade">8</td>
-              <td data-label="Recursos">Tv, Sala</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Alfa">Desativar</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Espaço">Sala Beta</td>
-              <td data-label="Capacidade">4</td>
-              <td data-label="Recursos">Videoconferência, Ar</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Beta">Desativar</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Espaço">Mesa 02</td>
-              <td data-label="Capacidade">2</td>
-              <td data-label="Recursos">Lousa, Ar</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Mesa 02">Desativar</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Espaço">Sala Gama</td>
-              <td data-label="Capacidade">16</td>
-              <td data-label="Recursos">Videoconferência</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Gama">Desativar</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Espaço">Mesa 03</td>
-              <td data-label="Capacidade">6</td>
-              <td data-label="Recursos">Tv, lousa e Ar</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action btn-outline" data-modal="modal-ativar-espaco" data-nome="Mesa 03">Ativar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+  <div class="aba-header">
+    <h2>Salas de Reunião</h2>
+    <button class="btn-action btn-action-principal" data-modal="modal-cadastrar-espaco">
+      + Cadastrar Espaço
+    </button>
+  </div>
 
-      <div class="aba-header">
-        <h2>Estações de Trabalho</h2>
-      </div>
+  <div class="tabela-container">
+    <table class="tabela-reservas">
+      <thead>
+        <tr>
+          <th>Espaço</th>
+          <th>Capacidade</th>
+          <th>Recursos</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
 
-      <div class="tabela-container">
-        <table class="tabela-reservas">
-          <thead>
-            <tr>
-              <th>Espaço</th>
-              <th>Área</th>
-              <th>Status</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td data-label="Espaço">Sala Alfa</td>
-              <td data-label="Área">Andar 2 - Ala A</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Alfa">Desativar</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Espaço">Sala Beta</td>
-              <td data-label="Área">Andar 2 - Ala A</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Beta">Desativar</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Espaço">Mesa 02</td>
-              <td data-label="Área">Andar 3 - Ala B</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Mesa 02">Desativar</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Espaço">Sala Gama</td>
-              <td data-label="Área">Andar 3 - Ala B</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action" data-modal="modal-desativar-espaco" data-nome="Sala Gama">Desativar</button>
-              </td>
-            </tr>
-            <tr>
-              <td data-label="Espaço">Mesa 03</td>
-              <td data-label="Área">Andar 2 - Ala B</td>
-              <td data-label="Status"><span class="status confirmado">Confirmado</span></td>
-              <td>
-                <button class="btn-action" data-modal="modal-editar-espaco">Editar</button>
-                <button class="btn-action btn-outline" data-modal="modal-ativar-espaco" data-nome="Mesa 03">Ativar</button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+      <tbody id="tabelaEspacosSalas"></tbody>
+    </table>
+  </div>
 
-    <section class="usuarios-container" data-tab-content="usuarios">
-      <div class="aba-header">
-        <div class="usuarios-busca">
-          <input type="text" class="input-busca" placeholder="Buscar colaborador..." />
-          <button class="btn-action">Buscar</button>
-        </div>
-        <button class="btn-action btn-action-principal" data-modal="modal-convidar-usuario">+ Convidar usuário</button>
-      </div>
+  <div class="aba-header">
+    <h2>Estações de Trabalho</h2>
+  </div>
+
+  <div class="tabela-container">
+    <table class="tabela-reservas">
+      <thead>
+        <tr>
+          <th>Espaço</th>
+          <th>Área</th>
+          <th>Status</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+
+      <tbody id="tabelaEspacosEstacoes"></tbody>
+    </table>
+  </div>
+
+</section>
+
+<section class="usuarios-container" data-tab-content="usuarios">
+
+  <div class="aba-header">
+    <div class="usuarios-busca">
+      <input type="text" class="input-busca" placeholder="Buscar colaborador..." />
+      <button class="btn-action">Buscar</button>
+    </div>
+
+    <button class="btn-action btn-action-principal"
+            data-modal="modal-convidar-usuario">
+      + Convidar usuário
+    </button>
+  </div>
 
       <div class="tabela-container">
         <table class="tabela-reservas">
@@ -465,28 +342,33 @@
   </dialog>
 
   <script src="assets/js/painelAdmin/customSelect.js"></script>
-  <script src="assets/js/partes/menu.js"></script>
-  <script src="./assets/js/painelAdmin/modalExcluirReserva.js"></script>
-  <script src="./assets/js/painelAdmin/tabs.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-  <script>
-    flatpickr('.date-input', {
-      locale: 'pt',
-      dateFormat: 'd/m/Y',
-      disableMobile: true,
-      placeholder: 'dd/mm/aaaa',
-      monthSelectorType: 'static'
-    });
+<script src="assets/js/partes/menu.js"></script>
+<script src="./assets/js/painelAdmin/modalExcluirReserva.js"></script>
+<script src="./assets/js/painelAdmin/tabs.js"></script>
+<script src="./assets/js/painelAdmin/painelAdminReservas.js"></script>
+<script src="./assets/js/painelAdmin/painelAdminEspacos.js"></script>
 
-    flatpickr('.modal-date-input', {
-      locale: 'pt',
-      dateFormat: 'd/m/Y',
-      disableMobile: true,
-      placeholder: 'dd/mm/aaaa',
-      monthSelectorType: 'static',
-      static: true
-    });
-  </script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+
+<script>
+  flatpickr('.date-input', {
+    locale: 'pt',
+    dateFormat: 'd/m/Y',
+    disableMobile: true,
+    placeholder: 'dd/mm/aaaa',
+    monthSelectorType: 'static'
+  });
+
+  flatpickr('.modal-date-input', {
+    locale: 'pt',
+    dateFormat: 'd/m/Y',
+    disableMobile: true,
+    placeholder: 'dd/mm/aaaa',
+    monthSelectorType: 'static',
+    static: true
+  });
+</script>
+
 </body>
 </html>
