@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cadastro</title>
+
+  <link rel="stylesheet" href="assets/css/global/global.css">
+  <link rel="stylesheet" href="assets/css/pages/login/login.css">
+</head>
+
+<body>
+
+  <div class="login-wrapper">
+
+    <div class="login-banner" aria-hidden="true"></div>
+
+    <div class="login-form">
+      <img src="assets/icons/logo.svg" alt="Logo" class="logo">
+
+      <h2 id="tituloCadastro">Crie sua conta</h2>
+
+      <form id="formCadastro">
+
+        <div class="field">
+          <label for="nome">Nome completo</label>
+          <input type="text" id="nome" required placeholder="Digite seu nome">
+        </div>
+
+        <div class="field">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" required placeholder="Digite seu e-mail">
+        </div>
+
+        <div class="field">
+          <label for="password">Senha</label>
+          <input type="password" id="password" required placeholder="Crie uma senha">
+        </div>
+
+        <button type="submit">Cadastrar</button>
+
+        <p style="margin-top: 16px; text-align: center;">
+          Já tem conta?
+          <a href="login.html">Entrar</a>
+        </p>
+
+      </form>
+    </div>
+
+  </div>
+
+  <script>
+    const formCadastro = document.getElementById("formCadastro");
+    const tituloCadastro = document.getElementById("tituloCadastro");
+
+    const perfilSelecionado = localStorage.getItem("perfilSelecionado") || "Usuário";
+
+    tituloCadastro.textContent =
+      perfilSelecionado === "Admin"
+        ? "Cadastro Administrador"
+        : "Cadastro Usuário";
+
+    formCadastro.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("password").value.trim();
+
+      if (!nome || !email || !senha) {
+        alert("Preencha todos os campos.");
+        return;
+      }
+
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      const emailJaExiste = usuarios.some(usuario => usuario.email === email);
+
+      if (emailJaExiste) {
+        alert("Esse e-mail já está cadastrado.");
+        return;
+      }
+
+      const novoUsuario = {
+        id: Date.now(),
+        nome: nome,
+        email: email,
+        senha: senha,
+        perfil: perfilSelecionado
+      };
+
+      usuarios.push(novoUsuario);
+
+      localStorage.setItem("usuarios", JSON.stringify(usuarios));
+
+      alert("Cadastro realizado com sucesso!");
+
+      window.location.href = "login.html";
+    });
+  </script>
+
+</body>
+</html>

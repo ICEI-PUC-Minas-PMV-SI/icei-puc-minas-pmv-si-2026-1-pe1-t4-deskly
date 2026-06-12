@@ -18,7 +18,7 @@
 
       <h2>Seja Bem vindo(a)!</h2>
 
-      <form action="dashboard.html" method="get">
+      <form id="formLogin">
 
         <div class="field">
           <label for="email">Login</label>
@@ -45,6 +45,32 @@
     </div>
 
   </div>
+
+  <script>
+    const formLogin = document.getElementById("formLogin");
+
+    formLogin.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("password").value.trim();
+
+      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
+
+      const usuarioEncontrado = usuarios.find(usuario =>
+        usuario.email === email && usuario.senha === senha
+      );
+
+      if (!usuarioEncontrado) {
+        alert("E-mail ou senha inválidos.");
+        return;
+      }
+
+      localStorage.setItem("usuarioLogado", JSON.stringify(usuarioEncontrado));
+
+      window.location.href = "dashboard.html";
+    });
+  </script>
 
 </body>
 </html>
