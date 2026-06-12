@@ -128,7 +128,7 @@ function criarModalEditarEspaco() {
 
                 <div class="input-group" id="grupoEditarCapacidade">
                     <label>Capacidade</label>
-                    <input type="number" id="editarEspacoCapacidade">
+                    <input type="number" id="editarEspacoCapacidade" min="1">
                 </div>
 
                 <div class="input-group" id="grupoEditarRecursos">
