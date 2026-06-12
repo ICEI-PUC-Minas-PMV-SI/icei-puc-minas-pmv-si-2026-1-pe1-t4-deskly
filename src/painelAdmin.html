@@ -13,7 +13,7 @@
 <body>
 
   <div id="toast-container"></div>
-  
+
   <header id="header"></header>
   <aside id="aside"></aside>
 
@@ -44,7 +44,10 @@
       <div class="custom-select">
         <button class="custom-select-trigger" type="button">
           <span class="custom-select-label">Todas as capacidades</span>
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
         </button>
         <ul class="custom-select-dropdown">
           <li class="custom-select-option" data-value="todos">Todas as capacidades</li>
@@ -57,84 +60,74 @@
     </section>
 
     <section class="tabela-container" data-tab-content="reservas">
-  <table class="tabela-reservas">
-    <thead>
-      <tr>
-        <th>Usuário</th>
-        <th>Espaço</th>
-        <th>Data</th>
-        <th>Horário</th>
-        <th>Status</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-
-    <tbody id="tabelaReservasAdmin">
-
-    </tbody>
-
-  </table>
-</section>
+      <table class="tabela-reservas">
+        <thead>
+          <tr>
+            <th>Usuário</th>
+            <th>Espaço</th>
+            <th>Data</th>
+            <th>Horário</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="tabelaReservasAdmin"></tbody>
+      </table>
+    </section>
 
     <section class="espacos-container" data-tab-content="espacos">
+      <div class="aba-header">
+        <h2>Salas de Reunião</h2>
+        <button class="btn-action btn-action-principal" data-modal="modal-cadastrar-espaco">
+          + Cadastrar Espaço
+        </button>
+      </div>
 
-  <div class="aba-header">
-    <h2>Salas de Reunião</h2>
-    <button class="btn-action btn-action-principal" data-modal="modal-cadastrar-espaco">
-      + Cadastrar Espaço
-    </button>
-  </div>
+      <div class="tabela-container">
+        <table class="tabela-reservas">
+          <thead>
+            <tr>
+              <th>Espaço</th>
+              <th>Localização</th>
+              <th>Capacidade</th>
+              <th>Recursos</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaEspacosSalas"></tbody>
+        </table>
+      </div>
 
-  <div class="tabela-container">
-    <table class="tabela-reservas">
-      <thead>
-        <tr>
-          <th>Espaço</th>
-          <th>Capacidade</th>
-          <th>Recursos</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
+      <div class="aba-header">
+        <h2>Estações de Trabalho</h2>
+      </div>
 
-      <tbody id="tabelaEspacosSalas"></tbody>
-    </table>
-  </div>
+      <div class="tabela-container">
+        <table class="tabela-reservas">
+          <thead>
+            <tr>
+              <th>Espaço</th>
+              <th>Localização / Área</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaEspacosEstacoes"></tbody>
+        </table>
+      </div>
+    </section>
 
-  <div class="aba-header">
-    <h2>Estações de Trabalho</h2>
-  </div>
-
-  <div class="tabela-container">
-    <table class="tabela-reservas">
-      <thead>
-        <tr>
-          <th>Espaço</th>
-          <th>Área</th>
-          <th>Status</th>
-          <th>Ações</th>
-        </tr>
-      </thead>
-
-      <tbody id="tabelaEspacosEstacoes"></tbody>
-    </table>
-  </div>
-
-</section>
-
-<section class="usuarios-container" data-tab-content="usuarios">
-
-  <div class="aba-header">
-    <div class="usuarios-busca">
-      <input type="text" class="input-busca" placeholder="Buscar colaborador..." />
-      <button class="btn-action">Buscar</button>
-    </div>
-
-    <button class="btn-action btn-action-principal"
-            data-modal="modal-convidar-usuario">
-      + Convidar usuário
-    </button>
-  </div>
+    <section class="usuarios-container" data-tab-content="usuarios">
+      <div class="aba-header">
+        <div class="usuarios-busca">
+          <input type="text" class="input-busca" placeholder="Buscar colaborador..." />
+          <button class="btn-action">Buscar</button>
+        </div>
+        <button class="btn-action btn-action-principal" data-modal="modal-convidar-usuario">
+          + Convidar usuário
+        </button>
+      </div>
 
       <div class="tabela-container">
         <table class="tabela-reservas">
@@ -146,38 +139,8 @@
               <th>Ações</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td data-label="Usuário">Emanuel Miranda</td>
-              <td data-label="E-mail">emanuel@deskly.com</td>
-              <td data-label="Perfil">Admin</td>
-              <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Emanuel Miranda">Excluir</button></td>
-            </tr>
-            <tr>
-              <td data-label="Usuário">Isabela Santos</td>
-              <td data-label="E-mail">isabela@deskly.com</td>
-              <td data-label="Perfil">Usuário</td>
-              <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Isabela Santos">Excluir</button></td>
-            </tr>
-            <tr>
-              <td data-label="Usuário">Kauã Silva</td>
-              <td data-label="E-mail">kaua@deskly.com</td>
-              <td data-label="Perfil">Usuário</td>
-              <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Kauã Silva">Excluir</button></td>
-            </tr>
-            <tr>
-              <td data-label="Usuário">Letícia Moreira</td>
-              <td data-label="E-mail">leticia@deskly.com</td>
-              <td data-label="Perfil">Usuário</td>
-              <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Letícia Moreira">Excluir</button></td>
-            </tr>
-            <tr>
-              <td data-label="Usuário">Vitória Leal</td>
-              <td data-label="E-mail">vitoria@deskly.com</td>
-              <td data-label="Perfil">Usuário</td>
-              <td><button class="btn-action" data-modal="modal-remover-usuario" data-nome="Vitória Leal">Excluir</button></td>
-            </tr>
-          </tbody>
+          <tbody id="tabelaUsuariosAdmin">
+            </tbody>
         </table>
       </div>
     </section>
@@ -187,8 +150,10 @@
     <div class="modal-confirmacao-header">
       <h3 class="modal-confirmacao-titulo">Excluir Reserva</h3>
       <button type="button" class="modal-confirmacao-fechar" data-modal="modal-confirmacao">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
     </div>
@@ -215,148 +180,113 @@
       <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Confirmar</button>
     </div>
   </dialog>
-  
-<dialog id="modal-cadastrar-espaco">
 
-  <div class="modal-header">
-    <h3 class="modal-title">Cadastrar Espaço</h3>
-
-    <button type="button"
-            class="close-modal"
-            data-modal="modal-cadastrar-espaco">
-      ×
-    </button>
-  </div>
-
-  <div class="modal-body">
-
-    <div class="input-group">
-      <label>Tipo</label>
-
-      <select id="cadastroTipoEspaco">
-        <option value="">Selecione</option>
-        <option value="Sala de Reunião">Sala de Reunião</option>
-        <option value="Estação de Trabalho">Estação de Trabalho</option>
-      </select>
-    </div>
-
-    <div id="camposCadastroEspaco">
-
-      <div class="input-group">
-        <label>Nome</label>
-        <input type="text" id="cadastroNomeEspaco">
-      </div>
-
-      <!-- CAMPOS DA SALA -->
-
-      <div class="modal-campo-row" id="grupoSalaCadastro">
-
-        <div class="input-group">
-          <label>Capacidade</label>
-          <input type="number" id="cadastroCapacidadeEspaco">
-        </div>
-
-        <div class="input-group">
-          <label>Recursos</label>
-          <input type="text" id="cadastroRecursosEspaco">
-        </div>
-
-      </div>
-
-      <!-- CAMPOS DA ESTAÇÃO -->
-
-      <div class="input-group" id="grupoEstacaoCadastro">
-
-        <label>Área / Localização</label>
-
-        <input type="text"
-               id="cadastroAreaEspaco">
-
-      </div>
-
-      <!-- STATUS -->
-
-      <div class="input-group">
-
-        <label>Status inicial</label>
-
-        <select id="cadastroStatusEspaco">
-          <option value="Ativo">Ativo</option>
-          <option value="Inativo">Inativo</option>
-        </select>
-
-      </div>
-
-      <!-- IMAGEM -->
-
-      <div class="input-group">
-
-        <label>Imagem do espaço</label>
-
-        <label class="upload-imagem-label"
-               for="cadastroImagemEspaco">
-
-          <span id="nomeImagemEspaco">
-            Escolher imagem
-          </span>
-
-        </label>
-
-        <input type="file"
-               id="cadastroImagemEspaco"
-               accept="image/*"
-               hidden>
-
-      </div>
-
-    </div>
-
-  </div>
-
-  <div class="modal-footer">
-
-    <button type="button"
-            data-modal="modal-cadastrar-espaco">
-
-      Cancelar
-
-    </button>
-
-    <button type="button"
-            id="btn-confirmar-cadastro-espaco">
-
-      Confirmar
-
-    </button>
-
-  </div>
-
-</dialog>
-
-  <dialog id="modal-editar-espaco">
+  <dialog id="modal-cadastrar-espaco">
     <div class="modal-header">
-      <h3 class="modal-title">Editar Espaço</h3>
-      <button type="button" class="close-modal" data-modal="modal-editar-espaco">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+      <h3 class="modal-title">Cadastrar Espaço</h3>
+      <button type="button" class="close-modal close-modal-icone" data-modal="modal-cadastrar-espaco"
+        style="display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
     </div>
     <div class="modal-body">
-      <div class="input-group"><label>Nome</label><input type="text" /></div>
-      <div class="modal-campo-row">
-        <div class="input-group">
-          <label>Data</label>
-          <input type="text" class="modal-date-input" placeholder="dd/mm/aaaa" /> <!-- ✅ CORRIGIDO -->
-        </div>
-        <div class="input-group"><label>Horário de Início</label><input type="time" /></div>
+      <div class="input-group" style="margin-bottom: 16px;">
+        <label>Tipo de Espaço</label>
+        <select id="cadastroTipoEspaco">
+          <option value="">Selecione o tipo...</option>
+          <option value="Sala de Reunião">Sala de Reunião</option>
+          <option value="Estação de Trabalho">Estação de Trabalho</option>
+        </select>
       </div>
-      <div class="input-group"><label>Convidados (e-mail, separado por vírgula)</label><input type="text" /></div>
-      <div class="input-group"><label>Convidados (e-mail, separado por vírgula)</label><input type="text" /></div>
+
+      <div id="camposCadastroEspaco">
+        <div class="input-group" style="margin-bottom: 16px;">
+          <label>Nome do Espaço</label>
+          <input type="text" id="cadastroNomeEspaco">
+        </div>
+
+        <div class="input-group" id="grupoLocalizacaoCadastro" style="margin-bottom: 16px;">
+          <label>Área / Localização</label>
+          <input type="text" id="cadastroAreaEspaco">
+        </div>
+
+        <div class="modal-campo-row" id="grupoSalaCadastro"
+          style="display: flex; gap: 16px; width: 100%; margin-bottom: 16px;">
+          <div class="input-group" style="flex: 1;">
+            <label>Capacidade</label>
+            <select id="cadastroCapacidadeEspaco" class="filtro-capacidade" style="width: 100%;">
+              <option value="4">Até 4 pessoas</option>
+              <option value="8">Até 8 pessoas</option>
+              <option value="12">Mais de 8 pessoas</option>
+            </select>
+          </div>
+          <div class="input-group" style="flex: 2;">
+            <label>Recursos</label>
+            <input type="text" id="cadastroRecursosEspaco">
+          </div>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 16px;">
+          <label>Status Inicial</label>
+          <select id="cadastroStatusEspaco">
+            <option value="Ativo">Ativo</option>
+            <option value="Inativo">Inativo</option>
+          </select>
+        </div>
+
+        <div class="input-group" style="margin-bottom: 16px;">
+          <label>Imagem do Espaço</label>
+          <label class="upload-imagem-label" for="cadastroImagemEspaco">
+            <span id="nomeImagemEspaco">Escolher imagem...</span>
+          </label>
+          <input type="file" id="cadastroImagemEspaco" accept="image/*" hidden>
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
-      <button type="button" data-modal="modal-editar-espaco">Cancelar</button>
-      <button type="button">Confirmar</button>
+      <button type="button" data-modal="modal-cadastrar-espaco">Cancelar</button>
+      <button type="button" id="btn-confirmar-cadastro-espaco">Confirmar</button>
+    </div>
+  </dialog>
+
+  <dialog id="modal-editar-admin">
+    <div class="modal-header">
+      <h3 class="modal-title">Editar Espaço</h3>
+      <button type="button" class="close-modal" id="fecharModalEditarAdmin"
+        style="display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="editarEspacoId">
+      <div class="input-group">
+        <label>Nome do espaço</label>
+        <input type="text" id="editarEspacoNome">
+      </div>
+      <div class="input-group" id="grupoEditarArea">
+        <label>Área / Localização</label>
+        <input type="text" id="editarEspacoArea">
+      </div>
+      <div class="input-group" id="grupoEditarCapacidade">
+        <label>Capacidade</label>
+        <input type="number" id="editarEspacoCapacidade">
+      </div>
+      <div class="input-group" id="grupoEditarRecursos">
+        <label>Recursos</label>
+        <input type="text" id="editarEspacoRecursos">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" id="cancelarEditarAdmin">Cancelar</button>
+      <button type="button" class="btn-action" id="salvarEditarAdmin">Salvar</button>
     </div>
   </dialog>
 
@@ -364,14 +294,18 @@
     <div class="modal-confirmacao-header">
       <h3 class="modal-confirmacao-titulo">Desativar Espaço</h3>
       <button type="button" class="modal-confirmacao-fechar" data-modal="modal-desativar-espaco">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
     </div>
     <div class="modal-confirmacao-body">
-      <p class="modal-confirmacao-descricao">Deseja desativar temporariamente <strong class="modal-desativar-nome"></strong>?</p>
-      <p class="modal-confirmacao-aviso">Reservas existentes não serão afetadas. Nenhuma nova reserva poderá ser feita enquanto o espaço estiver inativo.</p>
+      <p class="modal-confirmacao-descricao">Deseja desativar temporariamente <strong
+          class="modal-desativar-nome"></strong>?</p>
+      <p class="modal-confirmacao-aviso">Reservas existentes não serão afetadas. Nenhuma nova reserva poderá ser feita
+        enquanto o espaço estiver inativo.</p>
     </div>
     <div class="modal-confirmacao-footer">
       <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-desativar-espaco">Cancelar</button>
@@ -383,14 +317,18 @@
     <div class="modal-header">
       <h3 class="modal-title">Ativar Espaço</h3>
       <button type="button" class="close-modal" data-modal="modal-ativar-espaco">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
     </div>
     <div class="modal-body">
-      <p class="modal-confirmacao-descricao">Deseja ativar temporariamente <strong class="modal-ativar-nome"></strong>?</p>
-      <p class="modal-confirmacao-aviso">Reservas existentes não serão afetadas. Novas reservas poderão ser feitas normalmente enquanto o espaço estiver ativo.</p>
+      <p class="modal-confirmacao-descricao">Deseja ativar temporariamente <strong class="modal-ativar-nome"></strong>?
+      </p>
+      <p class="modal-confirmacao-aviso">Reservas existentes não serão afetadas. Novas reservas poderão ser feitas
+        normalmente enquanto o espaço estiver ativo.</p>
     </div>
     <div class="modal-footer">
       <button type="button" data-modal="modal-ativar-espaco">Cancelar</button>
@@ -402,14 +340,17 @@
     <div class="modal-header">
       <h3 class="modal-title">Remover Usuário</h3>
       <button type="button" class="close-modal" data-modal="modal-remover-usuario">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
     </div>
     <div class="modal-body">
       <p class="modal-confirmacao-descricao">Deseja remover <strong class="modal-remover-nome"></strong> da empresa?</p>
-      <p class="modal-confirmacao-aviso">O acesso será revogado imediatamente. As reservas futuras deste usuário serão mantidas até cancelamento manual.</p>
+      <p class="modal-confirmacao-aviso">O acesso será revogado imediatamente. As reservas futuras deste usuário serão
+        mantidas até cancelamento manual.</p>
     </div>
     <div class="modal-footer">
       <button type="button" data-modal="modal-remover-usuario">Cancelar</button>
@@ -421,8 +362,10 @@
     <div class="modal-header">
       <h3 class="modal-title">Convidar Usuário</h3>
       <button type="button" class="close-modal" data-modal="modal-convidar-usuario">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
         </svg>
       </button>
     </div>
@@ -437,33 +380,34 @@
   </dialog>
 
   <script src="assets/js/painelAdmin/customSelect.js"></script>
-<script src="assets/js/partes/menu.js"></script>
-<script src="./assets/js/painelAdmin/modalExcluirReserva.js"></script>
-<script src="./assets/js/painelAdmin/tabs.js"></script>
-<script src="./assets/js/painelAdmin/painelAdminReservas.js"></script>
-<script src="./assets/js/painelAdmin/painelAdminEspacos.js"></script>
+  <script src="assets/js/partes/menu.js"></script>
+  <script src="assets/js/partes/notificacoes.js"></script>
+  <script src="./assets/js/painelAdmin/modalExcluirReserva.js"></script>
+  <script src="./assets/js/painelAdmin/tabs.js"></script>
+  <script src="./assets/js/painelAdmin/painelAdminReservas.js"></script>
+  <script src="./assets/js/painelAdmin/painelAdminEspacos.js"></script>
 
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
-<script>
-  flatpickr('.date-input', {
-    locale: 'pt',
-    dateFormat: 'd/m/Y',
-    disableMobile: true,
-    placeholder: 'dd/mm/aaaa',
-    monthSelectorType: 'static'
-  });
+  <script>
+    flatpickr('.date-input', {
+      locale: 'pt',
+      dateFormat: 'd/m/Y',
+      disableMobile: true,
+      placeholder: 'dd/mm/aaaa',
+      monthSelectorType: 'static'
+    });
 
-  flatpickr('.modal-date-input', {
-    locale: 'pt',
-    dateFormat: 'd/m/Y',
-    disableMobile: true,
-    placeholder: 'dd/mm/aaaa',
-    monthSelectorType: 'static',
-    static: true
-  });
-</script>
-
+    flatpickr('.modal-date-input', {
+      locale: 'pt',
+      dateFormat: 'd/m/Y',
+      disableMobile: true,
+      placeholder: 'dd/mm/aaaa',
+      monthSelectorType: 'static',
+      static: true
+    });
+  </script>
 </body>
+
 </html>

@@ -139,10 +139,10 @@ function gerarCardsSalasDoSistema() {
 
                     <div class="sala-textos">
                         <h3>${sala.nome}</h3>
-                        <p>Capacidade: ${sala.capacidade} pessoas · ${sala.recursos}</p>
+                        <p>Capacidade: ${sala.capacidade} pessoas · ${sala.recursos}${sala.area && sala.area !== "-" ? ` · ${sala.area}` : ""}</p>
                     </div>
                 </div>
-
+    
                 <div class="sala-acoes">
                     <span class="badge ${classeBadge}">${textoBadge}</span>
 
@@ -380,23 +380,31 @@ function aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro) {
     aplicarStatusEspacosSalas();
 }
 
+// FUNÇÃO ATUALIZADA COM TODOS OS CAMPOS DO SEU NOVO MODAL HTML
 function abrirModalDetalhes(card) {
     const nomeSala = card.dataset.sala;
     const badge = card.querySelector(".badge");
-    const textos = card.querySelector(".sala-textos p").textContent;
 
-    const capacidadeMatch = textos.match(/(\d+) pessoas/);
-    const recursos = textos.replace(/Capacidade: \d+ pessoas · /, "");
+    const espacos = buscarEspacosSistema();
+    const salaDados = espacos.find(espaco => espaco.tipo === "Sala de Reunião" && espaco.nome === nomeSala);
 
-    document.getElementById("detalhes-titulo").textContent = nomeSala;
+    if (!salaDados) return;
 
-    document.getElementById("detalhes-capacidade").textContent =
-        capacidadeMatch ? `${capacidadeMatch[1]} pessoas` : "—";
-
-    document.getElementById("detalhes-recursos").textContent = recursos;
+    // Alimenta o cabeçalho e as linhas de detalhes mapeadas no HTML
+    document.getElementById("detalhes-titulo").textContent = salaDados.nome;
+    document.getElementById("detalhes-tipo").textContent = salaDados.tipo;
+    document.getElementById("detalhes-nome").textContent = salaDados.nome;
+    document.getElementById("detalhes-recursos").textContent = salaDados.recursos;
+    
+    // Tratamento para a capacidade (garante exibição elegante de números/traços)
+    document.getElementById("detalhes-capacidade").textContent = 
+        salaDados.capacidade !== "-" ? `${salaDados.capacidade} pessoas` : "—";
+        
+    // Captura e renderização do campo de Área / Local vindo do Admin
+    document.getElementById("detalhes-area").textContent = 
+        salaDados.area && salaDados.area !== "-" ? salaDados.area : "Não informada";
 
     const statusEl = document.getElementById("detalhes-status");
-
     statusEl.textContent = badge.textContent.trim();
     statusEl.className = "detail-value";
 
@@ -413,7 +421,6 @@ function abrirModalDetalhes(card) {
     const reservasHoje = reservas.filter(r => r.sala === nomeSala && r.data === hoje);
 
     const container = document.getElementById("detalhes-horarios");
-
     container.innerHTML = "";
 
     if (reservasHoje.length === 0) {
