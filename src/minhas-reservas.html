@@ -210,7 +210,7 @@
             <div class="modal-body">
                 <div class="input-group">
                     <label>Espaço</label>
-                    <input type="text" id="editar-espaco">
+                    <select id="editar-espaco"></select>
                 </div>
 
                 <div class="input-row">
@@ -220,21 +220,21 @@
                     </div>
                     <div class="input-group">
                         <label>Início</label>
-                        <input type="text" id="editar-inicio">
+                        <input type="time" id="editar-inicio">
                     </div>
                 </div>
 
                 <div class="input-group">
                     <label>Término</label>
-                    <input type="text" id="editar-fim">
+                    <input type="time" id="editar-fim">
                 </div>
 
-                <div class="input-group">
-                    <label>Convidados</label>
+                <div class="input-group" id="editar-grupo-convidados">
+                    <label>Convidados <span id="editar-contador-convidados" class="editar-contador"></span></label>
                     <div class="modal-convidados-lista" id="editar-lista"></div>
                 </div>
 
-                <div class="input-group">
+                <div class="input-group" id="editar-grupo-adicionar">
                     <label>Adicionar convidado</label>
                     <div class="conv-adicionar-row">
                         <input type="email" id="editar-novo-convidado" placeholder="email@empresa.com">
@@ -309,6 +309,8 @@
                 <button type="button" class="modal-detalhe-btn-confirmar-cancelamento">Confirmar</button>
             </div>
         </dialog>
+
+        <div id="toast-container"></div>
 
         <script src="assets/js/partes/menu.js"></script>
         <script src="assets/js/partes/notificacoes.js"></script>
