@@ -56,14 +56,38 @@ document.querySelectorAll('.btn-convidados').forEach(btn => {
 // --- Modal: Cancelar Reserva ---
 
 const modalCancelar = document.getElementById('modal-cancelar-reserva');
+let linhaParaCancelar = null;
 
 document.querySelectorAll('.btn-cancelar').forEach(btn => {
     btn.addEventListener('click', () => {
         document.getElementById('modal-cancelar-espaco').textContent  = btn.dataset.espaco;
         document.getElementById('modal-cancelar-data').textContent    = btn.dataset.data;
         document.getElementById('modal-cancelar-horario').textContent = btn.dataset.horario;
+        linhaParaCancelar = btn.closest('tr');
         modalCancelar.showModal();
     });
+});
+
+document.querySelector('.modal-detalhe-btn-confirmar-cancelamento').addEventListener('click', () => {
+    if (!linhaParaCancelar) return;
+
+    const espaco  = document.getElementById('modal-cancelar-espaco').textContent;
+    const data    = document.getElementById('modal-cancelar-data').textContent;
+    const horario = document.getElementById('modal-cancelar-horario').textContent;
+
+    const novaLinha = document.createElement('tr');
+    novaLinha.innerHTML = `
+        <td data-label="Espaço">${espaco}</td>
+        <td data-label="Data">${data}</td>
+        <td class="col-nowrap" data-label="Horário">${horario}</td>
+        <td data-label="Status"><span class="badge badge-cancelada">Cancelada</span></td>
+    `;
+
+    document.getElementById('tbody-historico').appendChild(novaLinha);
+    linhaParaCancelar.remove();
+    linhaParaCancelar = null;
+
+    modalCancelar.close();
 });
 
 // --- Filtros (custom select) ---
