@@ -1,41 +1,72 @@
-const modalConfirmacao = document.getElementById("modal-confirmacao")
+const modalConfirmacao = document.getElementById("modal-confirmacao");
 
-document.querySelectorAll("[data-modal]").forEach(btn => {
-    btn.addEventListener("click", () => {
-        const modal = document.getElementById(btn.dataset.modal)
-        if (modal.open) {
-            modal.close()
-        } else {
-            if (btn.dataset.modal === "modal-desativar-espaco" && btn.dataset.nome) {
-                document.querySelector(".modal-desativar-nome").textContent = btn.dataset.nome
-            }
-            if (btn.dataset.modal === "modal-ativar-espaco" && btn.dataset.nome) {
-                document.querySelector(".modal-ativar-nome").textContent = btn.dataset.nome
-            }
-            if (btn.dataset.modal === "modal-remover-usuario" && btn.dataset.nome) {
-                document.querySelector(".modal-remover-nome").textContent = btn.dataset.nome
-            }
-            modal.showModal()
-        }
-    })
-})
+document.addEventListener("click", event => {
+    const btn = event.target.closest("[data-modal]");
 
-document.getElementById("btn-confirmar-exclusao").addEventListener("click", () => {
-    modalConfirmacao.close()
-})
+    if (!btn) return;
 
-document.getElementById("btn-confirmar-desativar").addEventListener("click", () => {
-    document.getElementById("modal-desativar-espaco").close()
-})
+    const modal = document.getElementById(btn.dataset.modal);
 
-document.getElementById("btn-confirmar-ativar").addEventListener("click", () => {
-    document.getElementById("modal-ativar-espaco").close()
-})
+    if (!modal) return;
 
-document.getElementById("btn-confirmar-remover").addEventListener("click", () => {
-    document.getElementById("modal-remover-usuario").close()
-})
+    if (btn.dataset.modal === "modal-desativar-espaco" && btn.dataset.nome) {
+        const nome = document.querySelector(".modal-desativar-nome");
+        if (nome) nome.textContent = btn.dataset.nome;
+    }
 
-document.getElementById("btn-confirmar-convidar").addEventListener("click", () => {
-    document.getElementById("modal-convidar-usuario").close()
-})
+    if (btn.dataset.modal === "modal-ativar-espaco" && btn.dataset.nome) {
+        const nome = document.querySelector(".modal-ativar-nome");
+        if (nome) nome.textContent = btn.dataset.nome;
+    }
+
+    if (btn.dataset.modal === "modal-remover-usuario" && btn.dataset.nome) {
+        const nome = document.querySelector(".modal-remover-nome");
+        if (nome) nome.textContent = btn.dataset.nome;
+    }
+
+    if (modal.open) {
+        modal.close();
+    } else {
+        modal.showModal();
+    }
+});
+
+const btnConfirmarExclusao = document.getElementById("btn-confirmar-exclusao");
+const btnConfirmarDesativar = document.getElementById("btn-confirmar-desativar");
+const btnConfirmarAtivar = document.getElementById("btn-confirmar-ativar");
+const btnConfirmarRemover = document.getElementById("btn-confirmar-remover");
+const btnConfirmarConvidar = document.getElementById("btn-confirmar-convidar");
+
+if (btnConfirmarExclusao && modalConfirmacao) {
+    btnConfirmarExclusao.addEventListener("click", () => {
+        modalConfirmacao.close();
+    });
+}
+
+if (btnConfirmarDesativar) {
+    btnConfirmarDesativar.addEventListener("click", () => {
+        const modal = document.getElementById("modal-desativar-espaco");
+        if (modal) modal.close();
+    });
+}
+
+if (btnConfirmarAtivar) {
+    btnConfirmarAtivar.addEventListener("click", () => {
+        const modal = document.getElementById("modal-ativar-espaco");
+        if (modal) modal.close();
+    });
+}
+
+if (btnConfirmarRemover) {
+    btnConfirmarRemover.addEventListener("click", () => {
+        const modal = document.getElementById("modal-remover-usuario");
+        if (modal) modal.close();
+    });
+}
+
+if (btnConfirmarConvidar) {
+    btnConfirmarConvidar.addEventListener("click", () => {
+        const modal = document.getElementById("modal-convidar-usuario");
+        if (modal) modal.close();
+    });
+}

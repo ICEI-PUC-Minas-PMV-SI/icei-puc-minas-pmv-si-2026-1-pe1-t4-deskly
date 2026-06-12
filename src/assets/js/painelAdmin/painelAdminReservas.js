@@ -29,7 +29,7 @@ function carregarReservasAdmin() {
     reservas.forEach(reserva => {
         tabela.innerHTML += `
             <tr>
-                <td data-label="Usuário">${reserva.usuario}</td>
+                <td data-label="Usuário">${reserva.usuario || "Usuário não identificado"}</td>
                 <td data-label="Espaço">${reserva.espaco}</td>
                 <td data-label="Data">${reserva.data}</td>
                 <td data-label="Horário">${reserva.horario}</td>
