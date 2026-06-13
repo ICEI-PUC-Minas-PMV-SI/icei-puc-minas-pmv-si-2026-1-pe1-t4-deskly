@@ -59,9 +59,9 @@ function renderProximas(reservas) {
         const ehMesa    = r.tipo === 'Estação de Trabalho';
         const convArr   = parseConvidados(r.convidados);
         const espaco    = espacosSistema.find(e => e.nome === r.espaco);
-        const capacidade = (espaco && typeof espaco.capacidade === 'number') ? espaco.capacidade : null;
+        const capacidade = (espaco && Number(espaco.capacidade) >= 1) ? espaco.capacidade : null;
         const convCol   = (!ehMesa && convArr.length)
-            ? `<button class="btn-convidados" data-id="${r.id}">${convArr.length}${capacidade !== null ? ' / ' + capacidade : ''} →</button>`
+            ? `<button class="btn-convidados" data-id="${r.id}">${convArr.length}${capacidade !== null ? ' / ' + capacidade : ''}</button>`
             : '—';
         return `
         <tr data-id="${r.id}">
@@ -136,6 +136,19 @@ function renderizarConvidadosEdicao() {
             renderizarConvidadosEdicao();
         });
     });
+    popularSelectConvidados();
+}
+
+function popularSelectConvidados() {
+    const select = document.getElementById('editar-novo-convidado');
+    if (!select) return;
+    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    const disponiveis = usuarios.filter(u =>
+        u.senhaDefinida === true &&
+        !convidadosEditando.some(c => c.email === u.email)
+    );
+    select.innerHTML = '<option value="">Selecionar usuário...</option>' +
+        disponiveis.map(u => `<option value="${u.email}">${u.email}</option>`).join('');
 }
 
 function popularSelectEspaco(espacoAtual, tipo) {
@@ -146,7 +159,7 @@ function popularSelectEspaco(espacoAtual, tipo) {
         ? opcoes.map(e => `<option value="${e.nome}" ${e.nome === espacoAtual ? 'selected' : ''}>${e.nome}</option>`).join('')
         : `<option value="${espacoAtual}">${espacoAtual}</option>`;
     const encontrado = espacosSistema.find(e => e.nome === select.value);
-    capacidadeEditando = (encontrado && typeof encontrado.capacidade === 'number')
+    capacidadeEditando = (encontrado && Number(encontrado.capacidade) >= 1)
         ? encontrado.capacidade
         : Infinity;
 }
@@ -187,7 +200,7 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
         const convidados    = parseConvidados(reserva.convidados);
         const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema')) || [];
         const espacoAdmin   = espacosSistema.find(e => e.nome === reserva.espaco);
-        const capacidade    = (espacoAdmin && typeof espacoAdmin.capacidade === 'number') ? espacoAdmin.capacidade : null;
+        const capacidade    = (espacoAdmin && Number(espacoAdmin.capacidade) >= 1) ? espacoAdmin.capacidade : null;
         document.getElementById('conv-titulo').textContent    = `Convidados - ${reserva.espaco}`;
         document.getElementById('conv-subtitulo').textContent = `${reserva.data} · ${reserva.horario}${capacidade ? ` · Capacidade: ${capacidade}` : ''}`;
         document.getElementById('conv-lista').innerHTML = convidados.length
@@ -207,30 +220,22 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
 document.getElementById('editar-espaco').addEventListener('change', () => {
     const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema')) || [];
     const sel = espacosSistema.find(e => e.nome === document.getElementById('editar-espaco').value);
-    if (sel && typeof sel.capacidade === 'number') {
+    if (sel && Number(sel.capacidade) >= 1) {
         capacidadeEditando = sel.capacidade;
         renderizarConvidadosEdicao();
     }
 });
 
 document.querySelector('.conv-adicionar-btn').addEventListener('click', () => {
-    const input = document.getElementById('editar-novo-convidado');
-    const email = input.value.trim();
+    const select = document.getElementById('editar-novo-convidado');
+    const email  = select.value;
     if (!email) return;
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        mostrarToast('E-mail inválido', 'Digite um e-mail válido antes de adicionar.', 'erro');
-        return;
-    }
-    if (convidadosEditando.some(c => c.email === email)) {
-        mostrarToast('E-mail repetido', 'Verifique novamente.', 'erro');
-        return;
-    }
     if (capacidadeEditando !== Infinity && convidadosEditando.length >= capacidadeEditando) {
         mostrarToast('Capacidade máxima', `Limite de ${capacidadeEditando} convidados atingido.`, 'erro');
         return;
     }
     convidadosEditando.push({ email, status: 'pendente' });
-    input.value = '';
+    select.value = '';
     renderizarConvidadosEdicao();
 });
 

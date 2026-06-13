@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     id:         Date.now(),
                     tipo:       tipo,
                     nome:       nome,
-                    capacidade: tipo === "Sala de Reunião" ? capacidade : "-",
+                    capacidade: tipo === "Sala de Reunião" ? Number(capacidade) : "-",
                     recursos:   tipo === "Sala de Reunião" ? recursos : "-",
                     area:       area || "-", // ✅ Salva a localização para ambos os tipos agora!
                     status:     status,
