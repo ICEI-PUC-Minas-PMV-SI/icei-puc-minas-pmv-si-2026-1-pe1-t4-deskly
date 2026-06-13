@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="assets/css/global/global.css">
     <link rel="stylesheet" href="assets/css/pages/calendario/calendario.css">
     <title>Calendário</title>
 </head>
+
 <body>
     <header id="header"></header>
     <aside id="aside"></aside>
@@ -18,8 +19,9 @@
             <div class="calendar-page-header">
                 <div class="calendar-title">
                     <h1>Calendário</h1>
-                    <span class="subtitle">Visualize e gerencie suas reservas</span>
+                    <span class="subtitle">Visualize suas reservas</span>
                 </div>
+
                 <div class="calendar-nav">
                     <button onclick="mudarMes(-1)">&#8249;</button>
                     <span id="mesLabel"></span>
@@ -37,87 +39,32 @@
                     <span>Sex</span>
                     <span>Sáb</span>
                 </div>
+
                 <div id="calendar"></div>
             </div>
 
         </section>
     </main>
 
-    <dialog id="modal">
-        <form>
-            <div class="modal-header">
-                <h3 class="modal-title" id="modalTitle">Nova Reserva</h3>
-                <button class="close-modal" type="button" onclick="fechar()">
-                    <img src="assets/icons/close-menu.svg" alt="Fechar">
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <label for="espaco">Espaço</label>
-                    <select id="espaco" name="espaco">
-                        <option value="">Selecione um espaço</option>
-                        <option value="Sala A">Sala A — cap. 4 pessoas</option>
-                        <option value="Sala B">Sala B — cap. 8 pessoas</option>
-                        <option value="Sala C">Sala C — cap. 12 pessoas</option>
-                        <option value="Estação A">Estação A</option>
-                        <option value="Estação B">Estação B</option>
-                        <option value="Estação C">Estação C</option>
-                    </select>
-                </div>
-                <div class="input-group" style="position: relative;">
-                    <label for="data">Data</label>
-                    <input type="text" id="data" class="modal-date-input" placeholder="dd/mm/aaaa">
-                </div>
-                <div class="input-group">
-                    <label for="inicio">Horário de início</label>
-                    <input type="time" id="inicio">
-                </div>
-                <div class="input-group">
-                    <label for="fim">Horário de término</label>
-                    <input type="time" id="fim">
-                </div>
-                <div class="input-group">
-                    <label for="responsavel">Responsável</label>
-                    <input type="text" id="responsavel" placeholder="Nome do responsável">
-                </div>
-                <div class="input-group">
-                    <label for="emails">Convidados <small>(e-mails separados por vírgula, máx. 3)</small></label>
-                    <input type="text" id="emails" placeholder="email1@exemplo.com, email2@exemplo.com">
-                </div>
-                <div class="input-group">
-                    <label for="status">Status</label>
-                    <select id="status" name="status">
-                        <option value="Confirmado">Confirmado</option>
-                        <option value="Pendente">Pendente</option>
-                        <option value="Cancelado">Cancelado</option>
-                    </select>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="fechar()">Cancelar</button>
-                <button type="button" onclick="salvar()">Confirmar</button>
-            </div>
-        </form>
-    </dialog>
-
     <dialog id="viewModal">
         <div>
             <div class="modal-header">
                 <h3 class="modal-title" id="titulo"></h3>
+
                 <button class="close-modal" type="button" onclick="fecharView()">
                     <img src="assets/icons/close-menu.svg" alt="Fechar">
                 </button>
             </div>
+
             <div class="modal-body">
                 <p id="horario"></p>
                 <p id="respView"></p>
                 <p id="statusView"></p>
                 <div id="listaEmails"></div>
             </div>
+
             <div class="modal-footer">
-                <button type="button" class="btn-delete" onclick="excluir()">Excluir</button>
                 <button type="button" onclick="fecharView()">Fechar</button>
-                <button type="button" onclick="editar()">Editar</button>
             </div>
         </div>
     </dialog>
@@ -125,19 +72,6 @@
     <script src="assets/js/partes/menu.js"></script>
     <script src="assets/js/modal/modal.js"></script>
     <script src="assets/js/calendario/calendario.js"></script>
-    
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-
-    <script>
-        flatpickr('.modal-date-input', {
-            locale: 'pt',
-            dateFormat: 'd/m/Y',
-            disableMobile: true,
-            placeholder: 'dd/mm/aaaa',
-            monthSelectorType: 'static',
-            static: true
-        });
-    </script>
 </body>
+
 </html>

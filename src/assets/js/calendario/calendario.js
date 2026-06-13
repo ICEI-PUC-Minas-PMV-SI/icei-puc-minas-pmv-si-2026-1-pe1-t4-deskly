@@ -1,190 +1,212 @@
-const calendar = document.getElementById('calendar');
-const mesLabel = document.getElementById('mesLabel');
+const calendar = document.getElementById("calendar");
+const mesLabel = document.getElementById("mesLabel");
 
 let reservas = {};
-
 let diaSelecionado = null;
 let indexSelecionado = null;
+
 let mesAtual = new Date().getMonth();
 let anoAtual = new Date().getFullYear();
 const hoje = new Date();
 
-function chave(dia) { return `${anoAtual}-${mesAtual}-${dia}`; }
-function salvarLocal() { /* reservas já estão em memória */ }
+function buscarReservasSistema() {
+    return JSON.parse(localStorage.getItem("reservasSistema")) || [];
+}
+
+function converterDataParaChave(data) {
+    const partes = data.split("/");
+
+    if (partes.length !== 3) return null;
+
+    const dia = Number(partes[0]);
+    const mes = Number(partes[1]) - 1;
+    const ano = Number(partes[2]);
+
+    return `${ano}-${mes}-${dia}`;
+}
+
+function chave(dia) {
+    return `${anoAtual}-${mesAtual}-${dia}`;
+}
+
+function separarNomeEArea(espaco, tipo) {
+    if (tipo !== "Estação de Trabalho") {
+        return {
+            nome: espaco,
+            area: ""
+        };
+    }
+
+    if (espaco.includes(" — ")) {
+        const partes = espaco.split(" — ");
+
+        return {
+            nome: partes[0],
+            area: partes.slice(1).join(" — ")
+        };
+    }
+
+    return {
+        nome: espaco,
+        area: ""
+    };
+}
+
+function carregarReservasDoSistema() {
+    const reservasSistema = buscarReservasSistema();
+
+    reservas = {};
+
+    reservasSistema.forEach(reserva => {
+        const key = converterDataParaChave(reserva.data);
+
+        if (!key) return;
+
+        if (!reservas[key]) {
+            reservas[key] = [];
+        }
+
+        reservas[key].push({
+            id: reserva.id,
+            espaco: reserva.espaco,
+            tipo: reserva.tipo,
+            responsavel: reserva.usuario,
+            inicio: reserva.inicio,
+            fim: reserva.fim,
+            emails: reserva.convidados || "",
+            status: reserva.status || "Confirmada",
+            key: key
+        });
+    });
+}
 
 function renderCalendar() {
+    carregarReservasDoSistema();
+
     calendar.innerHTML = "";
+
     const primeiroDia = new Date(anoAtual, mesAtual, 1).getDay();
     const totalDias = new Date(anoAtual, mesAtual + 1, 0).getDate();
 
     for (let i = 0; i < primeiroDia; i++) {
-        calendar.appendChild(document.createElement('div'));
+        calendar.appendChild(document.createElement("div"));
     }
 
     for (let dia = 1; dia <= totalDias; dia++) {
-        const d = document.createElement('div');
-        d.className = 'day';
+        const d = document.createElement("div");
+        d.className = "day";
         d.innerText = dia;
 
-        if (dia === hoje.getDate() && mesAtual === hoje.getMonth() && anoAtual === hoje.getFullYear()) {
-            d.classList.add('today');
+        if (
+            dia === hoje.getDate() &&
+            mesAtual === hoje.getMonth() &&
+            anoAtual === hoje.getFullYear()
+        ) {
+            d.classList.add("today");
         }
 
         const key = chave(dia);
+
         if (reservas[key] && reservas[key].length > 0) {
-            d.classList.add('has-event');
-            reservas[key].forEach((r, i) => {
-                const ev = document.createElement('div');
-                ev.className = 'event';
+            d.classList.add("has-event");
+
+            reservas[key].forEach((reserva, index) => {
+                const dadosEspaco = separarNomeEArea(reserva.espaco, reserva.tipo);
+
+                const ev = document.createElement("div");
+                ev.className = "event";
+
                 ev.innerHTML = `
-                    <strong>${r.espaco}</strong>
-                    <span class='small'>${r.inicio} - ${r.fim}</span>
-                    <span class='small'>👤 ${r.responsavel || '-'}</span>
-                    <span class='small'>👥 ${r.emails ? r.emails.split(',').length + ' convidados' : '0 convidados'}</span>
+                    <strong>${dadosEspaco.nome}</strong>
+                    <span class="small">${reserva.inicio} - ${reserva.fim}</span>
+                    <span class="small">${reserva.tipo}</span>
                 `;
-                ev.onclick = (e) => { e.stopPropagation(); abrirView(dia, i); };
+
+                ev.onclick = event => {
+                    event.stopPropagation();
+                    abrirView(dia, index);
+                };
+
                 d.appendChild(ev);
             });
         }
 
-        d.onclick = () => abrir(dia);
         calendar.appendChild(d);
     }
 
-    mesLabel.innerText = new Date(anoAtual, mesAtual).toLocaleString('pt-BR', { month: 'long', year: 'numeric' });
+    mesLabel.innerText = new Date(anoAtual, mesAtual).toLocaleString("pt-BR", {
+        month: "long",
+        year: "numeric"
+    });
 }
 
 function mudarMes(dir) {
     mesAtual += dir;
-    if (mesAtual < 0) { mesAtual = 11; anoAtual--; }
-    if (mesAtual > 11) { mesAtual = 0; anoAtual++; }
-    renderCalendar();
-}
 
-function abrir(dia) {
-    diaSelecionado = dia;
-    indexSelecionado = null;
-    document.getElementById('modalTitle').innerText = 'Nova Reserva';
-
-    const dataInput = document.getElementById('data');
-    const data = new Date(anoAtual, mesAtual, dia);
-    dataInput.value = data.toISOString().split('T')[0];
-
-    document.getElementById('espaco').selectedIndex = 0;
-    document.getElementById('inicio').value = '';
-    document.getElementById('fim').value = '';
-    document.getElementById('responsavel').value = '';
-    document.getElementById('emails').value = '';
-    document.getElementById('status').selectedIndex = 0;
-
-    document.getElementById('modal').showModal();
-}
-
-function fechar() { document.getElementById('modal').close(); }
-
-function salvar() {
-    const emailsInput = document.getElementById('emails').value;
-    const selected = emailsInput ? emailsInput.split(',').map(e => e.trim()).filter(e => e) : [];
-
-    if (selected.length > 3) {
-        alert('Máximo de 3 convidados');
-        return;
+    if (mesAtual < 0) {
+        mesAtual = 11;
+        anoAtual--;
     }
 
-    const dataVal = document.getElementById('data').value;
-    if (!dataVal) { alert('Selecione a data'); return; }
-
-    const partes = dataVal.split('-');
-    const ano = Number(partes[0]);
-    const mes = Number(partes[1]) - 1;
-    const dia = Number(partes[2]);
-
-    const key = `${ano}-${mes}-${dia}`;
-
-    const nova = {
-        espaco: document.getElementById('espaco').value,
-        responsavel: document.getElementById('responsavel').value,
-        inicio: document.getElementById('inicio').value,
-        fim: document.getElementById('fim').value,
-        emails: selected.join(','),
-        status: document.getElementById('status').value,
-        key: key
-    };
-
-    if (!reservas[key]) reservas[key] = [];
-
-    if (indexSelecionado !== null) {
-        const chaveAntiga = chave(diaSelecionado);
-        if (chaveAntiga !== key) {
-            reservas[chaveAntiga].splice(indexSelecionado, 1);
-            if (reservas[chaveAntiga].length === 0) delete reservas[chaveAntiga];
-            reservas[key].push(nova);
-        } else {
-            reservas[key][indexSelecionado] = nova;
-        }
-    } else {
-        reservas[key].push(nova);
+    if (mesAtual > 11) {
+        mesAtual = 0;
+        anoAtual++;
     }
 
-    salvarLocal();
     renderCalendar();
-    fechar();
 }
 
 function abrirView(dia, index) {
-    const r = reservas[chave(dia)][index];
+    const reserva = reservas[chave(dia)][index];
+    const dadosEspaco = separarNomeEArea(reserva.espaco, reserva.tipo);
+
     diaSelecionado = dia;
     indexSelecionado = index;
 
-    document.getElementById('titulo').innerText = r.espaco;
-    document.getElementById('horario').innerText = r.inicio + ' - ' + r.fim;
-    document.getElementById('respView').innerText = 'Responsável: ' + (r.responsavel || '-');
-    document.getElementById('statusView').innerText = 'Status: ' + r.status;
+    document.getElementById("titulo").innerHTML = `
+        ${dadosEspaco.nome}
+        ${
+            dadosEspaco.area
+                ? `<br><small style="color: var(--color-text-md); font-size: 13px; font-weight: normal;">${dadosEspaco.area}</small>`
+                : ""
+        }
+    `;
 
-    const listaEmails = document.getElementById('listaEmails');
-    listaEmails.innerHTML = '';
-    if (r.emails) {
-        r.emails.split(',').forEach(e => {
-            const tag = document.createElement('span');
-            tag.className = 'tag';
-            tag.innerText = e.trim();
+    document.getElementById("horario").innerText =
+        `${reserva.inicio} - ${reserva.fim}`;
+
+    document.getElementById("respView").innerText =
+        `Responsável: ${reserva.responsavel || "-"}`;
+
+    document.getElementById("statusView").innerText =
+        `Status: ${reserva.status}`;
+
+    const listaEmails = document.getElementById("listaEmails");
+
+    listaEmails.innerHTML = "";
+
+    if (reserva.emails && reserva.emails !== "-") {
+        reserva.emails.split(",").forEach(email => {
+            const tag = document.createElement("span");
+            tag.className = "tag";
+            tag.innerText = email.trim();
             listaEmails.appendChild(tag);
         });
     }
 
-    document.getElementById('viewModal').showModal();
+    document.getElementById("viewModal").showModal();
 }
 
-function editar() {
-    const r = reservas[chave(diaSelecionado)][indexSelecionado];
-
-    document.getElementById('espaco').value = r.espaco;
-    document.getElementById('responsavel').value = r.responsavel;
-    document.getElementById('inicio').value = r.inicio;
-    document.getElementById('fim').value = r.fim;
-    document.getElementById('status').value = r.status;
-    document.getElementById('emails').value = r.emails || '';
-
-    if (r.key) {
-        const partes = r.key.split('-');
-        const dataFormatada = `${partes[0]}-${String(Number(partes[1]) + 1).padStart(2, '0')}-${String(partes[2]).padStart(2, '0')}`;
-        document.getElementById('data').value = dataFormatada;
-    }
-
-    document.getElementById('modalTitle').innerText = 'Editar Reserva';
-    document.getElementById('viewModal').close();
-    document.getElementById('modal').showModal();
+function fecharView() {
+    document.getElementById("viewModal").close();
 }
 
 function excluir() {
-    const key = chave(diaSelecionado);
-    reservas[key].splice(indexSelecionado, 1);
-    if (reservas[key].length === 0) delete reservas[key];
-    salvarLocal();
-    renderCalendar();
-    fecharView();
+    alert("Para excluir uma reserva, use a página Minhas Reservas ou o Painel Admin.");
 }
 
-function fecharView() { document.getElementById('viewModal').close(); }
+function editar() {
+    alert("Para editar uma reserva, use a página onde ela foi criada.");
+}
 
 renderCalendar();
