@@ -1,3 +1,8 @@
+function classeStatusReserva(status) {
+    const mapa = { 'Confirmada': 'badge-confirmada', 'Cancelada': 'badge-cancelada', 'Concluída': 'badge-concluida' };
+    return mapa[status] || 'badge-concluida';
+}
+
 function buscarReservasSistema() {
     return JSON.parse(localStorage.getItem("reservasSistema")) || [];
 }
@@ -34,11 +39,11 @@ function carregarReservasAdmin() {
                 <td data-label="Data">${reserva.data}</td>
                 <td data-label="Horário">${reserva.horario}</td>
                 <td data-label="Status">
-                    <span class="status confirmado">${reserva.status}</span>
+                    <span class="badge ${classeStatusReserva(reserva.status)}">${reserva.status}</span>
                 </td>
                 <td data-label="Ações">
                     <button class="btn-action btn-excluir-reserva-admin" data-id="${reserva.id}">
-                        Excluir
+                        Cancelar
                     </button>
                 </td>
             </tr>
@@ -47,16 +52,62 @@ function carregarReservasAdmin() {
 }
 
 function excluirReservaAdmin(id) {
-    let reservasSistema = buscarReservasSistema();
+    const reservasSistema = buscarReservasSistema();
+    const idx = reservasSistema.findIndex(r => r.id === Number(id));
 
-    reservasSistema = reservasSistema.filter(reserva => reserva.id !== Number(id));
+    if (idx === -1) return;
+
+    reservasSistema[idx].status = 'Cancelada';
 
     salvarReservasSistema(reservasSistema);
     carregarReservasAdmin();
+    exibirToast('Reserva cancelada', 'A reserva foi marcada como cancelada.', 'sucesso');
+}
+
+let idReservaParaCancelar = null;
+
+function capacidadeEspaco(nomeEspaco) {
+    const espacos = JSON.parse(localStorage.getItem('espacosSistema') || '[]');
+    const espaco  = espacos.find(e => e.nome === nomeEspaco);
+    return espaco ? Number(espaco.capacidade) : null;
+}
+
+function capacidadeOk(nomeEspaco, faixa) {
+    if (faixa === 'todos' || !faixa) return true;
+    const cap = capacidadeEspaco(nomeEspaco);
+    if (cap === null) return false;
+    if (faixa === '4')  return cap <= 4;
+    if (faixa === '8')  return cap > 4 && cap <= 8;
+    if (faixa === '8+') return cap > 8;
+    return true;
 }
 
 document.addEventListener("DOMContentLoaded", () => {
     carregarReservasAdmin();
+
+    document.getElementById("btn-filtrar-reservas")?.addEventListener("click", () => {
+        const data     = document.getElementById("filtro-data-reservas")?.value.trim();
+        const faixa    = document.getElementById("select-capacidade")?.dataset.valorSelecionado || 'todos';
+        const tabela   = document.getElementById("tabelaReservasAdmin");
+        if (!tabela) return;
+
+        tabela.querySelectorAll("tr").forEach(tr => {
+            const tdEspaco = tr.querySelector("td[data-label='Espaço']");
+            const tdData   = tr.querySelector("td[data-label='Data']");
+            if (!tdEspaco || !tdData) return;
+
+            const dataOk  = !data || tdData.textContent.trim() === data;
+            const capOk   = capacidadeOk(tdEspaco.textContent.trim(), faixa);
+            tr.style.display = (dataOk && capOk) ? '' : 'none';
+        });
+    });
+
+    document.getElementById("btn-confirmar-exclusao")?.addEventListener("click", () => {
+        if (idReservaParaCancelar === null) return;
+        excluirReservaAdmin(idReservaParaCancelar);
+        idReservaParaCancelar = null;
+        document.getElementById("modal-confirmacao")?.close();
+    });
 });
 
 document.addEventListener("click", event => {
@@ -64,7 +115,6 @@ document.addEventListener("click", event => {
 
     if (!botaoExcluir) return;
 
-    const id = botaoExcluir.dataset.id;
-
-    excluirReservaAdmin(id);
+    idReservaParaCancelar = botaoExcluir.dataset.id;
+    document.getElementById("modal-confirmacao")?.showModal();
 });

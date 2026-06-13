@@ -12,6 +12,7 @@ document.querySelectorAll('.custom-select').forEach(select => {
   options.forEach(option => {
     option.addEventListener('click', () => {
       label.textContent = option.textContent;
+      select.dataset.valorSelecionado = option.dataset.value;
       select.classList.remove('open');
     });
   });

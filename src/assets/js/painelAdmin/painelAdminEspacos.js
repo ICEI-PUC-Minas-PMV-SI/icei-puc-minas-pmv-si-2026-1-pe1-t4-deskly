@@ -61,7 +61,6 @@ function carregarEspacosAdmin() {
 
     espacos.forEach(espaco => {
         const botaoStatus = espaco.status === "Ativo" ? "Desativar" : "Ativar";
-        const classeBotao = espaco.status === "Inativo" ? "btn-outline" : "";
 
         if (espaco.tipo === "Sala de Reunião") {
             tabelaSalas.innerHTML += `
@@ -75,7 +74,7 @@ function carregarEspacosAdmin() {
                     </td>
                     <td data-label="Ações">
                         <button type="button" class="btn-action btn-editar-espaco" data-id="${espaco.id}">Editar</button>
-                        <button type="button" class="btn-action ${classeBotao} btn-toggle-espaco" data-id="${espaco.id}">${botaoStatus}</button>
+                        <button type="button" class="btn-action btn-toggle-espaco" data-id="${espaco.id}">${botaoStatus}</button>
                     </td>
                 </tr>
             `;
@@ -91,7 +90,7 @@ function carregarEspacosAdmin() {
                     </td>
                     <td data-label="Ações">
                         <button type="button" class="btn-action btn-editar-espaco" data-id="${espaco.id}">Editar</button>
-                        <button type="button" class="btn-action ${classeBotao} btn-toggle-espaco" data-id="${espaco.id}">${botaoStatus}</button>
+                        <button type="button" class="btn-action btn-toggle-espaco" data-id="${espaco.id}">${botaoStatus}</button>
                     </td>
                 </tr>
             `;

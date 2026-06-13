@@ -37,11 +37,11 @@
     </nav>
 
     <section class="filtros-container" data-tab-content="reservas">
-      <div class="campo-filtro">
-        <input type="text" class="date-input" placeholder="dd/mm/aaaa" />
+      <div class="date-wrapper">
+        <input type="text" id="filtro-data-reservas" class="date-input" placeholder="dd/mm/aaaa" />
         <img src="assets/icons/calendar-dots.svg" class="calendar-icon">
       </div>
-      <div class="custom-select">
+      <div class="custom-select" id="select-capacidade">
         <button class="custom-select-trigger" type="button">
           <span class="custom-select-label">Todas as capacidades</span>
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
@@ -56,7 +56,7 @@
           <li class="custom-select-option" data-value="8+">Mais de 8 pessoas</li>
         </ul>
       </div>
-      <button class="btn-action">Filtrar</button>
+      <button class="btn-action" id="btn-filtrar-reservas">Filtrar</button>
     </section>
 
     <section class="tabela-container" data-tab-content="reservas">
@@ -148,7 +148,7 @@
 
   <dialog id="modal-confirmacao">
     <div class="modal-confirmacao-header">
-      <h3 class="modal-confirmacao-titulo">Excluir Reserva</h3>
+      <h3 class="modal-confirmacao-titulo">Cancelar Reserva</h3>
       <button type="button" class="modal-confirmacao-fechar" data-modal="modal-confirmacao">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -158,7 +158,7 @@
       </button>
     </div>
     <div class="modal-confirmacao-body">
-      <p class="modal-confirmacao-descricao">Deseja excluir a reserva de <strong>Isabela Santos</strong>?</p>
+      <p class="modal-confirmacao-descricao">Deseja cancelar esta reserva?</p>
       <div class="modal-confirmacao-detalhes">
         <div class="modal-confirmacao-linha">
           <span class="modal-confirmacao-label">Espaço</span>
@@ -173,11 +173,11 @@
           <span class="modal-confirmacao-valor">09:00h – 10:00h</span>
         </div>
       </div>
-      <p class="modal-confirmacao-aviso">A sala será liberada para novas reservas</p>
+      <p class="modal-confirmacao-aviso">O status da reserva será alterado para Cancelada.</p>
     </div>
     <div class="modal-confirmacao-footer">
       <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-confirmacao">Cancelar</button>
-      <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Confirmar</button>
+      <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Cancelar reserva</button>
     </div>
   </dialog>
 
@@ -385,8 +385,8 @@
         <label for="convidar-perfil">Nível de acesso</label>
         <select id="convidar-perfil">
           <option value="">Selecione o perfil...</option>
-          <option value="Usuário">Usuário — pode fazer reservas</option>
-          <option value="Admin">Admin — acesso total ao painel</option>
+          <option value="usuario">Usuário — pode fazer reservas</option>
+          <option value="admin">Admin — acesso total ao painel</option>
         </select>
         <span class="msg-erro-modal" id="erro-convidar-perfil"
           style="display:none; color:#EF4444; font-size:0.78rem; margin-top:4px;">

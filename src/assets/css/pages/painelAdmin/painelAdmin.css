@@ -107,6 +107,39 @@ main {
     outline: none;
 }
 
+.date-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    background: var(--color-background);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    padding-right: 40px;
+    width: 220px;
+}
+
+.date-wrapper .date-input {
+    -webkit-appearance: none;
+    appearance: none;
+    background: transparent;
+    border: none;
+    outline: none;
+    width: 100%;
+    color: var(--color-text-md);
+    font: var(--text-md);
+}
+
+.date-wrapper .calendar-icon {
+    position: absolute;
+    right: var(--spacing-sm);
+    width: 20px;
+    height: 20px;
+    pointer-events: none;
+    opacity: 0.6;
+}
+
 .campo-filtro {
     display: flex;
     align-items: center;
@@ -232,6 +265,32 @@ main {
     background-color: var(--color-badge-green);
     color: var(--color-text-green);
 }
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 10px;
+    border-radius: var(--radius-md);
+    font: var(--text-sm);
+    font-weight: 600;
+    white-space: nowrap;
+    line-height: 1;
+}
+
+.badge-admin {
+    background-color: #DBEAFE;
+    color: #1D4ED8;
+}
+
+.badge-usuario {
+    background-color: #EDE9FE;
+    color: #6D28D9;
+}
+
+.badge-confirmada { background-color: var(--color-badge-green); color: var(--color-text-green); }
+.badge-cancelada  { background-color: var(--color-badge-red);   color: var(--color-text-red);   }
+.badge-concluida  { background-color: #e8e8e8;                  color: #555555;                 }
 
 .btn-action {
     padding: 10px 16px;
@@ -947,6 +1006,69 @@ main {
         opacity: 0;
         transform: translateX(40px);
     }
+}
+
+.btn-remover-usuario {
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.btn-remover-usuario:hover { opacity: 0.8; }
+
+.btn-reenviar {
+    background-color: #6B7280;
+    color: var(--color-background);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.btn-reenviar:hover { opacity: 0.8; }
+
+.btn-editar-espaco,
+.btn-toggle-espaco {
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.btn-editar-espaco { margin-right: 8px; }
+
+.btn-editar-espaco:hover,
+.btn-toggle-espaco:hover,
+.btn-excluir-reserva-admin:hover {
+    background-color: var(--color-btn-primary);
+    outline: none;
+    opacity: 0.8;
+}
+
+.btn-excluir-reserva-admin {
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
 }
 
 @media (max-width: 768px) {

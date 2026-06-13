@@ -3,13 +3,35 @@ const EMAILJS_TEMPLATE_ID = 'template_gejyh7t';
 const EMAILJS_PUBLIC_KEY  = '2kT0EfswhdPo4tzq7';
 
 document.addEventListener('DOMContentLoaded', () => {
-  emailjs.init(EMAILJS_PUBLIC_KEY);
+  try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch (_) {}
 
+  criarUsuariosPadrao();
   carregarUsuarios();
   inicializarConvite();
   inicializarBuscaUsuario();
-  inicializarFechamentoModais();
 });
+
+function criarUsuariosPadrao() {
+  const fixos = [
+    { id: 1000000000001, nome: 'Carlos Mendes',   email: 'carlos.mendes@deskly.com',   senha: 'senha123', perfil: 'Admin',   senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z' },
+    { id: 1000000000002, nome: 'Fernanda Rocha',  email: 'fernanda.rocha@deskly.com',  senha: 'senha123', perfil: 'Usuário', senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z' },
+    { id: 1000000000003, nome: 'Ricardo Alves',   email: 'ricardo.alves@deskly.com',   senha: 'senha123', perfil: 'Usuário', senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z' },
+    { id: 1000000000004, nome: 'Juliana Castro',  email: 'juliana.castro@deskly.com',  senha: 'senha123', perfil: 'Usuário', senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z' },
+    { id: 1000000000005, nome: 'Thiago Barbosa',  email: 'thiago.barbosa@deskly.com',  senha: 'senha123', perfil: 'Usuário', senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z' },
+  ];
+
+  const existentes = obterUsuarios();
+  let alterou = false;
+
+  fixos.forEach(fixo => {
+    if (!existentes.find(u => u.email === fixo.email)) {
+      existentes.push(fixo);
+      alterou = true;
+    }
+  });
+
+  if (alterou) salvarUsuarios(existentes);
+}
 
 function carregarUsuarios(filtro = '') {
   const tbody = document.getElementById('tabelaUsuariosAdmin');
@@ -45,15 +67,11 @@ function carregarUsuarios(filtro = '') {
       : '';
 
     const badgePerfil = usuario.perfil === 'Admin'
-      ? `<span style="background:#EFF6FF;color:#1D4ED8;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:600;">Admin</span>`
-      : `<span style="background:#F0FDF4;color:#15803D;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:600;">Usuário</span>`;
+      ? `<span class="badge badge-admin">Admin</span>`
+      : `<span class="badge badge-usuario">Usuário</span>`;
 
     const btnReenviar = !usuario.senhaDefinida
-      ? `<button class="btn-reenviar" data-email="${usuario.email}"
-            style="background:none;border:1px solid #D1D5DB;border-radius:6px;padding:4px 10px;
-                   cursor:pointer;font-size:0.78rem;color:#374151;margin-right:4px;">
-            Reenviar
-          </button>`
+      ? `<button class="btn-reenviar" data-email="${usuario.email}">Reenviar</button>`
       : '';
 
     tr.innerHTML = `
@@ -76,9 +94,7 @@ function carregarUsuarios(filtro = '') {
         <div style="display:flex;align-items:center;gap:4px;">
           ${btnReenviar}
           <button class="btn-remover-usuario"
-            data-email="${usuario.email}" data-nome="${usuario.nome || usuario.email}"
-            style="background:none;border:1px solid #FECACA;border-radius:6px;padding:4px 10px;
-                   cursor:pointer;font-size:0.78rem;color:#DC2626;">
+            data-email="${usuario.email}" data-nome="${usuario.nome || usuario.email}">
             Remover
           </button>
         </div>
@@ -121,11 +137,11 @@ function inicializarConvite() {
     let valido = true;
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { marcarErro(emailInput, true);  valido = false; } else { marcarErro(emailInput, false); }
     if (!['Admin', 'Usuário'].includes(perfil))                { marcarErro(perfilInput, true); valido = false; } else { marcarErro(perfilInput, false); }
-    if (!valido) { exibirToast('Preencha todos os campos corretamente.', 'erro'); return; }
+    if (!valido) { exibirToast('Campos inválidos', 'Preencha todos os campos corretamente.', 'erro'); return; }
 
     const usuarios = obterUsuarios();
     if (usuarios.find(u => u.email === email)) {
-      exibirToast('Este e-mail já está cadastrado no sistema.', 'erro');
+      exibirToast('E-mail já cadastrado', 'Este e-mail já está cadastrado no sistema.', 'erro');
       return;
     }
 
@@ -163,14 +179,13 @@ async function enviarConvitePorEmail(email, reenvio = false) {
   };
 
   try {
-    exibirToast('Enviando convite por e-mail...', 'info');
+    exibirToast('Enviando convite', 'Aguarde enquanto o e-mail é enviado...', 'info');
 
     await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
 
     exibirToast(
-      reenvio
-        ? `Convite reenviado para ${email}!`
-        : `Convite enviado para ${email}!`,
+      reenvio ? 'Convite reenviado' : 'Convite enviado',
+      `E-mail ${reenvio ? 'reenviado' : 'enviado'} para ${email}.`,
       'sucesso'
     );
 
@@ -178,7 +193,7 @@ async function enviarConvitePorEmail(email, reenvio = false) {
 
   } catch (erro) {
     console.error('Erro ao enviar email via EmailJS:', erro);
-    exibirToast(`Erro ao enviar o e-mail. Verifique o console para detalhes.`, 'erro');
+    exibirToast('Erro ao enviar', 'Verifique o console para detalhes.', 'erro');
   }
 }
 
@@ -198,17 +213,10 @@ function abrirModalRemover(email, nome) {
     salvarUsuarios(usuarios);
     modal.close();
     carregarUsuarios();
-    exibirToast('Usuário removido com sucesso.', 'sucesso');
+    exibirToast('Usuário removido', 'A operação foi concluída com sucesso.', 'sucesso');
   });
 }
 
-function inicializarFechamentoModais() {
-  document.querySelectorAll('[data-modal]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.getElementById(btn.dataset.modal)?.close();
-    });
-  });
-}
 
 function obterUsuarios()       { return JSON.parse(localStorage.getItem('usuarios') || '[]'); }
 function salvarUsuarios(lista) { localStorage.setItem('usuarios', JSON.stringify(lista)); }
@@ -225,14 +233,12 @@ function marcarErro(el, estado) {
   el.style.borderColor = estado ? '#EF4444' : '';
 }
 
-function exibirToast(mensagem, tipo = 'sucesso') {
+function exibirToast(titulo, mensagem, tipo = 'sucesso') {
   const container = document.getElementById('toast-container');
   if (!container) return;
   const toast = document.createElement('div');
-  toast.className = `toast toast-${tipo}`;
-  toast.innerHTML = `<span>${mensagem}</span>
-    <button onclick="this.parentElement.remove()"
-      style="background:none;border:none;cursor:pointer;color:#6B7280;margin-left:8px;">✕</button>`;
+  toast.className = `toast ${tipo}`;
+  toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;
   container.appendChild(toast);
   setTimeout(() => toast.remove(), 5000);
 }
