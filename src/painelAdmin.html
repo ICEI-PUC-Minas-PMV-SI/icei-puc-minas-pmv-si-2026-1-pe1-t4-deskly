@@ -184,8 +184,7 @@
   <dialog id="modal-cadastrar-espaco">
     <div class="modal-header">
       <h3 class="modal-title">Cadastrar Espaço</h3>
-      <button type="button" class="close-modal close-modal-icone" data-modal="modal-cadastrar-espaco"
-        style="display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer;">
+      <button type="button" class="close-modal" data-modal="modal-cadastrar-espaco">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" />
@@ -256,8 +255,7 @@
   <dialog id="modal-editar-admin">
     <div class="modal-header">
       <h3 class="modal-title">Editar Espaço</h3>
-      <button type="button" class="close-modal" id="fecharModalEditarAdmin"
-        style="display: flex; align-items: center; justify-content: center; background: none; border: none; cursor: pointer;">
+      <button type="button" class="close-modal" id="fecharModalEditarAdmin">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" />
@@ -385,8 +383,8 @@
         <label for="convidar-perfil">Nível de acesso</label>
         <select id="convidar-perfil">
           <option value="">Selecione o perfil...</option>
-          <option value="usuario">Usuário — pode fazer reservas</option>
-          <option value="admin">Admin — acesso total ao painel</option>
+          <option value="Usuário">Usuário — pode fazer reservas</option>
+          <option value="Admin">Admin — acesso total ao painel</option>
         </select>
         <span class="msg-erro-modal" id="erro-convidar-perfil"
           style="display:none; color:#EF4444; font-size:0.78rem; margin-top:4px;">

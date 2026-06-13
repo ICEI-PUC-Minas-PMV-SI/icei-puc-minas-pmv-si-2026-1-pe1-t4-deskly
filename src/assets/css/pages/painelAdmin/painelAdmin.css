@@ -266,6 +266,15 @@ main {
     color: var(--color-text-green);
 }
 
+.close-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
 .badge {
     display: inline-flex;
     align-items: center;
