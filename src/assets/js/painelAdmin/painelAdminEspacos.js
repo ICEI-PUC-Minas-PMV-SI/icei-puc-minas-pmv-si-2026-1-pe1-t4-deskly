@@ -37,7 +37,6 @@ function comprimirImagem(file, callback) {
     reader.readAsDataURL(file);
 }
 
-// ✅ MODIFICADO: Deixado completamente vazio para o painel iniciar limpo e dinâmico
 function criarEspacosPadrao() {
     if (localStorage.getItem("espacosSistema")) return;
     salvarEspacosSistema([]); 
@@ -47,7 +46,6 @@ function classeStatus(status) {
     return status === "Ativo" ? "confirmado" : "inativo";
 }
 
-// ✅ ATUALIZADO: Renderização dinâmica das colunas de tabelas limpas
 function carregarEspacosAdmin() {
     const tabelaSalas = document.getElementById("tabelaEspacosSalas");
     const tabelaEstacoes = document.getElementById("tabelaEspacosEstacoes");
@@ -228,7 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
     tipoCadastro.addEventListener("change", atualizarCamposCadastro);
     atualizarCamposCadastro();
 
-    // Confirmar novos cadastros capturando todas as propriedades sem perda
     document.getElementById("btn-confirmar-cadastro-espaco")
         .addEventListener("click", () => {
             const tipo       = tipoCadastro.value;
@@ -261,7 +258,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     nome:       nome,
                     capacidade: tipo === "Sala de Reunião" ? Number(capacidade) : "-",
                     recursos:   tipo === "Sala de Reunião" ? recursos : "-",
-                    area:       area || "-", // ✅ Salva a localização para ambos os tipos agora!
+                    area:       area || "-",
                     status:     status,
                     imagem:     imagemBase64
                 };
