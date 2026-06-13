@@ -454,6 +454,39 @@ button.btn-reservar:disabled {
     overflow: visible;
 }
 
+#modal-reserva .modal-convidados-lista {
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.reserva-contador {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-text-sm);
+    margin-left: 4px;
+}
+
+.btn-remover-convidado {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-sm);
+    font-size: 18px;
+    line-height: 1;
+    padding: 2px 5px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.btn-remover-convidado:hover {
+    color: var(--color-text-red);
+    background: #fee2e2;
+}
+
+.oculto {
+    display: none;
+}
+
 .flatpickr-calendar.static {
     z-index: 9999;
     position: absolute;
