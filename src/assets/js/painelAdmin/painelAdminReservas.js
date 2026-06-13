@@ -116,5 +116,13 @@ document.addEventListener("click", event => {
     if (!botaoExcluir) return;
 
     idReservaParaCancelar = botaoExcluir.dataset.id;
+
+    const reserva = buscarReservasSistema().find(r => r.id === Number(idReservaParaCancelar));
+    if (reserva) {
+        document.getElementById("modal-cancelar-espaco").textContent  = reserva.espaco  || '—';
+        document.getElementById("modal-cancelar-data").textContent    = reserva.data    || '—';
+        document.getElementById("modal-cancelar-horario").textContent = reserva.horario || '—';
+    }
+
     document.getElementById("modal-confirmacao")?.showModal();
 });
