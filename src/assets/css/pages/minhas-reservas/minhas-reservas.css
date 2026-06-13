@@ -63,7 +63,7 @@
 }
 
 .reservas-secao-titulo {
-    font-size: 1.25rem;
+    font: var(--heading-3);
     padding-bottom: 16px;
     border-bottom: 1px solid var(--color-border-card);
 }
@@ -102,6 +102,18 @@
 
 .reservas-table tbody tr:last-child td { border-bottom: none; }
 
+.tabela-vazia {
+    text-align: center;
+    color: var(--color-text-sm);
+    padding: 32px;
+}
+
+.sem-convidados {
+    color: var(--color-text-sm);
+    font: var(--text-sm);
+    margin: 0;
+}
+
 .reservas-table tbody tr:hover {
     background-color: var(--color-background);
     filter: brightness(0.97);
@@ -109,7 +121,8 @@
 
 .col-nowrap { white-space: nowrap; }
 
-/* badges */
+.oculto { display: none; }
+
 .badge {
     display: inline-flex;
     align-items: center;
@@ -123,11 +136,11 @@
 
 .badge-confirmada { background-color: var(--color-badge-green); color: var(--color-text-green); }
 .badge-cancelada { background-color: var(--color-badge-red); color: var(--color-text-red); }
-.badge-concluida { background-color: #e8e8e8; color: #555555; }
+.badge-concluida { background-color: var(--color-badge-neutral); color: var(--color-text-neutral); }
 
 .btn-convidados {
     background: none;
-    border: 1px solid var(--color-border-card) !important;
+    border: 1px solid var(--color-border-card);
     border-radius: 6px;
     padding: 4px 10px;
     cursor: pointer;
@@ -154,6 +167,25 @@
 .btn-editar:hover { background: var(--color-heading)}
 .btn-cancelar:hover { background: var(--color-heading)}
 
+.btn-filtrar-simples {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    min-height: 44px;
+    font: var(--text-md);
+    color: var(--color-text-md);
+    cursor: pointer;
+}
+
+.btn-filtrar-simples:hover {
+    background: var(--color-border-card);
+    color: var(--color-text-md);
+}
+
 .modal-detalhe-btn-confirmar {
     background-color: var(--color-btn-primary);
     color: var(--color-background);
@@ -164,8 +196,6 @@
     cursor: pointer;
     transition: opacity 0.15s ease;
 }
-
-.modal-detalhe-btn-confirmar:hover { opacity: 0.8; }
 
 .modal-detalhe-btn-confirmar-cancelamento {
     background-color: var(--color-btn-primary);
@@ -194,7 +224,6 @@
 
     .btn-filtrar-simples { width: 100%; justify-content: center; }
 
-    /* Remove borda do wrapper para usar o card individualmente */
     .reservas-table-wrapper {
         border: none;
         border-radius: 0;
@@ -202,10 +231,8 @@
         background: transparent;
     }
 
-    /* Oculta o cabeçalho da tabela */
     .reservas-table thead { display: none; }
 
-    /* Tabela vira grid de 2 colunas */
     .reservas-table {
         min-width: unset;
         display: grid;
@@ -215,7 +242,6 @@
 
     .reservas-table tbody { display: contents; }
 
-    /* Cada linha vira um card */
     .reservas-table tbody tr {
         display: flex;
         flex-direction: column;
@@ -229,7 +255,6 @@
         overflow: hidden;
     }
 
-    /* Cada célula mostra o label via data-label */
     .reservas-table td {
         display: flex;
         justify-content: space-between;
@@ -251,7 +276,6 @@
         min-width: 70px;
     }
 
-    /* Coluna de ações: botões lado a lado na parte inferior do card */
     .reservas-table td.col-acoes {
         flex-direction: row;
         flex-wrap: wrap;
@@ -282,25 +306,6 @@
     .reservas-table { grid-template-columns: 1fr; }
 
     h1 { font-size: 1.25rem; }
-}
-
-.btn-filtrar-simples {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: transparent;
-    border: 1px solid var(--color-border-card) !important;
-    border-radius: var(--radius-md);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    min-height: 44px;
-    font: var(--text-md);
-    color: var(--color-text-md);
-    cursor: pointer;
-}
-
-.btn-filtrar-simples:hover {
-    background: var(--color-border-card);
-    color: var(--color-text-md);
 }
 
 .flatpickr-calendar {
@@ -434,12 +439,10 @@
     color: var(--color-background);
 }
 
-#modal-1,
 #modal-editar {
     overflow: visible;
 }
 
-#modal-1 .modal-body,
 #modal-editar .modal-body {
     overflow: visible;
 }
@@ -450,8 +453,7 @@
 }
 
 .editar-contador {
-    font-size: 13px;
-    font-weight: 400;
+    font: var(--text-sm);
     color: var(--color-text-sm);
     margin-left: 4px;
 }
@@ -476,7 +478,7 @@
 
 .btn-remover-convidado:hover {
     color: var(--color-text-red);
-    background: #fee2e2;
+    background: var(--color-badge-red);
 }
 
 .flatpickr-calendar.static {
@@ -486,7 +488,6 @@
     left: 0;
 }
 
-/* ── Toast ────────────────────────────────────────────────── */
 
 #toast-container {
     position: fixed;
