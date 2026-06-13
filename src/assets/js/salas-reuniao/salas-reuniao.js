@@ -241,6 +241,7 @@ function salvarReservaNoSistema(reserva) {
         fim: reserva.fim,
         horario: `${reserva.inicio} – ${reserva.fim}`,
         convidados: reserva.convidados || "-",
+        convidadosStatus: reserva.convidadosStatus || {},
         status: "Confirmada"
     };
 
@@ -349,6 +350,9 @@ btnConfirmar.addEventListener("click", () => {
         return;
     }
 
+    const convidadosStatusObj = {};
+    convidadosReserva.forEach(email => { convidadosStatusObj[email] = 'pendente'; });
+
     const novaReserva = {
         id: Date.now(),
         usuarioId: usuarioLogado.id,
@@ -357,7 +361,8 @@ btnConfirmar.addEventListener("click", () => {
         data,
         inicio,
         fim,
-        convidados: convidadosReserva.join(', ') || '-'
+        convidados: convidadosReserva.join(', ') || '-',
+        convidadosStatus: convidadosStatusObj
     };
 
     reservas.push(novaReserva);
@@ -369,6 +374,20 @@ btnConfirmar.addEventListener("click", () => {
         adicionarNotificacao(
             `Reserva confirmada para ${sala} no dia ${data}, das ${inicio} às ${fim}.`
         );
+    }
+
+    if (convidadosReserva.length > 0 && typeof adicionarNotificacaoParaUsuario === "function") {
+        const todosUsuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+        convidadosReserva.forEach(email => {
+            const convidado = todosUsuarios.find(u => u.email === email);
+            if (convidado) {
+                adicionarNotificacaoParaUsuario(
+                    convidado.id,
+                    `${usuarioLogado.nome} te convidou para ${sala} no dia ${data} das ${inicio} às ${fim}.`,
+                    { tipo: 'convite', reservaId: novaReserva.id, emailConvidado: email, respondida: false }
+                );
+            }
+        });
     }
 
     mostrarToast("Reserva confirmada", "Sua reserva foi realizada com sucesso!", "sucesso");

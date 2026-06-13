@@ -406,6 +406,46 @@ button {
     font-size: 11px;
 }
 
+.convite-acoes {
+    display: flex;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.btn-aceitar-convite,
+.btn-recusar-convite {
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    transition: opacity 0.15s;
+}
+
+.btn-aceitar-convite {
+    background-color: #16a34a;
+    color: #ffffff;
+}
+
+.btn-recusar-convite {
+    background-color: #dc2626;
+    color: #ffffff;
+}
+
+.btn-aceitar-convite:hover,
+.btn-recusar-convite:hover {
+    opacity: 0.82;
+}
+
+.convite-respondida {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--color-text-sm);
+}
+
 .header-icons {
     margin-left: auto;
     display: flex;

@@ -28,9 +28,12 @@ function classeStatusReserva(status) {
     const mapa = { 'Confirmada': 'badge-confirmada', 'Cancelada': 'badge-cancelada', 'Concluída': 'badge-concluida' };
     return mapa[status] || 'badge-concluida';
 }
-function parseConvidados(str) {
+function parseConvidados(str, statusMap) {
     if (!str || str === '-') return [];
-    return str.split(',').map(e => e.trim()).filter(Boolean).map(email => ({ email, status: 'pendente' }));
+    return str.split(',').map(e => e.trim()).filter(Boolean).map(email => ({
+        email,
+        status: (statusMap && statusMap[email]) || 'pendente'
+    }));
 }
 
 // --- Toast ---
@@ -174,7 +177,7 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
         const reserva = obterReservasSistema().find(r => r.id === Number(btnEditar.dataset.id));
         if (!reserva) return;
         idParaEditar       = reserva.id;
-        convidadosEditando = parseConvidados(reserva.convidados);
+        convidadosEditando = parseConvidados(reserva.convidados, reserva.convidadosStatus);
         const ehMesa       = reserva.tipo === 'Estação de Trabalho';
         popularSelectEspaco(reserva.espaco, reserva.tipo);
         document.getElementById('editar-data').value   = reserva.data;
@@ -197,7 +200,7 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
     if (btnConv) {
         const reserva = obterReservasSistema().find(r => r.id === Number(btnConv.dataset.id));
         if (!reserva) return;
-        const convidados    = parseConvidados(reserva.convidados);
+        const convidados    = parseConvidados(reserva.convidados, reserva.convidadosStatus);
         const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema')) || [];
         const espacoAdmin   = espacosSistema.find(e => e.nome === reserva.espaco);
         const capacidade    = (espacoAdmin && Number(espacoAdmin.capacidade) >= 1) ? espacoAdmin.capacidade : null;
@@ -249,26 +252,31 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
         mostrarToast('Horário inválido', 'O início precisa ser menor que o fim.', 'erro');
         return;
     }
+    const novoStatus = {};
+    convidadosEditando.forEach(c => { novoStatus[c.email] = c.status; });
+
     const reservas = obterReservasSistema();
     const idx = reservas.findIndex(r => r.id === idParaEditar);
     if (idx !== -1) {
-        reservas[idx].espaco     = espaco;
-        reservas[idx].data       = data;
-        reservas[idx].inicio     = inicio;
-        reservas[idx].fim        = fim;
-        reservas[idx].horario    = `${inicio} – ${fim}`;
-        reservas[idx].convidados = convidadosEditando.map(c => c.email).join(', ') || '-';
+        reservas[idx].espaco          = espaco;
+        reservas[idx].data            = data;
+        reservas[idx].inicio          = inicio;
+        reservas[idx].fim             = fim;
+        reservas[idx].horario         = `${inicio} – ${fim}`;
+        reservas[idx].convidados      = convidadosEditando.map(c => c.email).join(', ') || '-';
+        reservas[idx].convidadosStatus = novoStatus;
         salvarReservasSistema(reservas);
     }
 
     const reservasSalas = JSON.parse(localStorage.getItem('reservasSalas') || '[]');
     const idxSalas = reservasSalas.findIndex(r => r.id === idParaEditar);
     if (idxSalas !== -1) {
-        reservasSalas[idxSalas].sala       = espaco;
-        reservasSalas[idxSalas].data       = data;
-        reservasSalas[idxSalas].inicio     = inicio;
-        reservasSalas[idxSalas].fim        = fim;
-        reservasSalas[idxSalas].convidados = convidadosEditando.map(c => c.email).join(', ') || '-';
+        reservasSalas[idxSalas].sala            = espaco;
+        reservasSalas[idxSalas].data            = data;
+        reservasSalas[idxSalas].inicio          = inicio;
+        reservasSalas[idxSalas].fim             = fim;
+        reservasSalas[idxSalas].convidados      = convidadosEditando.map(c => c.email).join(', ') || '-';
+        reservasSalas[idxSalas].convidadosStatus = novoStatus;
         localStorage.setItem('reservasSalas', JSON.stringify(reservasSalas));
     }
     idParaEditar = null;
