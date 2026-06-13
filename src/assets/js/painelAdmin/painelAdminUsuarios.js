@@ -231,6 +231,8 @@ function iniciais(texto) {
 function marcarErro(el, estado) {
   if (!el) return;
   el.style.borderColor = estado ? '#EF4444' : '';
+  const span = el.id ? document.getElementById(`erro-${el.id}`) : null;
+  if (span) span.style.display = estado ? 'block' : 'none';
 }
 
 function exibirToast(titulo, mensagem, tipo = 'sucesso') {

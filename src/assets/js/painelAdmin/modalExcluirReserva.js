@@ -64,9 +64,3 @@ if (btnConfirmarRemover) {
     });
 }
 
-if (btnConfirmarConvidar) {
-    btnConfirmarConvidar.addEventListener("click", () => {
-        const modal = document.getElementById("modal-convidar-usuario");
-        if (modal) modal.close();
-    });
-}
