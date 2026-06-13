@@ -244,6 +244,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
+            if (tipo === "Sala de Reunião") {
+                const capVal = Number(capacidade);
+                if (!capVal || capVal < 1) {
+                    mostrarToast("Capacidade inválida", "A capacidade deve ser igual ou maior que 1.", "erro");
+                    return;
+                }
+            }
+
             function salvarNovoEspaco(imagemBase64 = "") {
                 const espacos = buscarEspacosSistema();
 
