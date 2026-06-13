@@ -21,7 +21,7 @@
             </section>
 
             <div class="reservas-filtros">
-                <div class="custom-select">
+                <div class="custom-select" id="filtro-tipo">
                     <button class="custom-select-trigger" type="button">
                         <span class="custom-select-label">Todos os tipos</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -33,7 +33,7 @@
                     </ul>
                 </div>
                 
-                <div class="custom-select">
+                <div class="custom-select" id="filtro-status">
                     <button class="custom-select-trigger" type="button">
                         <span class="custom-select-label">Qualquer status</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -85,46 +85,6 @@
             </section>
 
         </main>
-
-        <dialog id="modal-1">
-            <form>
-                <div class="modal-header">
-                    <h3>Nova reserva</h3>
-                    <button class="close-modal" data-modal="modal-1" type="button">X</button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <label>Estação de trabalho</label>
-                        <select>
-                            <option>Mesa 01 — Andar 2 - Ala A</option>
-                            <option>Mesa 02 — Andar 2 - Ala B</option>
-                            <option>Mesa 03 — Andar 3 - Ala C</option>
-                            <option>Mesa 04 — Andar 2 - Ala D</option>
-                            <option>Mesa 05 — Andar 3 - Ala A</option>
-                            <option>Mesa 06 — Andar 3 - Ala B</option>
-                            <option>Mesa 07 — Andar 1 - Ala C</option>
-                            <option>Mesa 08 — Andar 1 - Ala D</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Data</label>
-                        <input type="text" id="modal-1-date" class="modal-date-input" placeholder="dd/mm/aaaa"> 
-                    </div>
-                    <div class="input-group">
-                        <label>Início</label>
-                        <input type="time">
-                    </div>
-                    <div class="input-group">
-                        <label>Fim</label>
-                        <input type="time">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
-                    <button type="button">Confirmar</button>
-                </div>
-            </form>
-        </dialog>
 
         <dialog id="modal-editar">
             <div class="modal-header">
@@ -199,8 +159,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="modal-detalhe-btn-cancelar close-modal" data-modal="modal-convidados">Cancelar</button>
-                <button type="button" class="modal-detalhe-btn-confirmar">Confirmar</button>
+                <button type="button" class="close-modal" data-modal="modal-convidados">Fechar</button>
             </div>
         </dialog>
 
@@ -236,7 +195,7 @@
                 <p class="modal-detalhe-aviso">O espaço será liberado para outros colaboradores.</p>
             </div>
 
-            <div class="modal-detalhe-footer">
+            <div class="modal-footer">
                 <button type="button" class="modal-detalhe-btn-cancelar close-modal" data-modal="modal-cancelar-reserva">Cancelar</button>
                 <button type="button" class="modal-detalhe-btn-confirmar-cancelamento">Confirmar</button>
             </div>
