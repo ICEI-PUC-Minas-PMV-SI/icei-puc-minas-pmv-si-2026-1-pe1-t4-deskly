@@ -102,8 +102,8 @@ function carregarMinhasReservas() {
     const logado = obterUsuarioLogado();
     if (!logado) return;
     const minhas = obterReservasSistema().filter(r => r.usuarioId === logado.id);
-    renderProximas(minhas.filter(ehProxima));
-    renderHistorico(minhas.filter(r => !ehProxima(r)));
+    renderProximas(minhas.filter(ehProxima).sort((a, b) => parsearData(a.data) - parsearData(b.data)));
+    renderHistorico(minhas.filter(r => !ehProxima(r)).sort((a, b) => parsearData(b.data) - parsearData(a.data)));
 }
 
 // --- Modal: Editar Reserva ---

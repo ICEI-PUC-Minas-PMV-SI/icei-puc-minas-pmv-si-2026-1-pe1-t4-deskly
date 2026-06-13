@@ -11,12 +11,19 @@ function salvarReservasSistema(reservas) {
     localStorage.setItem("reservasSistema", JSON.stringify(reservas));
 }
 
+function parsearData(str) {
+    const [d, m, y] = str.split('/');
+    return new Date(Number(y), Number(m) - 1, Number(d));
+}
+
 function carregarReservasAdmin() {
     const tabela = document.getElementById("tabelaReservasAdmin");
 
     if (!tabela) return;
 
-    const reservas = buscarReservasSistema();
+    const reservas = buscarReservasSistema()
+        .slice()
+        .sort((a, b) => parsearData(b.data) - parsearData(a.data));
 
     tabela.innerHTML = "";
 
