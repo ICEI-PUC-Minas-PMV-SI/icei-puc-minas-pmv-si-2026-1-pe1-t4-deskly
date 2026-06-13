@@ -13,7 +13,9 @@ const inputFiltroInicio = document.querySelector(".filtro-inicio");
 const inputFiltroFim = document.querySelector(".filtro-fim");
 const inputInicio = document.getElementById("start-time");
 const inputFim = document.getElementById("ending-time");
-const inputConvidados = document.getElementById("convidados");
+
+let convidadosReserva = [];
+let capacidadeReserva = Infinity;
 
 function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
@@ -88,6 +90,45 @@ function salvarReservasSistema(reservas) {
 
 function obterUsuarioLogado() {
     return JSON.parse(localStorage.getItem("usuarioLogado"));
+}
+
+function renderizarConvidadosReserva() {
+    const contador = document.getElementById("reserva-contador-convidados");
+    if (contador) {
+        contador.textContent = capacidadeReserva !== Infinity
+            ? `${convidadosReserva.length} / ${capacidadeReserva}`
+            : (convidadosReserva.length > 0 ? convidadosReserva.length : '');
+    }
+    const lista = document.getElementById("reserva-lista-convidados");
+    if (!lista) return;
+    lista.classList.toggle("oculto", convidadosReserva.length === 0);
+    lista.innerHTML = convidadosReserva.map((email, i) => `
+        <div class="modal-convidados-item">
+            <span>${email}</span>
+            <button type="button" class="btn-remover-convidado" data-index="${i}" title="Remover">×</button>
+        </div>
+    `).join('');
+    lista.querySelectorAll('.btn-remover-convidado').forEach(btn => {
+        btn.addEventListener('click', () => {
+            convidadosReserva.splice(Number(btn.dataset.index), 1);
+            renderizarConvidadosReserva();
+        });
+    });
+    popularSelectConvidadosReserva();
+}
+
+function popularSelectConvidadosReserva() {
+    const select = document.getElementById("reserva-novo-convidado");
+    if (!select) return;
+    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+    const logado = obterUsuarioLogado();
+    const disponiveis = usuarios.filter(u =>
+        u.senhaDefinida === true &&
+        (!logado || u.email !== logado.email) &&
+        !convidadosReserva.includes(u.email)
+    );
+    select.innerHTML = '<option value="">Selecionar usuário...</option>' +
+        disponiveis.map(u => `<option value="${u.email}">${u.email}</option>`).join('');
 }
 
 function converterHorarioParaMinutos(horario) {
@@ -240,6 +281,19 @@ btnNovaReserva.addEventListener("click", () => {
 
 selectEspaco.addEventListener("change", verificarCapacidade);
 
+document.getElementById("reserva-btn-adicionar").addEventListener("click", () => {
+    const select = document.getElementById("reserva-novo-convidado");
+    const email  = select.value;
+    if (!email) return;
+    if (capacidadeReserva !== Infinity && convidadosReserva.length >= capacidadeReserva) {
+        mostrarToast("Capacidade máxima", `Limite de ${capacidadeReserva} convidados atingido.`, "erro");
+        return;
+    }
+    convidadosReserva.push(email);
+    select.value = '';
+    renderizarConvidadosReserva();
+});
+
 function verificarCapacidade() {
     const limiteMsg = document.getElementById("limite-msg");
     const salas = buscarEspacosSistema();
@@ -250,10 +304,13 @@ function verificarCapacidade() {
     );
 
     if (sala) {
+        capacidadeReserva = Number(sala.capacidade) >= 1 ? Number(sala.capacidade) : Infinity;
         limiteMsg.textContent = `Limite de ${sala.capacidade} convidados para este espaço.`;
     } else {
+        capacidadeReserva = Infinity;
         limiteMsg.textContent = "Selecione uma sala para ver o limite de convidados.";
     }
+    renderizarConvidadosReserva();
 }
 
 btnConfirmar.addEventListener("click", () => {
@@ -300,7 +357,7 @@ btnConfirmar.addEventListener("click", () => {
         data,
         inicio,
         fim,
-        convidados: inputConvidados.value
+        convidados: convidadosReserva.join(', ') || '-'
     };
 
     reservas.push(novaReserva);
@@ -319,8 +376,10 @@ btnConfirmar.addEventListener("click", () => {
     inputDataModal.value = "";
     inputInicio.value = "";
     inputFim.value = "";
-    inputConvidados.value = "";
+    convidadosReserva = [];
+    capacidadeReserva = Infinity;
     selectEspaco.value = "";
+    renderizarConvidadosReserva();
 
     verificarCapacidade();
     modalReserva.close();
@@ -380,7 +439,6 @@ function aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro) {
     aplicarStatusEspacosSalas();
 }
 
-// FUNÇÃO ATUALIZADA COM TODOS OS CAMPOS DO SEU NOVO MODAL HTML
 function abrirModalDetalhes(card) {
     const nomeSala = card.dataset.sala;
     const badge = card.querySelector(".badge");
@@ -464,12 +522,18 @@ btnReservarDosDetalhes.addEventListener("click", () => {
 
 function preencherSelectComSala(nomeSala) {
     selectEspaco.value = nomeSala;
+    convidadosReserva = [];
+    capacidadeReserva = Infinity;
+    renderizarConvidadosReserva();
     verificarCapacidade();
 }
 
 function restaurarSelectCompleto() {
     selectEspaco.value = "";
     atualizarSelectSalas();
+    convidadosReserva = [];
+    capacidadeReserva = Infinity;
+    renderizarConvidadosReserva();
     verificarCapacidade();
 }
 
