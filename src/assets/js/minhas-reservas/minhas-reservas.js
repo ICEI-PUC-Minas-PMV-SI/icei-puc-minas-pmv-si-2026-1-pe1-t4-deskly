@@ -337,7 +337,7 @@ document.querySelector('.btn-filtrar-simples').addEventListener('click', () => {
     });
 });
 
-// --- Flatpickr ---
+
 
 flatpickr('.modal-date-input', {
     locale: 'pt',
@@ -348,6 +348,6 @@ flatpickr('.modal-date-input', {
     static: true
 });
 
-// --- Init ---
+
 
 carregarMinhasReservas();
