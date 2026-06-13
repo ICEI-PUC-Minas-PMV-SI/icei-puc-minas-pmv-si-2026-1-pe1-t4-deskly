@@ -260,6 +260,17 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
         reservas[idx].convidados = convidadosEditando.map(c => c.email).join(', ') || '-';
         salvarReservasSistema(reservas);
     }
+
+    const reservasSalas = JSON.parse(localStorage.getItem('reservasSalas') || '[]');
+    const idxSalas = reservasSalas.findIndex(r => r.id === idParaEditar);
+    if (idxSalas !== -1) {
+        reservasSalas[idxSalas].sala       = espaco;
+        reservasSalas[idxSalas].data       = data;
+        reservasSalas[idxSalas].inicio     = inicio;
+        reservasSalas[idxSalas].fim        = fim;
+        reservasSalas[idxSalas].convidados = convidadosEditando.map(c => c.email).join(', ') || '-';
+        localStorage.setItem('reservasSalas', JSON.stringify(reservasSalas));
+    }
     idParaEditar = null;
     modalEditar.close();
     carregarMinhasReservas();

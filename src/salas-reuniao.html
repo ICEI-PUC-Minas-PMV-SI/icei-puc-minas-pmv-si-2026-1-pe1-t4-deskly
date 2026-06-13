@@ -90,12 +90,20 @@
                     </div>
                 </div>
 
-                <div class="input-group">
-                    <label for="convidados">Convidados (e-mails separados por vírgula)</label>
-                    <input type="text" id="convidados">
-                    <small id="limite-msg">
-                        Selecione uma sala para ver o limite de convidados.
-                    </small>
+                <div class="input-group" id="reserva-grupo-convidados">
+                    <label>Convidados <span id="reserva-contador-convidados" class="reserva-contador"></span></label>
+                    <div class="modal-convidados-lista oculto" id="reserva-lista-convidados"></div>
+                    <small id="limite-msg">Selecione uma sala para ver o limite de convidados.</small>
+                </div>
+
+                <div class="input-group" id="reserva-grupo-adicionar">
+                    <label>Adicionar convidado</label>
+                    <div class="conv-adicionar-row">
+                        <select id="reserva-novo-convidado">
+                            <option value="">Selecionar usuário...</option>
+                        </select>
+                        <button type="button" class="conv-adicionar-btn" id="reserva-btn-adicionar">Adicionar</button>
+                    </div>
                 </div>
             </div>
 
