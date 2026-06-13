@@ -44,7 +44,7 @@ function carregarUsuarios(filtro = '') {
             padding:1px 6px;font-weight:600;vertical-align:middle;">Pendente</span>`
       : '';
 
-    const badgePerfil = usuario.perfil === 'admin'
+    const badgePerfil = usuario.perfil === 'Admin'
       ? `<span style="background:#EFF6FF;color:#1D4ED8;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:600;">Admin</span>`
       : `<span style="background:#F0FDF4;color:#15803D;border-radius:4px;padding:2px 8px;font-size:0.78rem;font-weight:600;">Usuário</span>`;
 
@@ -116,11 +116,11 @@ function inicializarConvite() {
     const perfilInput = document.getElementById('convidar-perfil') || modal.querySelectorAll('select')[0] || modal.querySelectorAll('input')[1];
 
     const email  = emailInput?.value.trim().toLowerCase();
-    const perfil = perfilInput?.value.trim().toLowerCase();
+    const perfil = perfilInput?.value.trim();
 
     let valido = true;
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { marcarErro(emailInput, true);  valido = false; } else { marcarErro(emailInput, false); }
-    if (!['admin', 'usuario'].includes(perfil))                { marcarErro(perfilInput, true); valido = false; } else { marcarErro(perfilInput, false); }
+    if (!['Admin', 'Usuário'].includes(perfil))                { marcarErro(perfilInput, true); valido = false; } else { marcarErro(perfilInput, false); }
     if (!valido) { exibirToast('Preencha todos os campos corretamente.', 'erro'); return; }
 
     const usuarios = obterUsuarios();
@@ -130,7 +130,7 @@ function inicializarConvite() {
     }
 
     const token = gerarToken();
-    usuarios.push({ email, perfil, token, senhaDefinida: false, dataCriacao: new Date().toISOString() });
+    usuarios.push({ id: Date.now(), nome: '', email, senha: '', perfil, token, senhaDefinida: false, dataCriacao: new Date().toISOString() });
     salvarUsuarios(usuarios);
     document.getElementById('modal-convidar-usuario')?.close();
     if (emailInput)  emailInput.value  = '';
@@ -152,7 +152,7 @@ async function enviarConvitePorEmail(email, reenvio = false) {
 
   const link = `${window.location.origin}/src/primeiro-acesso.html?token=${usuario.token}`;
 
-  const perfilLabel = usuario.perfil === 'admin'
+  const perfilLabel = usuario.perfil === 'Admin'
     ? 'Administrador — acesso total ao sistema'
     : 'Usuário — pode fazer e gerenciar suas reservas';
 
