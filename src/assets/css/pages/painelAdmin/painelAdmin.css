@@ -111,12 +111,13 @@ main {
     position: relative;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     min-height: 44px;
     border: 1px solid var(--color-border-card);
     border-radius: var(--radius-md);
-    background: var(--color-background);
+    background-color: transparent;
     padding: var(--spacing-xs) var(--spacing-sm);
-    padding-right: 40px;
+    overflow: hidden;
     width: 220px;
 }
 
@@ -129,6 +130,7 @@ main {
     width: 100%;
     color: var(--color-text-md);
     font: var(--text-md);
+    cursor: pointer;
 }
 
 .date-wrapper .calendar-icon {
@@ -264,6 +266,15 @@ main {
 .status.confirmado {
     background-color: var(--color-badge-green);
     color: var(--color-text-green);
+}
+
+.close-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .badge {
