@@ -137,7 +137,12 @@ function salvarEdicaoEspaco() {
     espaco.area = document.getElementById("editarEspacoArea").value.trim();
 
     if (espaco.tipo === "Sala de Reunião") {
-        espaco.capacidade = document.getElementById("editarEspacoCapacidade").value.trim();
+        const capVal = Number(document.getElementById("editarEspacoCapacidade").value);
+        if (!capVal || capVal < 1) {
+            mostrarToast("Capacidade inválida", "A capacidade deve ser igual ou maior que 1.", "erro");
+            return;
+        }
+        espaco.capacidade = capVal;
         espaco.recursos   = document.getElementById("editarEspacoRecursos").value.trim();
     } else {
         espaco.capacidade = "-";
