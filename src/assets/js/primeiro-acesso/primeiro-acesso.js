@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const form        = document.querySelector('form');
   const inputEmail  = document.getElementById('email');
+  const inputNome   = document.getElementById('nome');
   const inputSenha  = document.getElementById('novaSenha');
   const inputConf   = document.getElementById('confirmarSenha');
   const params = new URLSearchParams(window.location.search);
@@ -24,12 +25,18 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
+    const nome      = inputNome?.value.trim();
     const senha     = inputSenha.value;
     const confirmar = inputConf.value;
 
     limparErros();
 
     let valido = true;
+
+    if (!nome) {
+      exibirErro(inputNome, 'Informe seu nome completo.');
+      valido = false;
+    }
 
     if (senha.length < 8) {
       exibirErro(inputSenha, 'A senha deve ter pelo menos 8 caracteres.');
@@ -46,9 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const idx = usuarios.findIndex(u => u.token === token);
     if (idx === -1) return;
 
-    usuarios[idx].senha         = btoa(senha);   
+    usuarios[idx].nome          = nome;
+    usuarios[idx].senha         = senha;
     usuarios[idx].senhaDefinida = true;
-    usuarios[idx].token         = null;          
+    usuarios[idx].token         = null;
 
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
     window.location.href = 'login.html?ativado=1';
