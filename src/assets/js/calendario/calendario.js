@@ -163,26 +163,31 @@ function abrirView(dia, index) {
     diaSelecionado = dia;
     indexSelecionado = index;
 
+    const espacosSistema = JSON.parse(localStorage.getItem("espacosSistema")) || [];
+    const infoOriginal = espacosSistema.find(item => item.nome === dadosEspaco.nome);
+    const capacidadeText = infoOriginal ? infoOriginal.capacidade : "-";
+    let areaText = infoOriginal ? infoOriginal.area : "-";
+
+    if (!areaText || areaText === "-") {
+        areaText = dadosEspaco.area || "-";
+    }
+
     document.getElementById("titulo").innerHTML = `
         ${dadosEspaco.nome}
-        ${
-            dadosEspaco.area
-                ? `<br><small style="color: var(--color-text-md); font-size: 13px; font-weight: normal;">${dadosEspaco.area}</small>`
-                : ""
+        ${dadosEspaco.area
+            ? `<br><small style="color: var(--color-text-md); font-size: 13px; font-weight: normal;">${dadosEspaco.area}</small>`
+            : ""
         }
     `;
 
-    document.getElementById("horario").innerText =
-        `${reserva.inicio} - ${reserva.fim}`;
+    document.getElementById("horario").innerText = `${reserva.inicio} - ${reserva.fim}`;
+    document.getElementById("respView").innerText = `Responsável: ${reserva.responsavel || "-"}`;
+    document.getElementById("capacidadeView").innerText = `Capacidade: ${capacidadeText} pessoas`;
+    document.getElementById("areaView").innerText = `Área / Local: ${areaText}`;
 
-    document.getElementById("respView").innerText =
-        `Responsável: ${reserva.responsavel || "-"}`;
-
-    document.getElementById("statusView").innerText =
-        `Status: ${reserva.status}`;
+    document.getElementById("statusView").innerText = `Status: ${reserva.status}`;
 
     const listaEmails = document.getElementById("listaEmails");
-
     listaEmails.innerHTML = "";
 
     if (reserva.emails && reserva.emails !== "-") {
