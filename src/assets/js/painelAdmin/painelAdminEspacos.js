@@ -52,91 +52,12 @@ function comprimirImagem(file, callback) {
     reader.readAsDataURL(file);
 }
 
+// Modificado: Agora inicia o sistema com um array vazio se não houver dados
 function criarEspacosPadrao() {
     if (localStorage.getItem("espacosSistema")) return;
 
-    const espacosPadrao = [
-        {
-            id: 1,
-            tipo: "Sala de Reunião",
-            nome: "Sala Alfa",
-            capacidade: 8,
-            recursos: "TV, Videoconferência, Lousa",
-            area: "-",
-            status: "Ativo",
-            imagem: "assets/images/Sala1.png"
-        },
-        {
-            id: 2,
-            tipo: "Sala de Reunião",
-            nome: "Sala Beta",
-            capacidade: 4,
-            recursos: "TV, Videoconferência",
-            area: "-",
-            status: "Ativo",
-            imagem: "assets/images/Sala2.png"
-        },
-        {
-            id: 3,
-            tipo: "Sala de Reunião",
-            nome: "Sala Gama",
-            capacidade: 12,
-            recursos: "TV, Videoconferência, Lousa, Ar-condicionado",
-            area: "-",
-            status: "Ativo",
-            imagem: "assets/images/Sala3.png"
-        },
-        {
-            id: 4,
-            tipo: "Sala de Reunião",
-            nome: "Sala Delta",
-            capacidade: 6,
-            recursos: "Lousa",
-            area: "-",
-            status: "Inativo",
-            imagem: "assets/images/Sala4.png"
-        },
-        {
-            id: 5,
-            tipo: "Estação de Trabalho",
-            nome: "Mesa 01",
-            capacidade: "-",
-            recursos: "-",
-            area: "Andar 1 - Ala A",
-            status: "Ativo",
-            imagem: ""
-        },
-        {
-            id: 6,
-            tipo: "Estação de Trabalho",
-            nome: "Mesa 02",
-            capacidade: "-",
-            recursos: "-",
-            area: "Andar 2 - Ala B",
-            status: "Ativo",
-            imagem: ""
-        },
-        {
-            id: 7,
-            tipo: "Estação de Trabalho",
-            nome: "Mesa 03",
-            capacidade: "-",
-            recursos: "-",
-            area: "Andar 3 - Ala C",
-            status: "Inativo",
-            imagem: ""
-        },
-        {
-            id: 8,
-            tipo: "Estação de Trabalho",
-            nome: "Mesa 04",
-            capacidade: "-",
-            recursos: "-",
-            area: "Andar 4 - Ala D",
-            status: "Ativo",
-            imagem: ""
-        }
-    ];
+    // Removemos todos os objetos que vinham por padrão
+    const espacosPadrao = [];
 
     salvarEspacosSistema(espacosPadrao);
 }
@@ -295,7 +216,7 @@ function salvarEdicaoEspaco() {
     carregarEspacosAdmin();
 
     mostrarToast(
-        "Espaço atualizado",
+        "Espaço updated",
         `${espaco.nome} foi atualizado com sucesso.`,
         "sucesso"
     );
