@@ -107,7 +107,7 @@ function garantirAdminDeskly() {
     if (!admin) {
         usuarios.push({
             id: 1,
-            nome: 'Administrador Deskly',
+            nome: 'Deskly',
             email: 'sistema.deskly@gmail.com',
             senha: 'Deskly2026.',
             perfil: 'Admin',
