@@ -1,14 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const form        = document.querySelector('form');
-  const inputEmail  = document.getElementById('email');
-  const inputNome   = document.getElementById('nome');
-  const inputSenha  = document.getElementById('novaSenha');
-  const inputConf   = document.getElementById('confirmarSenha');
+  const form = document.querySelector('form');
+  const inputEmail = document.getElementById('email');
+  const inputNome = document.getElementById('nome');
+  const inputSenha = document.getElementById('novaSenha');
+  const inputConf = document.getElementById('confirmarSenha');
   const params = new URLSearchParams(window.location.search);
-  const token  = params.get('token') || '';
+  const token = params.get('token') || '';
   const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-  const usuario  = usuarios.find(u => u.token === token && !u.senhaDefinida);
+  const usuario = usuarios.find(u => u.token === token && !u.senhaDefinida);
 
   if (!token || !usuario) {
     exibirEstadoInvalido();
@@ -16,17 +16,17 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (inputEmail) {
-    inputEmail.value    = usuario.email;
+    inputEmail.value = usuario.email;
     inputEmail.readOnly = true;
     inputEmail.style.background = '#F3F4F6';
-    inputEmail.style.cursor     = 'not-allowed';
+    inputEmail.style.cursor = 'not-allowed';
   }
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const nome      = inputNome?.value.trim();
-    const senha     = inputSenha.value;
+    const nome = inputNome?.value.trim();
+    const senha = inputSenha.value;
     const confirmar = inputConf.value;
 
     limparErros();
@@ -53,10 +53,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const idx = usuarios.findIndex(u => u.token === token);
     if (idx === -1) return;
 
-    usuarios[idx].nome          = nome;
-    usuarios[idx].senha         = senha;
+    usuarios[idx].nome = nome;
+    usuarios[idx].senha = senha;
     usuarios[idx].senhaDefinida = true;
-    usuarios[idx].token         = null;
+    usuarios[idx].token = null;
 
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
     window.location.href = 'login.html?ativado=1';
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function exibirEstadoInvalido() {
   const formEl = document.querySelector('form');
-  const h2     = document.querySelector('h2');
+  const h2 = document.querySelector('h2');
 
   if (h2) h2.textContent = 'Link inválido';
 
@@ -78,9 +78,7 @@ function exibirEstadoInvalido() {
           Este link de ativação não é válido ou já foi utilizado.<br>
           Solicite um novo convite ao administrador.
         </p>
-        <a href="login.html"
-           style="display:inline-block; padding:10px 28px; background:var(--color-primary,#2563EB);
-                  color:#fff; border-radius:8px; text-decoration:none; font-weight:600;">
+        <a href="login.html" class="primeiroacesso-button" style="display:block; text-decoration:none; text-align:center;">
           Ir para o login
         </a>
       </div>`;

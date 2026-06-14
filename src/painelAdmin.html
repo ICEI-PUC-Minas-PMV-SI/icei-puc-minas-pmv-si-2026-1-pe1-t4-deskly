@@ -3,7 +3,8 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://127.0.0.1:5500; connect-src 'self' http://127.0.0.1:5500 https://api.emailjs.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://www.gstatic.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com;">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self' http://127.0.0.1:5500; connect-src 'self' http://127.0.0.1:5500 https://api.emailjs.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://www.gstatic.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' http://127.0.0.1:5500 blob: data:;">
   <title>Painel Admin</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
   <link rel="stylesheet" href="assets/css/global/global.css" />
@@ -11,12 +12,9 @@
 </head>
 
 <body>
-
   <div id="toast-container"></div>
-
   <header id="header"></header>
   <aside id="aside"></aside>
-
   <main>
     <section class="painel-admin">
       <div class="painel-admin-header">
@@ -26,7 +24,6 @@
         </div>
       </div>
     </section>
-
     <nav class="tabs">
       <ul class="tabs-list">
         <li class="tab active" data-tab="reservas">Todas as reservas</li>
@@ -35,7 +32,6 @@
         <div class="tab-indicator"></div>
       </ul>
     </nav>
-
     <section class="filtros-container" data-tab-content="reservas">
       <div class="date-wrapper">
         <input type="text" id="filtro-data-reservas" class="date-input" placeholder="dd/mm/aaaa" />
@@ -58,7 +54,6 @@
       </div>
       <button class="btn-action" id="btn-filtrar-reservas">Filtrar</button>
     </section>
-
     <section class="tabela-container" data-tab-content="reservas">
       <table class="tabela-reservas">
         <thead>
@@ -74,7 +69,6 @@
         <tbody id="tabelaReservasAdmin"></tbody>
       </table>
     </section>
-
     <section class="espacos-container" data-tab-content="espacos">
       <div class="aba-header">
         <h2>Salas de Reunião</h2>
@@ -82,7 +76,6 @@
           + Cadastrar Espaço
         </button>
       </div>
-
       <div class="tabela-container">
         <table class="tabela-reservas">
           <thead>
@@ -98,11 +91,9 @@
           <tbody id="tabelaEspacosSalas"></tbody>
         </table>
       </div>
-
       <div class="aba-header">
         <h2>Estações de Trabalho</h2>
       </div>
-
       <div class="tabela-container">
         <table class="tabela-reservas">
           <thead>
@@ -117,7 +108,6 @@
         </table>
       </div>
     </section>
-
     <section class="usuarios-container" data-tab-content="usuarios">
       <div class="aba-header">
         <div class="usuarios-busca">
@@ -128,7 +118,6 @@
           + Convidar usuário
         </button>
       </div>
-
       <div class="tabela-container">
         <table class="tabela-reservas">
           <thead>
@@ -145,7 +134,6 @@
       </div>
     </section>
   </main>
-
   <dialog id="modal-confirmacao">
     <div class="modal-confirmacao-header">
       <h3 class="modal-confirmacao-titulo">Cancelar Reserva</h3>
@@ -177,10 +165,10 @@
     </div>
     <div class="modal-confirmacao-footer">
       <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-confirmacao">Cancelar</button>
-      <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Cancelar reserva</button>
+      <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Cancelar
+        reserva</button>
     </div>
   </dialog>
-
   <dialog id="modal-cadastrar-espaco">
     <div class="modal-header">
       <h3 class="modal-title">Cadastrar Espaço</h3>
@@ -193,7 +181,7 @@
       </button>
     </div>
     <div class="modal-body">
-      <div class="input-group" style="margin-bottom: 16px;">
+      <div class="input-group group-spacing">
         <label>Tipo de Espaço</label>
         <select id="cadastroTipoEspaco">
           <option value="">Selecione o tipo...</option>
@@ -201,39 +189,33 @@
           <option value="Estação de Trabalho">Estação de Trabalho</option>
         </select>
       </div>
-
       <div id="camposCadastroEspaco">
-        <div class="input-group" style="margin-bottom: 16px;">
+        <div class="input-group group-spacing">
           <label>Nome do Espaço</label>
           <input type="text" id="cadastroNomeEspaco">
         </div>
-
-        <div class="input-group" id="grupoLocalizacaoCadastro" style="margin-bottom: 16px;">
+        <div class="input-group group-spacing" id="grupoLocalizacaoCadastro">
           <label>Área / Localização</label>
           <input type="text" id="cadastroAreaEspaco">
         </div>
-
-        <div class="modal-campo-row" id="grupoSalaCadastro"
-          style="display: flex; gap: 16px; width: 100%; margin-bottom: 16px;">
-          <div class="input-group" style="flex: 1;">
+        <div class="modal-campo-row row-spacing" id="grupoSalaCadastro">
+          <div class="input-group flex-1">
             <label>Capacidade</label>
             <input type="number" id="cadastroCapacidadeEspaco" min="1" placeholder="Ex: 8">
           </div>
-          <div class="input-group" style="flex: 2;">
+          <div class="input-group flex-2">
             <label>Recursos</label>
             <input type="text" id="cadastroRecursosEspaco">
           </div>
         </div>
-
-        <div class="input-group" style="margin-bottom: 16px;">
+        <div class="input-group group-spacing">
           <label>Status Inicial</label>
           <select id="cadastroStatusEspaco">
             <option value="Ativo">Ativo</option>
             <option value="Inativo">Inativo</option>
           </select>
         </div>
-
-        <div class="input-group" style="margin-bottom: 16px;">
+        <div class="input-group group-spacing">
           <label>Imagem do Espaço</label>
           <label class="upload-imagem-label" for="cadastroImagemEspaco">
             <span id="nomeImagemEspaco">Escolher imagem...</span>
@@ -247,7 +229,6 @@
       <button type="button" id="btn-confirmar-cadastro-espaco">Confirmar</button>
     </div>
   </dialog>
-
   <dialog id="modal-editar-admin">
     <div class="modal-header">
       <h3 class="modal-title">Editar Espaço</h3>
@@ -283,7 +264,6 @@
       <button type="button" class="btn-action" id="salvarEditarAdmin">Salvar</button>
     </div>
   </dialog>
-
   <dialog id="modal-desativar-espaco">
     <div class="modal-confirmacao-header">
       <h3 class="modal-confirmacao-titulo">Desativar Espaço</h3>
@@ -306,7 +286,6 @@
       <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-desativar">Desativar</button>
     </div>
   </dialog>
-
   <dialog id="modal-ativar-espaco">
     <div class="modal-header">
       <h3 class="modal-title">Ativar Espaço</h3>
@@ -329,7 +308,6 @@
       <button type="button" class="btn-ativar-confirmar" id="btn-confirmar-ativar">Ativar</button>
     </div>
   </dialog>
-
   <dialog id="modal-remover-usuario">
     <div class="modal-header">
       <h3 class="modal-title">Remover Usuário</h3>
@@ -351,7 +329,6 @@
       <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-remover">Remover</button>
     </div>
   </dialog>
-
   <dialog id="modal-convidar-usuario">
     <div class="modal-header">
       <h3 class="modal-title">Convidar Usuário</h3>
@@ -363,18 +340,14 @@
         </svg>
       </button>
     </div>
-
     <div class="modal-body">
-
       <div class="input-group">
         <label for="convidar-email">E-mail do colaborador</label>
         <input type="email" id="convidar-email" placeholder="colaborador@empresa.com" autocomplete="off" />
-        <span class="msg-erro-modal" id="erro-convidar-email"
-          style="display:none; color:#EF4444; font-size:0.78rem; margin-top:4px;">
+        <span class="msg-erro-modal" id="erro-convidar-email">
           Informe um e-mail válido.
         </span>
       </div>
-
       <div class="input-group">
         <label for="convidar-perfil">Nível de acesso</label>
         <select id="convidar-perfil">
@@ -382,17 +355,71 @@
           <option value="Usuário">Usuário — pode fazer reservas</option>
           <option value="Admin">Admin — acesso total ao painel</option>
         </select>
-        <span class="msg-erro-modal" id="erro-convidar-perfil"
-          style="display:none; color:#EF4444; font-size:0.78rem; margin-top:4px;">
+        <span class="msg-erro-modal" id="erro-convidar-perfil">
           Selecione um perfil.
         </span>
       </div>
-
     </div>
-
     <div class="modal-footer">
       <button type="button" data-modal="modal-convidar-usuario">Cancelar</button>
       <button type="button" id="btn-confirmar-convidar">Enviar convite</button>
+    </div>
+  </dialog>
+
+  <dialog id="modal-detalhes-usuario">
+    <div class="modal-detalhes-container">
+
+      <div class="modal-detalhes-header">
+        <h3>Detalhes do Colaborador</h3>
+        <button type="button" class="btn-fechar-topo" data-modal="modal-detalhes-usuario">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="18" y1="6" x2="6" y2="18" />
+            <line x1="6" y1="6" x2="18" y2="18" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-detalhes-body">
+
+        <div class="usuario-perfil-card">
+          <div id="detalhe-usuario-avatar" class="usuario-avatar-wrapper"></div>
+          <div class="usuario-perfil-info">
+            <span id="detalhe-usuario-perfil" class="badge">—</span>
+            <p>Cadastro ativo no sistema</p>
+          </div>
+        </div>
+
+        <div class="usuario-campos-lista">
+          <div class="usuario-campo-item">
+            <label>Nome Completo</label>
+            <input type="text" id="detalhe-usuario-nome" readonly />
+          </div>
+
+          <div class="usuario-campo-item">
+            <label>E-mail Corporativo</label>
+            <input type="text" id="detalhe-usuario-email" readonly />
+          </div>
+
+          <div class="usuario-campo-item">
+            <label>Departamento</label>
+            <input type="text" id="detalhe-usuario-departamento" readonly />
+          </div>
+
+          <div class="usuario-campo-item">
+            <label>Telefone / Ramal</label>
+            <input type="text" id="detalhe-usuario-telefone" readonly />
+          </div>
+        </div>
+
+      </div>
+
+      <div class="modal-detalhes-footer">
+        <button type="button" data-modal="modal-detalhes-usuario" class="btn-fechar-painel">
+          Fechar Painel
+        </button>
+      </div>
+
     </div>
   </dialog>
 
@@ -407,7 +434,6 @@
   <script src="./assets/js/painelAdmin/painelAdminEspacos.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-
   <script>
     flatpickr('.date-input', {
       locale: 'pt',
@@ -416,7 +442,6 @@
       placeholder: 'dd/mm/aaaa',
       monthSelectorType: 'static'
     });
-
     flatpickr('.modal-date-input', {
       locale: 'pt',
       dateFormat: 'd/m/Y',

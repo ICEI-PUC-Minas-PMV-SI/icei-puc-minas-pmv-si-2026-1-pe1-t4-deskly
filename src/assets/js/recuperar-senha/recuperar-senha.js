@@ -1,15 +1,15 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-  const form        = document.querySelector('form');
-  const inputEmail  = document.getElementById('email');
-  const inputSenha  = document.getElementById('novaSenha');
-  const inputConf   = document.getElementById('confirmarSenha');
+  const form = document.querySelector('form');
+  const inputEmail = document.getElementById('email');
+  const inputSenha = document.getElementById('novaSenha');
+  const inputConf = document.getElementById('confirmarSenha');
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const email     = inputEmail.value.trim().toLowerCase();
-    const senha     = inputSenha.value;
+    const email = inputEmail.value.trim().toLowerCase();
+    const senha = inputSenha.value;
     const confirmar = inputConf.value;
 
     limparErros();
