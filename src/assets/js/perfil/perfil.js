@@ -190,8 +190,20 @@ btnSalvar.addEventListener("click", (e) => {
             mostrarToast("Senha incorreta", "A senha atual informada está incorreta.", "erro");
             return;
         }
-        if (novaSenha.length < 6) {
-            mostrarToast("Senha fraca", "A nova senha precisa ter pelo menos 6 caracteres.", "erro");
+        if (novaSenha.length < 8) {
+            mostrarToast("Senha fraca", "A nova senha deve ter pelo menos 8 caracteres.", "erro");
+            return;
+        }
+        if (!/[A-Z]/.test(novaSenha)) {
+            mostrarToast("Senha fraca", "A nova senha deve conter pelo menos uma letra maiúscula.", "erro");
+            return;
+        }
+        if (!/[0-9]/.test(novaSenha)) {
+            mostrarToast("Senha fraca", "A nova senha deve conter pelo menos um número.", "erro");
+            return;
+        }
+        if (!/[^A-Za-z0-9]/.test(novaSenha)) {
+            mostrarToast("Senha fraca", "A nova senha deve conter pelo menos um caractere especial (ex: !@#$).", "erro");
             return;
         }
         usuarios[index].senha = novaSenha;

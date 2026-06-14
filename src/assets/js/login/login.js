@@ -1,5 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+    garantirAdminDeskly();
+
     const form = document.getElementById('formLogin');
     const inputEmail = document.getElementById('email');
     const inputSenha = document.getElementById('password');
@@ -97,3 +99,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 });
+
+function garantirAdminDeskly() {
+    const usuarios = obterUsuarios();
+    const admin = usuarios.find(u => u.email === 'sistema.deskly@gmail.com');
+
+    if (!admin) {
+        usuarios.push({
+            id: 1,
+            nome: 'Administrador Deskly',
+            email: 'sistema.deskly@gmail.com',
+            senha: 'Deskly2026.',
+            perfil: 'Admin',
+            token: null,
+            senhaDefinida: true,
+            protegido: true,
+            dataCriacao: new Date().toISOString(),
+            foto: ''
+        });
+        salvarUsuarios(usuarios);
+        return;
+    }
+
+    if (!admin.protegido) {
+        admin.protegido = true;
+        salvarUsuarios(usuarios);
+    }
+}
+
+function obterUsuarios() { return JSON.parse(localStorage.getItem('usuarios') || '[]'); }
+function salvarUsuarios(lista) { localStorage.setItem('usuarios', JSON.stringify(lista)); }

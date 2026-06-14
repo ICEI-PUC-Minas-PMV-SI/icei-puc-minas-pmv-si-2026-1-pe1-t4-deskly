@@ -23,24 +23,37 @@ function carregarFotoDB(chave) {
   }));
 }
 
-function protegerAdminDeskly() {
+function garantirAdminDeskly() {
   const usuarios = obterUsuarios();
-  let alterou = false;
+  const admin = usuarios.find(u => u.email === 'sistema.deskly@gmail.com');
 
-  usuarios.forEach(u => {
-    if (u.email === 'sistema.deskly@gmail.com' && !u.protegido) {
-      u.protegido = true;
-      alterou = true;
-    }
-  });
+  if (!admin) {
+    usuarios.push({
+      id: 1,
+      nome: 'Administrador Deskly',
+      email: 'sistema.deskly@gmail.com',
+      senha: 'Deskly@123', // defina aqui a senha padrão do admin
+      perfil: 'Admin',
+      token: null,
+      senhaDefinida: true,
+      protegido: true,
+      dataCriacao: new Date().toISOString(),
+      foto: ''
+    });
+    salvarUsuarios(usuarios);
+    return;
+  }
 
-  if (alterou) salvarUsuarios(usuarios);
+  if (!admin.protegido) {
+    admin.protegido = true;
+    salvarUsuarios(usuarios);
+  }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch (_) { }
 
-  protegerAdminDeskly();
+  garantirAdminDeskly();
   carregarUsuarios();
   inicializarConvite();
   inicializarBuscaUsuario();
@@ -227,7 +240,10 @@ async function enviarConvitePorEmail(email, reenvio = false) {
     salvarUsuarios(usuarios);
   }
 
-  const link = `${window.location.origin}/src/primeiro-acesso.html?token=${usuario.token}`;
+  // Monta o caminho base a partir da URL atual, garantindo que o link funcione
+  // tanto no localhost (raiz do projeto) quanto no GitHub Pages (dentro de /Deskly/, por exemplo)
+  const basePath = window.location.pathname.split('/src/')[0];
+  const link = `${window.location.origin}${basePath}/src/primeiro-acesso.html?token=${usuario.token}`;
 
   const perfilLabel = usuario.perfil === 'Admin'
     ? 'Administrador — acesso total ao sistema'
