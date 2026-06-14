@@ -5,10 +5,32 @@ document.addEventListener('DOMContentLoaded', () => {
   const inputNome = document.getElementById('nome');
   const inputSenha = document.getElementById('novaSenha');
   const inputConf = document.getElementById('confirmarSenha');
+
   const params = new URLSearchParams(window.location.search);
   const token = params.get('token') || '';
+  const emailUrl = params.get('email') || '';
+  const perfilUrl = params.get('perfil') || 'Usuário';
+
   const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-  const usuario = usuarios.find(u => u.token === token && !u.senhaDefinida);
+
+  let usuario = usuarios.find(u => u.token === token && !u.senhaDefinida);
+
+  if (!usuario && token && emailUrl) {
+    usuario = {
+      id: Date.now(),
+      nome: '',
+      email: emailUrl,
+      senha: '',
+      perfil: perfilUrl,
+      token: token,
+      senhaDefinida: false,
+      dataCriacao: new Date().toISOString(),
+      foto: ''
+    };
+
+    usuarios.push(usuario);
+    localStorage.setItem('usuarios', JSON.stringify(usuarios));
+  }
 
   if (!token || !usuario) {
     exibirEstadoInvalido();
@@ -38,9 +60,10 @@ document.addEventListener('DOMContentLoaded', () => {
     </svg>`;
 
   function adicionarToggleSenha(input) {
+    if (!input) return;
+
     const wrapper = input.parentElement;
     wrapper.style.position = 'relative';
-
     input.style.paddingRight = '40px';
 
     const btn = document.createElement('button');
@@ -51,23 +74,22 @@ document.addEventListener('DOMContentLoaded', () => {
       const inputRect = input.getBoundingClientRect();
       const wrapperRect = wrapper.getBoundingClientRect();
       const topRelativo = inputRect.top - wrapperRect.top + (inputRect.height / 2);
-
       btn.style.top = `${topRelativo}px`;
     };
 
     btn.style.cssText = `
-        position: absolute;
-        right: 10px;
-        transform: translateY(-50%);
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: #9CA3AF;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        width: 18px;
-        height: 18px;
+      position: absolute;
+      right: 10px;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #9CA3AF;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      width: 18px;
+      height: 18px;
     `;
 
     btn.addEventListener('click', () => {
@@ -88,13 +110,14 @@ document.addEventListener('DOMContentLoaded', () => {
   indicadorWrapper.style.cssText = 'margin-top: 6px;';
   indicadorWrapper.innerHTML = `
     <div id="forca-barras" style="display:flex; gap:4px; margin-bottom:4px;">
-      <span class="barra-forca" style="flex:1; height:4px; border-radius:2px; background:#E5E7EB; transition:background 0.3s;"></span>
-      <span class="barra-forca" style="flex:1; height:4px; border-radius:2px; background:#E5E7EB; transition:background 0.3s;"></span>
-      <span class="barra-forca" style="flex:1; height:4px; border-radius:2px; background:#E5E7EB; transition:background 0.3s;"></span>
-      <span class="barra-forca" style="flex:1; height:4px; border-radius:2px; background:#E5E7EB; transition:background 0.3s;"></span>
+      <span class="barra-forca" style="flex:1; height:4px; border-radius:2px; background:#E5E7EB;"></span>
+      <span class="barra-forca" style="flex:1; height:4px; border-radius:2px; background:#E5E7EB;"></span>
+      <span class="barra-forca" style="flex:1; height:4px; border-radius:2px; background:#E5E7EB;"></span>
+      <span class="barra-forca" style="flex:1; height:4px; border-radius:2px; background:#E5E7EB;"></span>
     </div>
     <span id="forca-texto" style="font-size:0.75rem; color:#6B7280;"></span>
   `;
+
   inputSenha.parentElement.appendChild(indicadorWrapper);
 
   const barras = indicadorWrapper.querySelectorAll('.barra-forca');
@@ -102,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function avaliarForca(senha) {
     let pontos = 0;
+
     if (senha.length >= 8) pontos++;
     if (senha.length >= 12) pontos++;
     if (/[A-Z]/.test(senha)) pontos++;
@@ -111,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pontos <= 1) return { nivel: 1, label: 'Muito fraca', cor: '#EF4444' };
     if (pontos === 2) return { nivel: 2, label: 'Fraca', cor: '#F97316' };
     if (pontos === 3) return { nivel: 3, label: 'Média', cor: '#EAB308' };
+
     return { nivel: 4, label: 'Forte', cor: '#22C55E' };
   }
 
@@ -124,7 +149,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const { nivel, label, cor } = avaliarForca(senha);
-    barras.forEach((b, i) => b.style.background = i < nivel ? cor : '#E5E7EB');
+
+    barras.forEach((b, i) => {
+      b.style.background = i < nivel ? cor : '#E5E7EB';
+    });
+
     forcaTexto.textContent = label;
     forcaTexto.style.color = cor;
   });
@@ -132,7 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
 
-    const nome = inputNome?.value.trim();
+    const nome = inputNome.value.trim();
     const senha = inputSenha.value;
     const confirmar = inputConf.value;
 
@@ -155,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
       exibirErro(inputSenha, 'A senha deve conter pelo menos um número.');
       valido = false;
     } else if (!/[^A-Za-z0-9]/.test(senha)) {
-      exibirErro(inputSenha, 'A senha deve conter pelo menos um caractere especial (ex: !@#$).');
+      exibirErro(inputSenha, 'A senha deve conter pelo menos um caractere especial.');
       valido = false;
     }
 
@@ -167,19 +196,25 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!valido) return;
 
     const idx = usuarios.findIndex(u => u.token === token);
-    if (idx === -1) return;
+
+    if (idx === -1) {
+      exibirEstadoInvalido();
+      return;
+    }
 
     usuarios[idx].nome = nome;
+    usuarios[idx].email = usuario.email;
+    usuarios[idx].perfil = usuario.perfil;
     usuarios[idx].senha = senha;
     usuarios[idx].senhaDefinida = true;
     usuarios[idx].token = null;
 
     localStorage.setItem('usuarios', JSON.stringify(usuarios));
+
     window.location.href = 'login.html?ativado=1';
   });
 
 });
-
 
 function exibirEstadoInvalido() {
   const formEl = document.querySelector('form');
@@ -205,12 +240,14 @@ function exibirErro(input, mensagem) {
   input.style.borderColor = '#EF4444';
 
   let span = input.parentElement.querySelector('.erro-msg');
+
   if (!span) {
     span = document.createElement('span');
     span.className = 'erro-msg';
     span.style.cssText = 'color:#EF4444; font-size:0.78rem; margin-top:4px; display:block;';
     input.parentElement.appendChild(span);
   }
+
   span.textContent = mensagem;
 }
 

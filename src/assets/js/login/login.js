@@ -104,6 +104,8 @@ function garantirAdminDeskly() {
     const usuarios = obterUsuarios();
     const admin = usuarios.find(u => u.email === 'sistema.deskly@gmail.com');
 
+    const caminhoFotoCorreto = 'assets/images/Perfil-deskly.jpg'; 
+
     if (!admin) {
         usuarios.push({
             id: 1,
@@ -115,14 +117,34 @@ function garantirAdminDeskly() {
             senhaDefinida: true,
             protegido: true,
             dataCriacao: new Date().toISOString(),
-            foto: ''
+            foto: caminhoFotoCorreto,
+            departamento: 'Tecnologia da Informação',
+            telefone: '(00) 00000-0000'
         });
         salvarUsuarios(usuarios);
         return;
     }
 
+    let mudou = false;
+
     if (!admin.protegido) {
         admin.protegido = true;
+        mudou = true;
+    }
+    if (admin.departamento === undefined || admin.departamento === '') {
+        admin.departamento = 'Sistema';
+        mudou = true;
+    }
+    if (admin.telefone === undefined || admin.telefone === '') {
+        admin.telefone = '(99) 99999-9999';
+        mudou = true;
+    }
+    if (!admin.foto || admin.foto.includes('foto_padrao')) {
+        admin.foto = caminhoFotoCorreto;
+        mudou = true;
+    }
+
+    if (mudou) {
         salvarUsuarios(usuarios);
     }
 }
