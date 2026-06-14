@@ -151,8 +151,8 @@ function garantirAdminDeskly() {
             protegido: true,
             dataCriacao: new Date().toISOString(),
             foto: caminhoFotoCorreto,
-            departamento: 'Tecnologia da Informação',
-            telefone: '(00) 00000-0000'
+            departamento: 'Sistema',
+            telefone: '(99) 99999-9999'
         });
         salvarUsuarios(usuarios);
         return;

@@ -173,6 +173,20 @@
         padding: 16px;
     }
 
+     header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px; 
+        gap: 50px;       
+    }
+
+    .header-actions, .nav-actions, .user-menu { 
+        display: flex;
+        align-items: center;
+        gap: 12px;      
+    }
+
     .calendar-page-header {
         flex-direction: column;
         align-items: flex-start;

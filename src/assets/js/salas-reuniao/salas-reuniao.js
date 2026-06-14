@@ -106,7 +106,7 @@ function popularSelectConvidadosReserva() {
 
 function converterHorarioParaMinutos(horario) {
     const [horas, minutos] = horario.split(":").map(Number);
-    return horas * 60 + minutes;
+    return horas * 60 + minutos;
 }
 
 function horariosConflitam(inicio1, fim1, inicio2, fim2) {

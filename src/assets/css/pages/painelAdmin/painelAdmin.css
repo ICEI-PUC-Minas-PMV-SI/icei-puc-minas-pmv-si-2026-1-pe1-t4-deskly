@@ -645,13 +645,27 @@ main {
     left: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 940px) {
     body {
         overflow-x: hidden;
         grid-template-columns: 1fr;
         grid-template-areas:
             "header"
             "main";
+    }
+
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px; 
+        gap: 50px;       
+    }
+
+    .header-actions, .nav-actions, .user-menu { 
+        display: flex;
+        align-items: center;
+        gap: 12px;      
     }
 
     .logo {
@@ -795,7 +809,11 @@ main {
         border-top: none;
         font-size: 0.8125rem;
         white-space: normal;
-        gap: 8px;
+        gap: 16px; 
+    }
+
+    .tabela-reservas td {
+        text-align: right;
     }
 
     .tabela-reservas td::before {
@@ -803,8 +821,21 @@ main {
         font-weight: 600;
         color: var(--color-heading);
         font-size: 0.75rem;
-        flex-shrink: 0;
-        min-width: 60px;
+        flex-shrink: 0; 
+        text-align: left;
+    }
+
+    .tabela-reservas td {
+        display: flex;
+    }
+    
+    .tabela-reservas td {
+        word-break: keep-all; 
+        white-space: normal;
+    }
+
+    .tabela-reservas td {
+        justify-content: space-between;
     }
 
     .tabela-reservas td:last-child {
