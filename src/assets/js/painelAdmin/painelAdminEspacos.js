@@ -52,11 +52,9 @@ function comprimirImagem(file, callback) {
     reader.readAsDataURL(file);
 }
 
-// Modificado: Agora inicia o sistema com um array vazio se não houver dados
 function criarEspacosPadrao() {
     if (localStorage.getItem("espacosSistema")) return;
 
-    // Removemos todos os objetos que vinham por padrão
     const espacosPadrao = [];
 
     salvarEspacosSistema(espacosPadrao);
