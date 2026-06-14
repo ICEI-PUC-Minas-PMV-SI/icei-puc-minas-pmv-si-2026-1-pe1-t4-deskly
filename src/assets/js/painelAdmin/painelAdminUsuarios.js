@@ -242,8 +242,12 @@ async function enviarConvitePorEmail(email, reenvio = false) {
 
   // Monta o caminho base a partir da URL atual, garantindo que o link funcione
   // tanto no localhost (raiz do projeto) quanto no GitHub Pages (dentro de /Deskly/, por exemplo)
-  const basePath = window.location.pathname.split('/src/')[0];
-  const link = `${window.location.origin}${basePath}/src/primeiro-acesso.html?token=${usuario.token}`;
+  const pastaAtual = window.location.pathname.substring(
+  0,
+  window.location.pathname.lastIndexOf('/') + 1
+);
+
+const link = `${window.location.origin}${pastaAtual}primeiro-acesso.html?token=${usuario.token}`;
 
   const perfilLabel = usuario.perfil === 'Admin'
     ? 'Administrador — acesso total ao sistema'

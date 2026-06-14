@@ -13,6 +13,26 @@ document.addEventListener('DOMContentLoaded', () => {
         checkLembrar.checked = true;
     }
 
+    function mostrarToast(titulo, mensagem, tipo = "aviso") {
+        const container = document.getElementById("toast-container");
+
+        if (!container) return;
+
+        const toast = document.createElement("div");
+        toast.className = `toast ${tipo}`;
+
+        toast.innerHTML = `
+            <strong>${titulo}</strong>
+            <span>${mensagem}</span>
+        `;
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.remove();
+        }, 4000);
+    }
+
     const SVG_OLHO_ABERTO = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
       stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -84,7 +104,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const usuario = usuarios.find(u => u.email === email && u.senha === senha);
 
         if (!usuario) {
-            alert('E-mail ou senha inválidos.');
+            mostrarToast(
+                "Login inválido",
+                "E-mail ou senha estão incorretos.",
+                "erro"
+            );
             return;
         }
 
@@ -95,7 +119,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         localStorage.setItem('usuarioLogado', JSON.stringify(usuario));
-        window.location.href = 'dashboard.html';
+
+        mostrarToast(
+            "Login realizado",
+            `Bem-vindo(a), ${usuario.nome}!`,
+            "sucesso"
+        );
+
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 900);
     });
 
 });
@@ -149,5 +182,10 @@ function garantirAdminDeskly() {
     }
 }
 
-function obterUsuarios() { return JSON.parse(localStorage.getItem('usuarios') || '[]'); }
-function salvarUsuarios(lista) { localStorage.setItem('usuarios', JSON.stringify(lista)); }
+function obterUsuarios() {
+    return JSON.parse(localStorage.getItem('usuarios') || '[]');
+}
+
+function salvarUsuarios(lista) {
+    localStorage.setItem('usuarios', JSON.stringify(lista));
+}
