@@ -365,6 +365,29 @@ main {
     opacity: 1;
 }
 
+.btn-excluir-reserva-admin,
+.btn-reativar-reserva-admin {
+    width: 90px !important;
+    padding: 10px 8px !important;
+    text-align: center;
+    justify-content: center;
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+    border-radius: 6px;
+    font: var(--text-sm);
+    font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.btn-excluir-reserva-admin:hover,
+.btn-reativar-reserva-admin:hover {
+    opacity: 0.8;
+    outline: none;
+    background-color: var(--color-btn-primary);
+}
+
 .aba-header {
     display: flex;
     justify-content: space-between;
@@ -622,7 +645,6 @@ main {
     left: 0;
 }
 
-
 @media (max-width: 768px) {
     body {
         overflow-x: hidden;
@@ -816,6 +838,11 @@ main {
         justify-content: center;
         padding: 10px var(--spacing-md);
     }
+
+    .btn-excluir-reserva-admin,
+    .btn-reativar-reserva-admin {
+        width: 100% !important;
+    }
 }
 
 .espacos-container .aba-header:not(:first-child) {
@@ -966,7 +993,6 @@ main {
 }
 
 @media (max-width: 768px) {
-
     #modal-cadastrar-espaco {
         width: calc(100vw - 32px) !important;
     }
@@ -1095,23 +1121,9 @@ main {
 }
 
 .btn-editar-espaco:hover,
-.btn-toggle-espaco:hover,
-.btn-excluir-reserva-admin:hover {
-    background-color: var(--color-btn-primary);
-    outline: none;
+.btn-toggle-espaco:hover {
     opacity: 0.8;
-}
-
-.btn-excluir-reserva-admin {
-    background-color: var(--color-btn-primary);
-    color: var(--color-background);
-    border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    font: var(--text-sm);
-    font-weight: 500;
-    cursor: pointer;
-    transition: opacity 0.15s ease;
+    outline: none;
 }
 
 .group-spacing {
