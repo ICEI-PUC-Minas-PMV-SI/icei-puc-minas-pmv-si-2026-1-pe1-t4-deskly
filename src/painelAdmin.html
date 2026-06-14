@@ -112,7 +112,7 @@
       <div class="aba-header">
         <div class="usuarios-busca">
           <input type="text" class="input-busca" placeholder="Buscar colaborador..." />
-          <button class="btn-action">Buscar</button>
+          <button class="btn-action" id="btn-buscar-usuario">Buscar</button>
         </div>
         <button class="btn-action btn-action-principal" data-modal="modal-convidar-usuario">
           + Convidar usuário
@@ -165,8 +165,7 @@
     </div>
     <div class="modal-confirmacao-footer">
       <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-confirmacao">Cancelar</button>
-      <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Cancelar
-        reserva</button>
+      <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Cancelar reserva</button>
     </div>
   </dialog>
   <dialog id="modal-cadastrar-espaco">
@@ -365,10 +364,8 @@
       <button type="button" id="btn-confirmar-convidar">Enviar convite</button>
     </div>
   </dialog>
-
   <dialog id="modal-detalhes-usuario">
     <div class="modal-detalhes-container">
-
       <div class="modal-detalhes-header">
         <h3>Detalhes do Colaborador</h3>
         <button type="button" class="btn-fechar-topo" data-modal="modal-detalhes-usuario">
@@ -379,9 +376,7 @@
           </svg>
         </button>
       </div>
-
       <div class="modal-detalhes-body">
-
         <div class="usuario-perfil-card">
           <div id="detalhe-usuario-avatar" class="usuario-avatar-wrapper"></div>
           <div class="usuario-perfil-info">
@@ -389,37 +384,30 @@
             <p>Cadastro ativo no sistema</p>
           </div>
         </div>
-
         <div class="usuario-campos-lista">
           <div class="usuario-campo-item">
             <label>Nome Completo</label>
             <input type="text" id="detalhe-usuario-nome" readonly />
           </div>
-
           <div class="usuario-campo-item">
             <label>E-mail Corporativo</label>
             <input type="text" id="detalhe-usuario-email" readonly />
           </div>
-
           <div class="usuario-campo-item">
             <label>Departamento</label>
             <input type="text" id="detalhe-usuario-departamento" readonly />
           </div>
-
           <div class="usuario-campo-item">
             <label>Telefone / Ramal</label>
             <input type="text" id="detalhe-usuario-telefone" readonly />
           </div>
         </div>
-
       </div>
-
       <div class="modal-detalhes-footer">
         <button type="button" data-modal="modal-detalhes-usuario" class="btn-fechar-painel">
           Fechar Painel
         </button>
       </div>
-
     </div>
   </dialog>
 

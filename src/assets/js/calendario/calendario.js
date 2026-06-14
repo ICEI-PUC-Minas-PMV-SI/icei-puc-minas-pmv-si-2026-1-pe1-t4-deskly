@@ -181,11 +181,10 @@ function abrirView(dia, index) {
     `;
 
     document.getElementById("horario").innerText = `${reserva.inicio} - ${reserva.fim}`;
-    document.getElementById("respView").innerText = `Responsável: ${reserva.responsavel || "-"}`;
-    document.getElementById("capacidadeView").innerText = `Capacidade: ${capacidadeText} pessoas`;
-    document.getElementById("areaView").innerText = `Área / Local: ${areaText}`;
-
-    document.getElementById("statusView").innerText = `Status: ${reserva.status}`;
+    document.getElementById("respView").innerText = reserva.responsavel || "-";
+    document.getElementById("capacidadeView").innerText = `${capacidadeText} pessoas`;
+    document.getElementById("areaView").innerText = areaText;
+    document.getElementById("statusView").innerText = reserva.status;
 
     const listaEmails = document.getElementById("listaEmails");
     listaEmails.innerHTML = "";

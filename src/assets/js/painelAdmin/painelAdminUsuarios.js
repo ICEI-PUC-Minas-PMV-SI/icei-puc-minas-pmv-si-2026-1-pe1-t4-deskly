@@ -23,49 +23,43 @@ function carregarFotoDB(chave) {
   }));
 }
 
+function protegerAdminDeskly() {
+  const usuarios = obterUsuarios();
+  let alterou = false;
+
+  usuarios.forEach(u => {
+    if (u.email === 'sistema.deskly@gmail.com' && !u.protegido) {
+      u.protegido = true;
+      alterou = true;
+    }
+  });
+
+  if (alterou) salvarUsuarios(usuarios);
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch (_) { }
 
-  criarUsuariosPadrao();
+  protegerAdminDeskly();
   carregarUsuarios();
   inicializarConvite();
   inicializarBuscaUsuario();
   configurarModalDetalhes();
 });
 
-function criarUsuariosPadrao() {
-  const fixos = [
-    { id: 1000000000001, nome: 'Carlos Mendes', email: 'carlos.mendes@deskly.com', senha: 'senha123', perfil: 'Admin', senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z', departamento: 'Diretoria', telefone: '(11) 99999-1111', foto: '' },
-    { id: 1000000000002, nome: 'Fernanda Rocha', email: 'fernanda.rocha@deskly.com', senha: 'senha123', perfil: 'Usuário', senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z', departamento: 'Financeiro', telefone: '(11) 99999-2222', foto: '' },
-    { id: 1000000000003, nome: 'Ricardo Alves', email: 'ricardo.alves@deskly.com', senha: 'senha123', perfil: 'Usuário', senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z', departamento: 'Tecnologia', telefone: '(11) 99999-3333', foto: '' },
-    { id: 1000000000004, nome: 'Juliana Castro', email: 'juliana.castro@deskly.com', senha: 'senha123', perfil: 'Usuário', senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z', departamento: 'Recursos Humanos', telefone: '(11) 99999-4444', foto: '' },
-    { id: 1000000000005, nome: 'Thiago Barbosa', email: 'thiago.barbosa@deskly.com', senha: 'senha123', perfil: 'Usuário', senhaDefinida: true, dataCriacao: '2026-01-10T08:00:00.000Z', departamento: 'Marketing', telefone: '(11) 99999-5555', foto: '' },
-  ];
-
-  const existentes = obterUsuarios();
-  let alterou = false;
-
-  fixos.forEach(fixo => {
-    if (!existentes.find(u => u.email === fixo.email)) {
-      existentes.push(fixo);
-      alterou = true;
-    }
-  });
-
-  if (alterou) salvarUsuarios(existentes);
-}
-
 function carregarUsuarios(filtro = '') {
   const tbody = document.getElementById('tabelaUsuariosAdmin');
   if (!tbody) return;
 
   const usuarios = obterUsuarios();
-  const filtroLower = filtro.toLowerCase();
+  const filtroLower = filtro.toLowerCase().trim();
 
-  const visiveis = usuarios.filter(u =>
-    (u.nome || '').toLowerCase().includes(filtroLower) ||
-    (u.email || '').toLowerCase().includes(filtroLower)
-  );
+  const visiveis = filtroLower === ''
+    ? usuarios
+    : usuarios.filter(u =>
+      (u.nome || '').toLowerCase().includes(filtroLower) ||
+      (u.email || '').toLowerCase().includes(filtroLower)
+    );
 
   tbody.innerHTML = '';
 
@@ -96,6 +90,12 @@ function carregarUsuarios(filtro = '') {
       ? `<button class="btn-reenviar" data-email="${usuario.email}">Reenviar</button>`
       : '';
 
+    const btnRemover = usuario.protegido ? '' : `
+      <button class="btn-remover-usuario"
+        data-email="${usuario.email}" data-nome="${usuario.nome || usuario.email}">
+        Remover
+      </button>`;
+
     const avatarId = `avatar-${usuario.id || usuario.email.replace(/[^a-z0-9]/gi, '')}`;
 
     tr.innerHTML = `
@@ -117,23 +117,14 @@ function carregarUsuarios(filtro = '') {
       <td>
         <div style="display:flex;align-items:center;gap:8px;">
           <button type="button" class="btn-ver-detalhes btn-detalhes-usuario" title="Ver Detalhes"
-            data-id="${usuario.id ?? ''}"
-            data-nome="${usuario.nome || ''}" 
-            data-email="${usuario.email || ''}" 
-            data-perfil="${usuario.perfil || 'Usuário'}"
-            data-departamento="${usuario.departamento || 'Não informado'}"
-            data-telefone="${usuario.telefone || 'Não informado'}"
-            data-foto="${usuario.foto || ''}">
+            data-id="${usuario.id ?? ''}">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
               <circle cx="12" cy="12" r="3"></circle>
             </svg>
           </button>
           ${btnReenviar}
-          <button class="btn-remover-usuario"
-            data-email="${usuario.email}" data-nome="${usuario.nome || usuario.email}">
-            Remover
-          </button>
+          ${btnRemover}
         </div>
       </td>`;
 
@@ -177,12 +168,19 @@ function carregarUsuarios(filtro = '') {
 
 function inicializarBuscaUsuario() {
   const inputBusca = document.querySelector('.input-busca');
-  const btnBusca = document.querySelector('.usuarios-busca .btn-action');
+  const btnBusca = document.getElementById('btn-buscar-usuario');
 
   inputBusca?.addEventListener('keydown', e => {
     if (e.key === 'Enter') carregarUsuarios(inputBusca.value.trim());
   });
-  btnBusca?.addEventListener('click', () => carregarUsuarios(inputBusca?.value.trim() || ''));
+
+  inputBusca?.addEventListener('input', () => {
+    if (inputBusca.value.trim() === '') carregarUsuarios('');
+  });
+
+  btnBusca?.addEventListener('click', () => {
+    carregarUsuarios(inputBusca?.value.trim() || '');
+  });
 }
 
 function inicializarConvite() {
@@ -259,28 +257,25 @@ function abrirModalDetalhes(btn) {
     return;
   }
 
-  const nome = btn.getAttribute("data-nome") || '—';
-  const email = btn.getAttribute("data-email") || '—';
-  const perfil = btn.getAttribute("data-perfil") || 'Usuário';
-  const departamento = btn.getAttribute("data-departamento") || 'Não informado';
-  const telefone = btn.getAttribute("data-telefone") || 'Não informado';
   const id = btn.getAttribute("data-id") || '';
-  const fotoBase64 = btn.getAttribute("data-foto") || '';
+  const usuarios = obterUsuarios();
+  const usuario = usuarios.find(u => String(u.id) === String(id));
+  if (!usuario) return;
 
   const inputNome = document.getElementById("detalhe-usuario-nome");
   const inputEmail = document.getElementById("detalhe-usuario-email");
   const inputDepto = document.getElementById("detalhe-usuario-departamento");
   const inputTel = document.getElementById("detalhe-usuario-telefone");
 
-  if (inputNome) inputNome.value = nome;
-  if (inputEmail) inputEmail.value = email;
-  if (inputDepto) inputDepto.value = departamento;
-  if (inputTel) inputTel.value = telefone;
+  if (inputNome) inputNome.value = usuario.nome || '—';
+  if (inputEmail) inputEmail.value = usuario.email || '—';
+  if (inputDepto) inputDepto.value = usuario.departamento || 'Não informado';
+  if (inputTel) inputTel.value = usuario.telefone || 'Não informado';
 
   const badgeModal = document.getElementById("detalhe-usuario-perfil");
   if (badgeModal) {
-    badgeModal.textContent = perfil;
-    badgeModal.className = "badge " + (perfil === "Admin" ? "disponivel" : "ocupado");
+    badgeModal.textContent = usuario.perfil || 'Usuário';
+    badgeModal.className = "badge " + (usuario.perfil === "Admin" ? "disponivel" : "ocupado");
   }
 
   const avatarPlaceholder = document.getElementById("detalhe-usuario-avatar");
@@ -300,17 +295,17 @@ function abrirModalDetalhes(btn) {
     }
   }
 
-  const chave = `foto_${id || email || "anonimo"}`;
+  const chave = `foto_${id || usuario.email || "anonimo"}`;
 
   carregarFotoDB(chave)
     .then(blob => {
       if (blob) {
         renderizarAvatar(URL.createObjectURL(blob));
       } else {
-        renderizarAvatar(fotoBase64 || '');
+        renderizarAvatar(usuario.foto || '');
       }
     })
-    .catch(() => renderizarAvatar(fotoBase64 || ''));
+    .catch(() => renderizarAvatar(usuario.foto || ''));
 
   modal.showModal();
 }
@@ -325,6 +320,14 @@ function configurarModalDetalhes() {
 }
 
 function abrirModalRemover(email, nome) {
+  const usuarios = obterUsuarios();
+  const usuario = usuarios.find(u => u.email === email);
+
+  if (usuario?.protegido) {
+    exibirToast('Ação não permitida', 'O administrador principal não pode ser removido.', 'erro');
+    return;
+  }
+
   const modal = document.getElementById('modal-remover-usuario');
   const nomeEl = modal?.querySelector('.modal-remover-nome');
   if (nomeEl) nomeEl.textContent = nome;

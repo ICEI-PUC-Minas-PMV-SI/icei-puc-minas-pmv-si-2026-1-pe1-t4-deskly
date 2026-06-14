@@ -225,7 +225,6 @@
     }
 }
 
-/* ── Modal (igual ao dashboard) ── */
 dialog {
     border: none;
     border-radius: 12px;
@@ -265,6 +264,10 @@ dialog::backdrop {
     cursor: pointer;
     padding: 4px;
     color: var(--color-heading);
+}
+
+.close-modal:focus {
+    outline: none;
 }
 
 .modal-body {
@@ -353,6 +356,38 @@ dialog::backdrop {
     font: var(--text-sm);
     color: var(--color-text-md);
     margin: 4px 0;
+}
+
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) 0;
+    border-bottom: 1px solid var(--color-border-card);
+    font: var(--text-sm);
+}
+
+.detail-row:last-of-type {
+    border-bottom: none;
+}
+
+.detail-label {
+    color: var(--color-text-md);
+    font-weight: 500;
+}
+
+.detail-value {
+    font-weight: 600;
+    color: var(--color-heading);
+}
+
+.horarios-title {
+    font: var(--text-sm);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-md);
+    margin: var(--spacing-md) 0 var(--spacing-sm);
 }
 
 @media (max-width: 768px) {
