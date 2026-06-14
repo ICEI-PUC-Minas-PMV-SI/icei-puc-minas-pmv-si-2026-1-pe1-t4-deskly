@@ -11,6 +11,8 @@
     --color-text-green: #2D6A3F;
     --color-badge-red: #ffd6d6;
     --color-text-red: #c0392b;
+    --color-badge-neutral: #e8e8e8;
+    --color-text-neutral: #555555;
 
     /* ===== TIPOGRAFIA ===== */
     --main-font: "Poppins", sans-serif;

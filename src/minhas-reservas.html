@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
         <link rel="stylesheet" href="assets/css/global/global.css">
         <link rel="stylesheet" href="assets/css/pages/minhas-reservas/minhas-reservas.css">
 
@@ -15,14 +15,13 @@
 
         <main class="reservas">
 
-            <!-- Cabeçalho + filtros -->
             <section>
                 <h1>Minhas Reservas</h1>
                 <span class="subtitle">Gerencie seus agendamentos</span>
             </section>
 
             <div class="reservas-filtros">
-                <div class="custom-select">
+                <div class="custom-select" id="filtro-tipo">
                     <button class="custom-select-trigger" type="button">
                         <span class="custom-select-label">Todos os tipos</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -34,7 +33,7 @@
                     </ul>
                 </div>
                 
-                <div class="custom-select">
+                <div class="custom-select" id="filtro-status">
                     <button class="custom-select-trigger" type="button">
                         <span class="custom-select-label">Qualquer status</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
@@ -43,12 +42,12 @@
                         <li class="custom-select-option" data-value="todos">Qualquer status</li>
                         <li class="custom-select-option" data-value="confirmadas">Confirmadas</li>
                         <li class="custom-select-option" data-value="canceladas">Canceladas</li>
+                        <li class="custom-select-option" data-value="concluidas">Concluídas</li>
                     </ul>
                 </div>
                 <button class="btn-filtrar-simples">Filtrar</button>
             </div>
 
-            <!-- Próximas reservas -->
             <section class="reservas-secao">
                 <h3 class="reservas-secao-titulo">Próximas</h3>
                 <div class="reservas-table-wrapper">
@@ -63,63 +62,11 @@
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Espaço">Sala Alfa</td>
-                            <td data-label="Data">30/03/2026</td>
-                            <td class="col-nowrap" data-label="Horário">10:00 – 11:30</td>
-                            <td data-label="Convidados"><button class="btn-convidados"
-                                data-espaco="Sala Alfa" data-capacidade="8"
-                                data-data="30/03/2026" data-horario="10:00 – 11:30"
-                                data-convidados='[{"email":"joao@empresa.com","status":"pendente"},{"email":"maria@empresa.com","status":"aceito"},{"email":"carlos@empresa.com","status":"recusado"}]'
-                            >3 / 8 →</button></td>
-                            <td data-label="Status"><span class="badge badge-confirmada">Confirmada</span></td>
-                            <td class="col-nowrap col-acoes">
-                                <button class="btn-editar"
-                                    data-espaco="Sala Alfa" data-data="30/03/2026" data-inicio="10:00" data-fim="11:30"
-                                    data-convidados='[{"email":"joao@empresa.com","status":"pendente"},{"email":"maria@empresa.com","status":"aceito"},{"email":"carlos@empresa.com","status":"recusado"}]'
-                                >Editar</button>
-                                <button class="btn-cancelar" data-espaco="Sala Alfa" data-data="30/03/2026" data-horario="10:00 – 11:30">Cancelar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Espaço">Sala Beta</td>
-                            <td data-label="Data">30/03/2026</td>
-                            <td class="col-nowrap" data-label="Horário">09:00 – 10:00</td>
-                            <td data-label="Convidados"><button class="btn-convidados"
-                                data-espaco="Sala Beta" data-capacidade="4"
-                                data-data="30/03/2026" data-horario="09:00 – 10:00"
-                                data-convidados='[{"email":"ana@empresa.com","status":"aceito"}]'
-                            >1 / 4 →</button></td>
-                            <td data-label="Status"><span class="badge badge-confirmada">Confirmada</span></td>
-                            <td class="col-nowrap col-acoes">
-                                <button class="btn-editar"
-                                    data-espaco="Sala Beta" data-data="30/03/2026" data-inicio="09:00" data-fim="10:00"
-                                    data-convidados='[{"email":"ana@empresa.com","status":"aceito"}]'
-                                >Editar</button>
-                                <button class="btn-cancelar" data-espaco="Sala Beta" data-data="30/03/2026" data-horario="09:00 – 10:00">Cancelar</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td data-label="Espaço">Mesa 04</td>
-                            <td data-label="Data">30/03/2026</td>
-                            <td class="col-nowrap" data-label="Horário">14:00 – 18:00</td>
-                            <td data-label="Convidados">—</td>
-                            <td data-label="Status"><span class="badge badge-confirmada">Confirmada</span></td>
-                            <td class="col-nowrap col-acoes">
-                                <button class="btn-editar"
-                                    data-espaco="Mesa 04" data-data="30/03/2026" data-inicio="14:00" data-fim="18:00"
-                                    data-convidados='[]'
-                                >Editar</button>
-                                <button class="btn-cancelar" data-espaco="Mesa 04" data-data="30/03/2026" data-horario="14:00 – 18:00">Cancelar</button>
-                            </td>
-                        </tr>
-                    </tbody>
+                    <tbody id="tbody-proximas"></tbody>
                 </table>
                 </div>
             </section>
 
-            <!-- Histórico -->
             <section class="reservas-secao">
                 <h3 class="reservas-secao-titulo">Histórico</h3>
                 <div class="reservas-table-wrapper">
@@ -132,71 +79,12 @@
                             <th>Status</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td data-label="Espaço">Sala Alfa</td>
-                            <td data-label="Data">10/03/2026</td>
-                            <td class="col-nowrap" data-label="Horário">13:00 – 14:30</td>
-                            <td data-label="Status"><span class="badge badge-cancelada">Cancelada</span></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Espaço">Mesa 01</td>
-                            <td data-label="Data">18/03/2026</td>
-                            <td class="col-nowrap" data-label="Horário">08:00 – 12:00</td>
-                            <td data-label="Status"><span class="badge badge-concluida">Concluída</span></td>
-                        </tr>
-                        <tr>
-                            <td data-label="Espaço">Sala Gama</td>
-                            <td data-label="Data">20/03/2026</td>
-                            <td class="col-nowrap" data-label="Horário">15:00 – 16:00</td>
-                            <td data-label="Status"><span class="badge badge-concluida">Concluída</span></td>
-                        </tr>
-                    </tbody>
+                    <tbody id="tbody-historico"></tbody>
                 </table>
                 </div>
             </section>
 
         </main>
-
-        <dialog id="modal-1">
-            <form>
-                <div class="modal-header">
-                    <h3>Nova reserva</h3>
-                    <button class="close-modal" data-modal="modal-1" type="button">X</button>
-                </div>
-                <div class="modal-body">
-                    <div class="input-group">
-                        <label>Estação de trabalho</label>
-                        <select>
-                            <option>Mesa 01 — Andar 2 - Ala A</option>
-                            <option>Mesa 02 — Andar 2 - Ala B</option>
-                            <option>Mesa 03 — Andar 3 - Ala C</option>
-                            <option>Mesa 04 — Andar 2 - Ala D</option>
-                            <option>Mesa 05 — Andar 3 - Ala A</option>
-                            <option>Mesa 06 — Andar 3 - Ala B</option>
-                            <option>Mesa 07 — Andar 1 - Ala C</option>
-                            <option>Mesa 08 — Andar 1 - Ala D</option>
-                        </select>
-                    </div>
-                    <div class="input-group">
-                        <label>Data</label>
-                        <input type="date">
-                    </div>
-                    <div class="input-group">
-                        <label>Início</label>
-                        <input type="time">
-                    </div>
-                    <div class="input-group">
-                        <label>Fim</label>
-                        <input type="time">
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
-                    <button type="button">Confirmar</button>
-                </div>
-            </form>
-        </dialog>
 
         <dialog id="modal-editar">
             <div class="modal-header">
@@ -212,34 +100,36 @@
             <div class="modal-body">
                 <div class="input-group">
                     <label>Espaço</label>
-                    <input type="text" id="editar-espaco">
+                    <select id="editar-espaco"></select>
                 </div>
 
                 <div class="input-row">
                     <div class="input-group">
                         <label>Data</label>
-                        <input type="text" id="editar-data">
+                        <input type="text" id="editar-data" class="modal-date-input" placeholder="dd/mm/aaaa"> 
                     </div>
                     <div class="input-group">
                         <label>Início</label>
-                        <input type="text" id="editar-inicio">
+                        <input type="time" id="editar-inicio">
                     </div>
                 </div>
 
                 <div class="input-group">
                     <label>Término</label>
-                    <input type="text" id="editar-fim">
+                    <input type="time" id="editar-fim">
                 </div>
 
-                <div class="input-group">
-                    <label>Convidados</label>
+                <div class="input-group" id="editar-grupo-convidados">
+                    <label>Convidados <span id="editar-contador-convidados" class="editar-contador"></span></label>
                     <div class="modal-convidados-lista" id="editar-lista"></div>
                 </div>
 
-                <div class="input-group">
+                <div class="input-group" id="editar-grupo-adicionar">
                     <label>Adicionar convidado</label>
                     <div class="conv-adicionar-row">
-                        <input type="email" id="editar-novo-convidado" placeholder="email@empresa.com">
+                        <select id="editar-novo-convidado">
+                            <option value="">Selecionar usuário...</option>
+                        </select>
                         <button type="button" class="conv-adicionar-btn">Adicionar</button>
                     </div>
                 </div>
@@ -269,8 +159,7 @@
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="modal-detalhe-btn-cancelar close-modal" data-modal="modal-convidados">Cancelar</button>
-                <button type="button" class="modal-detalhe-btn-confirmar">Confirmar</button>
+                <button type="button" class="close-modal" data-modal="modal-convidados">Fechar</button>
             </div>
         </dialog>
 
@@ -286,9 +175,7 @@
             </div>
 
             <div class="modal-detalhe-body">
-                <p class="modal-detalhe-descricao">
-                    Tem certeza que deseja cancelar esta reserva?
-                </p>
+                <p class="modal-detalhe-descricao">Tem certeza que deseja cancelar esta reserva?</p>
 
                 <div class="modal-detalhe-linhas">
                     <div class="modal-detalhe-linha">
@@ -308,102 +195,19 @@
                 <p class="modal-detalhe-aviso">O espaço será liberado para outros colaboradores.</p>
             </div>
 
-            <div class="modal-detalhe-footer">
+            <div class="modal-footer">
                 <button type="button" class="modal-detalhe-btn-cancelar close-modal" data-modal="modal-cancelar-reserva">Cancelar</button>
-                <button type="button" class="modal-detalhe-btn-confirmar">Confirmar</button>
+                <button type="button" class="modal-detalhe-btn-confirmar-cancelamento">Confirmar</button>
             </div>
         </dialog>
 
+        <div id="toast-container"></div>
+
         <script src="assets/js/partes/menu.js"></script>
+        <script src="assets/js/partes/notificacoes.js"></script>
         <script src="assets/js/modal/modal.js"></script>
-        <script>
-            const statusClasse = { pendente: 'badge-concluida', aceito: 'badge-confirmada', recusado: 'badge-cancelada' };
-            const modalEditar = document.getElementById('modal-editar');
-
-            document.querySelectorAll('.btn-editar').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const convidados = JSON.parse(btn.dataset.convidados);
-
-                    document.getElementById('editar-espaco').value  = btn.dataset.espaco;
-                    document.getElementById('editar-data').value    = btn.dataset.data;
-                    document.getElementById('editar-inicio').value  = btn.dataset.inicio;
-                    document.getElementById('editar-fim').value     = btn.dataset.fim;
-
-                    document.getElementById('editar-lista').innerHTML = convidados.map(c => `
-                        <div class="modal-convidados-item">
-                            <span>${c.email}</span>
-                            <span class="badge ${statusClasse[c.status]}">${statusLabel[c.status]}</span>
-                        </div>
-                    `).join('');
-
-                    modalEditar.showModal();
-                });
-            });
-
-
-            const statusLabel  = { pendente: 'Pendente', aceito: 'Aceito', recusado: 'Recusado' };
-            const modalConv = document.getElementById('modal-convidados');
-
-            document.querySelectorAll('.btn-convidados').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const convidados = JSON.parse(btn.dataset.convidados);
-                    const capacidade = Number(btn.dataset.capacidade);
-
-                    document.getElementById('conv-titulo').textContent = `Convidados - ${btn.dataset.espaco}`;
-                    document.getElementById('conv-subtitulo').textContent =
-                        `${btn.dataset.data} · ${btn.dataset.horario} · Capacidade: ${capacidade}`;
-
-                    document.getElementById('conv-lista').innerHTML = convidados.map(c => `
-                        <div class="modal-convidados-item">
-                            <span>${c.email}</span>
-                            <span class="badge ${statusClasse[c.status]}">${statusLabel[c.status]}</span>
-                        </div>
-                    `).join('');
-
-                    const vagas = capacidade - convidados.length;
-                    document.getElementById('conv-rodape').textContent =
-                        `${convidados.length} / ${capacidade} convidados · ${vagas} vaga${vagas !== 1 ? 's' : ''} restante${vagas !== 1 ? 's' : ''}`;
-
-                    modalConv.showModal();
-                });
-            });
-
-            const modal = document.getElementById('modal-cancelar-reserva');
-
-            document.querySelectorAll('.btn-cancelar').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.getElementById('modal-cancelar-espaco').textContent = btn.dataset.espaco;
-                    document.getElementById('modal-cancelar-data').textContent = btn.dataset.data;
-                    document.getElementById('modal-cancelar-horario').textContent = btn.dataset.horario;
-                    modal.showModal();
-                });
-            });
-        </script>
-        <script>
-            document.querySelectorAll('.custom-select').forEach(select => {
-                const trigger = select.querySelector('.custom-select-trigger');
-                const label = select.querySelector('.custom-select-label');
-                const options = select.querySelectorAll('.custom-select-option');
-
-                trigger.addEventListener('click', () => {
-                    const isOpen = select.classList.contains('open');
-                    document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
-                    if (!isOpen) select.classList.add('open');
-                });
-
-                options.forEach(option => {
-                    option.addEventListener('click', () => {
-                        label.textContent = option.textContent;
-                        select.classList.remove('open');
-                    });
-                });
-            });
-
-            document.addEventListener('click', e => {
-                if (!e.target.closest('.custom-select')) {
-                    document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
-                }
-            });
-        </script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
+        <script src="assets/js/minhas-reservas/minhas-reservas.js"></script>
     </body>
 </html>

@@ -160,7 +160,8 @@ dialog::backdrop {
     gap: 8px;
 }
 
-.conv-adicionar-row input { flex: 1; }
+.conv-adicionar-row input,
+.conv-adicionar-row select { flex: 1; }
 
 .conv-adicionar-btn {
     padding: 0 16px;
@@ -373,7 +374,8 @@ dialog::backdrop {
       flex-wrap: wrap;
   }
 
-  .conv-adicionar-row input {
+  .conv-adicionar-row input,
+  .conv-adicionar-row select {
       min-width: 0;
       width: 100%;
       flex: 1 1 100%;

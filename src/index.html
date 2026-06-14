@@ -19,13 +19,20 @@
       <img src="assets/icons/logo.svg" alt="Logo">
 
       <h2>Seja Bem vindo(a)!</h2>
-      <p>Escolha uma forma de entrar</p>
+      <p>Escolha uma forma de cadastro</p>
 
-      <button onclick="window.location.href='login.html'">Usuário</button>
-      <button onclick="window.location.href='login.html'">Administrador</button>
+      <button onclick="selecionarPerfil('Usuário')">Usuário</button>
+      <button onclick="selecionarPerfil('Admin')">Administrador</button>
 
     </div>
   </div>
+
+  <script>
+    function selecionarPerfil(perfil) {
+      localStorage.setItem("perfilSelecionado", perfil);
+      window.location.href = "login.html";
+    }
+  </script>
 
 </body>
 </html>

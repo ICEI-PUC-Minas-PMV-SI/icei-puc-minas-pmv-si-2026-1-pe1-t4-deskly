@@ -454,6 +454,39 @@ button.btn-reservar:disabled {
     overflow: visible;
 }
 
+#modal-reserva .modal-convidados-lista {
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.reserva-contador {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--color-text-sm);
+    margin-left: 4px;
+}
+
+.btn-remover-convidado {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-sm);
+    font-size: 18px;
+    line-height: 1;
+    padding: 2px 5px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.btn-remover-convidado:hover {
+    color: var(--color-text-red);
+    background: #fee2e2;
+}
+
+.oculto {
+    display: none;
+}
+
 .flatpickr-calendar.static {
     z-index: 9999;
     position: absolute;
@@ -559,5 +592,82 @@ button.btn-reservar:disabled {
         width: 100%;
         max-width: 100%;
         height: auto;
+    }
+}
+
+#toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 99999;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    width: 340px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border-card);
+    border-left: 5px solid var(--color-btn-primary);
+    border-radius: var(--radius-lg);
+    padding: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    animation: toastEntrada .3s ease, toastSaida .3s ease 3.7s forwards;
+}
+
+.toast strong {
+    display: block;
+    color: var(--color-heading);
+    font: var(--text-md);
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+
+.toast span {
+    color: var(--color-text-md);
+    font: var(--text-sm);
+}
+
+.toast.sucesso {
+    border-left-color: var(--color-text-green);
+}
+
+.toast.erro {
+    border-left-color: var(--color-text-red);
+}
+
+.toast.aviso {
+    border-left-color: var(--color-btn-primary);
+}
+
+@keyframes toastEntrada {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toastSaida {
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
+
+@media (max-width: 768px) {
+    #toast-container {
+        top: 16px;
+        left: 16px;
+        right: 16px;
+    }
+
+    .toast {
+        width: 100%;
     }
 }

@@ -19,6 +19,7 @@
     align-items: center;
     gap: 8px;
     padding: 8px 14px;
+    min-height: 44px;
     border: 1px solid var(--color-border-card);
     border-radius: 8px;
     background-color: var(--color-background);
@@ -62,7 +63,7 @@
 }
 
 .reservas-secao-titulo {
-    font-size: 1.25rem;
+    font: var(--heading-3);
     padding-bottom: 16px;
     border-bottom: 1px solid var(--color-border-card);
 }
@@ -101,6 +102,18 @@
 
 .reservas-table tbody tr:last-child td { border-bottom: none; }
 
+.tabela-vazia {
+    text-align: center;
+    color: var(--color-text-sm);
+    padding: 32px;
+}
+
+.sem-convidados {
+    color: var(--color-text-sm);
+    font: var(--text-sm);
+    margin: 0;
+}
+
 .reservas-table tbody tr:hover {
     background-color: var(--color-background);
     filter: brightness(0.97);
@@ -108,7 +121,8 @@
 
 .col-nowrap { white-space: nowrap; }
 
-/* badges */
+.oculto { display: none; }
+
 .badge {
     display: inline-flex;
     align-items: center;
@@ -122,11 +136,11 @@
 
 .badge-confirmada { background-color: var(--color-badge-green); color: var(--color-text-green); }
 .badge-cancelada { background-color: var(--color-badge-red); color: var(--color-text-red); }
-.badge-concluida { background-color: #e8e8e8; color: #555555; }
+.badge-concluida { background-color: var(--color-badge-neutral); color: var(--color-text-neutral); }
 
 .btn-convidados {
     background: none;
-    border: 1px solid var(--color-border-card) !important;
+    border: 1px solid var(--color-border-card);
     border-radius: 6px;
     padding: 4px 10px;
     cursor: pointer;
@@ -153,6 +167,25 @@
 .btn-editar:hover { background: var(--color-heading)}
 .btn-cancelar:hover { background: var(--color-heading)}
 
+.btn-filtrar-simples {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: transparent;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    min-height: 44px;
+    font: var(--text-md);
+    color: var(--color-text-md);
+    cursor: pointer;
+}
+
+.btn-filtrar-simples:hover {
+    background: var(--color-border-card);
+    color: var(--color-text-md);
+}
+
 .modal-detalhe-btn-confirmar {
     background-color: var(--color-btn-primary);
     color: var(--color-background);
@@ -160,6 +193,18 @@
     border-radius: 6px;
     font: var(--text-sm);
     font-weight: 500;
+    cursor: pointer;
+    transition: opacity 0.15s ease;
+}
+
+.modal-detalhe-btn-confirmar-cancelamento {
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    padding: 8px 20px;
+    border-radius: 6px;
+    font: var(--text-sm);
+    font-weight: 500;
+    font-size: 14px;
     cursor: pointer;
     transition: opacity 0.15s ease;
 }
@@ -179,7 +224,6 @@
 
     .btn-filtrar-simples { width: 100%; justify-content: center; }
 
-    /* Remove borda do wrapper para usar o card individualmente */
     .reservas-table-wrapper {
         border: none;
         border-radius: 0;
@@ -187,10 +231,8 @@
         background: transparent;
     }
 
-    /* Oculta o cabeçalho da tabela */
     .reservas-table thead { display: none; }
 
-    /* Tabela vira grid de 2 colunas */
     .reservas-table {
         min-width: unset;
         display: grid;
@@ -200,7 +242,6 @@
 
     .reservas-table tbody { display: contents; }
 
-    /* Cada linha vira um card */
     .reservas-table tbody tr {
         display: flex;
         flex-direction: column;
@@ -214,7 +255,6 @@
         overflow: hidden;
     }
 
-    /* Cada célula mostra o label via data-label */
     .reservas-table td {
         display: flex;
         justify-content: space-between;
@@ -236,7 +276,6 @@
         min-width: 70px;
     }
 
-    /* Coluna de ações: botões lado a lado na parte inferior do card */
     .reservas-table td.col-acoes {
         flex-direction: row;
         flex-wrap: wrap;
@@ -269,21 +308,271 @@
     h1 { font-size: 1.25rem; }
 }
 
-.btn-filtrar-simples {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: transparent;
-    border: 1px solid var(--color-border-card) !important;
-    border-radius: var(--radius-md);
-    padding: var(--spacing-xs) var(--spacing-sm);
-    min-height: 44px;
-    font: var(--text-md);
-    color: var(--color-text-md);
-    cursor: pointer;
+.flatpickr-calendar {
+    background: var(--color-background);
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    font-family: var(--main-font);
 }
 
-.btn-filtrar-simples:hover {
-    background: var(--color-border-card);
+.flatpickr-months {
+    padding: var(--spacing-xs) 0;
+    border-bottom: 1px solid var(--color-border-card);
+}
+
+.flatpickr-month {
+    color: var(--color-heading);
+}
+
+.flatpickr-current-month {
+    font: var(--heading-4);
+    color: var(--color-heading);
+}
+
+.flatpickr-monthDropdown-months,
+.numInputWrapper input {
+    font: var(--text-md);
+    color: var(--color-heading);
+    background: transparent;
+}
+
+.flatpickr-prev-month,
+.flatpickr-next-month {
     color: var(--color-text-md);
+    fill: var(--color-text-md);
+    transition: all 0.2s ease;
+}
+
+.flatpickr-prev-month svg,
+.flatpickr-next-month svg {
+    fill: var(--color-text-md);
+    transition: fill 0.2s ease;
+}
+
+.flatpickr-prev-month:hover,
+.flatpickr-next-month:hover,
+.flatpickr-calendar .flatpickr-prev-month:hover svg,
+.flatpickr-calendar .flatpickr-next-month:hover svg {
+    color: var(--color-heading);
+    fill: var(--color-heading);
+    background: transparent; 
+}
+
+.flatpickr-weekday {
+    font: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-md);
+}
+
+.flatpickr-day {
+    font: var(--text-sm);
+    color: var(--color-heading);
+    border-radius: 50%; 
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1; 
+    box-sizing: border-box;
+}
+
+.flatpickr-day:hover {
+    background: var(--color-border-card);
+    color: var(--color-heading);
+    border: none;
+}
+
+.flatpickr-day.selected,
+.flatpickr-day.selected:hover {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+}
+
+.flatpickr-day.today {
+    border: 1px solid var(--color-btn-primary);
+    border-radius: 50%;
+    color: var(--color-btn-primary);
+    font-weight: 600;
+}
+
+.flatpickr-day.today:hover {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
+}
+
+.flatpickr-day.prevMonthDay,
+.flatpickr-day.nextMonthDay {
+    color: var(--color-text-sm);
+}
+
+.flatpickr-day.flatpickr-disabled {
+    color: var(--color-text-sm);
+    opacity: 0.4;
+}
+
+.flatpickr-input::placeholder {
+    color: var(--color-text-md);
+    font: var(--text-md);
+}
+
+.flatpickr-monthDropdown-months {
+    background: var(--color-background);
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    color: var(--color-heading);
+    font: var(--text-md);
+    padding: var(--spacing-xs);
+}
+
+.flatpickr-monthDropdown-months option {
+    background: var(--color-background);
+    color: var(--color-heading);
+    font: var(--text-sm);
+    padding: var(--spacing-xs);
+}
+
+.flatpickr-monthDropdown-months option:checked,
+.flatpickr-monthDropdown-months option:hover {
+    background: var(--color-btn-primary);
+    color: var(--color-background);
+}
+
+#modal-editar {
+    overflow: visible;
+}
+
+#modal-editar .modal-body {
+    overflow: visible;
+}
+
+#modal-editar .modal-convidados-lista {
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.editar-contador {
+    font: var(--text-sm);
+    color: var(--color-text-sm);
+    margin-left: 4px;
+}
+
+.convidado-acoes {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-remover-convidado {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-sm);
+    font-size: 18px;
+    line-height: 1;
+    padding: 2px 5px;
+    border-radius: 4px;
+    transition: color 0.15s, background 0.15s;
+}
+
+.btn-remover-convidado:hover {
+    color: var(--color-text-red);
+    background: var(--color-badge-red);
+}
+
+.flatpickr-calendar.static {
+    z-index: 9999;
+    position: absolute;
+    top: 100%;
+    left: 0;
+}
+
+
+#toast-container {
+    position: fixed;
+    top: 24px;
+    right: 24px;
+    z-index: 99999;
+
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.toast {
+    width: 340px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border-card);
+    border-left: 5px solid var(--color-btn-primary);
+
+    border-radius: var(--radius-lg);
+
+    padding: 16px;
+
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+
+    animation: toastEntrada .3s ease,
+               toastSaida .3s ease 3.7s forwards;
+}
+
+.toast strong {
+    display: block;
+
+    color: var(--color-heading);
+
+    font: var(--text-md);
+    font-weight: 600;
+
+    margin-bottom: 4px;
+}
+
+.toast span {
+    color: var(--color-text-md);
+
+    font: var(--text-sm);
+}
+
+.toast.sucesso {
+    border-left-color: var(--color-text-green);
+}
+
+.toast.erro {
+    border-left-color: var(--color-text-red);
+}
+
+.toast.aviso {
+    border-left-color: var(--color-btn-primary);
+}
+
+@keyframes toastEntrada {
+    from {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes toastSaida {
+    to {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+}
+
+@media (max-width: 768px) {
+
+    #toast-container {
+        top: 16px;
+        left: 16px;
+        right: 16px;
+    }
+
+    .toast {
+        width: 100%;
+    }
 }
