@@ -1,6 +1,3 @@
-// ==========================================
-// 1. CONFIGURAÇÃO DO INDEXEDDB (FOTOS DE PERFIL)
-// ==========================================
 const DB_NOME = "perfilDB";
 const DB_VERSAO = 1;
 const STORE_NOME = "fotos";
@@ -32,9 +29,6 @@ function carregarFotoDB(chave) {
     }));
 }
 
-// ==========================================
-// 2. FUNÇÕES AUXILIARES DE GERENCIAMENTO DE SESSÃO
-// ==========================================
 function obterSessao() {
     return JSON.parse(sessionStorage.getItem("usuarioLogado"))
         || JSON.parse(localStorage.getItem("usuarioLogado"))
@@ -53,9 +47,6 @@ function chaveUsuario(sessao) {
     return `foto_${sessao.id ?? sessao.email ?? "anonimo"}`;
 }
 
-// ==========================================
-// 3. CAPTURA DOS ELEMENTOS DA DOM
-// ==========================================
 const inputNome = document.getElementById("nome");
 const inputEmail = document.getElementById("email");
 const inputDepartamento = document.getElementById("departamento");
@@ -72,9 +63,18 @@ const avatarEl = document.getElementById("perfil-avatar");
 const avatarOverlay = document.getElementById("avatar-overlay");
 const inputFoto = document.getElementById("input-foto");
 
-// ==========================================
-// 4. LÓGICA DE MANIPULAÇÃO VISUAL E FOTOS
-// ==========================================
+inputTelefone.addEventListener('input', () => {
+    let v = inputTelefone.value.replace(/\D/g, '').slice(0, 11);
+
+    if (v.length <= 10) {
+        v = v.replace(/(\d{2})(\d{4})(\d{0,4})/, '($1) $2-$3');
+    } else {
+        v = v.replace(/(\d{2})(\d{5})(\d{0,4})/, '($1) $2-$3');
+    }
+
+    inputTelefone.value = v;
+});
+
 function aplicarFoto(blob) {
     const url = URL.createObjectURL(blob);
     avatarEl.innerHTML = `<img src="${url}" alt="Foto de perfil" style="width:100%; height:100%; border-radius:50%; object-fit:cover;">`;
@@ -88,7 +88,6 @@ function carregarFoto() {
         .catch(() => { });
 }
 
-// Ouvintes de clique para abrir a seleção de arquivos de imagem
 avatarOverlay.addEventListener("click", () => inputFoto.click());
 avatarEl.addEventListener("click", () => inputFoto.click());
 
@@ -104,13 +103,11 @@ inputFoto.addEventListener("change", () => {
     const sessao = obterSessao();
     if (!sessao) return;
 
-    // Salva a imagem no banco IndexedDB
     salvarFotoDB(chaveUsuario(sessao), arquivo)
         .then(() => {
             aplicarFoto(arquivo);
             mostrarToast("Foto atualizada", "Sua foto de perfil foi salva.", "sucesso");
-            
-            // Opcional: Atualiza também uma referência em Base64 na lista global para leitura rápida no admin
+
             const reader = new FileReader();
             reader.onloadend = function () {
                 const usuarios = buscarUsuarios();
@@ -127,9 +124,6 @@ inputFoto.addEventListener("change", () => {
     inputFoto.value = "";
 });
 
-// ==========================================
-// 5. CARREGAMENTO DOS DADOS DO USUÁRIO
-// ==========================================
 function carregarPerfil() {
     const sessao = obterSessao();
     if (!sessao) {
@@ -156,9 +150,6 @@ function carregarPerfil() {
     carregarFoto();
 }
 
-// ==========================================
-// 6. EVENTOS DO FORMULÁRIO (SALVAR / DESCARTAR / LOGOUT)
-// ==========================================
 btnSalvar.addEventListener("click", (e) => {
     e.preventDefault();
 
@@ -184,7 +175,12 @@ btnSalvar.addEventListener("click", (e) => {
         return;
     }
 
-    // Lógica de validação e troca de senhas
+    const telefoneLimpo = novoTelefone.replace(/\D/g, '');
+    if (novoTelefone && (telefoneLimpo.length < 10 || telefoneLimpo.length > 11)) {
+        mostrarToast("Telefone inválido", "Informe um telefone válido: (00) 00000-0000.", "erro");
+        return;
+    }
+
     if (senhaAtual || novaSenha) {
         if (!senhaAtual || !novaSenha) {
             mostrarToast("Campos de senha", "Preencha a senha atual e a nova senha.", "erro");
@@ -201,25 +197,22 @@ btnSalvar.addEventListener("click", (e) => {
         usuarios[index].senha = novaSenha;
     }
 
-    // Atualiza os dados no array geral do sistema
     usuarios[index].nome = novoNome;
     usuarios[index].departamento = novoDepartamento;
     usuarios[index].telefone = novoTelefone;
 
     salvarUsuarios(usuarios);
 
-    // Atualiza o estado da sessão atual logada (session e local)
-    const novaSessao = { 
-        ...sessao, 
-        nome: novoNome, 
-        departamento: novoDepartamento, 
-        telefone: novoTelefone 
+    const novaSessao = {
+        ...sessao,
+        nome: novoNome,
+        departamento: novoDepartamento,
+        telefone: novoTelefone
     };
-    
+
     if (sessionStorage.getItem("usuarioLogado")) sessionStorage.setItem("usuarioLogado", JSON.stringify(novaSessao));
     if (localStorage.getItem("usuarioLogado")) localStorage.setItem("usuarioLogado", JSON.stringify(novaSessao));
 
-    // Atualiza a interface
     nomeExibido.textContent = novoNome;
     roleExibido.textContent = novoDepartamento || "Colaborador";
     inputSenhaAtual.value = "";
@@ -243,9 +236,6 @@ if (btnLogout) {
     });
 }
 
-// ==========================================
-// 7. GERENCIAMENTO DE NOTIFICAÇÕES (TOAST)
-// ==========================================
 function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
     if (!container) return;
@@ -259,5 +249,4 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     setTimeout(() => toast.remove(), 4000);
 }
 
-// Dispara a carga de dados assim que a estrutura do documento estiver pronta
 document.addEventListener("DOMContentLoaded", carregarPerfil);
