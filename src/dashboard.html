@@ -17,36 +17,36 @@
         <section class="dashboard">
             <div class="dashboard-header">
                 <div class="dashboard-title">
-                    <h1>Olá, Kauã Gomes</h1>
-                    <span class="subtitle">Segunda-feira, 30 de março de 2026
-                    </span>
+                    <!-- JS preenche o nome e a data -->
+                    <h1 id="dashboard-saudacao">Olá,</h1>
+                    <span class="subtitle" id="dashboard-data"></span>
                 </div>
                 <div class="stats-grid">
                     <div class="stats-card">
                         <span class="stats-title">SALAS DISPONÍVEIS</span>
                         <div>
-                            <h2>6</h2>
-                            <span class="subtitle">de 8 cadastradas</span>
+                            <h2 id="stat-salas-disp">—</h2>
+                            <span class="subtitle" id="stat-salas-sub"></span>
                         </div>
                     </div>
                     <div class="stats-card">
                         <span class="stats-title">ESTAÇÕES LIVRES</span>
                         <div>
-                            <h2>12</h2>
-                            <span class="subtitle">de 20 cadastradas</span>
+                            <h2 id="stat-estacoes-disp">—</h2>
+                            <span class="subtitle" id="stat-estacoes-sub"></span>
                         </div>
                     </div>
                     <div class="stats-card">
                         <span class="stats-title">SUAS RESERVAS</span>
                         <div>
-                            <h2>2</h2>
-                            <span class="subtitle">próxima às 10h</span>
+                            <h2 id="stat-reservas-qtd">—</h2>
+                            <span class="subtitle" id="stat-reservas-sub"></span>
                         </div>
                     </div>
                     <div class="stats-card">
                         <span class="stats-title">MEMBROS NA EMPRESA</span>
                         <div>
-                            <h2>34</h2>
+                            <h2 id="stat-membros">—</h2>
                             <span class="subtitle">colaboradores</span>
                         </div>
                     </div>
@@ -54,52 +54,15 @@
             </div>
             <div class="today-reservations">
                 <h3 class="dashboard-subtitle">Suas reservas de hoje</h3>
-                <div class="reservation-card-wrap">
-                    <div class="reservation-card">
-                        <div>
-                            <img src="assets/images/Sala1.png" alt="Imagem da Sala">
-                            <div>
-                                <h4>Sala Alfa</h4>
-                                <span class="subtitle">10:00 – 11:30 · 3 convidados</span>
-                            </div>
-                        </div>
-                        <div class="confirmed-badge">
-                            <span>Confirmado</span>
-                        </div>
-                    </div>
-                    <div class="reservation-card">
-                        <div>
-                            <img src="assets/images/Mesa 04.png" alt="Imagem da Sala">
-                            <div>
-                                <h4>Mesa 04</h4>
-                                <span class="subtitle">14:00 – 18:00 · estação individual</span>
-                            </div>
-                        </div>
-                        <div class="confirmed-badge">
-                            <span>Confirmado</span>
-                        </div>
-                    </div>
-                    <div class="reservation-card">
-                        <div>
-                            <img src="assets/images/Sala3.png" alt="Imagem da Sala">
-                            <div>
-                                <h4>Sala Delta</h4>
-                                <span class="subtitle">14:00 – 15:30 · 8 convidados</span>
-                            </div>
-                        </div>
-                        <div class="confirmed-badge">
-                            <span>Confirmado</span>
-                        </div>
-                    </div>
-                </div>
+                <!-- JS renderiza os cards aqui -->
+                <div class="reservation-card-wrap" id="reservation-card-wrap"></div>
             </div>
             <div class="fast-actions">
                 <h3 class="dashboard-subtitle">Ações rápidas</h3>
                 <div class="fast-actions-buttons-wrap">
-                    <button class="fast-action-btn open-modal" data-modal="modal-1">+ Reservar sala de reunião</button>
-                    <button class="fast-action-btn open-modal" data-modal="modal-2">+ Reservar estação de
-                        trabalho</button>
-                    <a href="minhas-reservas.html" class="fast-action-btn">+ Ver minhas reservas</a>
+                    <a href="salas-reuniao.html" class="fast-action-btn">Ir para salas de reunião</a>
+                    <a href="estacoes.html" class="fast-action-btn">Ir para estações de trabalho</a>
+                    <a href="minhas-reservas.html" class="fast-action-btn">Ver minhas reservas</a>
                 </div>
             </div>
         </section>
@@ -113,9 +76,7 @@
                     <img src="assets/icons/close-menu.svg" alt="Fechar">
                 </button>
             </div>
-
             <div class="modal-body">
-
                 <div class="input-group">
                     <label for="espaco">Sala de reunião</label>
                     <select id="espaco" name="espaco" onchange="atualizarConvidados()">
@@ -125,22 +86,18 @@
                         <option value="12">Sala C — cap. 12 pessoas</option>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label for="modal-date">Data</label>
                     <input type="text" id="modal-date" class="modal-date-input" placeholder="dd/mm/aaaa">
                 </div>
-
                 <div class="input-group">
                     <label for="start-time">Horário de início</label>
                     <input type="time" id="start-time">
                 </div>
-
                 <div class="input-group">
                     <label for="ending-time">Horário de término</label>
                     <input type="time" id="ending-time">
                 </div>
-
                 <div class="input-group" id="convidados-wrapper" style="display: none;">
                     <label for="convidados">
                         Convidados <span id="limite-label"></span>
@@ -148,9 +105,7 @@
                     <select id="convidados" name="guests[]" multiple></select>
                     <small id="aviso"></small>
                 </div>
-
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
                 <button type="button" onclick="confirmar()">Confirmar</button>
@@ -166,9 +121,7 @@
                     <img src="assets/icons/close-menu.svg" alt="Fechar">
                 </button>
             </div>
-
             <div class="modal-body">
-
                 <div class="input-group">
                     <label for="espaco-2">Estação de trabalho</label>
                     <select id="espaco-2" name="espaco" onchange="atualizarConvidados()">
@@ -178,22 +131,18 @@
                         <option value="12">Estação C</option>
                     </select>
                 </div>
-
                 <div class="input-group">
                     <label for="modal-date-2">Data</label>
                     <input type="text" id="modal-date-2" class="modal-date-input" placeholder="dd/mm/aaaa">
                 </div>
-
                 <div class="input-group">
                     <label for="start-time-2">Horário de início</label>
                     <input type="time" id="start-time-2">
                 </div>
-
                 <div class="input-group">
                     <label for="ending-time-2">Horário de término</label>
                     <input type="time" id="ending-time-2">
                 </div>
-
                 <div class="input-group" id="convidados-wrapper-2" style="display: none;">
                     <label for="convidados-2">
                         Convidados <span id="limite-label-2"></span>
@@ -201,9 +150,7 @@
                     <select id="convidados-2" name="guests[]" multiple></select>
                     <small id="aviso-2"></small>
                 </div>
-
             </div>
-
             <div class="modal-footer">
                 <button type="button" class="close-modal" data-modal="modal-2">Cancelar</button>
                 <button type="button" onclick="confirmar()">Confirmar</button>
@@ -211,20 +158,15 @@
         </form>
     </dialog>
 
+    <!-- seed de teste: remova quando o login estiver funcionando -->
+    <script src="assets/js/seed-dados-teste.js"></script>
+
     <script src="assets/js/partes/menu.js"></script>
     <script src="assets/js/modal/modal.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
 
     <script>
-        flatpickr('.date-input', {
-            locale: 'pt',
-            dateFormat: 'd/m/Y',
-            disableMobile: true,
-            placeholder: 'dd/mm/aaaa',
-            monthSelectorType: 'static'
-        });
-
         flatpickr('.modal-date-input', {
             locale: 'pt',
             dateFormat: 'd/m/Y',
@@ -233,5 +175,10 @@
             monthSelectorType: 'static',
             static: true
         });
-
     </script>
+
+    <!-- JS dinâmico da dashboard -->
+    <script src="assets/js/dashboard/dashboard.js"></script>
+</body>
+
+</html>
