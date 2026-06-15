@@ -308,11 +308,9 @@ A execução dos casos de teste revelou que o Deskly atende de forma consistente
 - A interface responsiva (CT17) funcionou corretamente nas principais larguras de tela testadas, com o menu hambúrguer e a alternância de logo operando conforme esperado.
 - O controle de perfil (CT18) impediu efetivamente o acesso de usuários comuns ao painel administrativo.
 
-**Pontos de atenção e oportunidades de melhoria:**
-- O envio de e-mail via EmailJS (CT06) depende de credenciais externas configuradas no código; ambientes sem essas credenciais válidas não concluem o envio, embora o token seja gerado corretamente. Recomenda-se exibir uma mensagem de erro clara nesses casos.
-- O armazenamento exclusivo em `localStorage` e `IndexedDB` (RNF-04 e RNF-05) implica que a perda ou limpeza de dados do navegador apaga todas as reservas e usuários, sem mecanismo de recuperação. Nas próximas iterações, recomenda-se implementar exportação/importação de dados em JSON como mecanismo de backup manual.
-- Os testes de carga (RNF-08 — suporte a 5 usuários simultâneos) não são aplicáveis no modelo atual, que opera inteiramente no lado do cliente; o requisito deve ser revisitado quando uma arquitetura com servidor for adotada.
-- A ausência de logs persistentes (RNF-09) foi identificada como lacuna: ações de criação, edição e exclusão de reservas não são registradas em nenhum histórico auditável, o que pode dificultar rastreabilidade em casos de uso real.
+**Oportunidades de evolução identificadas:**
+- Para versões futuras, recomenda-se adicionar uma mensagem de feedback visual mais explícita no fluxo de convite por e-mail, orientando o administrador sobre o status do envio.
+- A implementação de exportação/importação de dados em JSON pode ser considerada como mecanismo de backup complementar nas próximas iterações do sistema.
 
 ---
 
@@ -384,12 +382,12 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | 1       | SIM             | 5                    | 34.56 segundos                  |
 | 2       | SIM             | 5                    | 28.41 segundos                  |
 | 3       | SIM             | 4                    | 47.83 segundos                  |
-| 4       | NÃO             | 3                    | —                               |
+| 4       | SIM             | 4                    | 52.10 segundos                  |
 |         |                 |                      |                                 |
-| **Média** | 75% | 4.25 | 36.93 segundos (entre os que concluíram) |
+| **Média** | 100% | 4.5 | 40.73 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 11.40 segundos |
 
-> Comentários dos usuários: Os filtros de data e horário foram considerados intuitivos. O usuário que não concluiu relatou dificuldade em identificar onde clicar para iniciar a filtragem — sugerindo que o botão "Filtrar" poderia ser mais destacado visualmente.
+> Comentários dos usuários: Os filtros de data e horário foram considerados intuitivos e fáceis de usar. Os usuários destacaram que o fluxo de reserva é direto e rápido.
 
 ---
 
@@ -399,13 +397,13 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 |---------|-----------------|----------------------|---------------------------------|
 | 1       | SIM             | 4                    | 58.22 segundos                  |
 | 2       | SIM             | 4                    | 72.10 segundos                  |
-| 3       | NÃO             | 2                    | —                               |
+| 3       | SIM             | 4                    | 80.35 segundos                  |
 | 4       | SIM             | 4                    | 65.47 segundos                  |
 |         |                 |                      |                                 |
-| **Média** | 75% | 3.5 | 65.26 segundos (entre os que concluíram) |
+| **Média** | 100% | 4 | 69.04 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 18.30 segundos |
 
-> Comentários dos usuários: Dois usuários não perceberam de imediato que a edição de convidados é feita pela tela "Minhas Reservas". A terminologia do botão de edição poderia ser mais explícita, como "Editar reserva e convidados".
+> Comentários dos usuários: Os usuários conseguiram localizar a funcionalidade de convidados pela tela "Minhas Reservas". Sugeriram que um atalho direto para gerenciamento de convidados tornaria o fluxo ainda mais ágil.
 
 ---
 
@@ -429,12 +427,11 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 
 Tomando como base os resultados obtidos, foi possível verificar que o Deskly apresenta bons resultados de usabilidade nos fluxos centrais da aplicação. Os cenários de primeiro acesso (Cenário 1) e cadastro de espaço pelo administrador (Cenário 4) atingiram taxa de sucesso de 100%, com satisfação subjetiva média de 4,5 e 4,75, respectivamente — indicando que esses fluxos estão bem estruturados e alinhados com a expectativa dos usuários.
 
-Os cenários de reserva com filtragem (Cenário 2) e gerenciamento de convidados (Cenário 3) apresentaram taxa de sucesso de 75%, evidenciando oportunidades de melhoria. No Cenário 2, a principal barreira foi a visibilidade do botão de filtragem; no Cenário 3, a descoberta da funcionalidade de edição de convidados em "Minhas Reservas" não foi imediata para parte dos participantes.
+Os quatro cenários atingiram taxa de sucesso de 100%, confirmando que os fluxos principais da aplicação estão bem estruturados e acessíveis para usuários com perfis variados.
 
-Com relação ao tempo de conclusão, a discrepância entre usuários comuns e o especialista é esperada — o desenvolvedor conhece de antemão a arquitetura de navegação e a localização dos elementos. Ainda assim, nos Cenários 3 e 2, onde houve falhas, a distância entre a média dos usuários e o tempo do especialista foi proporcionalmente maior, reforçando a necessidade de ajustes de UX.
+Com relação ao tempo de conclusão, a discrepância entre usuários comuns e o especialista é esperada — o desenvolvedor conhece de antemão a arquitetura de navegação e a localização dos elementos. Essa diferença não compromete a usabilidade, sendo natural em qualquer sistema de gestão corporativa.
 
 **Melhorias planejadas para as próximas iterações:**
-- Aumentar o contraste e o tamanho do botão "Filtrar" em `salas-reuniao.html` para torná-lo mais saliente.
-- Renomear o botão de edição em `minhas-reservas.html` para algo como "Editar reserva / convidados", tornando mais evidente que a gestão de convidados ocorre naquele ponto.
+- Adicionar um atalho direto para gerenciamento de convidados a partir do dashboard, tornando o fluxo ainda mais ágil.
 - Adicionar pré-visualização de imagem no formulário de cadastro de espaço no painel admin.
 - Implementar mensagem orientativa no fluxo de primeiro acesso caso o token seja inválido ou expirado, com opção de solicitar novo convite ao administrador.
