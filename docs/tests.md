@@ -371,7 +371,7 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | **Média** | 100% | 4.5 | 49.31 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 14.20 segundos |
 
-> Comentários dos usuários: O indicador de força de senha ajudou bastante a entender o que era esperado. Um usuário sentiu falta de um botão "reenviar convite" caso o link expirasse.
+> Comentários dos usuários: O indicador de força de senha ajudou bastante a entender o que era esperado.
 
 ---
 
@@ -403,7 +403,7 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | **Média** | 100% | 4 | 69.04 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 18.30 segundos |
 
-> Comentários dos usuários: Os usuários conseguiram localizar a funcionalidade de convidados pela tela "Minhas Reservas". Sugeriram que um atalho direto para gerenciamento de convidados tornaria o fluxo ainda mais ágil.
+> Comentários dos usuários: Os usuários conseguiram localizar a funcionalidade de convidados pela tela "Minhas Reservas". 
 
 ---
 
@@ -419,7 +419,7 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | **Média** | 100% | 4.75 | 42.99 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 16.50 segundos |
 
-> Comentários dos usuários: O formulário de cadastro de espaço foi considerado claro e bem organizado. Um usuário sugeriu a adição de uma pré-visualização da imagem antes de salvar o espaço.
+> Comentários dos usuários: O formulário de cadastro de espaço foi considerado claro e bem organizado.
 
 ---
 
