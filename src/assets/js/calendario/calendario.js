@@ -2,28 +2,6 @@ const calendar = document.getElementById("calendar");
 const mesLabel = document.getElementById("mesLabel");
 
 let reservas = {};
-
-function carregarReservasDoStorage() {
-    const sistema = JSON.parse(localStorage.getItem('reservasSistema') || '[]');
-    reservas = {};
-    sistema
-        .filter(r => r.status === 'Confirmada')
-        .forEach(r => {
-            const [d, m, y] = r.data.split('/');
-            const key = `${y}-${Number(m) - 1}-${Number(d)}`;
-            if (!reservas[key]) reservas[key] = [];
-            reservas[key].push({
-                espaco:      r.espaco,
-                responsavel: r.usuario || '-',
-                inicio:      r.inicio  || '',
-                fim:         r.fim     || '',
-                emails:      (r.convidados && r.convidados !== '-') ? r.convidados : '',
-                status:      r.status,
-                key
-            });
-        });
-}
-
 let diaSelecionado = null;
 let indexSelecionado = null;
 
@@ -103,7 +81,6 @@ function carregarReservasDoSistema() {
 }
 
 function renderCalendar() {
-    carregarReservasDoStorage();
     carregarReservasDoSistema();
 
     calendar.innerHTML = "";
