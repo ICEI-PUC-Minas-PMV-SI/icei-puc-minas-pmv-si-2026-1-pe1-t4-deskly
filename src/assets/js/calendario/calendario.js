@@ -3,6 +3,27 @@ const mesLabel = document.getElementById('mesLabel');
 
 let reservas = {};
 
+function carregarReservasDoStorage() {
+    const sistema = JSON.parse(localStorage.getItem('reservasSistema') || '[]');
+    reservas = {};
+    sistema
+        .filter(r => r.status === 'Confirmada')
+        .forEach(r => {
+            const [d, m, y] = r.data.split('/');
+            const key = `${y}-${Number(m) - 1}-${Number(d)}`;
+            if (!reservas[key]) reservas[key] = [];
+            reservas[key].push({
+                espaco:      r.espaco,
+                responsavel: r.usuario || '-',
+                inicio:      r.inicio  || '',
+                fim:         r.fim     || '',
+                emails:      (r.convidados && r.convidados !== '-') ? r.convidados : '',
+                status:      r.status,
+                key
+            });
+        });
+}
+
 let diaSelecionado = null;
 let indexSelecionado = null;
 let mesAtual = new Date().getMonth();
@@ -13,6 +34,7 @@ function chave(dia) { return `${anoAtual}-${mesAtual}-${dia}`; }
 function salvarLocal() { /* reservas já estão em memória */ }
 
 function renderCalendar() {
+    carregarReservasDoStorage();
     calendar.innerHTML = "";
     const primeiroDia = new Date(anoAtual, mesAtual, 1).getDay();
     const totalDias = new Date(anoAtual, mesAtual + 1, 0).getDate();
