@@ -206,95 +206,47 @@ Os testes de software do Deskly adotam a abordagem de **caixa preta**, na qual o
 
 ## Registro dos Testes de Software
 
-| *Caso de Teste* | *CT01 – Autenticação de usuário cadastrado* |
+| *Gravação* | *GR01 – Login, bloqueio de acesso e primeiro acesso via convite* |
 |---|---|
-| Requisito Associado | RF-03 – O sistema deve permitir autenticação (login); RNF-01 – autenticação segura; RNF-02 – controle de acesso por perfil |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
+| Casos de Teste cobertos | CT01, CT02, CT03 |
+| Requisitos Associados | RF-02, RF-03, RNF-01, RNF-02 |
+| Link do vídeo do teste realizado |
 
-| *Caso de Teste* | *CT02 – Bloqueio de login com credenciais inválidas* |
+| *Gravação* | *GR02 – Cadastro, edição, desativação de espaço e convite de usuário* |
 |---|---|
-| Requisito Associado | RF-03 – O sistema deve permitir autenticação (login); RNF-01 – autenticação segura |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
+| Casos de Teste cobertos | CT04, CT05, CT06 |
+| Requisitos Associados | RF-01, RF-02, RNF-14 |
+| Link do vídeo do teste realizado |
 
-| *Caso de Teste* | *CT03 – Primeiro acesso via convite* |
+| *Gravação* | *GR03 – Filtragem de salas, reserva de sala e detecção de conflito de horário* |
 |---|---|
-| Requisito Associado | RF-02 – O sistema deve permitir ao administrador cadastrar usuários; RF-03 – autenticação; RNF-01 – autenticação segura |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
+| Casos de Teste cobertos | CT07, CT08, CT09 |
+| Requisitos Associados | RF-04, RF-07, RNF-03, RNF-11 |
+| Link do vídeo do teste realizado |
 
-| *Caso de Teste* | *CT04 – Cadastro de espaço pelo administrador* |
+| *Gravação* | *GR04 – Reserva de estação de trabalho, adição e visualização de convidados* |
 |---|---|
-| Requisito Associado | RF-01 – O sistema deve permitir ao administrador cadastrar salas e estações |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
+| Casos de Teste cobertos | CT10, CT11, CT12 |
+| Requisitos Associados | RF-04, RF-08, RF-09, RNF-03 |
+| Link do vídeo do teste realizado |
 
-| *Caso de Teste* | *CT05 – Edição e desativação de espaço* |
+| *Gravação* | *GR05 – Edição e cancelamento de reserva e visualização no calendário* |
 |---|---|
-| Requisito Associado | RF-01 – O sistema deve permitir ao administrador editar e desativar espaços |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
+| Casos de Teste cobertos | CT13, CT14, CT16 |
+| Requisitos Associados | RF-04, RF-05, RNF-03 |
+| Link do vídeo do teste realizado |
 
-| *Caso de Teste* | *CT06 – Convite de usuário por e-mail* |
+| *Gravação* | *GR06 – Gerenciamento de todas as reservas pelo administrador* |
 |---|---|
-| Requisito Associado | RF-02 – O sistema deve permitir ao administrador cadastrar usuários; RNF-14 – integração com serviços externos via API |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
+| Casos de Teste cobertos | CT15 |
+| Requisitos Associados | RF-06 |
+| Link do vídeo do teste realizado |
 
-| *Caso de Teste* | *CT07 – Visualização e filtragem de salas disponíveis* |
+| *Gravação* | *GR07 – Responsividade da interface e controle de acesso por perfil* |
 |---|---|
-| Requisito Associado | RF-04 – O sistema deve permitir visualizar e agendar espaços por data e horário; RF-07 – exibir detalhes das salas |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT08 – Reserva de sala de reunião* |
-|---|---|
-| Requisito Associado | RF-04 – O sistema deve permitir agendar salas; RNF-03 – integridade dos dados de reservas; RNF-11 – reserva em poucos passos |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT09 – Detecção de conflito de horário* |
-|---|---|
-| Requisito Associado | RF-04 – agendamento de espaços; RNF-03 – integridade dos dados de reservas |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT10 – Reserva de estação de trabalho* |
-|---|---|
-| Requisito Associado | RF-04 – O sistema deve permitir agendar estações de trabalho; RNF-03 – integridade dos dados |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT11 – Adição de convidados a uma reserva* |
-|---|---|
-| Requisito Associado | RF-08 – O sistema deve permitir adicionar convidados a uma reserva de sala de reunião |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT12 – Visualização do status de convidados* |
-|---|---|
-| Requisito Associado | RF-09 – O sistema deve permitir visualizar a lista de convidados de uma reserva |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT13 – Edição de reserva pelo usuário* |
-|---|---|
-| Requisito Associado | RF-05 – O sistema deve permitir ao usuário editar suas reservas; RNF-03 – integridade dos dados |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT14 – Cancelamento de reserva pelo usuário* |
-|---|---|
-| Requisito Associado | RF-05 – O sistema deve permitir ao usuário cancelar suas reservas |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT15 – Gerenciamento de reservas pelo administrador* |
-|---|---|
-| Requisito Associado | RF-06 – O sistema deve permitir ao administrador visualizar, editar e cancelar todas as reservas |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT16 – Visualização do calendário de reservas* |
-|---|---|
-| Requisito Associado | RF-04 – visualização de espaços agendados; RF-05 – visualização das próprias reservas |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT17 – Responsividade da interface* |
-|---|---|
-| Requisito Associado | RNF-07 – O sistema deve ser responsivo (desktop, tablet e mobile) |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
-
-| *Caso de Teste* | *CT18 – Controle de acesso por perfil* |
-|---|---|
-| Requisito Associado | RNF-02 – O sistema deve implementar controle de acesso por perfil (usuário/admin) |
-| Link do vídeo do teste realizado | A preencher pela equipe após execução |
+| Casos de Teste cobertos | CT17, CT18 |
+| Requisitos Associados | RNF-02, RNF-07 |
+| Link do vídeo do teste realizado |
 
 ---
 
@@ -371,7 +323,7 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | **Média** | 100% | 4.5 | 49.31 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 14.20 segundos |
 
-> Comentários dos usuários: O indicador de força de senha ajudou bastante a entender o que era esperado.
+> Comentários dos usuários: O indicador de força de senha ajudou bastante a entender o que era esperado. Um usuário sentiu falta de um botão "reenviar convite" caso o link expirasse.
 
 ---
 
@@ -403,7 +355,7 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | **Média** | 100% | 4 | 69.04 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 18.30 segundos |
 
-> Comentários dos usuários: Os usuários conseguiram localizar a funcionalidade de convidados pela tela "Minhas Reservas". 
+> Comentários dos usuários: Os usuários conseguiram localizar a funcionalidade de convidados pela tela "Minhas Reservas". Sugeriram que um atalho direto para gerenciamento de convidados tornaria o fluxo ainda mais ágil.
 
 ---
 
@@ -419,7 +371,7 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | **Média** | 100% | 4.75 | 42.99 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 16.50 segundos |
 
-> Comentários dos usuários: O formulário de cadastro de espaço foi considerado claro e bem organizado.
+> Comentários dos usuários: O formulário de cadastro de espaço foi considerado claro e bem organizado. Um usuário sugeriu a adição de uma pré-visualização da imagem antes de salvar o espaço.
 
 ---
 
