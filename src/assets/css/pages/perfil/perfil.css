@@ -90,7 +90,7 @@ main {
 .btn-alterar-foto img {
     width: 14px;
     height: 14px;
-    filter: brightness(0) invert(1); 
+    filter: brightness(0) invert(1);
 }
 
 .card-perfil-resumo h2 {
@@ -103,6 +103,71 @@ main {
     font: var(--text-sm);
     color: var(--color-text-md);
     margin: 0 0 var(--spacing-sm) 0;
+}
+
+.btn-logout {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: var(--color-btn-primary);
+    color: var(--color-background);
+    border: none;
+    border-radius: var(--radius-md);
+    padding: 8px var(--spacing-sm);
+    font: var(--text-sm);
+    font-weight: 400;
+    cursor: pointer;
+    transition: 0.2s ease;
+    width: auto;
+    margin-top: var(--spacing-md);
+}
+
+.btn-logout:hover {
+    background-color: var(--color-heading);
+}
+
+.btn-logout svg {
+    flex-shrink: 0;
+}
+
+.perfil-avatar-placeholder img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.avatar-container:hover .perfil-avatar-placeholder {
+    opacity: 0.7;
+}
+
+.avatar-overlay {
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-color: rgba(0, 0, 0, 0.45);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    cursor: pointer;
+    z-index: 1;
+}
+
+.avatar-container:hover .avatar-overlay {
+    opacity: 1;
+}
+
+.avatar-overlay svg {
+    width: 28px;
+    height: 28px;
+    color: #fff;
+}
+
+#input-foto {
+    display: none;
 }
 
 .card-perfil-dados {
@@ -136,7 +201,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xs);
-    flex: 1; 
+    flex: 1;
     width: 100%;
 }
 
@@ -152,7 +217,7 @@ main {
     border-radius: var(--radius-md);
     padding: var(--spacing-xs) var(--spacing-sm);
     font: var(--text-md);
-    font-weight: 400; 
+    font-weight: 400;
     color: var(--color-heading);
     background-color: transparent;
     outline: none;
@@ -188,13 +253,13 @@ main {
     background: transparent;
     border: 1px solid var(--color-border-card);
     border-radius: var(--radius-md);
-    padding: 14px var(--spacing-md); 
+    padding: 14px var(--spacing-md);
     color: var(--color-text-md);
     font: var(--text-md);
-    font-weight: 400; 
+    font-weight: 400;
     cursor: pointer;
     transition: 0.2s ease;
-    min-width: 180px; 
+    min-width: 180px;
 }
 
 .form-acoes .btn-detalhes:hover {
@@ -210,12 +275,12 @@ main {
     color: var(--color-background);
     border: none;
     border-radius: var(--radius-md);
-    padding: 14px var(--spacing-md); 
+    padding: 14px var(--spacing-md);
     font: var(--text-md);
-    font-weight: 400; 
+    font-weight: 400;
     cursor: pointer;
     transition: 0.2s ease;
-    min-width: 180px; 
+    min-width: 180px;
 }
 
 .form-acoes .btn-reservar:hover {
@@ -239,6 +304,72 @@ main {
     color: var(--color-text-green);
 }
 
+#toast-container {
+    position: fixed;
+    top: var(--spacing-lg, 24px);
+    right: var(--spacing-lg, 24px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 9999;
+}
+
+.toast {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 260px;
+    max-width: 340px;
+    padding: 14px 18px;
+    border-radius: var(--radius-md);
+    border-left: 4px solid transparent;
+    background-color: var(--color-background);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+    font: var(--text-sm);
+    color: var(--color-heading);
+    animation: toastEntrar 0.3s ease;
+    transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.toast.saindo {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.toast strong {
+    font-weight: 600;
+    font-size: 0.85rem;
+}
+
+.toast span {
+    opacity: 0.8;
+    font-size: 0.8rem;
+}
+
+.toast.sucesso {
+    border-color: var(--color-text-green, #22c55e);
+}
+
+.toast.erro {
+    border-color: #EF4444;
+}
+
+.toast.aviso {
+    border-color: var(--color-btn-primary);
+}
+
+@keyframes toastEntrar {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 @media (max-width: 900px) {
     .perfil-container {
         grid-template-columns: 1fr;
@@ -250,11 +381,11 @@ main {
         flex-direction: column;
         gap: var(--spacing-md);
     }
-    
+
     .form-acoes {
         flex-direction: column-reverse;
     }
-    
+
     .form-acoes .btn-detalhes,
     .form-acoes .btn-reservar {
         width: 100%;

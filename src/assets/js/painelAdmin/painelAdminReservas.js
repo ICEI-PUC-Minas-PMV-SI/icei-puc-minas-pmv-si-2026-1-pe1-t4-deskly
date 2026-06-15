@@ -39,6 +39,16 @@ function carregarReservasAdmin() {
     }
 
     reservas.forEach(reserva => {
+        const estaCancelada = reserva.status === 'Cancelada';
+
+        const botaoAcao = estaCancelada
+            ? `<button class="btn-action btn-reativar-reserva-admin" data-id="${reserva.id}">
+                   Reativar
+               </button>`
+            : `<button class="btn-action btn-excluir-reserva-admin" data-id="${reserva.id}">
+                   Cancelar
+               </button>`;
+
         tabela.innerHTML += `
             <tr>
                 <td data-label="Usuário">${reserva.usuario || "Usuário não identificado"}</td>
@@ -49,9 +59,7 @@ function carregarReservasAdmin() {
                     <span class="badge ${classeStatusReserva(reserva.status)}">${reserva.status}</span>
                 </td>
                 <td data-label="Ações">
-                    <button class="btn-action btn-excluir-reserva-admin" data-id="${reserva.id}">
-                        Cancelar
-                    </button>
+                    ${botaoAcao}
                 </td>
             </tr>
         `;
@@ -69,6 +77,19 @@ function excluirReservaAdmin(id) {
     salvarReservasSistema(reservasSistema);
     carregarReservasAdmin();
     exibirToast('Reserva cancelada', 'A reserva foi marcada como cancelada.', 'sucesso');
+}
+
+function reativarReservaAdmin(id) {
+    const reservasSistema = buscarReservasSistema();
+    const idx = reservasSistema.findIndex(r => r.id === Number(id));
+
+    if (idx === -1) return;
+
+    reservasSistema[idx].status = 'Confirmada';
+
+    salvarReservasSistema(reservasSistema);
+    carregarReservasAdmin();
+    exibirToast('Reserva reativada', 'A reserva foi marcada como confirmada novamente.', 'sucesso');
 }
 
 let idReservaParaCancelar = null;
@@ -119,6 +140,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("click", event => {
     const botaoExcluir = event.target.closest(".btn-excluir-reserva-admin");
+    const botaoReativar = event.target.closest(".btn-reativar-reserva-admin");
+
+    if (botaoReativar) {
+        reativarReservaAdmin(botaoReativar.dataset.id);
+        return;
+    }
 
     if (!botaoExcluir) return;
 

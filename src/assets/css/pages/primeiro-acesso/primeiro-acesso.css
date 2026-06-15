@@ -1,4 +1,4 @@
-@import './variables.css';
+@import '../../global/variables.css';
 
 body {
     display: flex;
@@ -14,7 +14,7 @@ body {
 
 .primeiroacesso-banner {
     overflow: hidden;
-    background-image: url('../../../images/banner-primeiro-acesso.png');
+    background-image: url('../../../images/primeiroacesso-banner.png');
     background-size: cover;
     background-position: center center;
 }
@@ -124,6 +124,9 @@ body {
     border: none;
     cursor: pointer;
     transition: opacity 0.2s;
+    font: var(--text-md);        
+    font-weight: normal;        
+    text-align: center;
 }
 
 .primeiroacesso-button:hover {
@@ -131,7 +134,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
     .primeiroacesso-wrapper {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
@@ -149,23 +151,26 @@ body {
         justify-content: flex-start;
     }
 
-    .primeiroacesso-form .logo {
+    .primeiroacesso-form .primeiroacesso-logo {
+        content: url('../../../icons/logo.svg'); /* Alinha ao padrão de caminhos do Login */
         display: block;
+        height: 36px;
+        width: auto;
+        max-width: 150px;
     }
 }
 
 @media (max-width: 350px) {
-
     .primeiroacesso-banner {
         min-height: 40vh;
     }
 }
 
 @media (max-width: 320px) {
-
     .primeiroacesso-wrapper {
         min-width: 320px;
         overflow-x: hidden;
+        min-height: 100dvh;
     }
 
     .primeiroacesso-form {

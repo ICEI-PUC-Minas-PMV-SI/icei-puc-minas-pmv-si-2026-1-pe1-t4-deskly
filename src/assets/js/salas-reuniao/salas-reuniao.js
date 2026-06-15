@@ -2,10 +2,8 @@ const btnNovaReserva = document.querySelector(".botao-add-sala");
 const btnConfirmar = document.getElementById("btn-confirmar-reserva");
 const btnFiltrar = document.querySelector(".btn-filtrar-simples");
 const btnReservarDosDetalhes = document.getElementById("btn-reservar-dos-detalhes");
-
 const modalReserva = document.getElementById("modal-reserva");
 const modalDetalhes = document.getElementById("modal-detalhes");
-
 const selectEspaco = document.getElementById("espaco");
 const inputDataModal = document.querySelector(".modal-date-input");
 const inputFiltroData = document.querySelector(".date-input");
@@ -43,33 +41,8 @@ function salvarEspacosSistema(espacos) {
     localStorage.setItem("espacosSistema", JSON.stringify(espacos));
 }
 
-function criarEspacosPadraoSalas() {
-    if (localStorage.getItem("espacosSistema")) return;
-
-    const espacosPadrao = [
-        { id: 1, tipo: "Sala de Reunião", nome: "Sala Alfa", capacidade: 8, recursos: "TV, Videoconferência, Lousa", area: "-", status: "Ativo", imagem: "" },
-        { id: 2, tipo: "Sala de Reunião", nome: "Sala Beta", capacidade: 4, recursos: "TV, Videoconferência", area: "-", status: "Ativo", imagem: "" },
-        { id: 3, tipo: "Sala de Reunião", nome: "Sala Gama", capacidade: 12, recursos: "TV, Videoconferência, Lousa, Ar-condicionado", area: "-", status: "Ativo", imagem: "" },
-        { id: 4, tipo: "Sala de Reunião", nome: "Sala Delta", capacidade: 6, recursos: "Lousa", area: "-", status: "Inativo", imagem: "" },
-
-        { id: 5, tipo: "Estação de Trabalho", nome: "Mesa 01", capacidade: "-", recursos: "-", area: "Andar 1 - Ala A", status: "Ativo", imagem: "" },
-        { id: 6, tipo: "Estação de Trabalho", nome: "Mesa 02", capacidade: "-", recursos: "-", area: "Andar 2 - Ala B", status: "Ativo", imagem: "" },
-        { id: 7, tipo: "Estação de Trabalho", nome: "Mesa 03", capacidade: "-", recursos: "-", area: "Andar 3 - Ala C", status: "Inativo", imagem: "" },
-        { id: 8, tipo: "Estação de Trabalho", nome: "Mesa 04", capacidade: "-", recursos: "-", area: "Andar 4 - Ala D", status: "Ativo", imagem: "" }
-    ];
-
-    salvarEspacosSistema(espacosPadrao);
-}
-
-function imagemPadraoSala(nomeSala) {
-    const imagens = {
-        "Sala Alfa": "assets/images/Sala1.png",
-        "Sala Beta": "assets/images/Sala2.png",
-        "Sala Gama": "assets/images/Sala3.png",
-        "Sala Delta": "assets/images/Sala4.png"
-    };
-
-    return imagens[nomeSala] || "assets/images/Sala1.png";
+function imagemPadraoSala(sala) {
+    return sala.imagem || "assets/images/Sala1.png";
 }
 
 function buscarReservas() {
@@ -150,8 +123,6 @@ function obterContainerSalas() {
 }
 
 function gerarCardsSalasDoSistema() {
-    criarEspacosPadraoSalas();
-
     const container = obterContainerSalas();
     if (!container) return;
 
@@ -161,11 +132,21 @@ function gerarCardsSalasDoSistema() {
 
     container.innerHTML = "";
 
+    if (salas.length === 0) {
+        container.innerHTML = `
+            <p class="aviso-vazio" style="color: var(--color-text-md); padding: 20px; font-size: 15px;">
+                Nenhum espaço ou sala de reunião cadastrada no sistema.
+            </p>
+        `;
+        if (selectEspaco) selectEspaco.innerHTML = `<option value="">Nenhum local disponível</option>`;
+        return;
+    }
+
     salas.forEach(sala => {
         const classeBadge = sala.status === "Inativo" ? "inativa" : "disponivel";
         const textoBadge = sala.status === "Inativo" ? "Inativa" : "Disponível";
         const disabled = sala.status === "Inativo" ? "disabled" : "";
-        const imagem = sala.imagem || imagemPadraoSala(sala.nome);
+        const imagem = imagemPadraoSala(sala);
 
         container.innerHTML += `
             <article class="card-sala"
@@ -207,6 +188,8 @@ function gerarCardsSalasDoSistema() {
 }
 
 function atualizarSelectSalas() {
+    if (!selectEspaco) return;
+
     const salas = buscarEspacosSistema().filter(espaco =>
         espaco.tipo === "Sala de Reunião" && espaco.status === "Ativo"
     );
@@ -276,29 +259,37 @@ document.addEventListener("click", event => {
     }
 });
 
-btnNovaReserva.addEventListener("click", () => {
-    restaurarSelectCompleto();
-});
+if (btnNovaReserva) {
+    btnNovaReserva.addEventListener("click", () => {
+        restaurarSelectCompleto();
+    });
+}
 
-selectEspaco.addEventListener("change", verificarCapacidade);
+if (selectEspaco) {
+    selectEspaco.addEventListener("change", verificarCapacidade);
+}
 
-document.getElementById("reserva-btn-adicionar").addEventListener("click", () => {
-    const select = document.getElementById("reserva-novo-convidado");
-    const email  = select.value;
-    if (!email) return;
-    if (capacidadeReserva !== Infinity && convidadosReserva.length >= capacidadeReserva) {
-        mostrarToast("Capacidade máxima", `Limite de ${capacidadeReserva} convidados atingido.`, "erro");
-        return;
-    }
-    convidadosReserva.push(email);
-    select.value = '';
-    renderizarConvidadosReserva();
-});
+const btnAddConvidado = document.getElementById("reserva-btn-adicionar");
+if (btnAddConvidado) {
+    btnAddConvidado.addEventListener("click", () => {
+        const select = document.getElementById("reserva-novo-convidado");
+        const email  = select.value;
+        if (!email) return;
+        if (capacidadeReserva !== Infinity && convidadosReserva.length >= capacidadeReserva) {
+            mostrarToast("Capacidade máxima", `Limite de ${capacidadeReserva} convidados atingido.`, "erro");
+            return;
+        }
+        convidadosReserva.push(email);
+        select.value = '';
+        renderizarConvidadosReserva();
+    });
+}
 
 function verificarCapacidade() {
     const limiteMsg = document.getElementById("limite-msg");
-    const salas = buscarEspacosSistema();
+    if (!limiteMsg) return;
 
+    const salas = buscarEspacosSistema();
     const sala = salas.find(espaco =>
         espaco.tipo === "Sala de Reunião" &&
         espaco.nome === selectEspaco.value
@@ -314,113 +305,115 @@ function verificarCapacidade() {
     renderizarConvidadosReserva();
 }
 
-btnConfirmar.addEventListener("click", () => {
-    const sala = selectEspaco.value;
-    const data = inputDataModal.value;
-    const inicio = inputInicio.value;
-    const fim = inputFim.value;
+if (btnConfirmar) {
+    btnConfirmar.addEventListener("click", () => {
+        const sala = selectEspaco.value;
+        const data = inputDataModal.value;
+        const inicio = inputInicio.value;
+        const fim = inputFim.value;
 
-    if (!sala || !data || !inicio || !fim) {
-        mostrarToast("Campos obrigatórios", "Preencha todos os campos da reserva.", "erro");
-        return;
-    }
+        if (!sala || !data || !inicio || !fim) {
+            mostrarToast("Campos obrigatórios", "Preencha todos os campos da reserva.", "erro");
+            return;
+        }
 
-    if (inicio >= fim) {
-        mostrarToast("Horário inválido", "O horário de início precisa ser menor que o horário de fim.", "erro");
-        return;
-    }
+        if (inicio >= fim) {
+            mostrarToast("Horário inválido", "O horário de início precisa ser menor que o horário de fim.", "erro");
+            return;
+        }
 
-    const usuarioLogado = obterUsuarioLogado();
+        const usuarioLogado = obterUsuarioLogado();
+        if (!usuarioLogado) {
+            mostrarToast("Usuário não encontrado", "Faça login novamente para realizar a reserva.", "erro");
+            return;
+        }
 
-    if (!usuarioLogado) {
-        mostrarToast("Usuário não encontrado", "Faça login novamente para realizar a reserva.", "erro");
-        return;
-    }
-
-    const reservas = buscarReservas();
-
-    const horarioIndisponivel = reservas.some(reserva =>
-        reserva.sala === sala &&
-        reserva.data === data &&
-        horariosConflitam(inicio, fim, reserva.inicio, reserva.fim)
-    );
-
-    if (horarioIndisponivel) {
-        mostrarToast("Horário indisponível", "Essa sala já está reservada nesse horário.", "erro");
-        return;
-    }
-
-    const convidadosStatusObj = {};
-    convidadosReserva.forEach(email => { convidadosStatusObj[email] = 'pendente'; });
-
-    const novaReserva = {
-        id: Date.now(),
-        usuarioId: usuarioLogado.id,
-        usuario: usuarioLogado.nome,
-        sala,
-        data,
-        inicio,
-        fim,
-        convidados: convidadosReserva.join(', ') || '-',
-        convidadosStatus: convidadosStatusObj
-    };
-
-    reservas.push(novaReserva);
-
-    salvarReservas(reservas);
-    salvarReservaNoSistema(novaReserva);
-
-    if (typeof adicionarNotificacao === "function") {
-        adicionarNotificacao(
-            `Reserva confirmada para ${sala} no dia ${data}, das ${inicio} às ${fim}.`
+        const reservas = buscarReservas();
+        const horarioIndisponivel = reservas.some(reserva =>
+            reserva.sala === sala &&
+            reserva.data === data &&
+            horariosConflitam(inicio, fim, reserva.inicio, reserva.fim)
         );
-    }
 
-    if (convidadosReserva.length > 0 && typeof adicionarNotificacaoParaUsuario === "function") {
-        const todosUsuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-        convidadosReserva.forEach(email => {
-            const convidado = todosUsuarios.find(u => u.email === email);
-            if (convidado) {
-                adicionarNotificacaoParaUsuario(
-                    convidado.id,
-                    `${usuarioLogado.nome} te convidou para ${sala} no dia ${data} das ${inicio} às ${fim}.`,
-                    { tipo: 'convite', reservaId: novaReserva.id, emailConvidado: email, respondida: false }
-                );
-            }
-        });
-    }
+        if (horarioIndisponivel) {
+            mostrarToast("Horário indisponível", "Essa sala já está reservada nesse horário.", "erro");
+            return;
+        }
 
-    mostrarToast("Reserva confirmada", "Sua reserva foi realizada com sucesso!", "sucesso");
+        const convidadosStatusObj = {};
+        convidadosReserva.forEach(email => { convidadosStatusObj[email] = 'pendente'; });
 
-    inputDataModal.value = "";
-    inputInicio.value = "";
-    inputFim.value = "";
-    convidadosReserva = [];
-    capacidadeReserva = Infinity;
-    selectEspaco.value = "";
-    renderizarConvidadosReserva();
+        const novaReserva = {
+            id: Date.now(),
+            usuarioId: usuarioLogado.id,
+            usuario: usuarioLogado.nome,
+            sala,
+            data,
+            inicio,
+            fim,
+            convidados: convidadosReserva.join(', ') || '-',
+            convidadosStatus: convidadosStatusObj
+        };
 
-    verificarCapacidade();
-    modalReserva.close();
-});
+        reservas.push(novaReserva);
 
-btnFiltrar.addEventListener("click", () => {
-    const dataFiltro = inputFiltroData.value;
-    const inicioFiltro = inputFiltroInicio.value;
-    const fimFiltro = inputFiltroFim.value;
+        salvarReservas(reservas);
+        salvarReservaNoSistema(novaReserva);
 
-    if (!dataFiltro || !inicioFiltro || !fimFiltro) {
-        mostrarToast("Filtro incompleto", "Preencha a data, horário inicial e horário final.", "erro");
-        return;
-    }
+        if (typeof adicionarNotificacao === "function") {
+            adicionarNotificacao(
+                `Reserva confirmada para ${sala} no dia ${data}, das ${inicio} às ${fim}.`
+            );
+        }
 
-    if (inicioFiltro >= fimFiltro) {
-        mostrarToast("Horário inválido", "O horário inicial precisa ser menor que o horário final.", "erro");
-        return;
-    }
+        if (convidadosReserva.length > 0 && typeof adicionarNotificacaoParaUsuario === "function") {
+            const todosUsuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
+            convidadosReserva.forEach(email => {
+                const convidado = todosUsuarios.find(u => u.email === email);
+                if (convidado) {
+                    adicionarNotificacaoParaUsuario(
+                        convidado.id,
+                        `${usuarioLogado.nome} te convidou para ${sala} no dia ${data} das ${inicio} às ${fim}.`,
+                        { tipo: 'convite', reservaId: novaReserva.id, emailConvidado: email, respondida: false }
+                    );
+                }
+            });
+        }
 
-    aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro);
-});
+        mostrarToast("Reserva confirmada", "Sua reserva foi realizada com sucesso!", "sucesso");
+
+        inputDataModal.value = "";
+        inputInicio.value = "";
+        inputFim.value = "";
+        convidadosReserva = [];
+        capacidadeReserva = Infinity;
+        selectEspaco.value = "";
+        renderizarConvidadosReserva();
+
+        verificarCapacidade();
+        modalReserva.close();
+    });
+}
+
+if (btnFiltrar) {
+    btnFiltrar.addEventListener("click", () => {
+        const dataFiltro = inputFiltroData.value;
+        const inicioFiltro = inputFiltroInicio.value;
+        const fimFiltro = inputFiltroFim.value;
+
+        if (!dataFiltro || !inicioFiltro || !fimFiltro) {
+            mostrarToast("Filtro incompleto", "Preencha a data, horário inicial e horário final.", "erro");
+            return;
+        }
+
+        if (inicioFiltro >= fimFiltro) {
+            mostrarToast("Horário inválido", "O horário inicial precisa ser menor que o horário final.", "erro");
+            return;
+        }
+
+        aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro);
+    });
+}
 
 function aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro) {
     const reservas = buscarReservas();
@@ -432,12 +425,11 @@ function aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro) {
         if (card.dataset.inativa === "true") {
             badge.textContent = "Inativa";
             badge.className = "badge inativa";
-            btnReservar.disabled = true;
+            if (btnReservar) btnReservar.disabled = true;
             return;
         }
 
         const nomeSala = card.dataset.sala;
-
         const reservadaNoPeriodo = reservas.some(reserva =>
             reserva.sala === nomeSala &&
             reserva.data === dataFiltro &&
@@ -447,11 +439,11 @@ function aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro) {
         if (reservadaNoPeriodo) {
             badge.textContent = "Ocupada";
             badge.className = "badge ocupada";
-            btnReservar.disabled = true;
+            if (btnReservar) btnReservar.disabled = true;
         } else {
             badge.textContent = "Disponível";
             badge.className = "badge disponivel";
-            btnReservar.disabled = false;
+            if (btnReservar) btnReservar.disabled = false;
         }
     });
 
@@ -467,17 +459,14 @@ function abrirModalDetalhes(card) {
 
     if (!salaDados) return;
 
-    // Alimenta o cabeçalho e as linhas de detalhes mapeadas no HTML
     document.getElementById("detalhes-titulo").textContent = salaDados.nome;
     document.getElementById("detalhes-tipo").textContent = salaDados.tipo;
     document.getElementById("detalhes-nome").textContent = salaDados.nome;
     document.getElementById("detalhes-recursos").textContent = salaDados.recursos;
     
-    // Tratamento para a capacidade (garante exibição elegante de números/traços)
     document.getElementById("detalhes-capacidade").textContent = 
         salaDados.capacidade !== "-" ? `${salaDados.capacidade} pessoas` : "—";
         
-    // Captura e renderização do campo de Área / Local vindo do Admin
     document.getElementById("detalhes-area").textContent = 
         salaDados.area && salaDados.area !== "-" ? salaDados.area : "Não informada";
 
@@ -510,36 +499,37 @@ function abrirModalDetalhes(card) {
         reservasHoje.forEach(r => {
             const item = document.createElement("div");
             item.className = "horario-item";
-
             item.innerHTML = `
                 <span class="horario-time">${r.inicio} – ${r.fim}</span>
                 ${r.convidados ? `<span class="horario-pessoa">· ${r.convidados}</span>` : ""}
             `;
-
             container.appendChild(item);
         });
     }
 
-    btnReservarDosDetalhes.dataset.sala = nomeSala;
+    if (btnReservarDosDetalhes) {
+        btnReservarDosDetalhes.dataset.sala = nomeSala;
+    }
 
     if (!modalDetalhes.open) {
         modalDetalhes.showModal();
     }
 }
 
-btnReservarDosDetalhes.addEventListener("click", () => {
-    const nomeSala = btnReservarDosDetalhes.dataset.sala;
+if (btnReservarDosDetalhes) {
+    btnReservarDosDetalhes.addEventListener("click", () => {
+        const nomeSala = btnReservarDosDetalhes.dataset.sala;
+        modalDetalhes.close();
+        preencherSelectComSala(nomeSala);
 
-    modalDetalhes.close();
-
-    preencherSelectComSala(nomeSala);
-
-    if (!modalReserva.open) {
-        modalReserva.showModal();
-    }
-});
+        if (!modalReserva.open) {
+            modalReserva.showModal();
+        }
+    });
+}
 
 function preencherSelectComSala(nomeSala) {
+    if (!selectEspaco) return;
     selectEspaco.value = nomeSala;
     convidadosReserva = [];
     capacidadeReserva = Infinity;
@@ -548,7 +538,7 @@ function preencherSelectComSala(nomeSala) {
 }
 
 function restaurarSelectCompleto() {
-    selectEspaco.value = "";
+    if (selectEspaco) selectEspaco.value = "";
     atualizarSelectSalas();
     convidadosReserva = [];
     capacidadeReserva = Infinity;
@@ -561,7 +551,6 @@ function aplicarStatusEspacosSalas() {
 
     document.querySelectorAll(".card-sala").forEach(card => {
         const nomeSala = card.dataset.sala;
-
         const espaco = espacos.find(item =>
             item.tipo === "Sala de Reunião" &&
             item.nome === nomeSala
@@ -575,23 +564,25 @@ function aplicarStatusEspacosSalas() {
 
         if (espaco.status === "Inativo") {
             card.dataset.inativa = "true";
-
-            badge.textContent = "Inativa";
-            badge.className = "badge inativa";
-
-            btnReservar.disabled = true;
-            btnDetalhes.disabled = true;
+            if (badge) {
+                badge.textContent = "Inativa";
+                badge.className = "badge inativa";
+            }
+            if (btnReservar) btnReservar.disabled = true;
+            if (btnDetalhes) btnDetalhes.disabled = true;
         } else {
             card.dataset.inativa = "false";
-
-            badge.textContent = "Disponível";
-            badge.className = "badge disponivel";
-
-            btnReservar.disabled = false;
-            btnDetalhes.disabled = false;
+            if (badge) {
+                badge.textContent = "Disponível";
+                badge.className = "badge disponivel";
+            }
+            if (btnReservar) btnReservar.disabled = false;
+            if (btnDetalhes) btnDetalhes.disabled = false;
         }
     });
 }
 
-gerarCardsSalasDoSistema();
-aplicarStatusEspacosSalas();
+document.addEventListener("DOMContentLoaded", () => {
+    gerarCardsSalasDoSistema();
+    aplicarStatusEspacosSalas();
+});

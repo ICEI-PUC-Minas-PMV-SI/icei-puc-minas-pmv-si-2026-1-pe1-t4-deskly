@@ -220,6 +220,21 @@
         gap: 10px;
     }
 
+     header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px; 
+        gap: 50px;       
+    }
+
+    .header-actions, .nav-actions, .user-menu { 
+        display: flex;
+        align-items: center;
+        gap: 12px;      
+    }
+
+
     .custom-select-trigger { width: 100%; }
 
     .btn-filtrar-simples { width: 100%; justify-content: center; }

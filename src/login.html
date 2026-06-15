@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
   <link rel="stylesheet" href="assets/css/global/global.css">
   <link rel="stylesheet" href="assets/css/pages/login/login.css">
 </head>
+
 <body>
+
+  <div id="toast-container"></div>
 
   <div class="login-wrapper">
 
@@ -27,7 +31,8 @@
 
         <div class="field">
           <label for="password">Senha</label>
-          <input type="password" id="password" name="password" autocomplete="current-password" required placeholder="Digite sua senha">
+          <input type="password" id="password" name="password" autocomplete="current-password" required
+            placeholder="Digite sua senha">
         </div>
 
         <div class="form-options">
@@ -36,41 +41,27 @@
             <span class="slider"></span>
             <span>Lembre de mim</span>
           </label>
-          <a href="recuperar-senha.html">Esqueceu sua senha?</a>
         </div>
 
         <button type="submit">Entrar</button>
 
       </form>
+
+      <div class="login-info">
+        <span class="login-info-titulo">Acesso somente por convite</span>
+        <span class="login-info-texto">
+          O acesso à plataforma é liberado apenas para usuários convidados pelo administrador.
+          Se você já recebeu um convite, verifique sua caixa de e-mail (incluindo spam ou lixo eletrônico)
+          e siga o link para ativar sua conta antes de fazer login.
+        </span>
+      </div>
+
     </div>
 
   </div>
 
-  <script>
-    const formLogin = document.getElementById("formLogin");
-
-    formLogin.addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const email = document.getElementById("email").value.trim();
-      const senha = document.getElementById("password").value.trim();
-
-      const usuarios = JSON.parse(localStorage.getItem("usuarios")) || [];
-
-      const usuarioEncontrado = usuarios.find(usuario =>
-        usuario.email === email && usuario.senha === senha
-      );
-
-      if (!usuarioEncontrado) {
-        alert("E-mail ou senha inválidos.");
-        return;
-      }
-
-      localStorage.setItem("usuarioLogado", JSON.stringify(usuarioEncontrado));
-
-      window.location.href = "dashboard.html";
-    });
-  </script>
+  <script src="assets/js/login/login.js"></script>
 
 </body>
+
 </html>
