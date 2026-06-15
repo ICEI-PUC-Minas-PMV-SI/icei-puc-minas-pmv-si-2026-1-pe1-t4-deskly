@@ -210,43 +210,43 @@ Os testes de software do Deskly adotam a abordagem de **caixa preta**, na qual o
 |---|---|
 | Casos de Teste cobertos | CT01, CT02, CT03 |
 | Requisitos Associados | RF-02, RF-03, RNF-01, RNF-02 |
-| Link do vídeo do teste realizado |
+| Link do vídeo do teste realizado: https://drive.google.com/file/d/1-IZsF-UaXEiQRn4CSp9IdO-6dt7CCYcb/view?usp=drive_link |
 
 | *Gravação* | *GR02 – Cadastro, edição, desativação de espaço e convite de usuário* |
 |---|---|
 | Casos de Teste cobertos | CT04, CT05, CT06 |
 | Requisitos Associados | RF-01, RF-02, RNF-14 |
-| Link do vídeo do teste realizado |
+| Link do vídeo do teste realizado: https://drive.google.com/file/d/1qt1qQPs7UiYn9RAh03un9IEf6K10qJpV/view?usp=drive_link |
 
 | *Gravação* | *GR03 – Filtragem de salas, reserva de sala e detecção de conflito de horário* |
 |---|---|
 | Casos de Teste cobertos | CT07, CT08, CT09 |
 | Requisitos Associados | RF-04, RF-07, RNF-03, RNF-11 |
-| Link do vídeo do teste realizado |
+| Link do vídeo do teste realizado: https://drive.google.com/file/d/1S67uJYAu12DdnEGwZt_BKWXdubN7-0SK/view?usp=drive_link |
 
 | *Gravação* | *GR04 – Reserva de estação de trabalho, adição e visualização de convidados* |
 |---|---|
 | Casos de Teste cobertos | CT10, CT11, CT12 |
 | Requisitos Associados | RF-04, RF-08, RF-09, RNF-03 |
-| Link do vídeo do teste realizado |
+| Link do vídeo do teste realizado: https://drive.google.com/file/d/1M3z-M8aRPU30TuOqzykdEu9c8aLkHZQM/view?usp=drive_link |
 
 | *Gravação* | *GR05 – Edição e cancelamento de reserva e visualização no calendário* |
 |---|---|
 | Casos de Teste cobertos | CT13, CT14, CT16 |
 | Requisitos Associados | RF-04, RF-05, RNF-03 |
-| Link do vídeo do teste realizado |
+| Link do vídeo do teste realizado: https://drive.google.com/file/d/1Gt2M_TAv3To-fWRTFEvPKqfqWKQke0_q/view?usp=drive_link |
 
 | *Gravação* | *GR06 – Gerenciamento de todas as reservas pelo administrador* |
 |---|---|
 | Casos de Teste cobertos | CT15 |
 | Requisitos Associados | RF-06 |
-| Link do vídeo do teste realizado |
+| Link do vídeo do teste realizado: https://drive.google.com/file/d/1tNYBid-oi9jkiKR1jJNJZ6jlo75z5XLl/view?usp=drive_link |
 
 | *Gravação* | *GR07 – Responsividade da interface e controle de acesso por perfil* |
 |---|---|
 | Casos de Teste cobertos | CT17, CT18 |
 | Requisitos Associados | RNF-02, RNF-07 |
-| Link do vídeo do teste realizado |
+| Link do vídeo do teste realizado: https://drive.google.com/file/d/181tmhlges5LAk51bbK2Mul6wz3PWcwEN/view?usp=drive_link |
 
 ---
 
