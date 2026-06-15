@@ -134,30 +134,43 @@ Banco de dados `IndexedDB`: nome `perfilDB`, store `fotos`
 
 ## Instruções de Acesso e Verificação
 
-### Executando localmente
+### Ambiente de hospedagem
+
+A aplicação está publicada via **GitHub Pages** e pode ser acessada diretamente pelo link:
+
+🔗 **[https://icei-puc-minas-pmv-si.github.io/icei-puc-minas-pmv-si-2026-1-pe1-t4-deskly/src/](https://icei-puc-minas-pmv-si.github.io/icei-puc-minas-pmv-si-2026-1-pe1-t4-deskly/src/)**
+
+Não é necessária nenhuma instalação. Basta acessar o link acima em um navegador moderno (Chrome, Edge ou Firefox recomendados).
+
+### Credenciais de acesso
+
+O sistema inicializa automaticamente um usuário administrador padrão via `garantirAdminDeskly()` em `login.js`:
+
+- **E-mail:** `sistema.deskly@gmail.com`
+- **Senha:** `Deskly2026.`
+
+### Executando localmente (opcional)
 
 1. Clone o repositório ou baixe os arquivos da pasta `src/`
-2. Abra o arquivo `src/index.html` diretamente no navegador (Chrome, Edge ou Firefox recomendados)
+2. Abra o arquivo `src/index.html` diretamente no navegador
 3. Na tela de seleção de perfil, escolha **Usuário** ou **Admin**
-4. O sistema inicializa automaticamente um usuário administrador padrão via `garantirAdminDeskly()` em `login.js`:
-   - **E-mail:** `sistema.deskly@gmail.com`
-   - **Senha:** `Deskly2026.`
+4. Utilize as credenciais acima para o primeiro acesso
 
 ### Fluxo de verificação por requisito
 
-| Requisito | Caminho de verificação |
+| Requisito | Caminho de verificação (a partir do link do GitHub Pages) |
 |-----------|------------------------|
-| RF-03 – Login | `index.html` → selecionar perfil → `login.html` → inserir credenciais |
-| RF-02 – Convidar usuário | Login como admin → `painelAdmin.html` → aba "Usuários" → "Convidar usuário" |
+| RF-03 – Login | Página inicial → selecionar perfil → inserir credenciais |
+| RF-02 – Convidar usuário | Login como admin → Painel Admin → aba "Usuários" → "Convidar usuário" |
 | RF-03 – Primeiro acesso | Acessar `primeiro-acesso.html?token=<token>` com token gerado no convite |
-| RF-01 – Cadastrar espaço | Login como admin → `painelAdmin.html` → aba "Espaços" → preencher formulário |
-| RF-04 – Reservar sala | Login como usuário → `salas-reuniao.html` → filtrar por data/horário → "Reservar" |
-| RF-04 – Reservar estação | Login como usuário → `estacoes.html` → filtrar → "Reservar" |
-| RF-07 – Detalhes da sala | Em `salas-reuniao.html` → clicar em "Ver detalhes" no card da sala |
+| RF-01 – Cadastrar espaço | Login como admin → Painel Admin → aba "Espaços" → preencher formulário |
+| RF-04 – Reservar sala | Login como usuário → "Salas de Reunião" → filtrar por data/horário → "Reservar" |
+| RF-04 – Reservar estação | Login como usuário → "Estações de Trabalho" → filtrar → "Reservar" |
+| RF-07 – Detalhes da sala | Em "Salas de Reunião" → clicar em "Ver detalhes" no card da sala |
 | RF-08/09 – Convidados | Ao reservar sala → seção de convidados no modal → selecionar usuários |
-| RF-05 – Minhas reservas | `minhas-reservas.html` → abas "Próximas" e "Histórico" |
-| RF-05 – Calendário | `calendario.html` → navegar por meses → clicar em dias com reservas |
-| RF-06 – Admin reservas | Login como admin → `painelAdmin.html` → aba "Reservas" |
+| RF-05 – Minhas reservas | Menu → "Minhas Reservas" → abas "Próximas" e "Histórico" |
+| RF-05 – Calendário | Menu → "Calendário" → navegar por meses → clicar em dias com reservas |
+| RF-06 – Admin reservas | Login como admin → Painel Admin → aba "Reservas" |
 
 ### Observações técnicas
 
