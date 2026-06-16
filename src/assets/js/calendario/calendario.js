@@ -54,10 +54,26 @@ function separarNomeEArea(espaco, tipo) {
 
 function carregarReservasDoSistema() {
     const reservasSistema = buscarReservasSistema();
+    const espacosSistema = JSON.parse(localStorage.getItem("espacosSistema")) || [];
 
     reservas = {};
 
     reservasSistema.forEach(reserva => {
+        if (reserva.status === "Cancelada") {
+            return;
+        }
+
+        const dadosEspaco = separarNomeEArea(reserva.espaco, reserva.tipo);
+
+        const espacoOriginal = espacosSistema.find(espaco =>
+            espaco.nome === reserva.espaco ||
+            espaco.nome === dadosEspaco.nome
+        );
+
+        if (espacoOriginal && espacoOriginal.status === "Inativo") {
+            return;
+        }
+
         const key = converterDataParaChave(reserva.data);
 
         if (!key) return;
@@ -164,7 +180,11 @@ function abrirView(dia, index) {
     indexSelecionado = index;
 
     const espacosSistema = JSON.parse(localStorage.getItem("espacosSistema")) || [];
-    const infoOriginal = espacosSistema.find(item => item.nome === dadosEspaco.nome);
+    const infoOriginal = espacosSistema.find(item =>
+        item.nome === dadosEspaco.nome ||
+        item.nome === reserva.espaco
+    );
+
     const capacidadeText = infoOriginal ? infoOriginal.capacidade : "-";
     let areaText = infoOriginal ? infoOriginal.area : "-";
 
@@ -174,9 +194,10 @@ function abrirView(dia, index) {
 
     document.getElementById("titulo").innerHTML = `
         ${dadosEspaco.nome}
-        ${dadosEspaco.area
-            ? `<br><small style="color: var(--color-text-md); font-size: 13px; font-weight: normal;">${dadosEspaco.area}</small>`
-            : ""
+        ${
+            dadosEspaco.area
+                ? `<br><small style="color: var(--color-text-md); font-size: 13px; font-weight: normal;">${dadosEspaco.area}</small>`
+                : ""
         }
     `;
 
@@ -212,5 +233,9 @@ function excluir() {
 function editar() {
     alert("Para editar uma reserva, use a página onde ela foi criada.");
 }
+
+window.addEventListener("storage", () => {
+    renderCalendar();
+});
 
 renderCalendar();
