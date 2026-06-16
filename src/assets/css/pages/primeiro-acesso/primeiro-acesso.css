@@ -134,7 +134,6 @@ body {
 }
 
 @media (max-width: 768px) {
-
     .primeiroacesso-wrapper {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto;
@@ -152,23 +151,26 @@ body {
         justify-content: flex-start;
     }
 
-    .primeiroacesso-form .logo {
+    .primeiroacesso-form .primeiroacesso-logo {
+        content: url('../../../icons/logo.svg'); /* Alinha ao padrão de caminhos do Login */
         display: block;
+        height: 36px;
+        width: auto;
+        max-width: 150px;
     }
 }
 
 @media (max-width: 350px) {
-
     .primeiroacesso-banner {
         min-height: 40vh;
     }
 }
 
 @media (max-width: 320px) {
-
     .primeiroacesso-wrapper {
         min-width: 320px;
         overflow-x: hidden;
+        min-height: 100dvh;
     }
 
     .primeiroacesso-form {

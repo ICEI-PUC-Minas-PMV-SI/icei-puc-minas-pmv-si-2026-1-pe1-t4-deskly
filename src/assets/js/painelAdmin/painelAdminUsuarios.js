@@ -24,30 +24,52 @@ function carregarFotoDB(chave) {
 }
 
 function garantirAdminDeskly() {
-  const usuarios = obterUsuarios();
-  const admin = usuarios.find(u => u.email === 'sistema.deskly@gmail.com');
+    const usuarios = obterUsuarios();
+    const admin = usuarios.find(u => u.email === 'sistema.deskly@gmail.com');
 
-  if (!admin) {
-    usuarios.push({
-      id: 1,
-      nome: 'Administrador Deskly',
-      email: 'sistema.deskly@gmail.com',
-      senha: 'Deskly@123', // defina aqui a senha padrão do admin
-      perfil: 'Admin',
-      token: null,
-      senhaDefinida: true,
-      protegido: true,
-      dataCriacao: new Date().toISOString(),
-      foto: ''
-    });
-    salvarUsuarios(usuarios);
-    return;
-  }
+    const caminhoFotoCorreto = 'assets/images/Perfil-deskly.jpg'; 
 
-  if (!admin.protegido) {
-    admin.protegido = true;
-    salvarUsuarios(usuarios);
-  }
+    if (!admin) {
+        usuarios.push({
+            id: 1,
+            nome: 'Deskly',
+            email: 'sistema.deskly@gmail.com',
+            senha: 'Deskly2026.',
+            perfil: 'Admin',
+            token: null,
+            senhaDefinida: true,
+            protegido: true,
+            dataCriacao: new Date().toISOString(),
+            foto: caminhoFotoCorreto,
+            departamento: 'Sistema',
+            telefone: '(99) 99999-9999'
+        });
+        salvarUsuarios(usuarios);
+        return;
+    }
+
+    let mudou = false;
+
+    if (!admin.protegido) {
+        admin.protegido = true;
+        mudou = true;
+    }
+    if (admin.departamento === undefined || admin.departamento === '') {
+        admin.departamento = 'Sistema';
+        mudou = true;
+    }
+    if (admin.telefone === undefined || admin.telefone === '') {
+        admin.telefone = '(99) 99999-9999';
+        mudou = true;
+    }
+    if (!admin.foto || admin.foto.includes('foto_padrao')) {
+        admin.foto = caminhoFotoCorreto;
+        mudou = true;
+    }
+
+    if (mudou) {
+        salvarUsuarios(usuarios);
+    }
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -240,8 +262,6 @@ async function enviarConvitePorEmail(email, reenvio = false) {
     salvarUsuarios(usuarios);
   }
 
-  // Monta o caminho base a partir da URL atual, garantindo que o link funcione
-  // tanto no localhost (raiz do projeto) quanto no GitHub Pages (dentro de /Deskly/, por exemplo)
   const pastaAtual = window.location.pathname.substring(
   0,
   window.location.pathname.lastIndexOf('/') + 1
