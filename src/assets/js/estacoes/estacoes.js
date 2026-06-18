@@ -51,6 +51,16 @@ function marcarCampoInvalido(campo) {
     campo.addEventListener("change", limpar);
 }
 
+function dataNoPassado(dataStr) {
+    if (!dataStr) return false;
+    const [d, m, y] = dataStr.split("/").map(Number);
+    if (!d || !m || !y) return false;
+    const data = new Date(y, m - 1, d);
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    return data < hoje;
+}
+
 function buscarEspacosSistema() {
     return JSON.parse(localStorage.getItem("espacosSistema")) || [];
 }
@@ -225,6 +235,12 @@ btnConfirmar.addEventListener("click", () => {
         if (!inicio) marcarCampoInvalido(inputInicio);
         if (!fim) marcarCampoInvalido(inputFim);
         mostrarToast("Campos obrigatórios", "Preencha todos os campos da reserva.", "erro");
+        return;
+    }
+
+    if (dataNoPassado(data)) {
+        marcarCampoInvalido(inputDataModal);
+        mostrarToast("Data inválida", "Não é possível reservar em uma data que já passou.", "erro");
         return;
     }
 

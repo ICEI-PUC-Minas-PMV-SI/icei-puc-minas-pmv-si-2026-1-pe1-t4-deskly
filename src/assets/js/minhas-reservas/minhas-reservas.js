@@ -59,6 +59,16 @@ function marcarCampoInvalido(campo) {
     campo.addEventListener('change', limpar);
 }
 
+function dataNoPassado(dataStr) {
+    if (!dataStr) return false;
+    const [d, m, y] = dataStr.split('/').map(Number);
+    if (!d || !m || !y) return false;
+    const data = new Date(y, m - 1, d);
+    const hoje = new Date();
+    hoje.setHours(0, 0, 0, 0);
+    return data < hoje;
+}
+
 
 function renderProximas(reservas) {
     const tbody = document.getElementById('tbody-proximas');
@@ -75,8 +85,9 @@ function renderProximas(reservas) {
         const convArr    = parseConvidados(r.convidados, r.convidadosStatus);
         const espaco     = espacosSistema.find(e => e.nome === r.espaco);
         const capacidade = (espaco && Number(espaco.capacidade) >= 1) ? espaco.capacidade : null;
+        const limiteConv = capacidade !== null ? capacidade - 1 : null;
         const convCol    = (!ehMesa && convArr.length)
-            ? `<button class="btn-convidados" data-id="${r.id}">${convArr.length}${capacidade !== null ? ' / ' + capacidade : ''}</button>`
+            ? `<button class="btn-convidados" data-id="${r.id}">${convArr.length}${limiteConv !== null ? ' / ' + limiteConv : ''}</button>`
             : '—';
         return `
         <tr data-id="${r.id}">
@@ -184,7 +195,7 @@ function popularSelectEspaco(espacoAtual, tipo) {
         : `<option value="${espacoAtual}">${espacoAtual}</option>`;
     const encontrado = espacosSistema.find(e => e.nome === select.value);
     capacidadeEditando = (encontrado && Number(encontrado.capacidade) >= 1)
-        ? Number(encontrado.capacidade)
+        ? Number(encontrado.capacidade) - 1
         : Infinity;
 }
 
@@ -235,7 +246,7 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
                 </div>`).join('')
             : '<p class="sem-convidados">Nenhum convidado.</p>';
         document.getElementById('conv-rodape').textContent = capacidade
-            ? `${convidados.length} / ${capacidade} convidados · ${capacidade - convidados.length} vaga(s) restante(s)`
+            ? `${convidados.length} / ${capacidade - 1} convidados · ${Math.max(0, (capacidade - 1) - convidados.length)} vaga(s) restante(s)`
             : `${convidados.length} convidado(s)`;
         modalConvidados.showModal();
     }
@@ -244,7 +255,7 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
 document.getElementById('editar-espaco').addEventListener('change', () => {
     const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema') || '[]');
     const sel = espacosSistema.find(e => e.nome === document.getElementById('editar-espaco').value);
-    capacidadeEditando = (sel && Number(sel.capacidade) >= 1) ? Number(sel.capacidade) : Infinity;
+    capacidadeEditando = (sel && Number(sel.capacidade) >= 1) ? Number(sel.capacidade) - 1 : Infinity;
     renderizarConvidadosEdicao();
 });
 
@@ -267,10 +278,34 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
     const data   = document.getElementById('editar-data').value.trim();
     const inicio = document.getElementById('editar-inicio').value.trim();
     const fim    = document.getElementById('editar-fim').value.trim();
+    if (dataNoPassado(data)) {
+        marcarCampoInvalido(document.getElementById('editar-data'));
+        mostrarToast('Data inválida', 'Não é possível reservar em uma data que já passou.', 'erro');
+        return;
+    }
+
     if (inicio && fim && inicio >= fim) {
         marcarCampoInvalido(document.getElementById('editar-inicio'));
         marcarCampoInvalido(document.getElementById('editar-fim'));
         mostrarToast('Horário inválido', 'O início precisa ser menor que o fim.', 'erro');
+        return;
+    }
+
+    // Revalida convidados contra a capacidade da sala selecionada
+    // (cobre o caso de trocar para uma sala menor após convidar).
+    const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema') || '[]');
+    const salaSelecionada = espacosSistema.find(e => e.nome === espaco);
+    const limiteConvidados = (salaSelecionada && Number(salaSelecionada.capacidade) >= 1)
+        ? Number(salaSelecionada.capacidade) - 1
+        : Infinity;
+
+    if (convidadosEditando.length > limiteConvidados) {
+        marcarCampoInvalido(document.getElementById('editar-espaco'));
+        mostrarToast(
+            'Capacidade excedida',
+            `Esta sala comporta no máximo ${limiteConvidados} convidado(s). Remova ${convidadosEditando.length - limiteConvidados}.`,
+            'erro'
+        );
         return;
     }
 
@@ -412,6 +447,7 @@ document.querySelector('.btn-filtrar-simples').addEventListener('click', () => {
 flatpickr('.modal-date-input', {
     locale: 'pt',
     dateFormat: 'd/m/Y',
+    minDate: 'today',
     disableMobile: true,
     placeholder: 'dd/mm/aaaa',
     monthSelectorType: 'static',
