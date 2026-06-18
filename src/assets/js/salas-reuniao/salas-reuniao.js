@@ -51,14 +51,13 @@ function marcarCampoInvalido(campo) {
     campo.addEventListener("change", limpar);
 }
 
-function dataNoPassado(dataStr) {
+function dataHoraNoPassado(dataStr, inicioStr) {
     if (!dataStr) return false;
     const [d, m, y] = dataStr.split("/").map(Number);
     if (!d || !m || !y) return false;
-    const data = new Date(y, m - 1, d);
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-    return data < hoje;
+    const [h, min] = (inicioStr || "00:00").split(":").map(Number);
+    const dataHora = new Date(y, m - 1, d, h || 0, min || 0);
+    return dataHora < new Date();
 }
 
 function buscarEspacosSistema() {
@@ -358,9 +357,10 @@ if (btnConfirmar) {
             return;
         }
 
-        if (dataNoPassado(data)) {
+        if (dataHoraNoPassado(data, inicio)) {
             marcarCampoInvalido(inputDataModal);
-            mostrarToast("Data inválida", "Não é possível reservar em uma data que já passou.", "erro");
+            marcarCampoInvalido(inputInicio);
+            mostrarToast("Horário inválido", "Não é possível reservar em uma data/horário que já passou.", "erro");
             return;
         }
 

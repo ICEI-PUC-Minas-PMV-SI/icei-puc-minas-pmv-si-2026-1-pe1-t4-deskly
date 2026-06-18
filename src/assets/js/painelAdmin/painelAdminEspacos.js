@@ -44,6 +44,34 @@ function nomeEspacoDuplicado(nome, ignorarId = null) {
     );
 }
 
+function contarConvidados(convidados) {
+    if (!convidados || convidados === "-") return 0;
+    return convidados.split(",").map(item => item.trim()).filter(Boolean).length;
+}
+
+// Maior nº de convidados entre reservas ATIVAS (confirmadas e que ainda não terminaram)
+// de um espaço. Usado para impedir reduzir a capacidade abaixo do necessário.
+function maiorConvidadosReservasAtivas(identificador) {
+    const reservas = JSON.parse(localStorage.getItem("reservasSistema") || "[]");
+    const agora = new Date();
+    let maximo = 0;
+
+    reservas.forEach(reserva => {
+        if (reserva.espaco !== identificador || reserva.status !== "Confirmada") return;
+
+        const [d, m, y] = (reserva.data || "").split("/").map(Number);
+        if (!d || !m || !y) return;
+
+        const [h, min] = (reserva.fim || "23:59").split(":").map(Number);
+        const termino = new Date(y, m - 1, d, h || 0, min || 0);
+        if (termino < agora) return; // reunião já terminou — não conta
+
+        maximo = Math.max(maximo, contarConvidados(reserva.convidados));
+    });
+
+    return maximo;
+}
+
 const LIMITE_NOME_ESPACO = 15;
 
 function aplicarLimiteNomeEspaco(campo) {
@@ -278,6 +306,17 @@ function salvarEdicaoEspaco() {
         if (!capacidade || capacidade < 1 || capacidade > 15) {
             marcarCampoInvalido(document.getElementById("editarEspacoCapacidade"));
             mostrarToast("Capacidade inválida", "A capacidade deve ser entre 1 e 15.", "erro");
+            return;
+        }
+
+        const maxConvidados = maiorConvidadosReservasAtivas(idReservaAntigo);
+        if (capacidade < maxConvidados + 1) {
+            marcarCampoInvalido(document.getElementById("editarEspacoCapacidade"));
+            mostrarToast(
+                "Capacidade insuficiente",
+                `Há uma reserva ativa com ${maxConvidados} convidado(s) (precisa de ${maxConvidados + 1} lugares). Exclua a reserva ou aguarde a reunião ser feita antes de reduzir a capacidade.`,
+                "erro"
+            );
             return;
         }
 

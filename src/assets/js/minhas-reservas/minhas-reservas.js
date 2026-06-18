@@ -19,9 +19,8 @@ function parsearData(str) {
     return new Date(Number(y), Number(m) - 1, Number(d));
 }
 function ehProxima(r) {
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-    return parsearData(r.data) >= hoje && r.status === 'Confirmada';
+    // Próxima = confirmada e que ainda não terminou (data + horário de término no futuro).
+    return r.status === 'Confirmada' && !dataHoraNoPassado(r.data, r.fim);
 }
 function parseConvidados(str, statusMap) {
     if (!str || str === '-') return [];
@@ -59,14 +58,13 @@ function marcarCampoInvalido(campo) {
     campo.addEventListener('change', limpar);
 }
 
-function dataNoPassado(dataStr) {
+function dataHoraNoPassado(dataStr, inicioStr) {
     if (!dataStr) return false;
     const [d, m, y] = dataStr.split('/').map(Number);
     if (!d || !m || !y) return false;
-    const data = new Date(y, m - 1, d);
-    const hoje = new Date();
-    hoje.setHours(0, 0, 0, 0);
-    return data < hoje;
+    const [h, min] = (inicioStr || '00:00').split(':').map(Number);
+    const dataHora = new Date(y, m - 1, d, h || 0, min || 0);
+    return dataHora < new Date();
 }
 
 
@@ -114,14 +112,18 @@ function renderHistorico(reservas) {
         tbody.innerHTML = `<tr><td colspan="4" class="tabela-vazia">Nenhum histórico encontrado.</td></tr>`;
         return;
     }
-    tbody.innerHTML = reservas.map(r => `
+    tbody.innerHTML = reservas.map(r => {
+        // Reserva confirmada que já terminou é exibida como "Concluída".
+        const statusExibido = r.status === 'Confirmada' ? 'Concluída' : r.status;
+        return `
         <tr>
             <td data-label="Espaço">${r.espaco}</td>
             <td data-label="Data">${r.data}</td>
             <td class="col-nowrap" data-label="Horário">${r.horario}</td>
-            <td data-label="Status"><span class="badge ${classeStatusReserva[r.status] || 'badge-concluida'}">${r.status}</span></td>
+            <td data-label="Status"><span class="badge ${classeStatusReserva[statusExibido] || 'badge-concluida'}">${statusExibido}</span></td>
         </tr>
-    `).join('');
+    `;
+    }).join('');
 }
 
 function carregarMinhasReservas() {
@@ -278,9 +280,10 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
     const data   = document.getElementById('editar-data').value.trim();
     const inicio = document.getElementById('editar-inicio').value.trim();
     const fim    = document.getElementById('editar-fim').value.trim();
-    if (dataNoPassado(data)) {
+    if (dataHoraNoPassado(data, inicio)) {
         marcarCampoInvalido(document.getElementById('editar-data'));
-        mostrarToast('Data inválida', 'Não é possível reservar em uma data que já passou.', 'erro');
+        marcarCampoInvalido(document.getElementById('editar-inicio'));
+        mostrarToast('Horário inválido', 'Não é possível reservar em uma data/horário que já passou.', 'erro');
         return;
     }
 
