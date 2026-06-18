@@ -275,9 +275,9 @@ function salvarEdicaoEspaco() {
         const capacidade = Number(capacidadeTexto);
         const recursos = document.getElementById("editarEspacoRecursos").value.trim();
 
-        if (!capacidade || capacidade < 1) {
+        if (!capacidade || capacidade < 1 || capacidade > 15) {
             marcarCampoInvalido(document.getElementById("editarEspacoCapacidade"));
-            mostrarToast("Capacidade inválida", "A capacidade deve ser igual ou maior que 1.", "erro");
+            mostrarToast("Capacidade inválida", "A capacidade deve ser entre 1 e 15.", "erro");
             return;
         }
 
@@ -502,9 +502,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (tipo === "Sala de Reunião") {
                 const capacidadeNumero = Number(capacidade);
 
-                if (!capacidadeNumero || capacidadeNumero < 1) {
+                if (!capacidadeNumero || capacidadeNumero < 1 || capacidadeNumero > 15) {
                     marcarCampoInvalido(document.getElementById("cadastroCapacidadeEspaco"));
-                    mostrarToast("Capacidade inválida", "A capacidade deve ser igual ou maior que 1.", "erro");
+                    mostrarToast("Capacidade inválida", "A capacidade deve ser entre 1 e 15.", "erro");
                     return;
                 }
             }
