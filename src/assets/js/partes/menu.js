@@ -99,17 +99,35 @@ document.querySelector('#aside').innerHTML = asideHTML;
 const btnHamburguer = document.getElementById('btn-hamburguer');
 const aside = document.querySelector('aside');
 
-btnHamburguer.addEventListener('click', function () {
-    aside.classList.toggle('aberto');
+const menuOverlay = document.createElement('div');
+menuOverlay.className = 'menu-overlay';
+document.body.appendChild(menuOverlay);
 
+function abrirMenu() {
+    aside.classList.add('aberto');
+    menuOverlay.classList.add('ativo');
+    document.body.classList.add('menu-aberto');
+    btnHamburguer.innerHTML =
+        '<img src="assets/icons/close-menu.svg" alt="Fechar menu">';
+}
+
+function fecharMenu() {
+    aside.classList.remove('aberto');
+    menuOverlay.classList.remove('ativo');
+    document.body.classList.remove('menu-aberto');
+    btnHamburguer.innerHTML =
+        '<img src="assets/icons/menu.svg" alt="Abrir menu">';
+}
+
+btnHamburguer.addEventListener('click', function () {
     if (aside.classList.contains('aberto')) {
-        btnHamburguer.innerHTML =
-            '<img src="assets/icons/close-menu.svg" alt="Fechar menu">';
+        fecharMenu();
     } else {
-        btnHamburguer.innerHTML =
-            '<img src="assets/icons/menu.svg" alt="Abrir menu">';
+        abrirMenu();
     }
 });
+
+menuOverlay.addEventListener('click', fecharMenu);
 
 const logo = document.querySelector('.logo');
 

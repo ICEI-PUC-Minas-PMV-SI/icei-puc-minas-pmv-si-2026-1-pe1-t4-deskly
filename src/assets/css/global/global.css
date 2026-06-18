@@ -66,6 +66,11 @@ aside {
     border-top: none;
 }
 
+/* Overlay do menu mobile — oculto no desktop (só ativado dentro da media query). */
+.menu-overlay {
+    display: none;
+}
+
 aside nav {
     display: flex;
     flex-direction: column;
@@ -481,6 +486,29 @@ button {
 
     aside.aberto {
         transform: translateX(0);
+    }
+
+    .menu-overlay {
+        display: block;
+        position: fixed;
+        top: 112px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .menu-overlay.ativo {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    body.menu-aberto {
+        overflow: hidden;
     }
 
     .hamburguer {
