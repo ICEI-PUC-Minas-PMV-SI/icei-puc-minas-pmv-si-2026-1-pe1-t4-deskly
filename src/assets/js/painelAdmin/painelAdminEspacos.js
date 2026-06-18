@@ -393,6 +393,55 @@ function alternarStatusEspaco(id) {
     );
 }
 
+let idParaExcluir = null;
+
+function abrirModalExcluirEspaco(id) {
+    const espaco = buscarEspacosSistema().find(item => Number(item.id) === Number(id));
+
+    if (!espaco) {
+        mostrarToast("Erro", "Espaço não encontrado.", "erro");
+        return;
+    }
+
+    idParaExcluir = Number(id);
+
+    const nomeEl = document.getElementById("modal-excluir-espaco-nome");
+    if (nomeEl) nomeEl.textContent = espaco.nome;
+
+    const modal = document.getElementById("modal-excluir-espaco");
+    if (modal) modal.showModal();
+}
+
+function excluirEspaco() {
+    const espacos = buscarEspacosSistema();
+    const espaco = espacos.find(item => Number(item.id) === idParaExcluir);
+
+    if (!espaco) {
+        mostrarToast("Erro", "Espaço não encontrado.", "erro");
+        return;
+    }
+
+    const canceladas = cancelarReservasDoEspaco(espaco);
+    const restantes = espacos.filter(item => Number(item.id) !== idParaExcluir);
+
+    salvarEspacosSistema(restantes);
+    carregarEspacosAdmin();
+
+    const modal = document.getElementById("modal-excluir-espaco");
+    if (modal) modal.close();
+
+    const modalEditar = document.getElementById("modal-editar-admin");
+    if (modalEditar && modalEditar.open) modalEditar.close();
+
+    idParaExcluir = null;
+
+    mostrarToast(
+        "Espaço excluído",
+        `${espaco.nome} foi excluído.${canceladas ? ` ${canceladas} reserva(s) cancelada(s) e usuário(s) notificado(s).` : ""}`,
+        "sucesso"
+    );
+}
+
 function limparFormularioCadastro() {
     const campos = [
         "cadastroTipoEspaco",
@@ -421,6 +470,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     aplicarLimiteNomeEspaco(document.getElementById("cadastroNomeEspaco"));
     aplicarLimiteNomeEspaco(document.getElementById("editarEspacoNome"));
+
+    const btnConfirmarExcluir = document.getElementById("btn-confirmar-excluir-espaco");
+    if (btnConfirmarExcluir) {
+        btnConfirmarExcluir.addEventListener("click", excluirEspaco);
+    }
+
+    const btnExcluirEditar = document.getElementById("btnExcluirEspacoEditar");
+    if (btnExcluirEditar) {
+        btnExcluirEditar.addEventListener("click", () => {
+            abrirModalExcluirEspaco(document.getElementById("editarEspacoId").value);
+        });
+    }
 
     const modalEditar = document.getElementById("modal-editar-admin");
     const btnFecharEditar = document.getElementById("fecharModalEditarAdmin");

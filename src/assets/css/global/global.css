@@ -584,3 +584,20 @@ button {
     border-color: #EF4444 !important;
     outline-color: #EF4444 !important;
 }
+
+/* Botão de excluir espaço (dentro do modal de edição) */
+.btn-excluir-modal {
+    margin-right: auto;
+    background: #DC2626;
+    color: #ffffff;
+    border: none;
+    border-radius: var(--radius-lg, 8px);
+    padding: 10px 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-excluir-modal:hover {
+    background: #B91C1C;
+}
