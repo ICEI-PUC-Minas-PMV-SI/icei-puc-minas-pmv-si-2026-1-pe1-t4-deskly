@@ -266,6 +266,8 @@ function salvarEdicaoEspaco() {
         return;
     }
 
+    const idReservaAntigo = identificadorReservaEspaco(espaco);
+
     espaco.nome = nome;
     espaco.area = area || "-";
 
@@ -287,6 +289,7 @@ function salvarEdicaoEspaco() {
     }
 
     salvarEspacosSistema(espacos);
+    atualizarIdentificadorReservas(idReservaAntigo, identificadorReservaEspaco(espaco), espaco.tipo);
     carregarEspacosAdmin();
 
     mostrarToast(
@@ -296,6 +299,68 @@ function salvarEdicaoEspaco() {
     );
 
     document.getElementById("modal-editar-admin").close();
+}
+
+// Identificador da reserva no reservasSistema: salas usam só o nome;
+// estações usam "nome — área" (igual ao value do select de reserva).
+function identificadorReservaEspaco(espaco) {
+    return espaco.tipo === "Sala de Reunião"
+        ? espaco.nome
+        : `${espaco.nome} — ${espaco.area}`;
+}
+
+// Ao renomear/reposicionar um espaço, atualiza o identificador nas reservas
+// existentes para que continuem vinculadas (e a checagem de conflito as enxergue).
+function atualizarIdentificadorReservas(idAntigo, idNovo, tipo) {
+    if (idAntigo === idNovo) return;
+
+    const reservasSistema = JSON.parse(localStorage.getItem("reservasSistema") || "[]");
+    let mudouSistema = false;
+    reservasSistema.forEach(reserva => {
+        if (reserva.espaco === idAntigo) {
+            reserva.espaco = idNovo;
+            mudouSistema = true;
+        }
+    });
+    if (mudouSistema) localStorage.setItem("reservasSistema", JSON.stringify(reservasSistema));
+
+    const ehSala = tipo === "Sala de Reunião";
+    const chave = ehSala ? "reservasSalas" : "reservasEstacoes";
+    const campo = ehSala ? "sala" : "estacao";
+    const especificas = JSON.parse(localStorage.getItem(chave) || "[]");
+    let mudouEspecificas = false;
+    especificas.forEach(reserva => {
+        if (reserva[campo] === idAntigo) {
+            reserva[campo] = idNovo;
+            mudouEspecificas = true;
+        }
+    });
+    if (mudouEspecificas) localStorage.setItem(chave, JSON.stringify(especificas));
+}
+
+function cancelarReservasDoEspaco(espaco) {
+    const identificador = identificadorReservaEspaco(espaco);
+    const reservasSistema = JSON.parse(localStorage.getItem("reservasSistema") || "[]");
+
+    const afetadas = reservasSistema.filter(reserva =>
+        reserva.espaco === identificador && reserva.status === "Confirmada"
+    );
+
+    if (!afetadas.length) return 0;
+
+    afetadas.forEach(reserva => { reserva.status = "Cancelada"; });
+    localStorage.setItem("reservasSistema", JSON.stringify(reservasSistema));
+
+    afetadas.forEach(reserva => {
+        if (reserva.usuarioId != null && typeof adicionarNotificacaoParaUsuario === "function") {
+            adicionarNotificacaoParaUsuario(
+                reserva.usuarioId,
+                `Sua reserva de ${espaco.nome} no dia ${reserva.data} (${reserva.horario}) foi cancelada porque o espaço foi desativado pelo administrador.`
+            );
+        }
+    });
+
+    return afetadas.length;
 }
 
 function alternarStatusEspaco(id) {
@@ -311,11 +376,19 @@ function alternarStatusEspaco(id) {
     espaco.status = ativando ? "Ativo" : "Inativo";
 
     salvarEspacosSistema(espacos);
+
+    let canceladas = 0;
+    if (!ativando) {
+        canceladas = cancelarReservasDoEspaco(espaco);
+    }
+
     carregarEspacosAdmin();
 
     mostrarToast(
         ativando ? "Espaço ativado" : "Espaço desativado",
-        `${espaco.nome} foi ${ativando ? "ativado" : "desativado"} com sucesso.`,
+        ativando
+            ? `${espaco.nome} foi ativado com sucesso.`
+            : `${espaco.nome} foi desativado.${canceladas ? ` ${canceladas} reserva(s) cancelada(s) e usuário(s) notificado(s).` : ""}`,
         "sucesso"
     );
 }

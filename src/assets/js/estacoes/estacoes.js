@@ -118,7 +118,8 @@ function atualizarSelectTodasEstacoes() {
     const espacos = buscarEspacosSistema();
 
     const estacoes = espacos.filter(espaco =>
-        espaco.tipo === "Estação de Trabalho"
+        espaco.tipo === "Estação de Trabalho" &&
+        espaco.status !== "Inativo"
     );
 
     selectEstacao.innerHTML = "";

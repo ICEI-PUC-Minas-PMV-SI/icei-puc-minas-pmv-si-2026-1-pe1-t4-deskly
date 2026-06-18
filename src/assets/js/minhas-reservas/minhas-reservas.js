@@ -281,6 +281,21 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
     const reservas = obterReservasSistema();
     const idx = reservas.findIndex(r => r.id === idParaEditar);
 
+    const conflito = data && inicio && fim && reservas.some(r =>
+        r.id !== idParaEditar &&
+        r.espaco === espaco &&
+        r.data === data &&
+        r.status !== 'Cancelada' &&
+        inicio < r.fim && r.inicio < fim
+    );
+
+    if (conflito) {
+        marcarCampoInvalido(document.getElementById('editar-inicio'));
+        marcarCampoInvalido(document.getElementById('editar-fim'));
+        mostrarToast('Horário indisponível', 'Já existe uma reserva para este espaço nesse horário.', 'erro');
+        return;
+    }
+
     const emailsAntigos = idx !== -1
         ? parseConvidados(reservas[idx].convidados, reservas[idx].convidadosStatus).map(c => c.email)
         : [];
