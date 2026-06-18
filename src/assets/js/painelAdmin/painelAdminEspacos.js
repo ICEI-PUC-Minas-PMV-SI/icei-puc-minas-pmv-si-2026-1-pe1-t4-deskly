@@ -348,8 +348,21 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             }
 
+            const IMAGENS_PADRAO_ESTACAO = [
+                "assets/images/Sala1.png",
+                "assets/images/Sala2.png",
+                "assets/images/Sala3.png",
+                "assets/images/Sala4.png"
+            ];
+
             function salvarNovoEspaco(imagemBase64 = "") {
                 const espacos = buscarEspacosSistema();
+
+                const imagemFinal = imagemBase64 || (
+                    tipo === "Estação de Trabalho"
+                        ? IMAGENS_PADRAO_ESTACAO[Math.floor(Math.random() * IMAGENS_PADRAO_ESTACAO.length)]
+                        : ""
+                );
 
                 const novoEspaco = {
                     id: Date.now(),
@@ -359,7 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     recursos: tipo === "Sala de Reunião" ? recursos || "-" : "-",
                     area: area || "-",
                     status: status,
-                    imagem: imagemBase64
+                    imagem: imagemFinal
                 };
 
                 espacos.push(novoEspaco);
