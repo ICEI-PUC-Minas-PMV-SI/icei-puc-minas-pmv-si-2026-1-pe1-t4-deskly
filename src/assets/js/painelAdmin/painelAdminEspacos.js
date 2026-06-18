@@ -36,6 +36,14 @@ function marcarCampoInvalido(campo) {
     campo.addEventListener("change", limpar);
 }
 
+function nomeEspacoDuplicado(nome, ignorarId = null) {
+    const alvo = nome.trim().toLowerCase();
+    return buscarEspacosSistema().some(espaco =>
+        Number(espaco.id) !== Number(ignorarId) &&
+        (espaco.nome || "").trim().toLowerCase() === alvo
+    );
+}
+
 const LIMITE_NOME_ESPACO = 15;
 
 function aplicarLimiteNomeEspaco(campo) {
@@ -252,6 +260,12 @@ function salvarEdicaoEspaco() {
         return;
     }
 
+    if (nomeEspacoDuplicado(nome, espaco.id)) {
+        marcarCampoInvalido(document.getElementById("editarEspacoNome"));
+        mostrarToast("Nome já existe", "Já existe um espaço com esse nome.", "erro");
+        return;
+    }
+
     espaco.nome = nome;
     espaco.area = area || "-";
 
@@ -420,6 +434,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     mostrarToast("Capacidade inválida", "A capacidade deve ser igual ou maior que 1.", "erro");
                     return;
                 }
+            }
+
+            if (nomeEspacoDuplicado(nome)) {
+                marcarCampoInvalido(document.getElementById("cadastroNomeEspaco"));
+                mostrarToast("Nome já existe", "Já existe um espaço com esse nome.", "erro");
+                return;
             }
 
             const IMAGENS_PADRAO_ESTACAO = [
