@@ -19,7 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!container) return;
 
         if (!container.hasAttribute("popover")) container.setAttribute("popover", "manual");
-        try { container.showPopover(); } catch (_) {}
+        try {
+            if (container.matches(":popover-open")) container.hidePopover();
+            container.showPopover();
+        } catch (_) {}
 
         const toast = document.createElement("div");
         toast.className = `toast ${tipo}`;
