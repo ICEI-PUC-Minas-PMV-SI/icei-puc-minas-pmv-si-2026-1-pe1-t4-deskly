@@ -10,12 +10,100 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
     if (!container) return;
 
+    if (!container.hasAttribute("popover")) container.setAttribute("popover", "manual");
+    try {
+        if (container.matches(":popover-open")) container.hidePopover();
+        container.showPopover();
+    } catch (_) {}
+
     const toast = document.createElement("div");
     toast.className = `toast ${tipo}`;
     toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;
     container.appendChild(toast);
 
     setTimeout(() => toast.remove(), 4000);
+}
+
+function marcarCampoInvalido(campo) {
+    if (!campo) return;
+    campo.classList.add("campo-invalido");
+    const limpar = () => {
+        campo.classList.remove("campo-invalido");
+        campo.removeEventListener("input", limpar);
+        campo.removeEventListener("change", limpar);
+    };
+    campo.addEventListener("input", limpar);
+    campo.addEventListener("change", limpar);
+}
+
+function nomeEspacoDuplicado(nome, ignorarId = null) {
+    const alvo = nome.trim().toLowerCase();
+    return buscarEspacosSistema().some(espaco =>
+        Number(espaco.id) !== Number(ignorarId) &&
+        (espaco.nome || "").trim().toLowerCase() === alvo
+    );
+}
+
+function contarConvidados(convidados) {
+    if (!convidados || convidados === "-") return 0;
+    return convidados.split(",").map(item => item.trim()).filter(Boolean).length;
+}
+
+// Maior nº de convidados entre reservas ATIVAS (confirmadas e que ainda não terminaram)
+// de um espaço. Usado para impedir reduzir a capacidade abaixo do necessário.
+function maiorConvidadosReservasAtivas(identificador) {
+    const reservas = JSON.parse(localStorage.getItem("reservasSistema") || "[]");
+    const agora = new Date();
+    let maximo = 0;
+
+    reservas.forEach(reserva => {
+        if (reserva.espaco !== identificador || reserva.status !== "Confirmada") return;
+
+        const [d, m, y] = (reserva.data || "").split("/").map(Number);
+        if (!d || !m || !y) return;
+
+        const [h, min] = (reserva.fim || "23:59").split(":").map(Number);
+        const termino = new Date(y, m - 1, d, h || 0, min || 0);
+        if (termino < agora) return; // reunião já terminou — não conta
+
+        maximo = Math.max(maximo, contarConvidados(reserva.convidados));
+    });
+
+    return maximo;
+}
+
+const LIMITE_NOME_ESPACO = 15;
+
+function aplicarLimiteNomeEspaco(campo) {
+    if (!campo) return;
+
+    let avisoRecente = false;
+    function avisar() {
+        if (avisoRecente) return;
+        mostrarToast(
+            "Limite atingido",
+            `O nome do espaço deve ter no máximo ${LIMITE_NOME_ESPACO} caracteres.`,
+            "erro"
+        );
+        avisoRecente = true;
+        setTimeout(() => { avisoRecente = false; }, 2000);
+    }
+
+    campo.addEventListener("keydown", event => {
+        const teclaImprimivel = event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey;
+        const semSelecao = campo.selectionStart === campo.selectionEnd;
+        if (campo.value.length >= LIMITE_NOME_ESPACO && teclaImprimivel && semSelecao) {
+            avisar();
+        }
+    });
+
+    campo.addEventListener("paste", event => {
+        const colado = (event.clipboardData || window.clipboardData).getData("text");
+        const selecionados = campo.selectionEnd - campo.selectionStart;
+        if (campo.value.length - selecionados + colado.length > LIMITE_NOME_ESPACO) {
+            avisar();
+        }
+    });
 }
 
 function comprimirImagem(file, callback) {
@@ -185,21 +273,50 @@ function salvarEdicaoEspaco() {
 
     const nome = document.getElementById("editarEspacoNome").value.trim();
     const area = document.getElementById("editarEspacoArea").value.trim();
+    const ehSala = espaco.tipo === "Sala de Reunião";
+    const capacidadeTexto = ehSala
+        ? document.getElementById("editarEspacoCapacidade").value.trim()
+        : "";
 
-    if (!nome) {
-        mostrarToast("Campo obrigatório", "Informe o nome do espaço.", "erro");
+    const faltando = [];
+    if (!nome) faltando.push(document.getElementById("editarEspacoNome"));
+    if (ehSala && !capacidadeTexto) faltando.push(document.getElementById("editarEspacoCapacidade"));
+
+    if (faltando.length) {
+        faltando.forEach(marcarCampoInvalido);
+        mostrarToast("Campos obrigatórios", "Preencha todos os campos destacados.", "erro");
         return;
     }
+
+    if (nomeEspacoDuplicado(nome, espaco.id)) {
+        marcarCampoInvalido(document.getElementById("editarEspacoNome"));
+        mostrarToast("Nome já existe", "Já existe um espaço com esse nome.", "erro");
+        return;
+    }
+
+    const idReservaAntigo = identificadorReservaEspaco(espaco);
 
     espaco.nome = nome;
     espaco.area = area || "-";
 
-    if (espaco.tipo === "Sala de Reunião") {
-        const capacidade = Number(document.getElementById("editarEspacoCapacidade").value);
+    if (ehSala) {
+        const capacidade = Number(capacidadeTexto);
         const recursos = document.getElementById("editarEspacoRecursos").value.trim();
 
-        if (!capacidade || capacidade < 1) {
-            mostrarToast("Capacidade inválida", "A capacidade deve ser igual ou maior que 1.", "erro");
+        if (!capacidade || capacidade < 1 || capacidade > 15) {
+            marcarCampoInvalido(document.getElementById("editarEspacoCapacidade"));
+            mostrarToast("Capacidade inválida", "A capacidade deve ser entre 1 e 15.", "erro");
+            return;
+        }
+
+        const maxConvidados = maiorConvidadosReservasAtivas(idReservaAntigo);
+        if (capacidade < maxConvidados + 1) {
+            marcarCampoInvalido(document.getElementById("editarEspacoCapacidade"));
+            mostrarToast(
+                "Capacidade insuficiente",
+                `Há uma reserva ativa com ${maxConvidados} convidado(s) (precisa de ${maxConvidados + 1} lugares). Exclua a reserva ou aguarde a reunião ser feita antes de reduzir a capacidade.`,
+                "erro"
+            );
             return;
         }
 
@@ -211,6 +328,7 @@ function salvarEdicaoEspaco() {
     }
 
     salvarEspacosSistema(espacos);
+    atualizarIdentificadorReservas(idReservaAntigo, identificadorReservaEspaco(espaco), espaco.tipo);
     carregarEspacosAdmin();
 
     mostrarToast(
@@ -220,6 +338,68 @@ function salvarEdicaoEspaco() {
     );
 
     document.getElementById("modal-editar-admin").close();
+}
+
+// Identificador da reserva no reservasSistema: salas usam só o nome;
+// estações usam "nome — área" (igual ao value do select de reserva).
+function identificadorReservaEspaco(espaco) {
+    return espaco.tipo === "Sala de Reunião"
+        ? espaco.nome
+        : `${espaco.nome} — ${espaco.area}`;
+}
+
+// Ao renomear/reposicionar um espaço, atualiza o identificador nas reservas
+// existentes para que continuem vinculadas (e a checagem de conflito as enxergue).
+function atualizarIdentificadorReservas(idAntigo, idNovo, tipo) {
+    if (idAntigo === idNovo) return;
+
+    const reservasSistema = JSON.parse(localStorage.getItem("reservasSistema") || "[]");
+    let mudouSistema = false;
+    reservasSistema.forEach(reserva => {
+        if (reserva.espaco === idAntigo) {
+            reserva.espaco = idNovo;
+            mudouSistema = true;
+        }
+    });
+    if (mudouSistema) localStorage.setItem("reservasSistema", JSON.stringify(reservasSistema));
+
+    const ehSala = tipo === "Sala de Reunião";
+    const chave = ehSala ? "reservasSalas" : "reservasEstacoes";
+    const campo = ehSala ? "sala" : "estacao";
+    const especificas = JSON.parse(localStorage.getItem(chave) || "[]");
+    let mudouEspecificas = false;
+    especificas.forEach(reserva => {
+        if (reserva[campo] === idAntigo) {
+            reserva[campo] = idNovo;
+            mudouEspecificas = true;
+        }
+    });
+    if (mudouEspecificas) localStorage.setItem(chave, JSON.stringify(especificas));
+}
+
+function cancelarReservasDoEspaco(espaco) {
+    const identificador = identificadorReservaEspaco(espaco);
+    const reservasSistema = JSON.parse(localStorage.getItem("reservasSistema") || "[]");
+
+    const afetadas = reservasSistema.filter(reserva =>
+        reserva.espaco === identificador && reserva.status === "Confirmada"
+    );
+
+    if (!afetadas.length) return 0;
+
+    afetadas.forEach(reserva => { reserva.status = "Cancelada"; });
+    localStorage.setItem("reservasSistema", JSON.stringify(reservasSistema));
+
+    afetadas.forEach(reserva => {
+        if (reserva.usuarioId != null && typeof adicionarNotificacaoParaUsuario === "function") {
+            adicionarNotificacaoParaUsuario(
+                reserva.usuarioId,
+                `Sua reserva de ${espaco.nome} no dia ${reserva.data} (${reserva.horario}) foi cancelada porque o espaço foi desativado pelo administrador.`
+            );
+        }
+    });
+
+    return afetadas.length;
 }
 
 function alternarStatusEspaco(id) {
@@ -235,11 +415,68 @@ function alternarStatusEspaco(id) {
     espaco.status = ativando ? "Ativo" : "Inativo";
 
     salvarEspacosSistema(espacos);
+
+    let canceladas = 0;
+    if (!ativando) {
+        canceladas = cancelarReservasDoEspaco(espaco);
+    }
+
     carregarEspacosAdmin();
 
     mostrarToast(
         ativando ? "Espaço ativado" : "Espaço desativado",
-        `${espaco.nome} foi ${ativando ? "ativado" : "desativado"} com sucesso.`,
+        ativando
+            ? `${espaco.nome} foi ativado com sucesso.`
+            : `${espaco.nome} foi desativado.${canceladas ? ` ${canceladas} reserva(s) cancelada(s) e usuário(s) notificado(s).` : ""}`,
+        "sucesso"
+    );
+}
+
+let idParaExcluir = null;
+
+function abrirModalExcluirEspaco(id) {
+    const espaco = buscarEspacosSistema().find(item => Number(item.id) === Number(id));
+
+    if (!espaco) {
+        mostrarToast("Erro", "Espaço não encontrado.", "erro");
+        return;
+    }
+
+    idParaExcluir = Number(id);
+
+    const nomeEl = document.getElementById("modal-excluir-espaco-nome");
+    if (nomeEl) nomeEl.textContent = espaco.nome;
+
+    const modal = document.getElementById("modal-excluir-espaco");
+    if (modal) modal.showModal();
+}
+
+function excluirEspaco() {
+    const espacos = buscarEspacosSistema();
+    const espaco = espacos.find(item => Number(item.id) === idParaExcluir);
+
+    if (!espaco) {
+        mostrarToast("Erro", "Espaço não encontrado.", "erro");
+        return;
+    }
+
+    const canceladas = cancelarReservasDoEspaco(espaco);
+    const restantes = espacos.filter(item => Number(item.id) !== idParaExcluir);
+
+    salvarEspacosSistema(restantes);
+    carregarEspacosAdmin();
+
+    const modal = document.getElementById("modal-excluir-espaco");
+    if (modal) modal.close();
+
+    const modalEditar = document.getElementById("modal-editar-admin");
+    if (modalEditar && modalEditar.open) modalEditar.close();
+
+    idParaExcluir = null;
+
+    mostrarToast(
+        "Espaço excluído",
+        `${espaco.nome} foi excluído.${canceladas ? ` ${canceladas} reserva(s) cancelada(s) e usuário(s) notificado(s).` : ""}`,
         "sucesso"
     );
 }
@@ -269,6 +506,21 @@ function limparFormularioCadastro() {
 document.addEventListener("DOMContentLoaded", () => {
     criarEspacosPadrao();
     carregarEspacosAdmin();
+
+    aplicarLimiteNomeEspaco(document.getElementById("cadastroNomeEspaco"));
+    aplicarLimiteNomeEspaco(document.getElementById("editarEspacoNome"));
+
+    const btnConfirmarExcluir = document.getElementById("btn-confirmar-excluir-espaco");
+    if (btnConfirmarExcluir) {
+        btnConfirmarExcluir.addEventListener("click", excluirEspaco);
+    }
+
+    const btnExcluirEditar = document.getElementById("btnExcluirEspacoEditar");
+    if (btnExcluirEditar) {
+        btnExcluirEditar.addEventListener("click", () => {
+            abrirModalExcluirEspaco(document.getElementById("editarEspacoId").value);
+        });
+    }
 
     const modalEditar = document.getElementById("modal-editar-admin");
     const btnFecharEditar = document.getElementById("fecharModalEditarAdmin");
@@ -334,22 +586,50 @@ document.addEventListener("DOMContentLoaded", () => {
             const status = document.getElementById("cadastroStatusEspaco").value;
             const imagemInput = document.getElementById("cadastroImagemEspaco");
 
-            if (!tipo || !nome) {
-                mostrarToast("Campos obrigatórios", "Preencha o tipo e o nome do espaço.", "erro");
+            const faltando = [];
+            if (!tipo) faltando.push(tipoCadastro);
+            if (!nome) faltando.push(document.getElementById("cadastroNomeEspaco"));
+            if (tipo === "Sala de Reunião" && !capacidade) {
+                faltando.push(document.getElementById("cadastroCapacidadeEspaco"));
+            }
+
+            if (faltando.length) {
+                faltando.forEach(marcarCampoInvalido);
+                mostrarToast("Campos obrigatórios", "Preencha todos os campos destacados.", "erro");
                 return;
             }
 
             if (tipo === "Sala de Reunião") {
                 const capacidadeNumero = Number(capacidade);
 
-                if (!capacidadeNumero || capacidadeNumero < 1) {
-                    mostrarToast("Capacidade inválida", "A capacidade deve ser igual ou maior que 1.", "erro");
+                if (!capacidadeNumero || capacidadeNumero < 1 || capacidadeNumero > 15) {
+                    marcarCampoInvalido(document.getElementById("cadastroCapacidadeEspaco"));
+                    mostrarToast("Capacidade inválida", "A capacidade deve ser entre 1 e 15.", "erro");
                     return;
                 }
             }
 
+            if (nomeEspacoDuplicado(nome)) {
+                marcarCampoInvalido(document.getElementById("cadastroNomeEspaco"));
+                mostrarToast("Nome já existe", "Já existe um espaço com esse nome.", "erro");
+                return;
+            }
+
+            const IMAGENS_PADRAO_ESTACAO = [
+                "assets/images/Mesa 01.png",
+                "assets/images/Mesa 02.png",
+                "assets/images/Mesa 03.png",
+                "assets/images/Mesa 04.png"
+            ];
+
             function salvarNovoEspaco(imagemBase64 = "") {
                 const espacos = buscarEspacosSistema();
+
+                const imagemFinal = imagemBase64 || (
+                    tipo === "Estação de Trabalho"
+                        ? IMAGENS_PADRAO_ESTACAO[Math.floor(Math.random() * IMAGENS_PADRAO_ESTACAO.length)]
+                        : ""
+                );
 
                 const novoEspaco = {
                     id: Date.now(),
@@ -359,7 +639,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     recursos: tipo === "Sala de Reunião" ? recursos || "-" : "-",
                     area: area || "-",
                     status: status,
-                    imagem: imagemBase64
+                    imagem: imagemFinal
                 };
 
                 espacos.push(novoEspaco);

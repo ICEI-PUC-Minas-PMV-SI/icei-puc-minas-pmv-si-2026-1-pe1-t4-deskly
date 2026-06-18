@@ -59,15 +59,34 @@ function atualizarConvidados() {
   wrapper.style.display = "block";
 }
 
+function marcarCampoInvalido(campo) {
+  if (!campo) return;
+  campo.classList.add("campo-invalido");
+  const limpar = () => {
+    campo.classList.remove("campo-invalido");
+    campo.removeEventListener("input", limpar);
+    campo.removeEventListener("change", limpar);
+  };
+  campo.addEventListener("input", limpar);
+  campo.addEventListener("change", limpar);
+}
+
 function confirmar() {
   const espaco = document.getElementById("espaco");
-  const data = document.getElementById("date").value;
-  const inicio = document.getElementById("start-time").value;
-  const termino = document.getElementById("ending-time").value;
+  const dataEl = document.getElementById("date");
+  const inicioEl = document.getElementById("start-time");
+  const terminoEl = document.getElementById("ending-time");
+  const data = dataEl.value;
+  const inicio = inicioEl.value;
+  const termino = terminoEl.value;
   const convidados = [...document.getElementById("convidados").selectedOptions]
     .map(o => o.value);
 
   if (!espaco.value || !data || !inicio || !termino) {
+    if (!espaco.value) marcarCampoInvalido(espaco);
+    if (!data) marcarCampoInvalido(dataEl);
+    if (!inicio) marcarCampoInvalido(inicioEl);
+    if (!termino) marcarCampoInvalido(terminoEl);
     alert("Preencha todos os campos.");
     return;
   }

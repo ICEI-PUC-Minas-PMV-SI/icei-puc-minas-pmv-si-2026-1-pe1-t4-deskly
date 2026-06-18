@@ -19,6 +19,12 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
     if (!container) return;
 
+    if (!container.hasAttribute("popover")) container.setAttribute("popover", "manual");
+    try {
+        if (container.matches(":popover-open")) container.hidePopover();
+        container.showPopover();
+    } catch (_) {}
+
     const toast = document.createElement("div");
     toast.className = `toast ${tipo}`;
     toast.innerHTML = `
@@ -31,6 +37,27 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     setTimeout(() => {
         toast.remove();
     }, 4000);
+}
+
+function marcarCampoInvalido(campo) {
+    if (!campo) return;
+    campo.classList.add("campo-invalido");
+    const limpar = () => {
+        campo.classList.remove("campo-invalido");
+        campo.removeEventListener("input", limpar);
+        campo.removeEventListener("change", limpar);
+    };
+    campo.addEventListener("input", limpar);
+    campo.addEventListener("change", limpar);
+}
+
+function dataHoraNoPassado(dataStr, inicioStr) {
+    if (!dataStr) return false;
+    const [d, m, y] = dataStr.split("/").map(Number);
+    if (!d || !m || !y) return false;
+    const [h, min] = (inicioStr || "00:00").split(":").map(Number);
+    const dataHora = new Date(y, m - 1, d, h || 0, min || 0);
+    return dataHora < new Date();
 }
 
 function buscarEspacosSistema() {
@@ -272,6 +299,11 @@ if (selectEspaco) {
 const btnAddConvidado = document.getElementById("reserva-btn-adicionar");
 if (btnAddConvidado) {
     btnAddConvidado.addEventListener("click", () => {
+        if (!selectEspaco || !selectEspaco.value) {
+            marcarCampoInvalido(selectEspaco);
+            mostrarToast("Selecione uma sala", "Escolha a sala antes de adicionar convidados.", "erro");
+            return;
+        }
         const select = document.getElementById("reserva-novo-convidado");
         const email  = select.value;
         if (!email) return;
@@ -296,8 +328,12 @@ function verificarCapacidade() {
     );
 
     if (sala) {
-        capacidadeReserva = Number(sala.capacidade) >= 1 ? Number(sala.capacidade) : Infinity;
-        limiteMsg.textContent = `Limite de ${sala.capacidade} convidados para este espaço.`;
+        const cap = Number(sala.capacidade);
+        // 1 lugar é reservado para o organizador; convidados = capacidade - 1
+        capacidadeReserva = cap >= 1 ? cap - 1 : Infinity;
+        limiteMsg.textContent = capacidadeReserva !== Infinity
+            ? `Limite de ${capacidadeReserva} convidado(s) — 1 lugar fica reservado para você.`
+            : "Selecione uma sala para ver o limite de convidados.";
     } else {
         capacidadeReserva = Infinity;
         limiteMsg.textContent = "Selecione uma sala para ver o limite de convidados.";
@@ -313,12 +349,44 @@ if (btnConfirmar) {
         const fim = inputFim.value;
 
         if (!sala || !data || !inicio || !fim) {
+            if (!sala) marcarCampoInvalido(selectEspaco);
+            if (!data) marcarCampoInvalido(inputDataModal);
+            if (!inicio) marcarCampoInvalido(inputInicio);
+            if (!fim) marcarCampoInvalido(inputFim);
             mostrarToast("Campos obrigatórios", "Preencha todos os campos da reserva.", "erro");
             return;
         }
 
+        if (dataHoraNoPassado(data, inicio)) {
+            marcarCampoInvalido(inputDataModal);
+            marcarCampoInvalido(inputInicio);
+            mostrarToast("Horário inválido", "Não é possível reservar em uma data/horário que já passou.", "erro");
+            return;
+        }
+
         if (inicio >= fim) {
+            marcarCampoInvalido(inputInicio);
+            marcarCampoInvalido(inputFim);
             mostrarToast("Horário inválido", "O horário de início precisa ser menor que o horário de fim.", "erro");
+            return;
+        }
+
+        // Revalida convidados contra a capacidade da sala selecionada
+        // (cobre o caso de trocar para uma sala menor depois de convidar).
+        const salaSelecionada = buscarEspacosSistema().find(e =>
+            e.tipo === "Sala de Reunião" && e.nome === sala
+        );
+        const limiteConvidados = salaSelecionada && Number(salaSelecionada.capacidade) >= 1
+            ? Number(salaSelecionada.capacidade) - 1
+            : Infinity;
+
+        if (convidadosReserva.length > limiteConvidados) {
+            marcarCampoInvalido(selectEspaco);
+            mostrarToast(
+                "Capacidade excedida",
+                `Esta sala comporta no máximo ${limiteConvidados} convidado(s). Remova ${convidadosReserva.length - limiteConvidados}.`,
+                "erro"
+            );
             return;
         }
 

@@ -402,11 +402,26 @@ function marcarErro(el, estado) {
   el.style.borderColor = estado ? '#EF4444' : '';
   const span = el.id ? document.getElementById(`erro-${el.id}`) : null;
   if (span) span.style.display = estado ? 'block' : 'none';
+
+  if (estado) {
+    const limpar = () => {
+      marcarErro(el, false);
+      el.removeEventListener('input', limpar);
+      el.removeEventListener('change', limpar);
+    };
+    el.addEventListener('input', limpar);
+    el.addEventListener('change', limpar);
+  }
 }
 
 function exibirToast(titulo, mensagem, tipo = 'sucesso') {
   const container = document.getElementById('toast-container');
   if (!container) return;
+  if (!container.hasAttribute('popover')) container.setAttribute('popover', 'manual');
+  try {
+    if (container.matches(':popover-open')) container.hidePopover();
+    container.showPopover();
+  } catch (_) {}
   const toast = document.createElement('div');
   toast.className = `toast ${tipo}`;
   toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;

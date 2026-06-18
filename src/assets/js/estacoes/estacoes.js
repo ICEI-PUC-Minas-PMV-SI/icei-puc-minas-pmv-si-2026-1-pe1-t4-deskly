@@ -18,6 +18,12 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
 
     if (!container) return;
 
+    if (!container.hasAttribute("popover")) container.setAttribute("popover", "manual");
+    try {
+        if (container.matches(":popover-open")) container.hidePopover();
+        container.showPopover();
+    } catch (_) {}
+
     const toast = document.createElement("div");
     toast.className = `toast ${tipo}`;
 
@@ -31,6 +37,27 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     setTimeout(() => {
         toast.remove();
     }, 4000);
+}
+
+function marcarCampoInvalido(campo) {
+    if (!campo) return;
+    campo.classList.add("campo-invalido");
+    const limpar = () => {
+        campo.classList.remove("campo-invalido");
+        campo.removeEventListener("input", limpar);
+        campo.removeEventListener("change", limpar);
+    };
+    campo.addEventListener("input", limpar);
+    campo.addEventListener("change", limpar);
+}
+
+function dataHoraNoPassado(dataStr, inicioStr) {
+    if (!dataStr) return false;
+    const [d, m, y] = dataStr.split("/").map(Number);
+    if (!d || !m || !y) return false;
+    const [h, min] = (inicioStr || "00:00").split(":").map(Number);
+    const dataHora = new Date(y, m - 1, d, h || 0, min || 0);
+    return dataHora < new Date();
 }
 
 function buscarEspacosSistema() {
@@ -100,7 +127,8 @@ function atualizarSelectTodasEstacoes() {
     const espacos = buscarEspacosSistema();
 
     const estacoes = espacos.filter(espaco =>
-        espaco.tipo === "Estação de Trabalho"
+        espaco.tipo === "Estação de Trabalho" &&
+        espaco.status !== "Inativo"
     );
 
     selectEstacao.innerHTML = "";
@@ -201,11 +229,24 @@ btnConfirmar.addEventListener("click", () => {
     const fim = inputFim.value;
 
     if (!estacao || !data || !inicio || !fim) {
+        if (!estacao) marcarCampoInvalido(selectEstacao);
+        if (!data) marcarCampoInvalido(inputDataModal);
+        if (!inicio) marcarCampoInvalido(inputInicio);
+        if (!fim) marcarCampoInvalido(inputFim);
         mostrarToast("Campos obrigatórios", "Preencha todos os campos da reserva.", "erro");
         return;
     }
 
+    if (dataHoraNoPassado(data, inicio)) {
+        marcarCampoInvalido(inputDataModal);
+        marcarCampoInvalido(inputInicio);
+        mostrarToast("Horário inválido", "Não é possível reservar em uma data/horário que já passou.", "erro");
+        return;
+    }
+
     if (inicio >= fim) {
+        marcarCampoInvalido(inputInicio);
+        marcarCampoInvalido(inputFim);
         mostrarToast("Horário inválido", "O horário de início precisa ser menor que o horário de fim.", "erro");
         return;
     }

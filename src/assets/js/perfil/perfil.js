@@ -236,18 +236,22 @@ if (btnSalvar) {
         const novaSenha = inputNovaSenha.value;
 
         if (!novoNome) {
+            marcarCampoInvalido(inputNome);
             mostrarToast("Campo obrigatório", "O nome não pode ficar vazio.", "erro");
             return;
         }
 
         const telefoneLimpo = novoTelefone.replace(/\D/g, '');
         if (novoTelefone && (telefoneLimpo.length < 10 || telefoneLimpo.length > 11)) {
+            marcarCampoInvalido(inputTelefone);
             mostrarToast("Telefone inválido", "Informe um telefone válido: (00) 00000-0000.", "erro");
             return;
         }
 
         if (senhaAtual || novaSenha) {
             if (!senhaAtual || !novaSenha) {
+                if (!senhaAtual) marcarCampoInvalido(inputSenhaAtual);
+                if (!novaSenha) marcarCampoInvalido(inputNovaSenha);
                 mostrarToast("Campos de senha", "Preencha a senha atual e a nova senha.", "erro");
                 return;
             }
@@ -320,6 +324,12 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
     if (!container) return;
 
+    if (!container.hasAttribute("popover")) container.setAttribute("popover", "manual");
+    try {
+        if (container.matches(":popover-open")) container.hidePopover();
+        container.showPopover();
+    } catch (_) {}
+
     const toast = document.createElement("div");
     toast.className = `toast ${tipo}`;
     toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;
@@ -327,6 +337,18 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
 
     setTimeout(() => toast.classList.add("saindo"), 3600);
     setTimeout(() => toast.remove(), 4000);
+}
+
+function marcarCampoInvalido(campo) {
+    if (!campo) return;
+    campo.classList.add("campo-invalido");
+    const limpar = () => {
+        campo.classList.remove("campo-invalido");
+        campo.removeEventListener("input", limpar);
+        campo.removeEventListener("change", limpar);
+    };
+    campo.addEventListener("input", limpar);
+    campo.addEventListener("change", limpar);
 }
 
 document.addEventListener("DOMContentLoaded", () => {

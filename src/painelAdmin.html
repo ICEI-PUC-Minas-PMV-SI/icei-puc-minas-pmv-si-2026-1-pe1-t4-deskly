@@ -167,6 +167,32 @@
       <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Cancelar reserva</button>
     </div>
   </dialog>
+  <dialog id="modal-excluir-espaco">
+    <div class="modal-confirmacao-header">
+      <h3 class="modal-confirmacao-titulo">Excluir Espaço</h3>
+      <button type="button" class="modal-confirmacao-fechar" data-modal="modal-excluir-espaco">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18" />
+          <line x1="6" y1="6" x2="18" y2="18" />
+        </svg>
+      </button>
+    </div>
+    <div class="modal-confirmacao-body">
+      <p class="modal-confirmacao-descricao">Deseja excluir este espaço permanentemente?</p>
+      <div class="modal-confirmacao-detalhes">
+        <div class="modal-confirmacao-linha">
+          <span class="modal-confirmacao-label">Espaço</span>
+          <span class="modal-confirmacao-valor" id="modal-excluir-espaco-nome"></span>
+        </div>
+      </div>
+      <p class="modal-confirmacao-aviso">Esta ação não pode ser desfeita. Reservas ativas serão canceladas e os usuários notificados.</p>
+    </div>
+    <div class="modal-confirmacao-footer">
+      <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-excluir-espaco">Cancelar</button>
+      <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-excluir-espaco">Excluir</button>
+    </div>
+  </dialog>
   <dialog id="modal-cadastrar-espaco">
     <div class="modal-header">
       <h3 class="modal-title">Cadastrar Espaço</h3>
@@ -190,7 +216,7 @@
       <div id="camposCadastroEspaco">
         <div class="input-group group-spacing">
           <label>Nome do Espaço</label>
-          <input type="text" id="cadastroNomeEspaco">
+          <input type="text" id="cadastroNomeEspaco" maxlength="15">
         </div>
         <div class="input-group group-spacing" id="grupoLocalizacaoCadastro">
           <label>Área / Localização</label>
@@ -199,7 +225,7 @@
         <div class="modal-campo-row row-spacing" id="grupoSalaCadastro">
           <div class="input-group flex-1">
             <label>Capacidade</label>
-            <input type="number" id="cadastroCapacidadeEspaco" min="1" placeholder="Ex: 8">
+            <input type="number" id="cadastroCapacidadeEspaco" min="1" max="15" placeholder="Ex: 8">
           </div>
           <div class="input-group flex-2">
             <label>Recursos</label>
@@ -242,7 +268,7 @@
       <input type="hidden" id="editarEspacoId">
       <div class="input-group">
         <label>Nome do espaço</label>
-        <input type="text" id="editarEspacoNome">
+        <input type="text" id="editarEspacoNome" maxlength="15">
       </div>
       <div class="input-group" id="grupoEditarArea">
         <label>Área / Localização</label>
@@ -250,7 +276,7 @@
       </div>
       <div class="input-group" id="grupoEditarCapacidade">
         <label>Capacidade</label>
-        <input type="number" id="editarEspacoCapacidade" min="1">
+        <input type="number" id="editarEspacoCapacidade" min="1" max="15">
       </div>
       <div class="input-group" id="grupoEditarRecursos">
         <label>Recursos</label>
@@ -258,6 +284,7 @@
       </div>
     </div>
     <div class="modal-footer">
+      <button type="button" class="btn-excluir-modal" id="btnExcluirEspacoEditar">Excluir</button>
       <button type="button" id="cancelarEditarAdmin">Cancelar</button>
       <button type="button" class="btn-action" id="salvarEditarAdmin">Salvar</button>
     </div>
