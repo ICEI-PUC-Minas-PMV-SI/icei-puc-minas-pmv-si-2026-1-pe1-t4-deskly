@@ -239,6 +239,7 @@ button {
 
 .notification-item {
     width: 100%;
+    flex-shrink: 0;
     background: var(--color-background);
     border: 1px solid var(--color-border-card);
     border-radius: 14px;
@@ -528,8 +529,14 @@ button {
         z-index: 9999;
     }
 
+    .notification-header,
+    .notification-footer {
+        flex-shrink: 0;
+    }
+
     .notification-list {
-        max-height: 55vh;
+        min-height: 0;
+        max-height: none;
         overflow-y: auto;
     }
 
@@ -550,10 +557,6 @@ button {
         right: 8px;
         top: 90px;
         max-height: 65vh;
-    }
-
-    .notification-list {
-        max-height: 50vh;
     }
 }
 
