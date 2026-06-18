@@ -39,6 +39,18 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     }, 4000);
 }
 
+function marcarCampoInvalido(campo) {
+    if (!campo) return;
+    campo.classList.add("campo-invalido");
+    const limpar = () => {
+        campo.classList.remove("campo-invalido");
+        campo.removeEventListener("input", limpar);
+        campo.removeEventListener("change", limpar);
+    };
+    campo.addEventListener("input", limpar);
+    campo.addEventListener("change", limpar);
+}
+
 function buscarEspacosSistema() {
     return JSON.parse(localStorage.getItem("espacosSistema")) || [];
 }
@@ -207,11 +219,17 @@ btnConfirmar.addEventListener("click", () => {
     const fim = inputFim.value;
 
     if (!estacao || !data || !inicio || !fim) {
+        if (!estacao) marcarCampoInvalido(selectEstacao);
+        if (!data) marcarCampoInvalido(inputDataModal);
+        if (!inicio) marcarCampoInvalido(inputInicio);
+        if (!fim) marcarCampoInvalido(inputFim);
         mostrarToast("Campos obrigatórios", "Preencha todos os campos da reserva.", "erro");
         return;
     }
 
     if (inicio >= fim) {
+        marcarCampoInvalido(inputInicio);
+        marcarCampoInvalido(inputFim);
         mostrarToast("Horário inválido", "O horário de início precisa ser menor que o horário de fim.", "erro");
         return;
     }

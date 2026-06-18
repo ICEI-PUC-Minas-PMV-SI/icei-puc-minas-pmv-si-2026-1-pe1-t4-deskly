@@ -402,6 +402,16 @@ function marcarErro(el, estado) {
   el.style.borderColor = estado ? '#EF4444' : '';
   const span = el.id ? document.getElementById(`erro-${el.id}`) : null;
   if (span) span.style.display = estado ? 'block' : 'none';
+
+  if (estado) {
+    const limpar = () => {
+      marcarErro(el, false);
+      el.removeEventListener('input', limpar);
+      el.removeEventListener('change', limpar);
+    };
+    el.addEventListener('input', limpar);
+    el.addEventListener('change', limpar);
+  }
 }
 
 function exibirToast(titulo, mensagem, tipo = 'sucesso') {

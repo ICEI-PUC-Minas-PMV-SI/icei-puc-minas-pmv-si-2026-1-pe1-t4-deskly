@@ -24,6 +24,52 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     setTimeout(() => toast.remove(), 4000);
 }
 
+function marcarCampoInvalido(campo) {
+    if (!campo) return;
+    campo.classList.add("campo-invalido");
+    const limpar = () => {
+        campo.classList.remove("campo-invalido");
+        campo.removeEventListener("input", limpar);
+        campo.removeEventListener("change", limpar);
+    };
+    campo.addEventListener("input", limpar);
+    campo.addEventListener("change", limpar);
+}
+
+const LIMITE_NOME_ESPACO = 15;
+
+function aplicarLimiteNomeEspaco(campo) {
+    if (!campo) return;
+
+    let avisoRecente = false;
+    function avisar() {
+        if (avisoRecente) return;
+        mostrarToast(
+            "Limite atingido",
+            `O nome do espaço deve ter no máximo ${LIMITE_NOME_ESPACO} caracteres.`,
+            "erro"
+        );
+        avisoRecente = true;
+        setTimeout(() => { avisoRecente = false; }, 2000);
+    }
+
+    campo.addEventListener("keydown", event => {
+        const teclaImprimivel = event.key.length === 1 && !event.ctrlKey && !event.metaKey && !event.altKey;
+        const semSelecao = campo.selectionStart === campo.selectionEnd;
+        if (campo.value.length >= LIMITE_NOME_ESPACO && teclaImprimivel && semSelecao) {
+            avisar();
+        }
+    });
+
+    campo.addEventListener("paste", event => {
+        const colado = (event.clipboardData || window.clipboardData).getData("text");
+        const selecionados = campo.selectionEnd - campo.selectionStart;
+        if (campo.value.length - selecionados + colado.length > LIMITE_NOME_ESPACO) {
+            avisar();
+        }
+    });
+}
+
 function comprimirImagem(file, callback) {
     const reader = new FileReader();
 
@@ -191,20 +237,30 @@ function salvarEdicaoEspaco() {
 
     const nome = document.getElementById("editarEspacoNome").value.trim();
     const area = document.getElementById("editarEspacoArea").value.trim();
+    const ehSala = espaco.tipo === "Sala de Reunião";
+    const capacidadeTexto = ehSala
+        ? document.getElementById("editarEspacoCapacidade").value.trim()
+        : "";
 
-    if (!nome) {
-        mostrarToast("Campo obrigatório", "Informe o nome do espaço.", "erro");
+    const faltando = [];
+    if (!nome) faltando.push(document.getElementById("editarEspacoNome"));
+    if (ehSala && !capacidadeTexto) faltando.push(document.getElementById("editarEspacoCapacidade"));
+
+    if (faltando.length) {
+        faltando.forEach(marcarCampoInvalido);
+        mostrarToast("Campos obrigatórios", "Preencha todos os campos destacados.", "erro");
         return;
     }
 
     espaco.nome = nome;
     espaco.area = area || "-";
 
-    if (espaco.tipo === "Sala de Reunião") {
-        const capacidade = Number(document.getElementById("editarEspacoCapacidade").value);
+    if (ehSala) {
+        const capacidade = Number(capacidadeTexto);
         const recursos = document.getElementById("editarEspacoRecursos").value.trim();
 
         if (!capacidade || capacidade < 1) {
+            marcarCampoInvalido(document.getElementById("editarEspacoCapacidade"));
             mostrarToast("Capacidade inválida", "A capacidade deve ser igual ou maior que 1.", "erro");
             return;
         }
@@ -276,6 +332,9 @@ document.addEventListener("DOMContentLoaded", () => {
     criarEspacosPadrao();
     carregarEspacosAdmin();
 
+    aplicarLimiteNomeEspaco(document.getElementById("cadastroNomeEspaco"));
+    aplicarLimiteNomeEspaco(document.getElementById("editarEspacoNome"));
+
     const modalEditar = document.getElementById("modal-editar-admin");
     const btnFecharEditar = document.getElementById("fecharModalEditarAdmin");
     const btnCancelarEditar = document.getElementById("cancelarEditarAdmin");
@@ -340,8 +399,16 @@ document.addEventListener("DOMContentLoaded", () => {
             const status = document.getElementById("cadastroStatusEspaco").value;
             const imagemInput = document.getElementById("cadastroImagemEspaco");
 
-            if (!tipo || !nome) {
-                mostrarToast("Campos obrigatórios", "Preencha o tipo e o nome do espaço.", "erro");
+            const faltando = [];
+            if (!tipo) faltando.push(tipoCadastro);
+            if (!nome) faltando.push(document.getElementById("cadastroNomeEspaco"));
+            if (tipo === "Sala de Reunião" && !capacidade) {
+                faltando.push(document.getElementById("cadastroCapacidadeEspaco"));
+            }
+
+            if (faltando.length) {
+                faltando.forEach(marcarCampoInvalido);
+                mostrarToast("Campos obrigatórios", "Preencha todos os campos destacados.", "erro");
                 return;
             }
 
@@ -349,6 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const capacidadeNumero = Number(capacidade);
 
                 if (!capacidadeNumero || capacidadeNumero < 1) {
+                    marcarCampoInvalido(document.getElementById("cadastroCapacidadeEspaco"));
                     mostrarToast("Capacidade inválida", "A capacidade deve ser igual ou maior que 1.", "erro");
                     return;
                 }

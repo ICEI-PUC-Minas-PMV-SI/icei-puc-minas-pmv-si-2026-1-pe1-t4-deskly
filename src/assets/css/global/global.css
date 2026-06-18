@@ -546,3 +546,10 @@ button {
     max-height: none;
     overflow: visible;
 }
+
+/* Campo obrigatório/ inválido destacado ao tentar salvar. Removido ao digitar. */
+.campo-invalido,
+.campo-invalido:focus {
+    border-color: #EF4444 !important;
+    outline-color: #EF4444 !important;
+}

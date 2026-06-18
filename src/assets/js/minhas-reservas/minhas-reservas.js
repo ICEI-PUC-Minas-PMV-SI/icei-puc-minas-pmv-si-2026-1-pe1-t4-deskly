@@ -47,6 +47,18 @@ function mostrarToast(titulo, mensagem, tipo = 'aviso') {
     setTimeout(() => toast.remove(), 4000);
 }
 
+function marcarCampoInvalido(campo) {
+    if (!campo) return;
+    campo.classList.add('campo-invalido');
+    const limpar = () => {
+        campo.classList.remove('campo-invalido');
+        campo.removeEventListener('input', limpar);
+        campo.removeEventListener('change', limpar);
+    };
+    campo.addEventListener('input', limpar);
+    campo.addEventListener('change', limpar);
+}
+
 
 function renderProximas(reservas) {
     const tbody = document.getElementById('tbody-proximas');
@@ -256,6 +268,8 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
     const inicio = document.getElementById('editar-inicio').value.trim();
     const fim    = document.getElementById('editar-fim').value.trim();
     if (inicio && fim && inicio >= fim) {
+        marcarCampoInvalido(document.getElementById('editar-inicio'));
+        marcarCampoInvalido(document.getElementById('editar-fim'));
         mostrarToast('Horário inválido', 'O início precisa ser menor que o fim.', 'erro');
         return;
     }
