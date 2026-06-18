@@ -407,6 +407,8 @@ function marcarErro(el, estado) {
 function exibirToast(titulo, mensagem, tipo = 'sucesso') {
   const container = document.getElementById('toast-container');
   if (!container) return;
+  if (!container.hasAttribute('popover')) container.setAttribute('popover', 'manual');
+  try { container.showPopover(); } catch (_) {}
   const toast = document.createElement('div');
   toast.className = `toast ${tipo}`;
   toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;

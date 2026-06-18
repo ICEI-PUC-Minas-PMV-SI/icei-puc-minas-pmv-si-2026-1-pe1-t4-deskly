@@ -19,6 +19,9 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
     if (!container) return;
 
+    if (!container.hasAttribute("popover")) container.setAttribute("popover", "manual");
+    try { container.showPopover(); } catch (_) {}
+
     const toast = document.createElement("div");
     toast.className = `toast ${tipo}`;
     toast.innerHTML = `

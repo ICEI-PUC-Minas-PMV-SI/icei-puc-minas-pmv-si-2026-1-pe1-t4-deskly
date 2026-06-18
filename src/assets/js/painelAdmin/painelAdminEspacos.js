@@ -10,6 +10,9 @@ function mostrarToast(titulo, mensagem, tipo = "aviso") {
     const container = document.getElementById("toast-container");
     if (!container) return;
 
+    if (!container.hasAttribute("popover")) container.setAttribute("popover", "manual");
+    try { container.showPopover(); } catch (_) {}
+
     const toast = document.createElement("div");
     toast.className = `toast ${tipo}`;
     toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;
@@ -349,10 +352,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const IMAGENS_PADRAO_ESTACAO = [
-                "assets/images/Sala1.png",
-                "assets/images/Sala2.png",
-                "assets/images/Sala3.png",
-                "assets/images/Sala4.png"
+                "assets/images/Mesa 01.png",
+                "assets/images/Mesa 02.png",
+                "assets/images/Mesa 03.png",
+                "assets/images/Mesa 04.png"
             ];
 
             function salvarNovoEspaco(imagemBase64 = "") {

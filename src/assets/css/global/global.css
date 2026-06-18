@@ -528,3 +528,21 @@ button {
         max-height: 50vh;
     }
 }
+
+/* Toasts via Popover API: ficam no top layer, acima de <dialog> abertos.
+   Reseta os estilos padrão de [popover] (borda, fundo, inset, margem) mantendo
+   o posicionamento fixo no canto superior direito. */
+#toast-container[popover] {
+    inset: auto;
+    top: 24px;
+    right: 24px;
+    margin: 0;
+    border: none;
+    padding: 0;
+    background: transparent;
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    overflow: visible;
+}
