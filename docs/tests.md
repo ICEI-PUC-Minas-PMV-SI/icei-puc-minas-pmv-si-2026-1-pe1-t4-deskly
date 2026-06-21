@@ -210,43 +210,43 @@ Os testes de software do Deskly adotam a abordagem de **caixa preta**, na qual o
 |---|---|
 | Casos de Teste cobertos | CT01, CT02, CT03 |
 | Requisitos Associados | RF-02, RF-03, RNF-01, RNF-02 |
-| Link do vídeo do teste realizado: https://drive.google.com/file/d/1-IZsF-UaXEiQRn4CSp9IdO-6dt7CCYcb/view?usp=drive_link |
+| Link do vídeo do teste realizado | https://drive.google.com/file/d/1-IZsF-UaXEiQRn4CSp9IdO-6dt7CCYcb/view?usp=drive_link |
 
 | *Gravação* | *GR02 – Cadastro, edição, desativação de espaço e convite de usuário* |
 |---|---|
 | Casos de Teste cobertos | CT04, CT05, CT06 |
 | Requisitos Associados | RF-01, RF-02, RNF-14 |
-| Link do vídeo do teste realizado: https://drive.google.com/file/d/1qt1qQPs7UiYn9RAh03un9IEf6K10qJpV/view?usp=drive_link |
+| Link do vídeo do teste realizado | https://drive.google.com/file/d/1qt1qQPs7UiYn9RAh03un9IEf6K10qJpV/view?usp=drive_link |
 
 | *Gravação* | *GR03 – Filtragem de salas, reserva de sala e detecção de conflito de horário* |
 |---|---|
 | Casos de Teste cobertos | CT07, CT08, CT09 |
 | Requisitos Associados | RF-04, RF-07, RNF-03, RNF-11 |
-| Link do vídeo do teste realizado: https://drive.google.com/file/d/1S67uJYAu12DdnEGwZt_BKWXdubN7-0SK/view?usp=drive_link |
+| Link do vídeo do teste realizado | https://drive.google.com/file/d/1S67uJYAu12DdnEGwZt_BKWXdubN7-0SK/view?usp=drive_link |
 
 | *Gravação* | *GR04 – Reserva de estação de trabalho, adição e visualização de convidados* |
 |---|---|
 | Casos de Teste cobertos | CT10, CT11, CT12 |
 | Requisitos Associados | RF-04, RF-08, RF-09, RNF-03 |
-| Link do vídeo do teste realizado: https://drive.google.com/file/d/1M3z-M8aRPU30TuOqzykdEu9c8aLkHZQM/view?usp=drive_link |
+| Link do vídeo do teste realizado | https://drive.google.com/file/d/1M3z-M8aRPU30TuOqzykdEu9c8aLkHZQM/view?usp=drive_link |
 
 | *Gravação* | *GR05 – Edição e cancelamento de reserva e visualização no calendário* |
 |---|---|
 | Casos de Teste cobertos | CT13, CT14, CT16 |
 | Requisitos Associados | RF-04, RF-05, RNF-03 |
-| Link do vídeo do teste realizado: https://drive.google.com/file/d/1Gt2M_TAv3To-fWRTFEvPKqfqWKQke0_q/view?usp=drive_link |
+| Link do vídeo do teste realizado | https://drive.google.com/file/d/1Gt2M_TAv3To-fWRTFEvPKqfqWKQke0_q/view?usp=drive_link |
 
 | *Gravação* | *GR06 – Gerenciamento de todas as reservas pelo administrador* |
 |---|---|
 | Casos de Teste cobertos | CT15 |
 | Requisitos Associados | RF-06 |
-| Link do vídeo do teste realizado: https://drive.google.com/file/d/1tNYBid-oi9jkiKR1jJNJZ6jlo75z5XLl/view?usp=drive_link |
+| Link do vídeo do teste realizado | https://drive.google.com/file/d/1tNYBid-oi9jkiKR1jJNJZ6jlo75z5XLl/view?usp=drive_link |
 
 | *Gravação* | *GR07 – Responsividade da interface e controle de acesso por perfil* |
 |---|---|
 | Casos de Teste cobertos | CT17, CT18 |
 | Requisitos Associados | RNF-02, RNF-07 |
-| Link do vídeo do teste realizado: https://drive.google.com/file/d/181tmhlges5LAk51bbK2Mul6wz3PWcwEN/view?usp=drive_link |
+| Link do vídeo do teste realizado | https://drive.google.com/file/d/181tmhlges5LAk51bbK2Mul6wz3PWcwEN/view?usp=drive_link |
 
 ---
 
@@ -261,7 +261,6 @@ A execução dos casos de teste revelou que o Deskly atende de forma consistente
 - O controle de perfil (CT18) impediu efetivamente o acesso de usuários comuns ao painel administrativo.
 
 **Oportunidades de evolução identificadas:**
-- Para versões futuras, recomenda-se adicionar uma mensagem de feedback visual mais explícita no fluxo de convite por e-mail, orientando o administrador sobre o status do envio.
 - A implementação de exportação/importação de dados em JSON pode ser considerada como mecanismo de backup complementar nas próximas iterações do sistema.
 
 ---
@@ -323,7 +322,7 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | **Média** | 100% | 4.5 | 49.31 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 14.20 segundos |
 
-> Comentários dos usuários: O indicador de força de senha ajudou bastante a entender o que era esperado. Um usuário sentiu falta de um botão "reenviar convite" caso o link expirasse.
+> Comentários dos usuários: O indicador de força de senha ajudou bastante a entender o que era esperado. 
 
 ---
 
@@ -355,7 +354,7 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | **Média** | 100% | 4 | 69.04 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 18.30 segundos |
 
-> Comentários dos usuários: Os usuários conseguiram localizar a funcionalidade de convidados pela tela "Minhas Reservas". Sugeriram que um atalho direto para gerenciamento de convidados tornaria o fluxo ainda mais ágil.
+> Comentários dos usuários: Os usuários conseguiram localizar a funcionalidade de convidados pela tela "Minhas Reservas". 
 
 ---
 
@@ -371,7 +370,7 @@ As sessões de teste foram realizadas com auxílio de ferramentas de gravação 
 | **Média** | 100% | 4.75 | 42.99 segundos |
 | **Tempo para conclusão pelo especialista** | SIM | 5 | 16.50 segundos |
 
-> Comentários dos usuários: O formulário de cadastro de espaço foi considerado claro e bem organizado. Um usuário sugeriu a adição de uma pré-visualização da imagem antes de salvar o espaço.
+> Comentários dos usuários: O formulário de cadastro de espaço foi considerado claro e bem organizado. 
 
 ---
 
