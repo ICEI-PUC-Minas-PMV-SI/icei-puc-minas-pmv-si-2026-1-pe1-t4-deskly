@@ -29,6 +29,18 @@ Nesta tela, é apresentado o seguinte requisito:
 
 ![Wire Frame Login](img/WireFrame-Index.png)
 
+## Tela de Primeiro Acesso
+
+A tela de primeiro acesso é exibida ao usuário após o recebimento do convite enviado pelo administrador, antes de seu primeiro login no sistema. Nela, o usuário finaliza seu cadastro informando o nome completo e definindo uma senha de acesso antes de prosseguir para o login.
+
+Nesta tela, são apresentados os seguintes requisitos:
+- RF-02: O sistema deve permitir ao administrador cadastrar usuários no ambiente.
+- RNF-01: O sistema deve possuir autenticação segura com criptografia de senhas.
+- RNF-02: O sistema deve implementar controle de acesso por perfil (usuário/admin).
+- RNF-11: A interface deve permitir que o usuário realize seu cadastro em poucos passos.
+
+![Wire Frame Primeiro Acesso](img/WireFrame-PrimeiroAcesso.png)
+
 ## Tela de Login
 
 A tela de login permite ao usuário acessar o sistema por meio da autenticação de suas credenciais. A interface apresenta campos para inserção de e-mail e senha, além de ações como recuperação de acesso e entrada no sistema. O cadastro de usuários não é realizado diretamente nesta tela, sendo feito previamente por um administrador, que convida novos usuários para a plataforma. Após o convite, o usuário recebe as instruções de acesso e pode realizar seu primeiro login no sistema.
@@ -39,16 +51,6 @@ Nesta tela, são apresentados os seguintes requisitos:
 - RNF-02: O sistema deve implementar controle de acesso por perfil (usuário/admin). 
 
 ![Wire Frame Login](img/WireFrame-Login.png)
-
-## Tela de Redifinição de Senha
-
-A tela de redefinição de senha foi desenvolvida para permitir que o usuário redefina suas credenciais de acesso ao sistema Deskly. 
-O formulário é composto por três campos sequenciais: e-mail, nova senha e confirmação de senha, garantindo a validação da identidade do usuário e a consistência da nova credencial. Abaixo dos campos, há uma opção de "Lembre de mim" ativável por alternância, seguida de um botão de confirmação para concluir o processo de redefinição.
-
-Nesta tela, é apresentado o seguinte requisito:
-- RNF-01: O sistema deve possuir autenticação segura com criptografia de senhas. 
-
-![Wire Frame Login](img/WireFrame-RedifinicaoSenha.png)
 
 ## Tela Inicial (Dashboard)
 
