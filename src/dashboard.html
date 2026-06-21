@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="assets/images/Deskly.jpeg" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />
     <link rel="stylesheet" href="assets/css/global/global.css">
     <link rel="stylesheet" href="assets/css/pages/dashboard/dashboard.css">
     <title>Dashboard</title>
@@ -69,115 +68,10 @@
         </section>
     </main>
 
-    <dialog id="modal-1">
-        <form action="">
-            <div class="modal-header">
-                <h3 class="modal-title">Nova reserva</h3>
-                <button class="close-modal" data-modal="modal-1" type="button">
-                    <img src="assets/icons/close-menu.svg" alt="Fechar">
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <label for="espaco">Sala de reunião</label>
-                    <select id="espaco" name="espaco" onchange="atualizarConvidados()">
-                        <option value="">Selecione uma sala de reunião</option>
-                        <option value="4">Sala A — cap. 4 pessoas</option>
-                        <option value="8">Sala B — cap. 8 pessoas</option>
-                        <option value="12">Sala C — cap. 12 pessoas</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label for="modal-date">Data</label>
-                    <input type="text" id="modal-date" class="modal-date-input" placeholder="dd/mm/aaaa">
-                </div>
-                <div class="input-group">
-                    <label for="start-time">Horário de início</label>
-                    <input type="time" id="start-time">
-                </div>
-                <div class="input-group">
-                    <label for="ending-time">Horário de término</label>
-                    <input type="time" id="ending-time">
-                </div>
-                <div class="input-group" id="convidados-wrapper" style="display: none;">
-                    <label for="convidados">
-                        Convidados <span id="limite-label"></span>
-                    </label>
-                    <select id="convidados" name="guests[]" multiple></select>
-                    <small id="aviso"></small>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
-                <button type="button" onclick="confirmar()">Confirmar</button>
-            </div>
-        </form>
-    </dialog>
-
-    <dialog id="modal-2">
-        <form action="">
-            <div class="modal-header">
-                <h3 class="modal-title">Nova reserva</h3>
-                <button class="close-modal" data-modal="modal-2" type="button">
-                    <img src="assets/icons/close-menu.svg" alt="Fechar">
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="input-group">
-                    <label for="espaco-2">Estação de trabalho</label>
-                    <select id="espaco-2" name="espaco" onchange="atualizarConvidados()">
-                        <option value="">Selecione uma estação de trabalho</option>
-                        <option value="4">Estação A</option>
-                        <option value="8">Estação B</option>
-                        <option value="12">Estação C</option>
-                    </select>
-                </div>
-                <div class="input-group">
-                    <label for="modal-date-2">Data</label>
-                    <input type="text" id="modal-date-2" class="modal-date-input" placeholder="dd/mm/aaaa">
-                </div>
-                <div class="input-group">
-                    <label for="start-time-2">Horário de início</label>
-                    <input type="time" id="start-time-2">
-                </div>
-                <div class="input-group">
-                    <label for="ending-time-2">Horário de término</label>
-                    <input type="time" id="ending-time-2">
-                </div>
-                <div class="input-group" id="convidados-wrapper-2" style="display: none;">
-                    <label for="convidados-2">
-                        Convidados <span id="limite-label-2"></span>
-                    </label>
-                    <select id="convidados-2" name="guests[]" multiple></select>
-                    <small id="aviso-2"></small>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="close-modal" data-modal="modal-2">Cancelar</button>
-                <button type="button" onclick="confirmar()">Confirmar</button>
-            </div>
-        </form>
-    </dialog>
-
-    <!-- JS dinâmico da dashboard -->
-    <script src="assets/js/dashboard/dashboard.js"></script>
+    <script src="assets/js/utils.js"></script>
     <script src="assets/js/partes/menu.js"></script>
     <script src="assets/js/partes/notificacoes.js"></script>
-    <script src="assets/js/modal/modal.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
-
-    <script>
-        flatpickr('.modal-date-input', {
-            locale: 'pt',
-            dateFormat: 'd/m/Y',
-            minDate: 'today',
-            disableMobile: true,
-            placeholder: 'dd/mm/aaaa',
-            monthSelectorType: 'static',
-            static: true
-        });
-    </script>
+    <script src="assets/js/dashboard/dashboard.js"></script>
 
     
 </body>

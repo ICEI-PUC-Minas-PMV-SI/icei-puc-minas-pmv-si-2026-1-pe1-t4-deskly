@@ -1,27 +1,11 @@
-const statusClasse      = { pendente: 'badge-concluida', aceito: 'badge-confirmada', recusado: 'badge-cancelada' };
-const statusLabel       = { pendente: 'Pendente', aceito: 'Aceito', recusado: 'Recusado' };
+const statusClasse        = { pendente: 'badge-concluida', aceito: 'badge-confirmada', recusado: 'badge-cancelada' };
+const statusLabel         = { pendente: 'Pendente',        aceito: 'Aceito',            recusado: 'Recusado' };
 const classeStatusReserva = { 'Confirmada': 'badge-confirmada', 'Cancelada': 'badge-cancelada', 'Concluída': 'badge-concluida' };
 
-
-function obterUsuarioLogado() {
-    return JSON.parse(localStorage.getItem('usuarioLogado'));
-}
-function obterReservasSistema() {
-    return JSON.parse(localStorage.getItem('reservasSistema') || '[]');
-}
-function salvarReservasSistema(reservas) {
-    localStorage.setItem('reservasSistema', JSON.stringify(reservas));
-}
-
-
-function parsearData(str) {
-    const [d, m, y] = str.split('/');
-    return new Date(Number(y), Number(m) - 1, Number(d));
-}
 function ehProxima(r) {
-    // Próxima = confirmada e que ainda não terminou (data + horário de término no futuro).
     return r.status === 'Confirmada' && !dataHoraNoPassado(r.data, r.fim);
 }
+
 function parseConvidados(str, statusMap) {
     if (!str || str === '-') return [];
     return str.split(',').map(e => e.trim()).filter(Boolean).map(email => ({
@@ -30,54 +14,13 @@ function parseConvidados(str, statusMap) {
     }));
 }
 
-
-function mostrarToast(titulo, mensagem, tipo = 'aviso') {
-    const container = document.getElementById('toast-container');
-    if (!container) return;
-    if (!container.hasAttribute('popover')) container.setAttribute('popover', 'manual');
-    try {
-        if (container.matches(':popover-open')) container.hidePopover();
-        container.showPopover();
-    } catch (_) {}
-    const toast = document.createElement('div');
-    toast.className = `toast ${tipo}`;
-    toast.innerHTML = `<strong>${titulo}</strong><span>${mensagem}</span>`;
-    container.appendChild(toast);
-    setTimeout(() => toast.remove(), 4000);
-}
-
-function marcarCampoInvalido(campo) {
-    if (!campo) return;
-    campo.classList.add('campo-invalido');
-    const limpar = () => {
-        campo.classList.remove('campo-invalido');
-        campo.removeEventListener('input', limpar);
-        campo.removeEventListener('change', limpar);
-    };
-    campo.addEventListener('input', limpar);
-    campo.addEventListener('change', limpar);
-}
-
-function dataHoraNoPassado(dataStr, inicioStr) {
-    if (!dataStr) return false;
-    const [d, m, y] = dataStr.split('/').map(Number);
-    if (!d || !m || !y) return false;
-    const [h, min] = (inicioStr || '00:00').split(':').map(Number);
-    const dataHora = new Date(y, m - 1, d, h || 0, min || 0);
-    return dataHora < new Date();
-}
-
-
 function renderProximas(reservas) {
     const tbody = document.getElementById('tbody-proximas');
-
     if (!reservas.length) {
         tbody.innerHTML = `<tr><td colspan="6" class="tabela-vazia">Nenhuma reserva próxima.</td></tr>`;
         return;
     }
-
-    const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema') || '[]');
-
+    const espacosSistema = obterEspacosSistema();
     tbody.innerHTML = reservas.map(r => {
         const ehMesa     = r.tipo === 'Estação de Trabalho';
         const convArr    = parseConvidados(r.convidados, r.convidadosStatus);
@@ -113,7 +56,6 @@ function renderHistorico(reservas) {
         return;
     }
     tbody.innerHTML = reservas.map(r => {
-        // Reserva confirmada que já terminou é exibida como "Concluída".
         const statusExibido = r.status === 'Confirmada' ? 'Concluída' : r.status;
         return `
         <tr>
@@ -121,8 +63,7 @@ function renderHistorico(reservas) {
             <td data-label="Data">${r.data}</td>
             <td class="col-nowrap" data-label="Horário">${r.horario}</td>
             <td data-label="Status"><span class="badge ${classeStatusReserva[statusExibido] || 'badge-concluida'}">${statusExibido}</span></td>
-        </tr>
-    `;
+        </tr>`;
     }).join('');
 }
 
@@ -138,9 +79,8 @@ function carregarMinhasReservas() {
 }
 
 
-
-const modalEditar    = document.getElementById('modal-editar');
-const modalCancelar  = document.getElementById('modal-cancelar-reserva');
+const modalEditar     = document.getElementById('modal-editar');
+const modalCancelar   = document.getElementById('modal-cancelar-reserva');
 const modalConvidados = document.getElementById('modal-convidados');
 
 let idParaEditar       = null;
@@ -177,9 +117,8 @@ function renderizarConvidadosEdicao() {
 function popularSelectConvidados() {
     const select = document.getElementById('editar-novo-convidado');
     if (!select) return;
-    const logado   = obterUsuarioLogado();
-    const usuarios = JSON.parse(localStorage.getItem('usuarios') || '[]');
-    const disponiveis = usuarios.filter(u =>
+    const logado = obterUsuarioLogado();
+    const disponiveis = obterUsuarios().filter(u =>
         u.senhaDefinida === true &&
         (!logado || u.email !== logado.email) &&
         !convidadosEditando.some(c => c.email === u.email)
@@ -189,13 +128,12 @@ function popularSelectConvidados() {
 }
 
 function popularSelectEspaco(espacoAtual, tipo) {
-    const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema') || '[]');
-    const opcoes = espacosSistema.filter(e => e.tipo === tipo && e.status === 'Ativo');
+    const opcoes = obterEspacosSistema().filter(e => e.tipo === tipo && e.status === 'Ativo');
     const select = document.getElementById('editar-espaco');
     select.innerHTML = opcoes.length
         ? opcoes.map(e => `<option value="${e.nome}" ${e.nome === espacoAtual ? 'selected' : ''}>${e.nome}</option>`).join('')
         : `<option value="${espacoAtual}">${espacoAtual}</option>`;
-    const encontrado = espacosSistema.find(e => e.nome === select.value);
+    const encontrado = obterEspacosSistema().find(e => e.nome === select.value);
     capacidadeEditando = (encontrado && Number(encontrado.capacidade) >= 1)
         ? Number(encontrado.capacidade) - 1
         : Infinity;
@@ -234,10 +172,9 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
     if (btnConv) {
         const reserva = obterReservasSistema().find(r => r.id === Number(btnConv.dataset.id));
         if (!reserva) return;
-        const convidados     = parseConvidados(reserva.convidados, reserva.convidadosStatus);
-        const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema') || '[]');
-        const espacoAdmin    = espacosSistema.find(e => e.nome === reserva.espaco);
-        const capacidade     = (espacoAdmin && Number(espacoAdmin.capacidade) >= 1) ? espacoAdmin.capacidade : null;
+        const convidados  = parseConvidados(reserva.convidados, reserva.convidadosStatus);
+        const espacoAdmin = obterEspacosSistema().find(e => e.nome === reserva.espaco);
+        const capacidade  = (espacoAdmin && Number(espacoAdmin.capacidade) >= 1) ? espacoAdmin.capacidade : null;
         document.getElementById('conv-titulo').textContent    = `Convidados - ${reserva.espaco}`;
         document.getElementById('conv-subtitulo').textContent = `${reserva.data} · ${reserva.horario}${capacidade ? ` · Capacidade: ${capacidade}` : ''}`;
         document.getElementById('conv-lista').innerHTML = convidados.length
@@ -255,8 +192,7 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
 });
 
 document.getElementById('editar-espaco').addEventListener('change', () => {
-    const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema') || '[]');
-    const sel = espacosSistema.find(e => e.nome === document.getElementById('editar-espaco').value);
+    const sel = obterEspacosSistema().find(e => e.nome === document.getElementById('editar-espaco').value);
     capacidadeEditando = (sel && Number(sel.capacidade) >= 1) ? Number(sel.capacidade) - 1 : Infinity;
     renderizarConvidadosEdicao();
 });
@@ -280,6 +216,7 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
     const data   = document.getElementById('editar-data').value.trim();
     const inicio = document.getElementById('editar-inicio').value.trim();
     const fim    = document.getElementById('editar-fim').value.trim();
+
     if (dataHoraNoPassado(data, inicio)) {
         marcarCampoInvalido(document.getElementById('editar-data'));
         marcarCampoInvalido(document.getElementById('editar-inicio'));
@@ -294,10 +231,7 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
         return;
     }
 
-    // Revalida convidados contra a capacidade da sala selecionada
-    // (cobre o caso de trocar para uma sala menor após convidar).
-    const espacosSistema = JSON.parse(localStorage.getItem('espacosSistema') || '[]');
-    const salaSelecionada = espacosSistema.find(e => e.nome === espaco);
+    const salaSelecionada  = obterEspacosSistema().find(e => e.nome === espaco);
     const limiteConvidados = (salaSelecionada && Number(salaSelecionada.capacidade) >= 1)
         ? Number(salaSelecionada.capacidade) - 1
         : Infinity;
@@ -317,7 +251,7 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
     convidadosEditando.forEach(c => { novoStatus[c.email] = c.status; });
 
     const reservas = obterReservasSistema();
-    const idx = reservas.findIndex(r => r.id === idParaEditar);
+    const idx      = reservas.findIndex(r => r.id === idParaEditar);
 
     const conflito = data && inicio && fim && reservas.some(r =>
         r.id !== idParaEditar &&
@@ -362,12 +296,11 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
     }
 
     const novosConvidados = convidadosEditando.filter(c => !emailsAntigos.includes(c.email));
-    if (novosConvidados.length) {
-        const usuarios  = JSON.parse(localStorage.getItem('usuarios') || '[]');
-        const logado    = obterUsuarioLogado();
+    if (novosConvidados.length && typeof adicionarNotificacaoParaUsuario === 'function') {
+        const logado     = obterUsuarioLogado();
         const nomeLogado = logado ? logado.nome : 'Alguém';
         novosConvidados.forEach(c => {
-            const usuario = usuarios.find(u => u.email === c.email);
+            const usuario = obterUsuarios().find(u => u.email === c.email);
             if (!usuario) return;
             adicionarNotificacaoParaUsuario(
                 usuario.id,
@@ -383,14 +316,14 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
     mostrarToast('Reserva atualizada', 'As alterações foram salvas com sucesso!', 'sucesso');
 });
 
-
-
 document.querySelector('.modal-detalhe-btn-confirmar-cancelamento').addEventListener('click', () => {
     if (!idParaCancelar) return;
     const reservas = obterReservasSistema();
     const idx = reservas.findIndex(r => r.id === idParaCancelar);
     if (idx !== -1) {
-        adicionarNotificacao(`Reserva cancelada: ${reservas[idx].espaco} no dia ${reservas[idx].data}, das ${reservas[idx].horario}.`);
+        if (typeof adicionarNotificacao === 'function') {
+            adicionarNotificacao(`Reserva cancelada: ${reservas[idx].espaco} no dia ${reservas[idx].data}, das ${reservas[idx].horario}.`);
+        }
         reservas[idx].status = 'Cancelada';
         salvarReservasSistema(reservas);
     }
@@ -398,31 +331,6 @@ document.querySelector('.modal-detalhe-btn-confirmar-cancelamento').addEventList
     modalCancelar.close();
     carregarMinhasReservas();
     mostrarToast('Reserva cancelada', 'Sua reserva foi cancelada com sucesso.', 'aviso');
-});
-
-
-document.querySelectorAll('.custom-select').forEach(select => {
-    const trigger = select.querySelector('.custom-select-trigger');
-    const label   = select.querySelector('.custom-select-label');
-    const options = select.querySelectorAll('.custom-select-option');
-    trigger.addEventListener('click', () => {
-        const isOpen = select.classList.contains('open');
-        document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
-        if (!isOpen) select.classList.add('open');
-    });
-    options.forEach(option => {
-        option.addEventListener('click', () => {
-            label.textContent = option.textContent;
-            select.dataset.valorSelecionado = option.dataset.value;
-            select.classList.remove('open');
-        });
-    });
-});
-
-document.addEventListener('click', e => {
-    if (!e.target.closest('.custom-select')) {
-        document.querySelectorAll('.custom-select.open').forEach(s => s.classList.remove('open'));
-    }
 });
 
 document.querySelector('.btn-filtrar-simples').addEventListener('click', () => {

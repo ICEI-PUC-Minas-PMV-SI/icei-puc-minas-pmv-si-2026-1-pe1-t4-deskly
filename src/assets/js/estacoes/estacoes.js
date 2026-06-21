@@ -1,105 +1,66 @@
-const btnNovaReserva = document.querySelector(".btn-primary.open-modal");
-const btnConfirmar = document.querySelector(".modal-footer button:last-child");
-const btnFiltrar = document.querySelector(".btn-filtrar");
+const btnNovaReserva  = document.querySelector('.btn-primary.open-modal');
+const btnConfirmar    = document.getElementById('btn-confirmar-estacao');
+const btnFiltrar      = document.querySelector('.btn-filtrar');
+const modal           = document.getElementById('modal-1');
+const selectEstacao   = document.getElementById('select-estacao');
+const inputDataModal  = document.querySelector('.modal-date-input');
+const inputFiltroData = document.querySelector('.date-input');
+const inputFiltroInicio = document.querySelector('.filtro-inicio');
+const inputFiltroFim    = document.querySelector('.filtro-fim');
+const inputInicio     = document.getElementById('estacao-start-time');
+const inputFim        = document.getElementById('estacao-end-time');
 
-const modal = document.getElementById("modal-1");
-const selectEstacao = document.querySelector("#modal-1 select");
-const inputDataModal = document.querySelector(".modal-date-input");
-const inputFiltroData = document.querySelector(".date-input");
-const inputFiltroInicio = document.querySelector(".filtro-inicio");
-const inputFiltroFim = document.querySelector(".filtro-fim");
-
-const horarios = document.querySelectorAll('#modal-1 input[type="time"]');
-const inputInicio = horarios[0];
-const inputFim = horarios[1];
-
-function mostrarToast(titulo, mensagem, tipo = "aviso") {
-    const container = document.getElementById("toast-container");
-
-    if (!container) return;
-
-    if (!container.hasAttribute("popover")) container.setAttribute("popover", "manual");
-    try {
-        if (container.matches(":popover-open")) container.hidePopover();
-        container.showPopover();
-    } catch (_) {}
-
-    const toast = document.createElement("div");
-    toast.className = `toast ${tipo}`;
-
-    toast.innerHTML = `
-        <strong>${titulo}</strong>
-        <span>${mensagem}</span>
-    `;
-
-    container.appendChild(toast);
-
-    setTimeout(() => {
-        toast.remove();
-    }, 4000);
+function obterReservasEstacoes() {
+    return JSON.parse(localStorage.getItem('reservasEstacoes') || '[]');
 }
 
-function marcarCampoInvalido(campo) {
-    if (!campo) return;
-    campo.classList.add("campo-invalido");
-    const limpar = () => {
-        campo.classList.remove("campo-invalido");
-        campo.removeEventListener("input", limpar);
-        campo.removeEventListener("change", limpar);
-    };
-    campo.addEventListener("input", limpar);
-    campo.addEventListener("change", limpar);
+function salvarReservasEstacoes(reservas) {
+    localStorage.setItem('reservasEstacoes', JSON.stringify(reservas));
 }
 
-function dataHoraNoPassado(dataStr, inicioStr) {
-    if (!dataStr) return false;
-    const [d, m, y] = dataStr.split("/").map(Number);
-    if (!d || !m || !y) return false;
-    const [h, min] = (inicioStr || "00:00").split(":").map(Number);
-    const dataHora = new Date(y, m - 1, d, h || 0, min || 0);
-    return dataHora < new Date();
+function _nomeEstacaoPeloCard(card) {
+    const nome = card.querySelector('h4').textContent.trim();
+    const area  = card.querySelector('.subtitle').textContent.replace('Área: ', '').trim();
+    return `${nome} — ${area}`;
 }
 
-function buscarEspacosSistema() {
-    return JSON.parse(localStorage.getItem("espacosSistema")) || [];
+function _salvarNoSistema(reserva) {
+    const usuario = obterUsuarioLogado();
+    if (!usuario) {
+        mostrarToast('Usuário não encontrado', 'Faça login novamente para realizar a reserva.', 'erro');
+        return;
+    }
+    const lista = obterReservasSistema();
+    lista.unshift({
+        id:        reserva.id,
+        usuarioId: usuario.id,
+        usuario:   usuario.nome,
+        tipo:      'Estação de Trabalho',
+        espaco:    reserva.estacao,
+        data:      reserva.data,
+        inicio:    reserva.inicio,
+        fim:       reserva.fim,
+        horario:   `${reserva.inicio} – ${reserva.fim}`,
+        convidados: '-',
+        status:    'Confirmada'
+    });
+    salvarReservasSistema(lista);
 }
 
-function buscarReservas() {
-    return JSON.parse(localStorage.getItem("reservasEstacoes")) || [];
-}
-
-function salvarReservas(reservas) {
-    localStorage.setItem("reservasEstacoes", JSON.stringify(reservas));
-}
-
-function buscarReservasSistema() {
-    return JSON.parse(localStorage.getItem("reservasSistema")) || [];
-}
-
-function salvarReservasSistema(reservas) {
-    localStorage.setItem("reservasSistema", JSON.stringify(reservas));
-}
-
-function gerarCardsEstacoesDoSistema() {
-    const lista = document.querySelector(".estacoes-lista");
-    const espacos = buscarEspacosSistema();
-
+function gerarCardsEstacoes() {
+    const lista    = document.querySelector('.estacoes-lista');
+    const estacoes = obterEspacosSistema().filter(e => e.tipo === 'Estação de Trabalho');
     if (!lista) return;
 
-    const estacoes = espacos.filter(espaco =>
-        espaco.tipo === "Estação de Trabalho"
-    );
-
-    lista.innerHTML = "";
-
+    lista.innerHTML = '';
     estacoes.forEach(espaco => {
-        const imagem = espaco.imagem || `assets/images/${espaco.nome}.png`;
-        const classeBadge = espaco.status === "Inativo" ? "inativa" : "disponivel";
-        const textoBadge = espaco.status === "Inativo" ? "Inativa" : "Disponível";
-        const disabled = espaco.status === "Inativo" ? "disabled" : "";
+        const imagem     = espaco.imagem || `assets/images/${espaco.nome}.png`;
+        const classeBadge = espaco.status === 'Inativo' ? 'inativa' : 'disponivel';
+        const textoBadge  = espaco.status === 'Inativo' ? 'Inativa' : 'Disponível';
+        const disabled    = espaco.status === 'Inativo' ? 'disabled' : '';
 
         lista.innerHTML += `
-            <div class="estacao-card" data-inativa="${espaco.status === "Inativo"}">
+            <div class="estacao-card" data-inativa="${espaco.status === 'Inativo'}">
                 <div class="estacao-info">
                     <img class="estacao-icon" src="${imagem}" alt="${espaco.nome}">
                     <div>
@@ -107,285 +68,177 @@ function gerarCardsEstacoesDoSistema() {
                         <span class="subtitle">Área: ${espaco.area}</span>
                     </div>
                 </div>
-
                 <div class="estacao-acoes">
                     <span class="badge ${classeBadge}">${textoBadge}</span>
-                    <button class="fast-action-btn open-modal"
-                            data-modal="modal-1"
-                            ${disabled}>
-                        Reservar
-                    </button>
+                    <button class="fast-action-btn open-modal" data-modal="modal-1" ${disabled}>Reservar</button>
                 </div>
-            </div>
-        `;
+            </div>`;
     });
 
     atualizarSelectTodasEstacoes();
 }
 
 function atualizarSelectTodasEstacoes() {
-    const espacos = buscarEspacosSistema();
-
-    const estacoes = espacos.filter(espaco =>
-        espaco.tipo === "Estação de Trabalho" &&
-        espaco.status !== "Inativo"
+    const estacoes = obterEspacosSistema().filter(e =>
+        e.tipo === 'Estação de Trabalho' && e.status !== 'Inativo'
     );
-
-    selectEstacao.innerHTML = "";
-
-    estacoes.forEach(espaco => {
-        const option = document.createElement("option");
-        option.textContent = `${espaco.nome} — ${espaco.area}`;
-        option.value = `${espaco.nome} — ${espaco.area}`;
-        selectEstacao.appendChild(option);
+    selectEstacao.innerHTML = '';
+    estacoes.forEach(e => {
+        const opt = document.createElement('option');
+        opt.textContent = `${e.nome} — ${e.area}`;
+        opt.value       = `${e.nome} — ${e.area}`;
+        selectEstacao.appendChild(opt);
     });
 }
 
 function atualizarSelectUmaEstacao(estacao) {
-    selectEstacao.innerHTML = "";
-
-    const option = document.createElement("option");
-    option.textContent = estacao;
-    option.value = estacao;
-    selectEstacao.appendChild(option);
+    selectEstacao.innerHTML = '';
+    const opt = document.createElement('option');
+    opt.textContent = estacao;
+    opt.value       = estacao;
+    selectEstacao.appendChild(opt);
 }
 
-function obterNomeEstacaoPeloCard(card) {
-    const nomeMesa = card.querySelector("h4").textContent.trim();
-    const area = card.querySelector(".subtitle").textContent.replace("Área: ", "").trim();
-
-    return `${nomeMesa} — ${area}`;
-}
-
-function salvarReservaNoSistema(reserva) {
-    const reservasSistema = buscarReservasSistema();
-    const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
-
-    if (!usuarioLogado) {
-        mostrarToast("Usuário não encontrado", "Faça login novamente para realizar a reserva.", "erro");
-        return;
-    }
-
-    const reservaSistema = {
-        id: reserva.id,
-        usuarioId: usuarioLogado.id,
-        usuario: usuarioLogado.nome,
-        tipo: "Estação de Trabalho",
-        espaco: reserva.estacao,
-        data: reserva.data,
-        inicio: reserva.inicio,
-        fim: reserva.fim,
-        horario: `${reserva.inicio} – ${reserva.fim}`,
-        convidados: "-",
-        status: "Confirmada"
-    };
-
-    reservasSistema.unshift(reservaSistema);
-    salvarReservasSistema(reservasSistema);
-}
-
-function converterHorarioParaMinutos(horario) {
-    const [horas, minutos] = horario.split(":").map(Number);
-    return horas * 60 + minutos;
-}
-
-function horariosConflitam(inicio1, fim1, inicio2, fim2) {
-    const i1 = converterHorarioParaMinutos(inicio1);
-    const f1 = converterHorarioParaMinutos(fim1);
-    const i2 = converterHorarioParaMinutos(inicio2);
-    const f2 = converterHorarioParaMinutos(fim2);
-
-    return i1 < f2 && f1 > i2;
-}
-
-document.addEventListener("click", event => {
-    const botao = event.target.closest(".fast-action-btn");
-
-    if (!botao) return;
-    if (botao.disabled) return;
-
-    const card = botao.closest(".estacao-card");
-
-    if (!card) return;
-    if (card.dataset.inativa === "true") return;
-
-    const estacao = obterNomeEstacaoPeloCard(card);
-
-    atualizarSelectUmaEstacao(estacao);
-
-    if (!modal.open) {
-        modal.showModal();
-    }
+// Abre modal ao clicar em "Reservar" em um card específico
+document.addEventListener('click', e => {
+    const botao = e.target.closest('.fast-action-btn');
+    if (!botao || botao.disabled) return;
+    const card = botao.closest('.estacao-card');
+    if (!card || card.dataset.inativa === 'true') return;
+    atualizarSelectUmaEstacao(_nomeEstacaoPeloCard(card));
+    if (!modal.open) modal.showModal();
 });
 
-btnNovaReserva.addEventListener("click", () => {
-    atualizarSelectTodasEstacoes();
-});
+// Botão "Nova Reserva" (abre o modal via modal.js; aqui só popula o select)
+if (btnNovaReserva) {
+    btnNovaReserva.addEventListener('click', atualizarSelectTodasEstacoes);
+}
 
-btnConfirmar.addEventListener("click", () => {
-    const estacao = selectEstacao.value;
-    const data = inputDataModal.value;
-    const inicio = inputInicio.value;
-    const fim = inputFim.value;
+if (btnConfirmar) {
+    btnConfirmar.addEventListener('click', () => {
+        const estacao = selectEstacao.value;
+        const data    = inputDataModal.value;
+        const inicio  = inputInicio.value;
+        const fim     = inputFim.value;
 
-    if (!estacao || !data || !inicio || !fim) {
-        if (!estacao) marcarCampoInvalido(selectEstacao);
-        if (!data) marcarCampoInvalido(inputDataModal);
-        if (!inicio) marcarCampoInvalido(inputInicio);
-        if (!fim) marcarCampoInvalido(inputFim);
-        mostrarToast("Campos obrigatórios", "Preencha todos os campos da reserva.", "erro");
-        return;
-    }
-
-    if (dataHoraNoPassado(data, inicio)) {
-        marcarCampoInvalido(inputDataModal);
-        marcarCampoInvalido(inputInicio);
-        mostrarToast("Horário inválido", "Não é possível reservar em uma data/horário que já passou.", "erro");
-        return;
-    }
-
-    if (inicio >= fim) {
-        marcarCampoInvalido(inputInicio);
-        marcarCampoInvalido(inputFim);
-        mostrarToast("Horário inválido", "O horário de início precisa ser menor que o horário de fim.", "erro");
-        return;
-    }
-
-    const reservas = buscarReservas();
-
-    const horarioIndisponivel = reservas.some(reserva =>
-        reserva.estacao === estacao &&
-        reserva.data === data &&
-        horariosConflitam(inicio, fim, reserva.inicio, reserva.fim)
-    );
-
-    if (horarioIndisponivel) {
-        mostrarToast("Horário indisponível", "Essa estação já está reservada nesse horário.", "erro");
-        return;
-    }
-
-    const novaReserva = {
-        id: Date.now(),
-        estacao,
-        data,
-        inicio,
-        fim
-    };
-
-    reservas.push(novaReserva);
-    salvarReservas(reservas);
-    salvarReservaNoSistema(novaReserva);
-
-    if (typeof adicionarNotificacao === "function") {
-        adicionarNotificacao(
-            `Reserva confirmada para ${estacao} no dia ${data}, das ${inicio} às ${fim}.`
-        );
-    }
-
-    mostrarToast("Reserva confirmada", "Sua reserva foi realizada com sucesso!", "sucesso");
-
-    inputDataModal.value = "";
-    inputInicio.value = "";
-    inputFim.value = "";
-
-    modal.close();
-});
-
-function aplicarFiltro() {
-    const dataFiltro = inputFiltroData.value;
-    const inicioFiltro = inputFiltroInicio.value;
-    const fimFiltro = inputFiltroFim.value;
-    const reservas = buscarReservas();
-
-    document.querySelectorAll(".estacao-card").forEach(card => {
-        const badge = card.querySelector(".badge");
-        const botao = card.querySelector(".fast-action-btn");
-
-        if (card.dataset.inativa === "true") {
-            badge.textContent = "Inativa";
-            badge.className = "badge inativa";
-            botao.disabled = true;
+        if (!estacao || !data || !inicio || !fim) {
+            if (!estacao) marcarCampoInvalido(selectEstacao);
+            if (!data)    marcarCampoInvalido(inputDataModal);
+            if (!inicio)  marcarCampoInvalido(inputInicio);
+            if (!fim)     marcarCampoInvalido(inputFim);
+            mostrarToast('Campos obrigatórios', 'Preencha todos os campos da reserva.', 'erro');
             return;
         }
 
-        const estacao = obterNomeEstacaoPeloCard(card);
-
-        const reservadaNoPeriodo = reservas.some(reserva =>
-            reserva.estacao === estacao &&
-            reserva.data === dataFiltro &&
-            horariosConflitam(
-                inicioFiltro,
-                fimFiltro,
-                reserva.inicio,
-                reserva.fim
-            )
-        );
-
-        if (reservadaNoPeriodo) {
-            badge.textContent = "Ocupada";
-            badge.className = "badge ocupado";
-            botao.disabled = true;
-        } else {
-            badge.textContent = "Disponível";
-            badge.className = "badge disponivel";
-            botao.disabled = false;
+        if (dataHoraNoPassado(data, inicio)) {
+            marcarCampoInvalido(inputDataModal);
+            marcarCampoInvalido(inputInicio);
+            mostrarToast('Horário inválido', 'Não é possível reservar em uma data/horário que já passou.', 'erro');
+            return;
         }
-    });
 
-    aplicarStatusEspacosEstacoes();
+        if (inicio >= fim) {
+            marcarCampoInvalido(inputInicio);
+            marcarCampoInvalido(inputFim);
+            mostrarToast('Horário inválido', 'O horário de início precisa ser menor que o horário de fim.', 'erro');
+            return;
+        }
+
+        const reservas = obterReservasEstacoes();
+        const ocupado  = reservas.some(r =>
+            r.estacao === estacao && r.data === data && horariosConflitam(inicio, fim, r.inicio, r.fim)
+        );
+        if (ocupado) {
+            mostrarToast('Horário indisponível', 'Essa estação já está reservada nesse horário.', 'erro');
+            return;
+        }
+
+        const novaReserva = { id: Date.now(), estacao, data, inicio, fim };
+        reservas.push(novaReserva);
+        salvarReservasEstacoes(reservas);
+        _salvarNoSistema(novaReserva);
+
+        if (typeof adicionarNotificacao === 'function') {
+            adicionarNotificacao(`Reserva confirmada para ${estacao} no dia ${data}, das ${inicio} às ${fim}.`);
+        }
+
+        mostrarToast('Reserva confirmada', 'Sua reserva foi realizada com sucesso!', 'sucesso');
+        inputDataModal.value = '';
+        inputInicio.value    = '';
+        inputFim.value       = '';
+        modal.close();
+    });
 }
 
-btnFiltrar.addEventListener("click", () => {
-    const dataFiltro = inputFiltroData.value;
-    const inicioFiltro = inputFiltroInicio.value;
-    const fimFiltro = inputFiltroFim.value;
+if (btnFiltrar) {
+    btnFiltrar.addEventListener('click', () => {
+        const dataFiltro   = inputFiltroData.value;
+        const inicioFiltro = inputFiltroInicio.value;
+        const fimFiltro    = inputFiltroFim.value;
 
-    if (!dataFiltro || !inicioFiltro || !fimFiltro) {
-        mostrarToast("Filtro incompleto", "Preencha a data, horário inicial e horário final.", "erro");
-        return;
-    }
+        if (!dataFiltro || !inicioFiltro || !fimFiltro) {
+            mostrarToast('Filtro incompleto', 'Preencha a data, horário inicial e horário final.', 'erro');
+            return;
+        }
+        if (inicioFiltro >= fimFiltro) {
+            mostrarToast('Horário inválido', 'O horário inicial do filtro precisa ser menor que o horário final.', 'erro');
+            return;
+        }
 
-    if (inicioFiltro >= fimFiltro) {
-        mostrarToast("Horário inválido", "O horário inicial do filtro precisa ser menor que o horário final.", "erro");
-        return;
-    }
+        const reservas = obterReservasEstacoes();
+        document.querySelectorAll('.estacao-card').forEach(card => {
+            const badge  = card.querySelector('.badge');
+            const botao  = card.querySelector('.fast-action-btn');
 
-    aplicarFiltro();
-});
+            if (card.dataset.inativa === 'true') {
+                badge.textContent = 'Inativa';
+                badge.className   = 'badge inativa';
+                botao.disabled    = true;
+                return;
+            }
 
-function aplicarStatusEspacosEstacoes() {
-    const espacos = buscarEspacosSistema();
+            const estacao  = _nomeEstacaoPeloCard(card);
+            const ocupada  = reservas.some(r =>
+                r.estacao === estacao && r.data === dataFiltro &&
+                horariosConflitam(inicioFiltro, fimFiltro, r.inicio, r.fim)
+            );
 
-    document.querySelectorAll(".estacao-card").forEach(card => {
-        const nomeMesa = card.querySelector("h4").textContent.trim();
+            if (ocupada) {
+                badge.textContent = 'Ocupada';
+                badge.className   = 'badge ocupado';
+                botao.disabled    = true;
+            } else {
+                badge.textContent = 'Disponível';
+                badge.className   = 'badge disponivel';
+                botao.disabled    = false;
+            }
+        });
+    });
+}
 
-        const espaco = espacos.find(item =>
-            item.tipo === "Estação de Trabalho" &&
-            item.nome === nomeMesa
-        );
-
+function _aplicarStatusEspacos() {
+    const espacos = obterEspacosSistema();
+    document.querySelectorAll('.estacao-card').forEach(card => {
+        const nomeMesa = card.querySelector('h4').textContent.trim();
+        const espaco   = espacos.find(e => e.tipo === 'Estação de Trabalho' && e.nome === nomeMesa);
         if (!espaco) return;
 
-        const badge = card.querySelector(".badge");
-        const botao = card.querySelector(".fast-action-btn");
+        const badge  = card.querySelector('.badge');
+        const botao  = card.querySelector('.fast-action-btn');
 
-        if (espaco.status === "Inativo") {
-            card.dataset.inativa = "true";
-
-            badge.textContent = "Inativa";
-            badge.className = "badge inativa";
-
-            botao.disabled = true;
+        if (espaco.status === 'Inativo') {
+            card.dataset.inativa = 'true';
+            badge.textContent = 'Inativa';
+            badge.className   = 'badge inativa';
+            botao.disabled    = true;
         } else {
-            card.dataset.inativa = "false";
-
-            badge.textContent = "Disponível";
-            badge.className = "badge disponivel";
-
-            botao.disabled = false;
+            card.dataset.inativa = 'false';
+            badge.textContent = 'Disponível';
+            badge.className   = 'badge disponivel';
+            botao.disabled    = false;
         }
     });
 }
 
-gerarCardsEstacoesDoSistema();
-aplicarStatusEspacosEstacoes();
+gerarCardsEstacoes();
+_aplicarStatusEspacos();

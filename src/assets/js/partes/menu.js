@@ -1,4 +1,4 @@
-const usuarioLogado = JSON.parse(localStorage.getItem("usuarioLogado"));
+const usuarioLogado = obterUsuarioLogado();
 
 const linkPainelAdmin = usuarioLogado?.perfil === "Admin"
     ? `<li><a href="painelAdmin.html">Painel Admin</a></li>`
