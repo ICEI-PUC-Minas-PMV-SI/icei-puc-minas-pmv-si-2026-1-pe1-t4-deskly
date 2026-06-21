@@ -248,6 +248,12 @@ Os testes de software do Deskly adotam a abordagem de **caixa preta**, na qual o
 | Requisitos Associados | RNF-02, RNF-07 |
 | Link do vídeo do teste realizado | https://drive.google.com/file/d/181tmhlges5LAk51bbK2Mul6wz3PWcwEN/view?usp=drive_link |
 
+| *Gravação* | *Gravação GR08 – Execução completa dos cenários de teste do sistema Deskly* |
+|---|---|
+| Casos de Teste cobertos | CT01 a CT18 |
+| Requisitos Associados | RF-01 a RF-09 e RNF-01 a RNF-14 |
+| Link do vídeo do teste realizado | https://youtu.be/a3iM2SkVwhs?si=cp6hEKUnkbn6M1V_ |
+
 ---
 
 ## Avaliação dos Testes de Software
