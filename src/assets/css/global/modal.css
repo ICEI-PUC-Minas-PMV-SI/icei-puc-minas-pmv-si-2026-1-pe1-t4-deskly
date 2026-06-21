@@ -190,6 +190,9 @@ dialog::backdrop {
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
 }
 
 .modal-convidados-item {
@@ -199,6 +202,16 @@ dialog::backdrop {
     padding: 10px 14px;
     font-size: 14px;
     color: var(--color-text-md);
+    min-width: 0;
+    overflow: hidden;
+}
+
+.modal-convidados-item > span:first-child {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 .modal-convidados-item + .modal-convidados-item {

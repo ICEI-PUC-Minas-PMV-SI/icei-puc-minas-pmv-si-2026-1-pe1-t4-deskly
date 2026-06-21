@@ -1,5 +1,9 @@
 const usuarioLogado = obterUsuarioLogado();
 
+if (!usuarioLogado) {
+    window.location.href = 'login.html';
+}
+
 const linkPainelAdmin = usuarioLogado?.perfil === "Admin"
     ? `<li><a href="painelAdmin.html">Painel Admin</a></li>`
     : "";
