@@ -383,6 +383,4 @@ Os quatro cenários atingiram taxa de sucesso de 100%, confirmando que os fluxos
 Com relação ao tempo de conclusão, a discrepância entre usuários comuns e o especialista é esperada — o desenvolvedor conhece de antemão a arquitetura de navegação e a localização dos elementos. Essa diferença não compromete a usabilidade, sendo natural em qualquer sistema de gestão corporativa.
 
 **Melhorias planejadas para as próximas iterações:**
-- Adicionar um atalho direto para gerenciamento de convidados a partir do dashboard, tornando o fluxo ainda mais ágil.
-- Adicionar pré-visualização de imagem no formulário de cadastro de espaço no painel admin.
-- Implementar mensagem orientativa no fluxo de primeiro acesso caso o token seja inválido ou expirado, com opção de solicitar novo convite ao administrador.
+- Até o momento, o sistema atende aos requisitos definidos para esta versão, não havendo funcionalidades adicionais previstas para implementação imediata. Como possível evolução futura, poderá ser considerada a substituição do banco de dados baseado em arquivos JSON por uma solução de banco de dados mais robusta, visando maior escalabilidade, desempenho e segurança conforme o crescimento da aplicação e da quantidade de usuários.
