@@ -20,6 +20,8 @@ function carregarReservasAdmin() {
 
     reservas.forEach(reserva => {
         const estaCancelada = reserva.status === 'Cancelada';
+        const estaConcluida = reserva.status === 'Confirmada' && reservaJaPassou(reserva);
+        const statusExibido = estaConcluida ? 'Concluída' : reserva.status;
         const botaoAcao = estaCancelada
             ? `<button class="btn-action btn-reativar-reserva-admin" data-id="${reserva.id}">Reativar</button>`
             : `<button class="btn-action btn-excluir-reserva-admin" data-id="${reserva.id}">Cancelar</button>`;
@@ -30,7 +32,7 @@ function carregarReservasAdmin() {
                 <td data-label="Espaço">${reserva.espaco}</td>
                 <td data-label="Data">${reserva.data}</td>
                 <td data-label="Horário">${reserva.horario}</td>
-                <td data-label="Status"><span class="badge ${classeStatusReserva(reserva.status)}">${reserva.status}</span></td>
+                <td data-label="Status"><span class="badge ${classeStatusReserva(statusExibido)}">${statusExibido}</span></td>
                 <td data-label="Ações">${botaoAcao}</td>
             </tr>`;
     });
@@ -50,8 +52,10 @@ function reservaJaPassou(reserva) {
     const agora = new Date();
     const [dia, mes, ano] = (reserva.data || '').split('/').map(Number);
     let hora = 23, minuto = 59;
-    if (reserva.horario && reserva.horario.includes('-')) {
-        const fim = reserva.horario.split('-')[1].trim();
+    const horario = reserva.horario || '';
+    const separador = horario.includes('–') ? '–' : '-';
+    if (horario.includes(separador)) {
+        const fim = horario.split(separador)[1].trim();
         if (fim.includes(':')) [hora, minuto] = fim.split(':').map(Number);
     }
     return new Date(ano, mes - 1, dia, hora || 23, minuto || 59) < agora;
