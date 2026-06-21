@@ -40,7 +40,7 @@ function salvarReservasSistema(reservas) {
 // --- TOAST ---
 
 function mostrarToast(titulo, mensagem, tipo = 'aviso') {
-    const container = document.getElementById('toast-container');
+    const container = document.getElementById('container-avisos');
     if (!container) return;
     if (!container.hasAttribute('popover')) container.setAttribute('popover', 'manual');
     try {

@@ -50,17 +50,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalMembros = usuarios.filter(u => u.senhaDefinida).length;
 
     const setEl = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
-    setEl('stat-salas-disp',  salasDisponiveis);
-    setEl('stat-salas-sub',   `de ${salas.length} cadastradas`);
-    setEl('stat-estacoes-disp', estLivres);
-    setEl('stat-estacoes-sub',  `de ${estacoes.length} cadastradas`);
-    setEl('stat-reservas-qtd', minhasReservas.length);
-    setEl('stat-reservas-sub', proxima
+    setEl('indicador-salas-disp',  salasDisponiveis);
+    setEl('indicador-salas-sub',   `de ${salas.length} cadastradas`);
+    setEl('indicador-estacoes-disp', estLivres);
+    setEl('indicador-estacoes-sub',  `de ${estacoes.length} cadastradas`);
+    setEl('indicador-reservas-qtd', minhasReservas.length);
+    setEl('indicador-reservas-sub', proxima
         ? `próxima em ${proxima.data} às ${proxima.inicio}`
         : 'nenhuma confirmada');
-    setEl('stat-membros', totalMembros);
+    setEl('indicador-membros', totalMembros);
 
-    const wrap = document.getElementById('reservation-card-wrap');
+    const wrap = document.getElementById('grade-reservas');
     if (!wrap) return;
 
     if (!minhasReservas.length) {

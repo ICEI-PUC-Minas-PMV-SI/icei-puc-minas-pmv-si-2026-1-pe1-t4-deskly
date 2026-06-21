@@ -106,14 +106,14 @@ function abrirModalEditarEspaco(id) {
     const modal = document.getElementById('modal-editar-admin');
     if (!modal) { mostrarToast('Erro', 'Modal de edição não encontrado.', 'erro'); return; }
 
-    document.getElementById('editarEspacoId').value    = espaco.id;
-    document.getElementById('editarEspacoNome').value  = espaco.nome || '';
-    document.getElementById('editarEspacoArea').value  = espaco.area === '-' ? '' : espaco.area || '';
+    document.getElementById('editar-espaco-id').value    = espaco.id;
+    document.getElementById('editar-espaco-nome').value  = espaco.nome || '';
+    document.getElementById('editar-espaco-area').value  = espaco.area === '-' ? '' : espaco.area || '';
 
-    const grupoCapacidade = document.getElementById('grupoEditarCapacidade');
-    const grupoRecursos   = document.getElementById('grupoEditarRecursos');
-    const inputCapacidade = document.getElementById('editarEspacoCapacidade');
-    const inputRecursos   = document.getElementById('editarEspacoRecursos');
+    const grupoCapacidade = document.getElementById('grupo-editar-capacidade');
+    const grupoRecursos   = document.getElementById('grupo-editar-recursos');
+    const inputCapacidade = document.getElementById('editar-espaco-capacidade');
+    const inputRecursos   = document.getElementById('editar-espaco-recursos');
 
     if (espaco.tipo === 'Sala de Reunião') {
         grupoCapacidade.style.display = 'flex';
@@ -127,9 +127,9 @@ function abrirModalEditarEspaco(id) {
         inputRecursos.value   = '';
     }
 
-    const container = document.getElementById('previewEditarContainer');
-    const image     = document.getElementById('previewEditarImagem');
-    const label     = document.getElementById('nomeImagemEspacoEditar');
+    const container = document.getElementById('previa-editar');
+    const image     = document.getElementById('previa-editar-imagem');
+    const label     = document.getElementById('nome-imagem-espaco-editar');
 
     if (label) label.textContent = 'Alterar imagem...';
     if (espaco.imagem && container && image) {
@@ -142,11 +142,11 @@ function abrirModalEditarEspaco(id) {
     modal.showModal();
 }
 
-document.getElementById('cadastroImagemEspaco')?.addEventListener('change', function (e) {
+document.getElementById('cadastro-imagem-espaco')?.addEventListener('change', function (e) {
     const file      = e.target.files[0];
-    const container = document.getElementById('previewCadastroContainer');
-    const image     = document.getElementById('previewCadastroImagem');
-    const label     = document.getElementById('nomeImagemEspaco');
+    const container = document.getElementById('previa-cadastro');
+    const image     = document.getElementById('previa-cadastro-imagem');
+    const label     = document.getElementById('nome-imagem-espaco');
 
     if (file) {
         label.textContent = file.name;
@@ -160,11 +160,11 @@ document.getElementById('cadastroImagemEspaco')?.addEventListener('change', func
     }
 });
 
-document.getElementById('editarImagemEspaco')?.addEventListener('change', function (e) {
+document.getElementById('editar-imagem-espaco')?.addEventListener('change', function (e) {
     const file      = e.target.files[0];
-    const container = document.getElementById('previewEditarContainer');
-    const image     = document.getElementById('previewEditarImagem');
-    const label     = document.getElementById('nomeImagemEspacoEditar');
+    const container = document.getElementById('previa-editar');
+    const image     = document.getElementById('previa-editar-imagem');
+    const label     = document.getElementById('nome-imagem-espaco-editar');
 
     if (file) {
         label.textContent = file.name;
@@ -179,19 +179,19 @@ document.getElementById('editarImagemEspaco')?.addEventListener('change', functi
 });
 
 function salvarEdicaoEspaco() {
-    const id     = Number(document.getElementById('editarEspacoId').value);
+    const id     = Number(document.getElementById('editar-espaco-id').value);
     const espacos = obterEspacosSistema();
     const espaco  = espacos.find(e => Number(e.id) === id);
     if (!espaco) { mostrarToast('Erro', 'Espaço não encontrado.', 'erro'); return; }
 
-    const nome           = document.getElementById('editarEspacoNome').value.trim();
-    const area           = document.getElementById('editarEspacoArea').value.trim();
+    const nome           = document.getElementById('editar-espaco-nome').value.trim();
+    const area           = document.getElementById('editar-espaco-area').value.trim();
     const ehSala         = espaco.tipo === 'Sala de Reunião';
-    const capacidadeTexto = ehSala ? document.getElementById('editarEspacoCapacidade').value.trim() : '';
+    const capacidadeTexto = ehSala ? document.getElementById('editar-espaco-capacidade').value.trim() : '';
 
     const faltando = [];
-    if (!nome) faltando.push(document.getElementById('editarEspacoNome'));
-    if (ehSala && !capacidadeTexto) faltando.push(document.getElementById('editarEspacoCapacidade'));
+    if (!nome) faltando.push(document.getElementById('editar-espaco-nome'));
+    if (ehSala && !capacidadeTexto) faltando.push(document.getElementById('editar-espaco-capacidade'));
 
     if (faltando.length) {
         faltando.forEach(marcarCampoInvalido);
@@ -200,7 +200,7 @@ function salvarEdicaoEspaco() {
     }
 
     if (nomeEspacoDuplicado(nome, espaco.id)) {
-        marcarCampoInvalido(document.getElementById('editarEspacoNome'));
+        marcarCampoInvalido(document.getElementById('editar-espaco-nome'));
         mostrarToast('Nome já existe', 'Já existe um espaço com esse nome.', 'erro');
         return;
     }
@@ -210,13 +210,13 @@ function salvarEdicaoEspaco() {
     if (ehSala) {
         const capacidaded = Number(capacidadeTexto);
         if (!capacidaded || capacidaded < 1 || capacidaded > 15) {
-            marcarCampoInvalido(document.getElementById('editarEspacoCapacidade'));
+            marcarCampoInvalido(document.getElementById('editar-espaco-capacidade'));
             mostrarToast('Capacidade inválida', 'A capacidade deve ser entre 1 e 15.', 'erro');
             return;
         }
         const maxConvidados = maiorConvidadosReservasAtivas(idReservaAntigo);
         if (capacidaded < maxConvidados + 1) {
-            marcarCampoInvalido(document.getElementById('editarEspacoCapacidade'));
+            marcarCampoInvalido(document.getElementById('editar-espaco-capacidade'));
             mostrarToast(
                 'Capacidade insuficiente',
                 `Há uma reserva ativa com ${maxConvidados} convidado(s) (precisa de ${maxConvidados + 1} lugares). Exclua a reserva ou aguarde a reunião ser feita antes de reduzir a capacidade.`,
@@ -225,7 +225,7 @@ function salvarEdicaoEspaco() {
             return;
         }
         espaco.capacidade = capacidaded;
-        espaco.recursos   = document.getElementById('editarEspacoRecursos').value.trim() || '-';
+        espaco.recursos   = document.getElementById('editar-espaco-recursos').value.trim() || '-';
     } else {
         espaco.capacidade = '-';
         espaco.recursos   = '-';
@@ -244,11 +244,11 @@ function salvarEdicaoEspaco() {
         mostrarToast('Espaço atualizado', `${espaco.nome} foi atualizado com sucesso.`, 'sucesso');
         document.getElementById('modal-editar-admin').close();
 
-        const inputImagemEditar = document.getElementById('editarImagemEspaco');
+        const inputImagemEditar = document.getElementById('editar-imagem-espaco');
         if (inputImagemEditar) inputImagemEditar.value = '';
     }
 
-    const imagemInput = document.getElementById('editarImagemEspaco');
+    const imagemInput = document.getElementById('editar-imagem-espaco');
     if (imagemInput && imagemInput.files.length > 0) {
         comprimirImagem(imagemInput.files[0], executarSalvamento);
     } else {
@@ -357,18 +357,18 @@ function excluirEspaco() {
 }
 
 function limparFormularioCadastro() {
-    ['cadastroTipoEspaco','cadastroNomeEspaco','cadastroCapacidadeEspaco',
-     'cadastroRecursosEspaco','cadastroAreaEspaco','cadastroImagemEspaco']
+    ['cadastro-tipo-espaco','cadastro-nome-espaco','cadastro-capacidade-espaco',
+     'cadastro-recursos-espaco','cadastro-area-espaco','cadastro-imagem-espaco']
         .forEach(id => { const c = document.getElementById(id); if (c) c.value = ''; });
 
-    const status = document.getElementById('cadastroStatusEspaco');
+    const status = document.getElementById('cadastro-status-espaco');
     if (status) status.value = 'Ativo';
 
-    const nomeImagem = document.getElementById('nomeImagemEspaco');
+    const nomeImagem = document.getElementById('nome-imagem-espaco');
     if (nomeImagem) nomeImagem.textContent = 'Escolher imagem...';
 
-    const container = document.getElementById('previewCadastroContainer');
-    const image     = document.getElementById('previewCadastroImagem');
+    const container = document.getElementById('previa-cadastro');
+    const image     = document.getElementById('previa-cadastro-imagem');
     if (container) container.style.display = 'none';
     if (image)     image.src = '';
 }
@@ -377,15 +377,15 @@ document.addEventListener('DOMContentLoaded', () => {
     criarEspacosPadrao();
     carregarEspacosAdmin();
 
-    aplicarLimiteNomeEspaco(document.getElementById('cadastroNomeEspaco'));
-    aplicarLimiteNomeEspaco(document.getElementById('editarEspacoNome'));
+    aplicarLimiteNomeEspaco(document.getElementById('cadastro-nome-espaco'));
+    aplicarLimiteNomeEspaco(document.getElementById('editar-espaco-nome'));
 
     document.getElementById('btn-confirmar-excluir-espaco')?.addEventListener('click', excluirEspaco);
 
-    const btnExcluirEditar = document.getElementById('btnExcluirEspacoEditar');
+    const btnExcluirEditar = document.getElementById('btn-excluir-espaco-editar');
     if (btnExcluirEditar) {
         btnExcluirEditar.addEventListener('click', () => {
-            const id         = document.getElementById('editarEspacoId').value;
+            const id         = document.getElementById('editar-espaco-id').value;
             const modalEditar = document.getElementById('modal-editar-admin');
             if (modalEditar && modalEditar.open) modalEditar.close();
             setTimeout(() => abrirModalExcluirEspaco(id), 100);
@@ -393,17 +393,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const modalEditar      = document.getElementById('modal-editar-admin');
-    const btnFecharEditar  = document.getElementById('fecharModalEditarAdmin');
-    const btnCancelarEditar = document.getElementById('cancelarEditarAdmin');
-    const btnSalvarEditar  = document.getElementById('salvarEditarAdmin');
+    const btnFecharEditar  = document.getElementById('btn-fechar-editar-admin');
+    const btnCancelarEditar = document.getElementById('btn-cancelar-editar-admin');
+    const btnSalvarEditar  = document.getElementById('btn-salvar-editar-admin');
 
     if (btnFecharEditar  && modalEditar) btnFecharEditar.addEventListener('click', () => modalEditar.close());
     if (btnCancelarEditar && modalEditar) btnCancelarEditar.addEventListener('click', () => modalEditar.close());
     if (btnSalvarEditar) btnSalvarEditar.addEventListener('click', salvarEdicaoEspaco);
 
-    const tipoCadastro       = document.getElementById('cadastroTipoEspaco');
-    const grupoSalaCadastro  = document.getElementById('grupoSalaCadastro');
-    const camposCadastro     = document.getElementById('camposCadastroEspaco');
+    const tipoCadastro       = document.getElementById('cadastro-tipo-espaco');
+    const grupoSalaCadastro  = document.getElementById('grupo-sala-cadastro');
+    const camposCadastro     = document.getElementById('campos-cadastro-espaco');
 
     function atualizarCamposCadastro() {
         if (!tipoCadastro || !camposCadastro || !grupoSalaCadastro) return;
@@ -428,17 +428,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btnConfirmarCadastro) {
         btnConfirmarCadastro.addEventListener('click', () => {
             const tipo       = tipoCadastro.value;
-            const nome       = document.getElementById('cadastroNomeEspaco').value.trim();
-            const capacidade = document.getElementById('cadastroCapacidadeEspaco').value.trim();
-            const recursos   = document.getElementById('cadastroRecursosEspaco').value.trim();
-            const area       = document.getElementById('cadastroAreaEspaco').value.trim();
-            const status     = document.getElementById('cadastroStatusEspaco').value;
-            const imagemInput = document.getElementById('cadastroImagemEspaco');
+            const nome       = document.getElementById('cadastro-nome-espaco').value.trim();
+            const capacidade = document.getElementById('cadastro-capacidade-espaco').value.trim();
+            const recursos   = document.getElementById('cadastro-recursos-espaco').value.trim();
+            const area       = document.getElementById('cadastro-area-espaco').value.trim();
+            const status     = document.getElementById('cadastro-status-espaco').value;
+            const imagemInput = document.getElementById('cadastro-imagem-espaco');
 
             const faltando = [];
             if (!tipo) faltando.push(tipoCadastro);
-            if (!nome) faltando.push(document.getElementById('cadastroNomeEspaco'));
-            if (tipo === 'Sala de Reunião' && !capacidade) faltando.push(document.getElementById('cadastroCapacidadeEspaco'));
+            if (!nome) faltando.push(document.getElementById('cadastro-nome-espaco'));
+            if (tipo === 'Sala de Reunião' && !capacidade) faltando.push(document.getElementById('cadastro-capacidade-espaco'));
 
             if (faltando.length) {
                 faltando.forEach(marcarCampoInvalido);
@@ -449,14 +449,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (tipo === 'Sala de Reunião') {
                 const cap = Number(capacidade);
                 if (!cap || cap < 1 || cap > 15) {
-                    marcarCampoInvalido(document.getElementById('cadastroCapacidadeEspaco'));
+                    marcarCampoInvalido(document.getElementById('cadastro-capacidade-espaco'));
                     mostrarToast('Capacidade inválida', 'A capacidade deve ser entre 1 e 15.', 'erro');
                     return;
                 }
             }
 
             if (nomeEspacoDuplicado(nome)) {
-                marcarCampoInvalido(document.getElementById('cadastroNomeEspaco'));
+                marcarCampoInvalido(document.getElementById('cadastro-nome-espaco'));
                 mostrarToast('Nome já existe', 'Já existe um espaço com esse nome.', 'erro');
                 return;
             }

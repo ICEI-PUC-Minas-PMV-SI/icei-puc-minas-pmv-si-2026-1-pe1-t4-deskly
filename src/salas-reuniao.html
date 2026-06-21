@@ -14,7 +14,7 @@
 
 <body>
 
-    <div id="toast-container"></div>
+    <div id="container-avisos"></div>
 
     <header id="header"></header>
     <aside id="aside"></aside>
@@ -55,7 +55,7 @@
             <button class="btn-filtrar-simples">Filtrar</button>
         </section>
 
-        <section class="lista-salas" id="listaSalasContainer"></section>
+        <section class="lista-salas" id="container-salas"></section>
     </main>
 
     <dialog id="modal-reserva">
@@ -76,25 +76,25 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="modal-date">Data</label>
-                    <input type="text" id="modal-date" class="modal-date-input" placeholder="dd/mm/aaaa">
+                    <label for="campo-data">Data</label>
+                    <input type="text" id="campo-data" class="modal-date-input" placeholder="dd/mm/aaaa">
                 </div>
 
                 <div class="input-row">
                     <div class="input-group">
-                        <label for="start-time">Início</label>
-                        <input type="time" id="start-time">
+                        <label for="horario-inicio">Início</label>
+                        <input type="time" id="horario-inicio">
                     </div>
                     <div class="input-group">
-                        <label for="ending-time">Término</label>
-                        <input type="time" id="ending-time">
+                        <label for="horario-fim">Término</label>
+                        <input type="time" id="horario-fim">
                     </div>
                 </div>
 
                 <div class="input-group" id="reserva-grupo-convidados">
                     <label>Convidados <span id="reserva-contador-convidados" class="reserva-contador"></span></label>
                     <div class="modal-convidados-lista oculto" id="reserva-lista-convidados"></div>
-                    <small id="limite-msg">Selecione uma sala para ver o limite de convidados.</small>
+                    <small id="aviso-limite">Selecione uma sala para ver o limite de convidados.</small>
                 </div>
 
                 <div class="input-group" id="reserva-grupo-adicionar">

@@ -43,7 +43,7 @@
     border-color: var(--color-btn-primary);
 }
 
-#mesLabel {
+#rotulo-mes {
     font: var(--heading-3);
     color: var(--color-heading);
     min-width: 180px;
@@ -80,7 +80,7 @@
 }
 
 /* ── Grade do calendário ── */
-#calendar {
+#grade-calendario {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 8px;
@@ -198,7 +198,7 @@
         justify-content: space-between;
     }
 
-    #mesLabel {
+    #rotulo-mes {
         min-width: unset;
         flex: 1;
     }
@@ -208,7 +208,7 @@
     }
 
     .week-header,
-    #calendar {
+    #grade-calendario {
         gap: 4px;
     }
 
@@ -366,7 +366,7 @@ dialog::backdrop {
     margin: 4px 4px 0 0;
 }
 
-#viewModal p {
+#modal-visualizar p {
     font: var(--text-sm);
     color: var(--color-text-md);
     margin: 4px 0;

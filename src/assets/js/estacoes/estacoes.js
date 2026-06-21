@@ -1,14 +1,14 @@
 const btnNovaReserva  = document.querySelector('.btn-primary.open-modal');
 const btnConfirmar    = document.getElementById('btn-confirmar-estacao');
 const btnFiltrar      = document.querySelector('.btn-filtrar');
-const modal           = document.getElementById('modal-1');
+const modal           = document.getElementById('modal-reserva-estacao');
 const selectEstacao   = document.getElementById('select-estacao');
 const inputDataModal  = document.querySelector('.modal-date-input');
 const inputFiltroData = document.querySelector('.date-input');
 const inputFiltroInicio = document.querySelector('.filtro-inicio');
 const inputFiltroFim    = document.querySelector('.filtro-fim');
-const inputInicio     = document.getElementById('estacao-start-time');
-const inputFim        = document.getElementById('estacao-end-time');
+const inputInicio     = document.getElementById('estacao-horario-inicio');
+const inputFim        = document.getElementById('estacao-horario-fim');
 
 function obterReservasEstacoes() {
     return JSON.parse(localStorage.getItem('reservasEstacoes') || '[]');
@@ -70,7 +70,7 @@ function gerarCardsEstacoes() {
                 </div>
                 <div class="estacao-acoes">
                     <span class="badge ${classeBadge}">${textoBadge}</span>
-                    <button class="fast-action-btn open-modal" data-modal="modal-1" ${disabled}>Reservar</button>
+                    <button class="fast-action-btn open-modal" data-modal="modal-reserva-estacao" ${disabled}>Reservar</button>
                 </div>
             </div>`;
     });

@@ -26,7 +26,7 @@
                     <span class="subtitle">Reserve sua mesa para o dia</span>
                 </div>
 
-                <button class="btn-primary open-modal" data-modal="modal-1">
+                <button class="btn-primary open-modal" data-modal="modal-reserva-estacao">
                     + Nova Reserva
                 </button>
             </div>
@@ -50,11 +50,11 @@
         </section>
     </main>
 
-    <dialog id="modal-1">
+    <dialog id="modal-reserva-estacao">
         <form>
             <div class="modal-header">
                 <h3>Nova reserva</h3>
-                <button class="close-modal" data-modal="modal-1" type="button">
+                <button class="close-modal" data-modal="modal-reserva-estacao" type="button">
                     <img src="assets/icons/close-menu.svg" alt="Fechar">
                 </button>
             </div>
@@ -76,25 +76,25 @@
 
                 <div class="input-group">
                     <label>Início</label>
-                    <input type="time" id="estacao-start-time">
+                    <input type="time" id="estacao-horario-inicio">
                 </div>
 
                 <div class="input-group">
                     <label>Fim</label>
-                    <input type="time" id="estacao-end-time">
+                    <input type="time" id="estacao-horario-fim">
                 </div>
 
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="close-modal" data-modal="modal-1">Cancelar</button>
+                <button type="button" class="close-modal" data-modal="modal-reserva-estacao">Cancelar</button>
                 <button type="button" id="btn-confirmar-estacao">Confirmar</button>
             </div>
 
         </form>
     </dialog>
 
-    <div id="toast-container"></div>
+    <div id="container-avisos"></div>
 
     <script src="assets/js/utils.js"></script>
     <script src="assets/js/partes/menu.js"></script>

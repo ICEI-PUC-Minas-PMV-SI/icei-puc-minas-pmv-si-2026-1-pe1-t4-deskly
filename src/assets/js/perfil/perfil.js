@@ -22,7 +22,7 @@ const btnDescartar      = document.querySelector('.btn-detalhes');
 const btnLogout         = document.getElementById('btn-logout');
 const avatarEl          = document.getElementById('perfil-avatar');
 const avatarOverlay     = document.getElementById('avatar-overlay');
-const inputFoto         = document.getElementById('input-foto');
+const inputFoto         = document.getElementById('campo-foto');
 
 if (inputTelefone) {
     inputTelefone.addEventListener('input', () => {

@@ -25,7 +25,7 @@
 
                 <div class="calendar-nav">
                     <button onclick="mudarMes(-1)">&#8249;</button>
-                    <span id="mesLabel"></span>
+                    <span id="rotulo-mes"></span>
                     <button onclick="mudarMes(1)">&#8250;</button>
                 </div>
             </div>
@@ -41,13 +41,13 @@
                     <span>Sáb</span>
                 </div>
 
-                <div id="calendar"></div>
+                <div id="grade-calendario"></div>
             </div>
 
         </section>
     </main>
 
-    <dialog id="viewModal">
+    <dialog id="modal-visualizar">
         <span autofocus style="position:absolute; opacity:0; pointer-events:none;"></span>
         <div class="modal-header">
             <h3 class="modal-title" id="titulo"></h3>
@@ -63,23 +63,23 @@
             </div>
             <div class="detail-row">
                 <span class="detail-label">Responsável</span>
-                <span class="detail-value" id="respView"></span>
+                <span class="detail-value" id="detalhe-responsavel"></span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Capacidade</span>
-                <span class="detail-value" id="capacidadeView"></span>
+                <span class="detail-value" id="detalhe-capacidade"></span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Área / Local</span>
-                <span class="detail-value" id="areaView"></span>
+                <span class="detail-value" id="detalhe-area"></span>
             </div>
             <div class="detail-row">
                 <span class="detail-label">Status</span>
-                <span class="detail-value" id="statusView"></span>
+                <span class="detail-value" id="detalhe-status"></span>
             </div>
 
             <p class="horarios-title">Convidados</p>
-            <div id="listaEmails"></div>
+            <div id="lista-convidados"></div>
         </div>
 
         <div class="modal-footer">

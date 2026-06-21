@@ -166,7 +166,7 @@ main {
     color: #fff;
 }
 
-#input-foto {
+#campo-foto {
     display: none;
 }
 
@@ -304,71 +304,6 @@ main {
     color: var(--color-text-green);
 }
 
-#toast-container {
-    position: fixed;
-    top: var(--spacing-lg, 24px);
-    right: var(--spacing-lg, 24px);
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    z-index: 9999;
-}
-
-.toast {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 260px;
-    max-width: 340px;
-    padding: 14px 18px;
-    border-radius: var(--radius-md);
-    border-left: 4px solid transparent;
-    background-color: var(--color-background);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
-    font: var(--text-sm);
-    color: var(--color-heading);
-    animation: toastEntrar 0.3s ease;
-    transition: opacity 0.35s ease, transform 0.35s ease;
-}
-
-.toast.saindo {
-    opacity: 0;
-    transform: translateY(-10px);
-}
-
-.toast strong {
-    font-weight: 600;
-    font-size: 0.85rem;
-}
-
-.toast span {
-    opacity: 0.8;
-    font-size: 0.8rem;
-}
-
-.toast.sucesso {
-    border-color: var(--color-text-green, #22c55e);
-}
-
-.toast.erro {
-    border-color: #EF4444;
-}
-
-.toast.aviso {
-    border-color: var(--color-btn-primary);
-}
-
-@keyframes toastEntrar {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
 
 @media (max-width: 900px) {
     .perfil-container {

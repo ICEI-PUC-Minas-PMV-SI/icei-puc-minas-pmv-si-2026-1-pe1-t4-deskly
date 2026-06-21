@@ -9,8 +9,8 @@ const inputDataModal         = document.querySelector('.modal-date-input');
 const inputFiltroData        = document.querySelector('.date-input');
 const inputFiltroInicio      = document.querySelector('.filtro-inicio');
 const inputFiltroFim         = document.querySelector('.filtro-fim');
-const inputInicio            = document.getElementById('start-time');
-const inputFim               = document.getElementById('ending-time');
+const inputInicio            = document.getElementById('horario-inicio');
+const inputFim               = document.getElementById('horario-fim');
 
 let convidadosReserva = [];
 let capacidadeReserva = Infinity;
@@ -196,7 +196,7 @@ if (btnAddConvidado) {
 }
 
 function verificarCapacidade() {
-    const limiteMsg = document.getElementById('limite-msg');
+    const limiteMsg = document.getElementById('aviso-limite');
     if (!limiteMsg) return;
     const sala = obterEspacosSistema().find(e => e.tipo === 'Sala de Reunião' && e.nome === selectEspaco.value);
     if (sala) {

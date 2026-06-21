@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const form      = document.querySelector('form');
     const inputEmail = document.getElementById('email');
     const inputNome  = document.getElementById('nome');
-    const inputSenha = document.getElementById('novaSenha');
-    const inputConf  = document.getElementById('confirmarSenha');
+    const inputSenha = document.getElementById('nova-senha');
+    const inputConf  = document.getElementById('confirmar-senha');
 
     const params   = new URLSearchParams(window.location.search);
     const token    = params.get('token')  || '';
@@ -45,11 +45,11 @@ document.addEventListener('DOMContentLoaded', () => {
             <span class="barra-forca" style="flex:1;height:4px;border-radius:2px;background:#E5E7EB;"></span>
             <span class="barra-forca" style="flex:1;height:4px;border-radius:2px;background:#E5E7EB;"></span>
         </div>
-        <span id="forca-texto" style="font-size:0.75rem;color:#6B7280;"></span>`;
+        <span id="texto-forca" style="font-size:0.75rem;color:#6B7280;"></span>`;
     inputSenha.parentElement.appendChild(indicadorWrapper);
 
     const barras     = indicadorWrapper.querySelectorAll('.barra-forca');
-    const forcaTexto = indicadorWrapper.querySelector('#forca-texto');
+    const forcaTexto = indicadorWrapper.querySelector('#texto-forca');
 
     function avaliarForca(senha) {
         let p = 0;

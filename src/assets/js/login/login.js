@@ -1,9 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     garantirAdminDeskly();
 
-    const form        = document.getElementById('formLogin');
+    const form        = document.getElementById('formulario-login');
     const inputEmail  = document.getElementById('email');
-    const inputSenha  = document.getElementById('password');
+    const inputSenha  = document.getElementById('senha');
     const checkLembrar = document.getElementById('lembrar');
 
     const emailSalvo = localStorage.getItem('lembrar_email');

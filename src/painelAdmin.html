@@ -14,7 +14,7 @@
 </head>
 
 <body>
-  <div id="toast-container"></div>
+  <div id="container-avisos"></div>
   <header id="header"></header>
   <aside id="aside"></aside>
   <main>
@@ -212,46 +212,46 @@
     <div class="modal-body">
       <div class="input-group group-spacing">
         <label>Tipo de Espaço</label>
-        <select id="cadastroTipoEspaco">
+        <select id="cadastro-tipo-espaco">
           <option value="">Selecione o tipo...</option>
           <option value="Sala de Reunião">Sala de Reunião</option>
           <option value="Estação de Trabalho">Estação de Trabalho</option>
         </select>
       </div>
-      <div id="camposCadastroEspaco">
+      <div id="campos-cadastro-espaco">
         <div class="input-group group-spacing">
           <label>Nome do Espaço</label>
-          <input type="text" id="cadastroNomeEspaco" maxlength="15">
+          <input type="text" id="cadastro-nome-espaco" maxlength="15">
         </div>
-        <div class="input-group group-spacing" id="grupoLocalizacaoCadastro">
+        <div class="input-group group-spacing" id="grupo-localizacao-cadastro">
           <label>Área / Localização</label>
-          <input type="text" id="cadastroAreaEspaco">
+          <input type="text" id="cadastro-area-espaco">
         </div>
-        <div class="modal-campo-row row-spacing" id="grupoSalaCadastro">
+        <div class="modal-campo-row row-spacing" id="grupo-sala-cadastro">
           <div class="input-group flex-1">
             <label>Capacidade</label>
-            <input type="number" id="cadastroCapacidadeEspaco" min="1" max="15" placeholder="Ex: 8">
+            <input type="number" id="cadastro-capacidade-espaco" min="1" max="15" placeholder="Ex: 8">
           </div>
           <div class="input-group flex-2">
             <label>Recursos</label>
-            <input type="text" id="cadastroRecursosEspaco">
+            <input type="text" id="cadastro-recursos-espaco">
           </div>
         </div>
         <div class="input-group group-spacing">
           <label>Status Inicial</label>
-          <select id="cadastroStatusEspaco">
+          <select id="cadastro-status-espaco">
             <option value="Ativo">Ativo</option>
             <option value="Inativo">Inativo</option>
           </select>
         </div>
         <div class="input-group group-spacing">
           <label>Imagem do Espaço</label>
-          <label class="upload-imagem-label" for="cadastroImagemEspaco">
-            <span id="nomeImagemEspaco">Escolher imagem...</span>
+          <label class="upload-imagem-label" for="cadastro-imagem-espaco">
+            <span id="nome-imagem-espaco">Escolher imagem...</span>
           </label>
-          <input type="file" id="cadastroImagemEspaco" accept="image/*" hidden>
-          <div id="previewCadastroContainer" class="preview-imagem-container" style="display: none;">
-            <img id="previewCadastroImagem" src="" alt="Pré-visualização do espaço">
+          <input type="file" id="cadastro-imagem-espaco" accept="image/*" hidden>
+          <div id="previa-cadastro" class="preview-imagem-container" style="display: none;">
+            <img id="previa-cadastro-imagem" src="" alt="Pré-visualização do espaço">
           </div>
         </div>
       </div>
@@ -264,7 +264,7 @@
   <dialog id="modal-editar-admin">
     <div class="modal-header">
       <h3 class="modal-title">Editar Espaço</h3>
-      <button type="button" class="close-modal" id="fecharModalEditarAdmin">
+      <button type="button" class="close-modal" id="btn-fechar-editar-admin">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="18" y1="6" x2="6" y2="18" />
@@ -273,38 +273,38 @@
       </button>
     </div>
     <div class="modal-body">
-      <input type="hidden" id="editarEspacoId">
+      <input type="hidden" id="editar-espaco-id">
       <div class="input-group">
         <label>Nome do espaço</label>
-        <input type="text" id="editarEspacoNome" maxlength="15">
+        <input type="text" id="editar-espaco-nome" maxlength="15">
       </div>
-      <div class="input-group" id="grupoEditarArea">
+      <div class="input-group" id="grupo-editar-area">
         <label>Área / Localização</label>
-        <input type="text" id="editarEspacoArea">
+        <input type="text" id="editar-espaco-area">
       </div>
-      <div class="input-group" id="grupoEditarCapacidade">
+      <div class="input-group" id="grupo-editar-capacidade">
         <label>Capacidade</label>
-        <input type="number" id="editarEspacoCapacidade" min="1" max="15">
+        <input type="number" id="editar-espaco-capacidade" min="1" max="15">
       </div>
-      <div class="input-group" id="grupoEditarRecursos">
+      <div class="input-group" id="grupo-editar-recursos">
         <label>Recursos</label>
-        <input type="text" id="editarEspacoRecursos">
+        <input type="text" id="editar-espaco-recursos">
       </div>
       <div class="input-group group-spacing" style="margin-top: 14px;">
         <label>Imagem do Espaço</label>
-        <label class="upload-imagem-label" for="editarImagemEspaco">
-          <span id="nomeImagemEspacoEditar">Alterar imagem...</span>
+        <label class="upload-imagem-label" for="editar-imagem-espaco">
+          <span id="nome-imagem-espaco-editar">Alterar imagem...</span>
         </label>
-        <input type="file" id="editarImagemEspaco" accept="image/*" hidden>
-        <div id="previewEditarContainer" class="preview-imagem-container" style="display: none;">
-          <img id="previewEditarImagem" src="" alt="Imagem do espaço">
+        <input type="file" id="editar-imagem-espaco" accept="image/*" hidden>
+        <div id="previa-editar" class="preview-imagem-container" style="display: none;">
+          <img id="previa-editar-imagem" src="" alt="Imagem do espaço">
         </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn-excluir-modal" id="btnExcluirEspacoEditar">Excluir</button>
-      <button type="button" id="cancelarEditarAdmin">Cancelar</button>
-      <button type="button" class="btn-action" id="salvarEditarAdmin">Salvar</button>
+      <button type="button" class="btn-excluir-modal" id="btn-excluir-espaco-editar">Excluir</button>
+      <button type="button" id="btn-cancelar-editar-admin">Cancelar</button>
+      <button type="button" class="btn-action" id="btn-salvar-editar-admin">Salvar</button>
     </div>
   </dialog>
   <dialog id="modal-desativar-espaco">

@@ -1,5 +1,5 @@
-const calendar  = document.getElementById('calendar');
-const mesLabel   = document.getElementById('mesLabel');
+const calendar  = document.getElementById('grade-calendario');
+const mesLabel   = document.getElementById('rotulo-mes');
 
 let reservas = {};
 let mesAtual  = new Date().getMonth();
@@ -121,12 +121,12 @@ function abrirView(dia, index) {
         ${dados.area ? `<br><small style="color:var(--color-text-md);font-size:13px;font-weight:normal;">${dados.area}</small>` : ''}`;
 
     document.getElementById('horario').innerText       = `${reserva.inicio} - ${reserva.fim}`;
-    document.getElementById('respView').innerText      = reserva.responsavel || '-';
-    document.getElementById('capacidadeView').innerText = `${capacidade} pessoas`;
-    document.getElementById('areaView').innerText      = area;
-    document.getElementById('statusView').innerText    = reserva.status;
+    document.getElementById('detalhe-responsavel').innerText      = reserva.responsavel || '-';
+    document.getElementById('detalhe-capacidade').innerText = `${capacidade} pessoas`;
+    document.getElementById('detalhe-area').innerText      = area;
+    document.getElementById('detalhe-status').innerText    = reserva.status;
 
-    const listaEmails = document.getElementById('listaEmails');
+    const listaEmails = document.getElementById('lista-convidados');
     listaEmails.innerHTML = '';
     if (reserva.emails && reserva.emails !== '-') {
         reserva.emails.split(',').forEach(email => {
@@ -137,11 +137,11 @@ function abrirView(dia, index) {
         });
     }
 
-    document.getElementById('viewModal').showModal();
+    document.getElementById('modal-visualizar').showModal();
 }
 
 function fecharView() {
-    document.getElementById('viewModal').close();
+    document.getElementById('modal-visualizar').close();
 }
 
 window.addEventListener('storage', renderCalendar);
