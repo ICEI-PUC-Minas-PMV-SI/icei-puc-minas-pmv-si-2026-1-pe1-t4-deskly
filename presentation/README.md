@@ -4,7 +4,7 @@ Esta seção reúne um resumo de todo o processo de desenvolvimento do projeto *
 
 Os arquivos produzidos estão listados a seguir, com suas respectivas localizações e descrição do conteúdo:
 
-* [Apresentação final](./Apresentacao_Deskly_Final.pdf) — | [Visualizar no Google Drive](https://drive.google.com/file/d/1911MaZJDlyPGSKNoI8atYeRxIVDTbHKL/view?usp=drive_link) slides da apresentação final do projeto, contemplando marca, time, contexto, objetivo, justificativa, personas, template visual e funcionalidades do sistema.
+* [Apresentação final](./Apresentacao_Deskly_Final.pdf) | [Visualizar no Google Drive](https://drive.google.com/file/d/1911MaZJDlyPGSKNoI8atYeRxIVDTbHKL/view?usp=drive_link) — slides da apresentação final do projeto, contemplando marca, time, contexto, objetivo, justificativa, personas, template visual e funcionalidades do sistema.
 * [Vídeo de demonstração](https://youtu.be/a3iM2SkVwhs?si=cp6hEKUnkbn6M1V_) — vídeo com a demonstração do funcionamento do sistema Deskly.
 * [GitHub Pages](https://icei-puc-minas-pmv-si.github.io/icei-puc-minas-pmv-si-2026-1-pe1-t4-deskly/src/) — versão publicada do sistema para acesso e validação das funcionalidades.
 
