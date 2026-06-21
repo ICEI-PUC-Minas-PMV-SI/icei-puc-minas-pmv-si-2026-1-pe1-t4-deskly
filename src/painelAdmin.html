@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="pt-br">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="assets/images/Deskly.jpeg" />
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self' http://127.0.0.1:5500; connect-src 'self' http://127.0.0.1:5500 https://api.emailjs.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://www.gstatic.com https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src 'self' https://fonts.gstatic.com; img-src 'self' http://127.0.0.1:5500 blob: data:;">
   <title>Painel Admin</title>
@@ -10,6 +12,7 @@
   <link rel="stylesheet" href="assets/css/global/global.css" />
   <link rel="stylesheet" href="assets/css/pages/painelAdmin/painelAdmin.css" />
 </head>
+
 <body>
   <div id="toast-container"></div>
   <header id="header"></header>
@@ -164,7 +167,8 @@
     </div>
     <div class="modal-confirmacao-footer">
       <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-confirmacao">Cancelar</button>
-      <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Cancelar reserva</button>
+      <button type="button" class="modal-confirmacao-btn-confirmar" id="btn-confirmar-exclusao">Cancelar
+        reserva</button>
     </div>
   </dialog>
   <dialog id="modal-excluir-espaco">
@@ -186,7 +190,8 @@
           <span class="modal-confirmacao-valor" id="modal-excluir-espaco-nome"></span>
         </div>
       </div>
-      <p class="modal-confirmacao-aviso">Esta ação não pode ser desfeita. Reservas ativas serão canceladas e os usuários notificados.</p>
+      <p class="modal-confirmacao-aviso">Esta ação não pode ser desfeita. Reservas ativas serão canceladas e os usuários
+        notificados.</p>
     </div>
     <div class="modal-confirmacao-footer">
       <button type="button" class="modal-confirmacao-btn-cancelar" data-modal="modal-excluir-espaco">Cancelar</button>
@@ -245,6 +250,9 @@
             <span id="nomeImagemEspaco">Escolher imagem...</span>
           </label>
           <input type="file" id="cadastroImagemEspaco" accept="image/*" hidden>
+          <div id="previewCadastroContainer" class="preview-imagem-container" style="display: none;">
+            <img id="previewCadastroImagem" src="" alt="Pré-visualização do espaço">
+          </div>
         </div>
       </div>
     </div>
@@ -281,6 +289,16 @@
       <div class="input-group" id="grupoEditarRecursos">
         <label>Recursos</label>
         <input type="text" id="editarEspacoRecursos">
+      </div>
+      <div class="input-group group-spacing" style="margin-top: 14px;">
+        <label>Imagem do Espaço</label>
+        <label class="upload-imagem-label" for="editarImagemEspaco">
+          <span id="nomeImagemEspacoEditar">Alterar imagem...</span>
+        </label>
+        <input type="file" id="editarImagemEspaco" accept="image/*" hidden>
+        <div id="previewEditarContainer" class="preview-imagem-container" style="display: none;">
+          <img id="previewEditarImagem" src="" alt="Imagem do espaço">
+        </div>
       </div>
     </div>
     <div class="modal-footer">
@@ -369,9 +387,7 @@
       <div class="input-group">
         <label for="convidar-email">E-mail do colaborador</label>
         <input type="email" id="convidar-email" placeholder="colaborador@empresa.com" autocomplete="off" />
-        <span class="msg-erro-modal" id="erro-convidar-email">
-          Informe um e-mail válido.
-        </span>
+        <span class="msg-erro-modal" id="erro-convidar-email">Informe um e-mail válido.</span>
       </div>
       <div class="input-group">
         <label for="convidar-perfil">Nível de acesso</label>
@@ -380,9 +396,7 @@
           <option value="Usuário">Usuário — pode fazer reservas</option>
           <option value="Admin">Admin — acesso total ao painel</option>
         </select>
-        <span class="msg-erro-modal" id="erro-convidar-perfil">
-          Selecione um perfil.
-        </span>
+        <span class="msg-erro-modal" id="erro-convidar-perfil">Selecione um perfil.</span>
       </div>
     </div>
     <div class="modal-footer">
@@ -448,21 +462,22 @@
   <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
   <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/pt.js"></script>
   <script>
-  flatpickr('.date-input', {
-    locale: 'pt',
-    dateFormat: 'd/m/Y',
-    disableMobile: true,
-    placeholder: 'dd/mm/aaaa',
-    monthSelectorType: 'static'
-  });
-  flatpickr('.modal-date-input', {
-    locale: 'pt',
-    dateFormat: 'd/m/Y',
-    disableMobile: true,
-    placeholder: 'dd/mm/aaaa',
-    monthSelectorType: 'static',
-    static: true
-  });
+    flatpickr('.date-input', {
+      locale: 'pt',
+      dateFormat: 'd/m/Y',
+      disableMobile: true,
+      placeholder: 'dd/mm/aaaa',
+      monthSelectorType: 'static'
+    });
+    flatpickr('.modal-date-input', {
+      locale: 'pt',
+      dateFormat: 'd/m/Y',
+      disableMobile: true,
+      placeholder: 'dd/mm/aaaa',
+      monthSelectorType: 'static',
+      static: true
+    });
   </script>
 </body>
+
 </html>

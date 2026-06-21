@@ -658,14 +658,16 @@ main {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 0 16px; 
-        gap: 50px;       
+        padding: 0 16px;
+        gap: 50px;
     }
 
-    .header-actions, .nav-actions, .user-menu { 
+    .header-actions,
+    .nav-actions,
+    .user-menu {
         display: flex;
         align-items: center;
-        gap: 12px;      
+        gap: 12px;
     }
 
     .logo {
@@ -809,7 +811,7 @@ main {
         border-top: none;
         font-size: 0.8125rem;
         white-space: normal;
-        gap: 16px; 
+        gap: 16px;
     }
 
     .tabela-reservas td {
@@ -821,16 +823,16 @@ main {
         font-weight: 600;
         color: var(--color-heading);
         font-size: 0.75rem;
-        flex-shrink: 0; 
+        flex-shrink: 0;
         text-align: left;
     }
 
     .tabela-reservas td {
         display: flex;
     }
-    
+
     .tabela-reservas td {
-        word-break: keep-all; 
+        word-break: keep-all;
         white-space: normal;
     }
 
@@ -919,6 +921,30 @@ main {
 .upload-imagem-label:hover {
     border-color: var(--color-heading);
     color: var(--color-heading);
+}
+
+.preview-imagem-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 12px;
+    padding: 8px;
+    border: 1px solid var(--color-border-card);
+    border-radius: var(--radius-md);
+    max-width: 100%;
+    width: 100%;
+    height: 140px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.preview-imagem-container img {
+    max-width: 100%;
+    max-height: 120px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: var(--radius-md);
 }
 
 #grupoEstacaoCadastro {
@@ -1221,8 +1247,8 @@ button.btn-detalhes-usuario:disabled {
     border: none;
     border-radius: 12px;
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    width: 440px; 
-    max-width: 95vw; 
+    width: 440px;
+    max-width: 95vw;
     background: var(--color-background);
 }
 
@@ -1374,7 +1400,7 @@ button.btn-detalhes-usuario:disabled {
     }
 
     #modal-detalhes-usuario {
-        width: calc(100vw - 32px); 
+        width: calc(100vw - 32px);
     }
 
     .toast {
