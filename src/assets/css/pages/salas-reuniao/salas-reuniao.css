@@ -444,13 +444,12 @@ button.btn-reservar:disabled {
     color: var(--color-background);
 }
 
-#modal-reserva,
-#modal-detalhes {
+/* overflow:visible apenas no modal-reserva, para o flatpickr aparecer fora do body */
+#modal-reserva {
     overflow: visible;
 }
 
-#modal-reserva .modal-body,
-#modal-detalhes .modal-body {
+#modal-reserva .modal-body {
     overflow: visible;
 }
 
@@ -458,6 +457,20 @@ button.btn-reservar:disabled {
     max-height: 180px;
     overflow-y: auto;
 }
+
+/* modal-detalhes: scroll interno + altura máxima */
+#modal-detalhes[open] {
+    display: flex;
+    flex-direction: column;
+    max-height: 90dvh;
+}
+
+#modal-detalhes .modal-body {
+    overflow-y: auto;
+    flex: 1;
+}
+
+.modal-detalhe-valor.status-disponivel { color: var(--color-text-green); }
 
 .reserva-contador {
     font-size: 13px;

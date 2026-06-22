@@ -389,7 +389,7 @@ function abrirModalDetalhes(card) {
 
     const statusEl = document.getElementById('detalhes-status');
     statusEl.textContent = badge.textContent.trim();
-    statusEl.className   = 'detail-value';
+    statusEl.className   = 'modal-detalhe-valor';
     if (badge.classList.contains('disponivel')) statusEl.classList.add('status-disponivel');
     else if (badge.classList.contains('ocupada')) statusEl.classList.add('status-ocupada');
     else statusEl.classList.add('status-inativa');
