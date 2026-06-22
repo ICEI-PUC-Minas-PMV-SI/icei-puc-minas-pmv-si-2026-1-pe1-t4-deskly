@@ -1,9 +1,10 @@
-const EMAILJS_SERVICE_ID  = 'service_u5f1c5k';
+const EMAILJS_SERVICE_ID = 'service_u5f1c5k';
 const EMAILJS_TEMPLATE_ID = 'template_gejyh7t';
-const EMAILJS_PUBLIC_KEY  = '2kT0EfswhdPo4tzq7';
+const EMAILJS_PUBLIC_KEY = '2kT0EfswhdPo4tzq7';
 
 document.addEventListener('DOMContentLoaded', () => {
-    try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch (_) {}
+    if (!exigirAdmin()) return;
+    try { emailjs.init(EMAILJS_PUBLIC_KEY); } catch (_) { }
     garantirAdminDeskly();
     carregarUsuarios();
     inicializarConvite();
@@ -16,11 +17,11 @@ function carregarUsuarios(filtro = '') {
     if (!tbody) return;
 
     const filtroLower = filtro.toLowerCase().trim();
-    const usuarios    = obterUsuarios();
-    const visiveis    = filtroLower === ''
+    const usuarios = obterUsuarios();
+    const visiveis = filtroLower === ''
         ? usuarios
         : usuarios.filter(u =>
-            (u.nome  || '').toLowerCase().includes(filtroLower) ||
+            (u.nome || '').toLowerCase().includes(filtroLower) ||
             (u.email || '').toLowerCase().includes(filtroLower)
         );
 
@@ -119,7 +120,7 @@ function carregarUsuarios(filtro = '') {
 
 function inicializarBuscaUsuario() {
     const inputBusca = document.querySelector('.input-busca');
-    const btnBusca   = document.getElementById('btn-buscar-usuario');
+    const btnBusca = document.getElementById('btn-buscar-usuario');
 
     inputBusca?.addEventListener('keydown', e => {
         if (e.key === 'Enter') carregarUsuarios(inputBusca.value.trim());
@@ -135,11 +136,11 @@ function inicializarConvite() {
     if (!btnConfirmar) return;
 
     btnConfirmar.addEventListener('click', async () => {
-        const modal       = document.getElementById('modal-convidar-usuario');
-        const emailInput  = document.getElementById('convidar-email')  || modal.querySelectorAll('input')[0];
+        const modal = document.getElementById('modal-convidar-usuario');
+        const emailInput = document.getElementById('convidar-email') || modal.querySelectorAll('input')[0];
         const perfilInput = document.getElementById('convidar-perfil') || modal.querySelectorAll('select')[0] || modal.querySelectorAll('input')[1];
 
-        const email  = emailInput?.value.trim().toLowerCase();
+        const email = emailInput?.value.trim().toLowerCase();
         const perfil = perfilInput?.value.trim();
 
         let valido = true;
@@ -165,7 +166,7 @@ function inicializarConvite() {
         usuarios.push({ id: Date.now(), nome: '', email, senha: '', perfil, token, senhaDefinida: false, dataCriacao: new Date().toISOString(), foto: '' });
         salvarUsuarios(usuarios);
         document.getElementById('modal-convidar-usuario')?.close();
-        if (emailInput)  emailInput.value  = '';
+        if (emailInput) emailInput.value = '';
         if (perfilInput) perfilInput.value = '';
         carregarUsuarios();
         await enviarConvitePorEmail(email, false);
@@ -174,7 +175,7 @@ function inicializarConvite() {
 
 async function enviarConvitePorEmail(email, reenvio = false) {
     const usuarios = obterUsuarios();
-    const usuario  = usuarios.find(u => u.email === email);
+    const usuario = usuarios.find(u => u.email === email);
     if (!usuario) return;
 
     if (reenvio) {
@@ -183,7 +184,7 @@ async function enviarConvitePorEmail(email, reenvio = false) {
     }
 
     const pasta = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-    const link  = `${window.location.origin}${pasta}primeiro-acesso.html?token=${usuario.token}`;
+    const link = `${window.location.origin}${pasta}primeiro-acesso.html?token=${usuario.token}`;
 
     const perfilLabel = usuario.perfil === 'Admin'
         ? 'Administrador — acesso total ao sistema'
@@ -203,24 +204,24 @@ function abrirModalDetalhes(btn) {
     const modal = document.getElementById('modal-detalhes-usuario');
     if (!modal) { console.error("Modal 'modal-detalhes-usuario' não encontrado no HTML."); return; }
 
-    const id      = btn.getAttribute('data-id') || '';
+    const id = btn.getAttribute('data-id') || '';
     const usuario = obterUsuarios().find(u => String(u.id) === String(id));
     if (!usuario) return;
 
-    const inputNome  = document.getElementById('detalhe-usuario-nome');
+    const inputNome = document.getElementById('detalhe-usuario-nome');
     const inputEmail = document.getElementById('detalhe-usuario-email');
     const inputDepto = document.getElementById('detalhe-usuario-departamento');
-    const inputTel   = document.getElementById('detalhe-usuario-telefone');
+    const inputTel = document.getElementById('detalhe-usuario-telefone');
 
-    if (inputNome)  inputNome.value  = usuario.nome          || '—';
-    if (inputEmail) inputEmail.value = usuario.email         || '—';
-    if (inputDepto) inputDepto.value = usuario.departamento  || 'Não informado';
-    if (inputTel)   inputTel.value   = usuario.telefone      || 'Não informado';
+    if (inputNome) inputNome.value = usuario.nome || '—';
+    if (inputEmail) inputEmail.value = usuario.email || '—';
+    if (inputDepto) inputDepto.value = usuario.departamento || 'Não informado';
+    if (inputTel) inputTel.value = usuario.telefone || 'Não informado';
 
     const badgeModal = document.getElementById('detalhe-usuario-perfil');
     if (badgeModal) {
         badgeModal.textContent = usuario.perfil || 'Usuário';
-        badgeModal.className   = 'badge ' + (usuario.perfil === 'Admin' ? 'disponivel' : 'ocupado');
+        badgeModal.className = 'badge ' + (usuario.perfil === 'Admin' ? 'disponivel' : 'ocupado');
     }
 
     const avatarPlaceholder = document.getElementById('detalhe-usuario-avatar');
@@ -256,20 +257,20 @@ function configurarModalDetalhes() {
 
 function abrirModalRemover(email, nome) {
     const usuarios = obterUsuarios();
-    const usuario  = usuarios.find(u => u.email === email);
+    const usuario = usuarios.find(u => u.email === email);
 
     if (usuario?.protegido) {
         mostrarToast('Ação não permitida', 'O administrador principal não pode ser removido.', 'erro');
         return;
     }
 
-    const modal  = document.getElementById('modal-remover-usuario');
+    const modal = document.getElementById('modal-remover-usuario');
     const nomeEl = modal?.querySelector('.modal-remover-nome');
     if (nomeEl) nomeEl.textContent = nome;
     modal?.showModal();
 
     const btnAntigo = document.getElementById('btn-confirmar-remover');
-    const btnNovo   = btnAntigo.cloneNode(true);
+    const btnNovo = btnAntigo.cloneNode(true);
     btnAntigo.parentNode.replaceChild(btnNovo, btnAntigo);
 
     btnNovo.addEventListener('click', () => {

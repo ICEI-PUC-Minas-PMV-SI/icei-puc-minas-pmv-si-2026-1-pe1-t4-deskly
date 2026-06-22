@@ -1,10 +1,3 @@
-// ============================================================
-// utils.js — Utilitários globais compartilhados
-// Carregue este arquivo antes de qualquer script de página.
-// ============================================================
-
-// --- STORAGE: USUÁRIOS ---
-
 function obterUsuarios() {
     return JSON.parse(localStorage.getItem('usuarios') || '[]');
 }
@@ -17,8 +10,6 @@ function obterUsuarioLogado() {
     return JSON.parse(localStorage.getItem('usuarioLogado') || 'null');
 }
 
-// --- STORAGE: ESPAÇOS ---
-
 function obterEspacosSistema() {
     return JSON.parse(localStorage.getItem('espacosSistema') || '[]');
 }
@@ -27,8 +18,6 @@ function salvarEspacosSistema(espacos) {
     localStorage.setItem('espacosSistema', JSON.stringify(espacos));
 }
 
-// --- STORAGE: RESERVAS ---
-
 function obterReservasSistema() {
     return JSON.parse(localStorage.getItem('reservasSistema') || '[]');
 }
@@ -36,8 +25,6 @@ function obterReservasSistema() {
 function salvarReservasSistema(reservas) {
     localStorage.setItem('reservasSistema', JSON.stringify(reservas));
 }
-
-// --- TOAST ---
 
 function mostrarToast(titulo, mensagem, tipo = 'aviso') {
     const container = document.getElementById('container-avisos');
@@ -59,8 +46,6 @@ function mostrarToast(titulo, mensagem, tipo = 'aviso') {
     setTimeout(() => toast.remove(), 4000);
 }
 
-// --- FORMULÁRIO ---
-
 function marcarCampoInvalido(campo) {
     if (!campo) return;
     campo.classList.add('campo-invalido');
@@ -72,8 +57,6 @@ function marcarCampoInvalido(campo) {
     campo.addEventListener('input', limpar);
     campo.addEventListener('change', limpar);
 }
-
-// --- DATA E HORA ---
 
 function parsearData(str) {
     if (!str) return null;
@@ -99,7 +82,24 @@ function horariosConflitam(inicio1, fim1, inicio2, fim2) {
            converterHorarioParaMinutos(fim1)   > converterHorarioParaMinutos(inicio2);
 }
 
-// --- AUTH ---
+function exigirLogin() {
+    const usuario = obterUsuarioLogado();
+    if (!usuario) {
+        window.location.replace('login.html');
+        return null;
+    }
+    return usuario;
+}
+
+function exigirAdmin() {
+    const usuario = exigirLogin();
+    if (!usuario) return null;
+    if (usuario.perfil !== 'Admin') {
+        window.location.replace('dashboard.html');
+        return null;
+    }
+    return usuario;
+}
 
 function garantirAdminDeskly() {
     const usuarios = obterUsuarios();
@@ -125,8 +125,6 @@ function garantirAdminDeskly() {
     if (!admin.foto || admin.foto.includes('foto_padrao')) { admin.foto = foto; mudou = true; }
     if (mudou) salvarUsuarios(usuarios);
 }
-
-// --- UI: TOGGLE SENHA ---
 
 const _SVG_OLHO_ABERTO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>`;
 const _SVG_OLHO_FECHADO = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/><path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/><line x1="1" y1="1" x2="23" y2="23"/></svg>`;
@@ -160,8 +158,6 @@ function adicionarToggleSenha(input) {
     requestAnimationFrame(atualizarPosicao);
 }
 
-// --- INDEXEDDB ---
-
 const _DB = { nome: 'perfilDB', versao: 1, store: 'fotos' };
 
 function abrirDB() {
@@ -189,8 +185,6 @@ function carregarFotoDB(chave) {
     }));
 }
 
-// --- IMAGEM ---
-
 function comprimirImagem(file, callback) {
     const reader = new FileReader();
     reader.onload = e => {
@@ -208,9 +202,6 @@ function comprimirImagem(file, callback) {
     };
     reader.readAsDataURL(file);
 }
-
-// --- CUSTOM SELECT ---
-// Inicializa automaticamente todos os .custom-select do documento.
 
 document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.custom-select').forEach(select => {

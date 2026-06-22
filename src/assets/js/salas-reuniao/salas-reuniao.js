@@ -1,16 +1,20 @@
-const btnNovaReserva         = document.querySelector('.botao-add-sala');
-const btnConfirmar           = document.getElementById('btn-confirmar-reserva');
-const btnFiltrar             = document.querySelector('.btn-filtrar-simples');
+document.addEventListener('DOMContentLoaded', () => {
+    if (!exigirLogin()) return;
+});
+
+const btnNovaReserva = document.querySelector('.botao-add-sala');
+const btnConfirmar = document.getElementById('btn-confirmar-reserva');
+const btnFiltrar = document.querySelector('.btn-filtrar-simples');
 const btnReservarDosDetalhes = document.getElementById('btn-reservar-dos-detalhes');
-const modalReserva           = document.getElementById('modal-reserva');
-const modalDetalhes          = document.getElementById('modal-detalhes');
-const selectEspaco           = document.getElementById('espaco');
-const inputDataModal         = document.querySelector('.modal-date-input');
-const inputFiltroData        = document.querySelector('.date-input');
-const inputFiltroInicio      = document.querySelector('.filtro-inicio');
-const inputFiltroFim         = document.querySelector('.filtro-fim');
-const inputInicio            = document.getElementById('horario-inicio');
-const inputFim               = document.getElementById('horario-fim');
+const modalReserva = document.getElementById('modal-reserva');
+const modalDetalhes = document.getElementById('modal-detalhes');
+const selectEspaco = document.getElementById('espaco');
+const inputDataModal = document.querySelector('.modal-date-input');
+const inputFiltroData = document.querySelector('.date-input');
+const inputFiltroInicio = document.querySelector('.filtro-inicio');
+const inputFiltroFim = document.querySelector('.filtro-fim');
+const inputInicio = document.getElementById('horario-inicio');
+const inputFim = document.getElementById('horario-fim');
 
 let convidadosReserva = [];
 let capacidadeReserva = Infinity;
@@ -82,10 +86,10 @@ function gerarCardsSalasDoSistema() {
     }
 
     salas.forEach(sala => {
-        const classeBadge = sala.status === 'Inativo' ? 'inativa'    : 'disponivel';
-        const textoBadge  = sala.status === 'Inativo' ? 'Inativa'    : 'Disponível';
-        const disabled    = sala.status === 'Inativo' ? 'disabled'   : '';
-        const imagem      = imagemPadraoSala(sala);
+        const classeBadge = sala.status === 'Inativo' ? 'inativa' : 'disponivel';
+        const textoBadge = sala.status === 'Inativo' ? 'Inativa' : 'Disponível';
+        const disabled = sala.status === 'Inativo' ? 'disabled' : '';
+        const imagem = imagemPadraoSala(sala);
 
         container.innerHTML += `
             <article class="card-sala"
@@ -116,7 +120,7 @@ function atualizarSelectSalas() {
     selectEspaco.innerHTML = `<option value="">Selecione o local</option>`;
     salas.forEach(sala => {
         const opt = document.createElement('option');
-        opt.value       = sala.nome;
+        opt.value = sala.nome;
         opt.textContent = `${sala.nome} – cap. ${sala.capacidade}`;
         selectEspaco.appendChild(opt);
     });
@@ -130,18 +134,18 @@ function salvarReservaNoSistema(reserva) {
     }
     const lista = obterReservasSistema();
     lista.unshift({
-        id:               reserva.id,
-        usuarioId:        usuarioLogado.id,
-        usuario:          usuarioLogado.nome,
-        tipo:             'Sala de Reunião',
-        espaco:           reserva.sala,
-        data:             reserva.data,
-        inicio:           reserva.inicio,
-        fim:              reserva.fim,
-        horario:          `${reserva.inicio} – ${reserva.fim}`,
-        convidados:       reserva.convidados || '-',
+        id: reserva.id,
+        usuarioId: usuarioLogado.id,
+        usuario: usuarioLogado.nome,
+        tipo: 'Sala de Reunião',
+        espaco: reserva.sala,
+        data: reserva.data,
+        inicio: reserva.inicio,
+        fim: reserva.fim,
+        horario: `${reserva.inicio} – ${reserva.fim}`,
+        convidados: reserva.convidados || '-',
         convidadosStatus: reserva.convidadosStatus || {},
-        status:           'Confirmada'
+        status: 'Confirmada'
     });
     salvarReservasSistema(lista);
 }
@@ -183,7 +187,7 @@ if (btnAddConvidado) {
             return;
         }
         const select = document.getElementById('reserva-novo-convidado');
-        const email  = select.value;
+        const email = select.value;
         if (!email) return;
         if (capacidadeReserva !== Infinity && convidadosReserva.length >= capacidadeReserva) {
             mostrarToast('Capacidade máxima', `Limite de ${capacidadeReserva} convidados atingido.`, 'erro');
@@ -214,16 +218,16 @@ function verificarCapacidade() {
 
 if (btnConfirmar) {
     btnConfirmar.addEventListener('click', () => {
-        const sala   = selectEspaco.value;
-        const data   = inputDataModal.value;
+        const sala = selectEspaco.value;
+        const data = inputDataModal.value;
         const inicio = inputInicio.value;
-        const fim    = inputFim.value;
+        const fim = inputFim.value;
 
         if (!sala || !data || !inicio || !fim) {
-            if (!sala)   marcarCampoInvalido(selectEspaco);
-            if (!data)   marcarCampoInvalido(inputDataModal);
+            if (!sala) marcarCampoInvalido(selectEspaco);
+            if (!data) marcarCampoInvalido(inputDataModal);
             if (!inicio) marcarCampoInvalido(inputInicio);
-            if (!fim)    marcarCampoInvalido(inputFim);
+            if (!fim) marcarCampoInvalido(inputFim);
             mostrarToast('Campos obrigatórios', 'Preencha todos os campos da reserva.', 'erro');
             return;
         }
@@ -242,7 +246,7 @@ if (btnConfirmar) {
             return;
         }
 
-        const salaSelecionada  = obterEspacosSistema().find(e => e.tipo === 'Sala de Reunião' && e.nome === sala);
+        const salaSelecionada = obterEspacosSistema().find(e => e.tipo === 'Sala de Reunião' && e.nome === sala);
         const limiteConvidados = (salaSelecionada && Number(salaSelecionada.capacidade) >= 1)
             ? Number(salaSelecionada.capacidade) - 1
             : Infinity;
@@ -276,14 +280,14 @@ if (btnConfirmar) {
         convidadosReserva.forEach(email => { convidadosStatusObj[email] = 'pendente'; });
 
         const novaReserva = {
-            id:               Date.now(),
-            usuarioId:        usuarioLogado.id,
-            usuario:          usuarioLogado.nome,
+            id: Date.now(),
+            usuarioId: usuarioLogado.id,
+            usuario: usuarioLogado.nome,
             sala,
             data,
             inicio,
             fim,
-            convidados:       convidadosReserva.join(', ') || '-',
+            convidados: convidadosReserva.join(', ') || '-',
             convidadosStatus: convidadosStatusObj
         };
 
@@ -311,11 +315,11 @@ if (btnConfirmar) {
         mostrarToast('Reserva confirmada', 'Sua reserva foi realizada com sucesso!', 'sucesso');
 
         inputDataModal.value = '';
-        inputInicio.value    = '';
-        inputFim.value       = '';
-        convidadosReserva    = [];
-        capacidadeReserva    = Infinity;
-        selectEspaco.value   = '';
+        inputInicio.value = '';
+        inputFim.value = '';
+        convidadosReserva = [];
+        capacidadeReserva = Infinity;
+        selectEspaco.value = '';
         renderizarConvidadosReserva();
         verificarCapacidade();
         modalReserva.close();
@@ -324,9 +328,9 @@ if (btnConfirmar) {
 
 if (btnFiltrar) {
     btnFiltrar.addEventListener('click', () => {
-        const dataFiltro   = inputFiltroData.value;
+        const dataFiltro = inputFiltroData.value;
         const inicioFiltro = inputFiltroInicio.value;
-        const fimFiltro    = inputFiltroFim.value;
+        const fimFiltro = inputFiltroFim.value;
 
         if (!dataFiltro || !inicioFiltro || !fimFiltro) {
             mostrarToast('Filtro incompleto', 'Preencha a data, horário inicial e horário final.', 'erro');
@@ -344,29 +348,29 @@ if (btnFiltrar) {
 function aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro) {
     const reservas = obterReservasSalas();
     document.querySelectorAll('.card-sala').forEach(card => {
-        const badge      = card.querySelector('.badge');
+        const badge = card.querySelector('.badge');
         const btnReservar = card.querySelector('.btn-reservar');
 
         if (card.dataset.inativa === 'true') {
             badge.textContent = 'Inativa';
-            badge.className   = 'badge inativa';
+            badge.className = 'badge inativa';
             if (btnReservar) btnReservar.disabled = true;
             return;
         }
 
         const nomeSala = card.dataset.sala;
-        const ocupada  = reservas.some(r =>
+        const ocupada = reservas.some(r =>
             r.sala === nomeSala && r.data === dataFiltro &&
             horariosConflitam(inicioFiltro, fimFiltro, r.inicio, r.fim)
         );
 
         if (ocupada) {
             badge.textContent = 'Ocupada';
-            badge.className   = 'badge ocupada';
+            badge.className = 'badge ocupada';
             if (btnReservar) btnReservar.disabled = true;
         } else {
             badge.textContent = 'Disponível';
-            badge.className   = 'badge disponivel';
+            badge.className = 'badge disponivel';
             if (btnReservar) btnReservar.disabled = false;
         }
     });
@@ -374,14 +378,14 @@ function aplicarFiltro(dataFiltro, inicioFiltro, fimFiltro) {
 
 function abrirModalDetalhes(card) {
     const nomeSala = card.dataset.sala;
-    const badge    = card.querySelector('.badge');
+    const badge = card.querySelector('.badge');
     const salaDados = obterEspacosSistema().find(e => e.tipo === 'Sala de Reunião' && e.nome === nomeSala);
     if (!salaDados) return;
 
-    document.getElementById('detalhes-titulo').textContent    = salaDados.nome;
-    document.getElementById('detalhes-tipo').textContent      = salaDados.tipo;
-    document.getElementById('detalhes-nome').textContent      = salaDados.nome;
-    document.getElementById('detalhes-recursos').textContent  = salaDados.recursos;
+    document.getElementById('detalhes-titulo').textContent = salaDados.nome;
+    document.getElementById('detalhes-tipo').textContent = salaDados.tipo;
+    document.getElementById('detalhes-nome').textContent = salaDados.nome;
+    document.getElementById('detalhes-recursos').textContent = salaDados.recursos;
     document.getElementById('detalhes-capacidade').textContent =
         salaDados.capacidade !== '-' ? `${salaDados.capacidade} pessoas` : '—';
     document.getElementById('detalhes-area').textContent =
@@ -389,7 +393,7 @@ function abrirModalDetalhes(card) {
 
     const statusEl = document.getElementById('detalhes-status');
     statusEl.textContent = badge.textContent.trim();
-    statusEl.className   = 'detail-value';
+    statusEl.className = 'detail-value';
     if (badge.classList.contains('disponivel')) statusEl.classList.add('status-disponivel');
     else if (badge.classList.contains('ocupada')) statusEl.classList.add('status-ocupada');
     else statusEl.classList.add('status-inativa');
@@ -428,8 +432,8 @@ if (btnReservarDosDetalhes) {
 function preencherSelectComSala(nomeSala) {
     if (!selectEspaco) return;
     selectEspaco.value = nomeSala;
-    convidadosReserva  = [];
-    capacidadeReserva  = Infinity;
+    convidadosReserva = [];
+    capacidadeReserva = Infinity;
     renderizarConvidadosReserva();
     verificarCapacidade();
 }
@@ -446,22 +450,22 @@ function restaurarSelectCompleto() {
 function aplicarStatusEspacosSalas() {
     const espacos = obterEspacosSistema();
     document.querySelectorAll('.card-sala').forEach(card => {
-        const nomeSala   = card.dataset.sala;
-        const espaco     = espacos.find(e => e.tipo === 'Sala de Reunião' && e.nome === nomeSala);
+        const nomeSala = card.dataset.sala;
+        const espaco = espacos.find(e => e.tipo === 'Sala de Reunião' && e.nome === nomeSala);
         if (!espaco) return;
 
-        const badge      = card.querySelector('.badge');
+        const badge = card.querySelector('.badge');
         const btnReservar = card.querySelector('.btn-reservar');
         const btnDetalhes = card.querySelector('.btn-detalhes');
 
         if (espaco.status === 'Inativo') {
             card.dataset.inativa = 'true';
-            if (badge)       { badge.textContent = 'Inativa'; badge.className = 'badge inativa'; }
+            if (badge) { badge.textContent = 'Inativa'; badge.className = 'badge inativa'; }
             if (btnReservar) btnReservar.disabled = true;
             if (btnDetalhes) btnDetalhes.disabled = true;
         } else {
             card.dataset.inativa = 'false';
-            if (badge)       { badge.textContent = 'Disponível'; badge.className = 'badge disponivel'; }
+            if (badge) { badge.textContent = 'Disponível'; badge.className = 'badge disponivel'; }
             if (btnReservar) btnReservar.disabled = false;
             if (btnDetalhes) btnDetalhes.disabled = false;
         }

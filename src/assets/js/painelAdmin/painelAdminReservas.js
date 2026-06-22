@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+    if (!exigirAdmin()) return;
+});
+
 function classeStatusReserva(status) {
     const mapa = { 'Confirmada': 'badge-confirmada', 'Cancelada': 'badge-cancelada', 'Concluída': 'badge-concluida' };
     return mapa[status] || 'badge-concluida';
@@ -104,8 +108,8 @@ function capacidadeOk(nomeEspaco, faixa) {
     if (faixa === 'todos' || !faixa) return true;
     const cap = capacidadeEspaco(nomeEspaco);
     if (cap === null) return false;
-    if (faixa === '4')  return cap <= 4;
-    if (faixa === '8')  return cap > 4 && cap <= 8;
+    if (faixa === '4') return cap <= 4;
+    if (faixa === '8') return cap > 4 && cap <= 8;
     if (faixa === '8+') return cap > 8;
     return true;
 }
@@ -114,16 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
     carregarReservasAdmin();
 
     document.getElementById('btn-filtrar-reservas')?.addEventListener('click', () => {
-        const data  = document.getElementById('filtro-data-reservas')?.value.trim();
+        const data = document.getElementById('filtro-data-reservas')?.value.trim();
         const faixa = document.getElementById('select-capacidade')?.dataset.valorSelecionado || 'todos';
         const tabela = document.getElementById('tabelaReservasAdmin');
         if (!tabela) return;
         tabela.querySelectorAll('tr').forEach(tr => {
             const tdEspaco = tr.querySelector("td[data-label='Espaço']");
-            const tdData   = tr.querySelector("td[data-label='Data']");
+            const tdData = tr.querySelector("td[data-label='Data']");
             if (!tdEspaco || !tdData) return;
             const dataOk = !data || tdData.textContent.trim() === data;
-            const capOk  = capacidadeOk(tdEspaco.textContent.trim(), faixa);
+            const capOk = capacidadeOk(tdEspaco.textContent.trim(), faixa);
             tr.style.display = (dataOk && capOk) ? '' : 'none';
         });
     });
@@ -137,7 +141,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('click', event => {
-    const botaoExcluir  = event.target.closest('.btn-excluir-reserva-admin');
+    const botaoExcluir = event.target.closest('.btn-excluir-reserva-admin');
     const botaoReativar = event.target.closest('.btn-reativar-reserva-admin');
 
     if (botaoReativar) {
@@ -150,8 +154,8 @@ document.addEventListener('click', event => {
     idReservaParaCancelar = botaoExcluir.dataset.id;
     const reserva = obterReservasSistema().find(r => r.id === Number(idReservaParaCancelar));
     if (reserva) {
-        document.getElementById('modal-cancelar-espaco').textContent  = reserva.espaco  || '—';
-        document.getElementById('modal-cancelar-data').textContent    = reserva.data    || '—';
+        document.getElementById('modal-cancelar-espaco').textContent = reserva.espaco || '—';
+        document.getElementById('modal-cancelar-data').textContent = reserva.data || '—';
         document.getElementById('modal-cancelar-horario').textContent = reserva.horario || '—';
     }
     document.getElementById('modal-confirmacao')?.showModal();

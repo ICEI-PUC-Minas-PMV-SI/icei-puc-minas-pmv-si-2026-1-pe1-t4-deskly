@@ -1,5 +1,9 @@
-const statusClasse        = { pendente: 'badge-concluida', aceito: 'badge-confirmada', recusado: 'badge-cancelada' };
-const statusLabel         = { pendente: 'Pendente',        aceito: 'Aceito',            recusado: 'Recusado' };
+document.addEventListener('DOMContentLoaded', () => {
+    if (!exigirLogin()) return;
+});
+
+const statusClasse = { pendente: 'badge-concluida', aceito: 'badge-confirmada', recusado: 'badge-cancelada' };
+const statusLabel = { pendente: 'Pendente', aceito: 'Aceito', recusado: 'Recusado' };
 const classeStatusReserva = { 'Confirmada': 'badge-confirmada', 'Cancelada': 'badge-cancelada', 'Concluída': 'badge-concluida' };
 
 function ehProxima(r) {
@@ -22,12 +26,12 @@ function renderProximas(reservas) {
     }
     const espacosSistema = obterEspacosSistema();
     tbody.innerHTML = reservas.map(r => {
-        const ehMesa     = r.tipo === 'Estação de Trabalho';
-        const convArr    = parseConvidados(r.convidados, r.convidadosStatus);
-        const espaco     = espacosSistema.find(e => e.nome === r.espaco);
+        const ehMesa = r.tipo === 'Estação de Trabalho';
+        const convArr = parseConvidados(r.convidados, r.convidadosStatus);
+        const espaco = espacosSistema.find(e => e.nome === r.espaco);
         const capacidade = (espaco && Number(espaco.capacidade) >= 1) ? espaco.capacidade : null;
         const limiteConv = capacidade !== null ? capacidade - 1 : null;
-        const convCol    = (!ehMesa && convArr.length)
+        const convCol = (!ehMesa && convArr.length)
             ? `<button class="btn-convidados" data-id="${r.id}">${convArr.length}${limiteConv !== null ? ' / ' + limiteConv : ''}</button>`
             : '—';
         return `
@@ -79,12 +83,12 @@ function carregarMinhasReservas() {
 }
 
 
-const modalEditar     = document.getElementById('modal-editar');
-const modalCancelar   = document.getElementById('modal-cancelar-reserva');
+const modalEditar = document.getElementById('modal-editar');
+const modalCancelar = document.getElementById('modal-cancelar-reserva');
 const modalConvidados = document.getElementById('modal-convidados');
 
-let idParaEditar       = null;
-let idParaCancelar     = null;
+let idParaEditar = null;
+let idParaCancelar = null;
 let convidadosEditando = [];
 let capacidadeEditando = Infinity;
 
@@ -141,20 +145,20 @@ function popularSelectEspaco(espacoAtual, tipo) {
 
 
 document.getElementById('tbody-proximas').addEventListener('click', e => {
-    const btnEditar   = e.target.closest('.btn-editar');
+    const btnEditar = e.target.closest('.btn-editar');
     const btnCancelar = e.target.closest('.btn-cancelar');
-    const btnConv     = e.target.closest('.btn-convidados');
+    const btnConv = e.target.closest('.btn-convidados');
 
     if (btnEditar) {
         const reserva = obterReservasSistema().find(r => r.id === Number(btnEditar.dataset.id));
         if (!reserva) return;
-        idParaEditar       = reserva.id;
+        idParaEditar = reserva.id;
         convidadosEditando = parseConvidados(reserva.convidados, reserva.convidadosStatus);
-        const ehMesa       = reserva.tipo === 'Estação de Trabalho';
+        const ehMesa = reserva.tipo === 'Estação de Trabalho';
         popularSelectEspaco(reserva.espaco, reserva.tipo);
-        document.getElementById('editar-data').value   = reserva.data;
+        document.getElementById('editar-data').value = reserva.data;
         document.getElementById('editar-inicio').value = reserva.inicio || '';
-        document.getElementById('editar-fim').value    = reserva.fim || '';
+        document.getElementById('editar-fim').value = reserva.fim || '';
         document.getElementById('editar-grupo-convidados').classList.toggle('oculto', ehMesa);
         document.getElementById('editar-grupo-adicionar').classList.toggle('oculto', ehMesa);
         renderizarConvidadosEdicao();
@@ -162,8 +166,8 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
     }
 
     if (btnCancelar) {
-        document.getElementById('modal-cancelar-espaco').textContent  = btnCancelar.dataset.espaco;
-        document.getElementById('modal-cancelar-data').textContent    = btnCancelar.dataset.data;
+        document.getElementById('modal-cancelar-espaco').textContent = btnCancelar.dataset.espaco;
+        document.getElementById('modal-cancelar-data').textContent = btnCancelar.dataset.data;
         document.getElementById('modal-cancelar-horario').textContent = btnCancelar.dataset.horario;
         idParaCancelar = Number(btnCancelar.dataset.id);
         modalCancelar.showModal();
@@ -172,10 +176,10 @@ document.getElementById('tbody-proximas').addEventListener('click', e => {
     if (btnConv) {
         const reserva = obterReservasSistema().find(r => r.id === Number(btnConv.dataset.id));
         if (!reserva) return;
-        const convidados  = parseConvidados(reserva.convidados, reserva.convidadosStatus);
+        const convidados = parseConvidados(reserva.convidados, reserva.convidadosStatus);
         const espacoAdmin = obterEspacosSistema().find(e => e.nome === reserva.espaco);
-        const capacidade  = (espacoAdmin && Number(espacoAdmin.capacidade) >= 1) ? espacoAdmin.capacidade : null;
-        document.getElementById('conv-titulo').textContent    = `Convidados - ${reserva.espaco}`;
+        const capacidade = (espacoAdmin && Number(espacoAdmin.capacidade) >= 1) ? espacoAdmin.capacidade : null;
+        document.getElementById('conv-titulo').textContent = `Convidados - ${reserva.espaco}`;
         document.getElementById('conv-subtitulo').textContent = `${reserva.data} · ${reserva.horario}${capacidade ? ` · Capacidade: ${capacidade}` : ''}`;
         document.getElementById('conv-lista').innerHTML = convidados.length
             ? convidados.map(c => `
@@ -199,7 +203,7 @@ document.getElementById('editar-espaco').addEventListener('change', () => {
 
 document.querySelector('.conv-adicionar-btn').addEventListener('click', () => {
     const select = document.getElementById('editar-novo-convidado');
-    const email  = select.value;
+    const email = select.value;
     if (!email) return;
     if (capacidadeEditando !== Infinity && convidadosEditando.length >= capacidadeEditando) {
         mostrarToast('Capacidade máxima', `Limite de ${capacidadeEditando} convidados atingido.`, 'erro');
@@ -213,9 +217,9 @@ document.querySelector('.conv-adicionar-btn').addEventListener('click', () => {
 document.querySelector('#modal-editar .btn-confirmar').addEventListener('click', () => {
     if (!idParaEditar) return;
     const espaco = document.getElementById('editar-espaco').value.trim();
-    const data   = document.getElementById('editar-data').value.trim();
+    const data = document.getElementById('editar-data').value.trim();
     const inicio = document.getElementById('editar-inicio').value.trim();
-    const fim    = document.getElementById('editar-fim').value.trim();
+    const fim = document.getElementById('editar-fim').value.trim();
 
     if (dataHoraNoPassado(data, inicio)) {
         marcarCampoInvalido(document.getElementById('editar-data'));
@@ -231,7 +235,7 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
         return;
     }
 
-    const salaSelecionada  = obterEspacosSistema().find(e => e.nome === espaco);
+    const salaSelecionada = obterEspacosSistema().find(e => e.nome === espaco);
     const limiteConvidados = (salaSelecionada && Number(salaSelecionada.capacidade) >= 1)
         ? Number(salaSelecionada.capacidade) - 1
         : Infinity;
@@ -246,12 +250,12 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
         return;
     }
 
-    const novoStatus    = {};
+    const novoStatus = {};
     const convidadosStr = convidadosEditando.map(c => c.email).join(', ') || '-';
     convidadosEditando.forEach(c => { novoStatus[c.email] = c.status; });
 
     const reservas = obterReservasSistema();
-    const idx      = reservas.findIndex(r => r.id === idParaEditar);
+    const idx = reservas.findIndex(r => r.id === idParaEditar);
 
     const conflito = data && inicio && fim && reservas.some(r =>
         r.id !== idParaEditar &&
@@ -273,12 +277,12 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
         : [];
 
     if (idx !== -1) {
-        reservas[idx].espaco           = espaco;
-        reservas[idx].data             = data;
-        reservas[idx].inicio           = inicio;
-        reservas[idx].fim              = fim;
-        reservas[idx].horario          = `${inicio} – ${fim}`;
-        reservas[idx].convidados       = convidadosStr;
+        reservas[idx].espaco = espaco;
+        reservas[idx].data = data;
+        reservas[idx].inicio = inicio;
+        reservas[idx].fim = fim;
+        reservas[idx].horario = `${inicio} – ${fim}`;
+        reservas[idx].convidados = convidadosStr;
         reservas[idx].convidadosStatus = novoStatus;
         salvarReservasSistema(reservas);
     }
@@ -286,18 +290,18 @@ document.querySelector('#modal-editar .btn-confirmar').addEventListener('click',
     const reservasSalas = JSON.parse(localStorage.getItem('reservasSalas') || '[]');
     const idxSalas = reservasSalas.findIndex(r => r.id === idParaEditar);
     if (idxSalas !== -1) {
-        reservasSalas[idxSalas].sala             = espaco;
-        reservasSalas[idxSalas].data             = data;
-        reservasSalas[idxSalas].inicio           = inicio;
-        reservasSalas[idxSalas].fim              = fim;
-        reservasSalas[idxSalas].convidados       = convidadosStr;
+        reservasSalas[idxSalas].sala = espaco;
+        reservasSalas[idxSalas].data = data;
+        reservasSalas[idxSalas].inicio = inicio;
+        reservasSalas[idxSalas].fim = fim;
+        reservasSalas[idxSalas].convidados = convidadosStr;
         reservasSalas[idxSalas].convidadosStatus = novoStatus;
         localStorage.setItem('reservasSalas', JSON.stringify(reservasSalas));
     }
 
     const novosConvidados = convidadosEditando.filter(c => !emailsAntigos.includes(c.email));
     if (novosConvidados.length && typeof adicionarNotificacaoParaUsuario === 'function') {
-        const logado     = obterUsuarioLogado();
+        const logado = obterUsuarioLogado();
         const nomeLogado = logado ? logado.nome : 'Alguém';
         novosConvidados.forEach(c => {
             const usuario = obterUsuarios().find(u => u.email === c.email);
@@ -334,23 +338,23 @@ document.querySelector('.modal-detalhe-btn-confirmar-cancelamento').addEventList
 });
 
 document.querySelector('.btn-filtrar-simples').addEventListener('click', () => {
-    const tipoSelecionado   = document.getElementById('filtro-tipo')?.dataset.valorSelecionado   || 'todos';
+    const tipoSelecionado = document.getElementById('filtro-tipo')?.dataset.valorSelecionado || 'todos';
     const statusSelecionado = document.getElementById('filtro-status')?.dataset.valorSelecionado || 'todos';
     document.querySelectorAll('.reservas-table tbody tr').forEach(linha => {
         const espacoEl = linha.querySelector('td[data-label="Espaço"]');
-        const badge    = linha.querySelector('.badge');
+        const badge = linha.querySelector('.badge');
         if (!espacoEl || !badge) return;
-        const espaco      = espacoEl.textContent.trim().toLowerCase();
+        const espaco = espacoEl.textContent.trim().toLowerCase();
         const classeBadge = badge.className;
         const tipoOk =
             tipoSelecionado === 'todos' ||
-            (tipoSelecionado === 'salas'    && espaco.includes('sala')) ||
+            (tipoSelecionado === 'salas' && espaco.includes('sala')) ||
             (tipoSelecionado === 'estacoes' && espaco.includes('mesa'));
         const statusOk =
             statusSelecionado === 'todos' ||
             (statusSelecionado === 'confirmadas' && classeBadge.includes('badge-confirmada')) ||
-            (statusSelecionado === 'canceladas'  && classeBadge.includes('badge-cancelada'))  ||
-            (statusSelecionado === 'concluidas'  && classeBadge.includes('badge-concluida'));
+            (statusSelecionado === 'canceladas' && classeBadge.includes('badge-cancelada')) ||
+            (statusSelecionado === 'concluidas' && classeBadge.includes('badge-concluida'));
         linha.style.display = (tipoOk && statusOk) ? '' : 'none';
     });
 });

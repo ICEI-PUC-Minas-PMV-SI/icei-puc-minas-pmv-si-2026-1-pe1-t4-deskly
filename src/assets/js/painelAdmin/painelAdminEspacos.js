@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', () => {
+    if (!exigirAdmin()) return;
+});
+
 function nomeEspacoDuplicado(nome, ignorarId = null) {
     const alvo = nome.trim().toLowerCase();
     return obterEspacosSistema().some(e =>
@@ -58,11 +62,11 @@ function classeStatus(status) {
 }
 
 function carregarEspacosAdmin() {
-    const tabelaSalas    = document.getElementById('tabelaEspacosSalas');
+    const tabelaSalas = document.getElementById('tabelaEspacosSalas');
     const tabelaEstacoes = document.getElementById('tabelaEspacosEstacoes');
     if (!tabelaSalas || !tabelaEstacoes) return;
 
-    tabelaSalas.innerHTML    = '';
+    tabelaSalas.innerHTML = '';
     tabelaEstacoes.innerHTML = '';
 
     obterEspacosSistema().forEach(espaco => {
@@ -106,30 +110,30 @@ function abrirModalEditarEspaco(id) {
     const modal = document.getElementById('modal-editar-admin');
     if (!modal) { mostrarToast('Erro', 'Modal de edição não encontrado.', 'erro'); return; }
 
-    document.getElementById('editar-espaco-id').value    = espaco.id;
-    document.getElementById('editar-espaco-nome').value  = espaco.nome || '';
-    document.getElementById('editar-espaco-area').value  = espaco.area === '-' ? '' : espaco.area || '';
+    document.getElementById('editar-espaco-id').value = espaco.id;
+    document.getElementById('editar-espaco-nome').value = espaco.nome || '';
+    document.getElementById('editar-espaco-area').value = espaco.area === '-' ? '' : espaco.area || '';
 
     const grupoCapacidade = document.getElementById('grupo-editar-capacidade');
-    const grupoRecursos   = document.getElementById('grupo-editar-recursos');
+    const grupoRecursos = document.getElementById('grupo-editar-recursos');
     const inputCapacidade = document.getElementById('editar-espaco-capacidade');
-    const inputRecursos   = document.getElementById('editar-espaco-recursos');
+    const inputRecursos = document.getElementById('editar-espaco-recursos');
 
     if (espaco.tipo === 'Sala de Reunião') {
         grupoCapacidade.style.display = 'flex';
-        grupoRecursos.style.display   = 'flex';
+        grupoRecursos.style.display = 'flex';
         inputCapacidade.value = espaco.capacidade || '';
-        inputRecursos.value   = espaco.recursos === '-' ? '' : espaco.recursos || '';
+        inputRecursos.value = espaco.recursos === '-' ? '' : espaco.recursos || '';
     } else {
         grupoCapacidade.style.display = 'none';
-        grupoRecursos.style.display   = 'none';
+        grupoRecursos.style.display = 'none';
         inputCapacidade.value = '';
-        inputRecursos.value   = '';
+        inputRecursos.value = '';
     }
 
     const container = document.getElementById('previa-editar');
-    const image     = document.getElementById('previa-editar-imagem');
-    const label     = document.getElementById('nome-imagem-espaco-editar');
+    const image = document.getElementById('previa-editar-imagem');
+    const label = document.getElementById('nome-imagem-espaco-editar');
 
     if (label) label.textContent = 'Alterar imagem...';
     if (espaco.imagem && container && image) {
@@ -143,10 +147,10 @@ function abrirModalEditarEspaco(id) {
 }
 
 document.getElementById('cadastro-imagem-espaco')?.addEventListener('change', function (e) {
-    const file      = e.target.files[0];
+    const file = e.target.files[0];
     const container = document.getElementById('previa-cadastro');
-    const image     = document.getElementById('previa-cadastro-imagem');
-    const label     = document.getElementById('nome-imagem-espaco');
+    const image = document.getElementById('previa-cadastro-imagem');
+    const label = document.getElementById('nome-imagem-espaco');
 
     if (file) {
         label.textContent = file.name;
@@ -161,10 +165,10 @@ document.getElementById('cadastro-imagem-espaco')?.addEventListener('change', fu
 });
 
 document.getElementById('editar-imagem-espaco')?.addEventListener('change', function (e) {
-    const file      = e.target.files[0];
+    const file = e.target.files[0];
     const container = document.getElementById('previa-editar');
-    const image     = document.getElementById('previa-editar-imagem');
-    const label     = document.getElementById('nome-imagem-espaco-editar');
+    const image = document.getElementById('previa-editar-imagem');
+    const label = document.getElementById('nome-imagem-espaco-editar');
 
     if (file) {
         label.textContent = file.name;
@@ -179,14 +183,14 @@ document.getElementById('editar-imagem-espaco')?.addEventListener('change', func
 });
 
 function salvarEdicaoEspaco() {
-    const id     = Number(document.getElementById('editar-espaco-id').value);
+    const id = Number(document.getElementById('editar-espaco-id').value);
     const espacos = obterEspacosSistema();
-    const espaco  = espacos.find(e => Number(e.id) === id);
+    const espaco = espacos.find(e => Number(e.id) === id);
     if (!espaco) { mostrarToast('Erro', 'Espaço não encontrado.', 'erro'); return; }
 
-    const nome           = document.getElementById('editar-espaco-nome').value.trim();
-    const area           = document.getElementById('editar-espaco-area').value.trim();
-    const ehSala         = espaco.tipo === 'Sala de Reunião';
+    const nome = document.getElementById('editar-espaco-nome').value.trim();
+    const area = document.getElementById('editar-espaco-area').value.trim();
+    const ehSala = espaco.tipo === 'Sala de Reunião';
     const capacidadeTexto = ehSala ? document.getElementById('editar-espaco-capacidade').value.trim() : '';
 
     const faltando = [];
@@ -225,10 +229,10 @@ function salvarEdicaoEspaco() {
             return;
         }
         espaco.capacidade = capacidaded;
-        espaco.recursos   = document.getElementById('editar-espaco-recursos').value.trim() || '-';
+        espaco.recursos = document.getElementById('editar-espaco-recursos').value.trim() || '-';
     } else {
         espaco.capacidade = '-';
-        espaco.recursos   = '-';
+        espaco.recursos = '-';
     }
 
     const idNovoAntigo = identificadorReservaEspaco({ ...espaco, nome, area: area || '-' });
@@ -272,9 +276,9 @@ function atualizarIdentificadorReservas(idAntigo, idNovo, tipo) {
     });
     if (mudouSistema) salvarReservasSistema(reservasSistema);
 
-    const ehSala    = tipo === 'Sala de Reunião';
-    const chave     = ehSala ? 'reservasSalas' : 'reservasEstacoes';
-    const campo     = ehSala ? 'sala' : 'estacao';
+    const ehSala = tipo === 'Sala de Reunião';
+    const chave = ehSala ? 'reservasSalas' : 'reservasEstacoes';
+    const campo = ehSala ? 'sala' : 'estacao';
     const especificas = JSON.parse(localStorage.getItem(chave) || '[]');
     let mudouEspecificas = false;
     especificas.forEach(r => {
@@ -284,17 +288,17 @@ function atualizarIdentificadorReservas(idAntigo, idNovo, tipo) {
 }
 
 function cancelarReservasDoEspaco(espaco, espacoFoiExcluido = false) {
-    const identificador   = identificadorReservaEspaco(espaco);
+    const identificador = identificadorReservaEspaco(espaco);
     const reservasSistema = obterReservasSistema();
-    const afetadas        = reservasSistema.filter(r => r.espaco === identificador && r.status === 'Confirmada');
+    const afetadas = reservasSistema.filter(r => r.espaco === identificador && r.status === 'Confirmada');
     if (!afetadas.length) return 0;
 
     afetadas.forEach(r => {
         r.status = 'Cancelada';
         if (espacoFoiExcluido) {
-            r.espacoExcluido      = true;
-            r.espacoIdExcluido    = espaco.id;
-            r.nomeEspacoExcluido  = identificador;
+            r.espacoExcluido = true;
+            r.espacoIdExcluido = espaco.id;
+            r.nomeEspacoExcluido = identificador;
         }
     });
 
@@ -304,11 +308,11 @@ function cancelarReservasDoEspaco(espaco, espacoFoiExcluido = false) {
 
 function alternarStatusEspaco(id) {
     const espacos = obterEspacosSistema();
-    const espaco  = espacos.find(e => Number(e.id) === Number(id));
+    const espaco = espacos.find(e => Number(e.id) === Number(id));
     if (!espaco) { mostrarToast('Erro', 'Espaço não encontrado.', 'erro'); return; }
 
     const ativando = espaco.status === 'Inativo';
-    espaco.status  = ativando ? 'Ativo' : 'Inativo';
+    espaco.status = ativando ? 'Ativo' : 'Inativo';
     salvarEspacosSistema(espacos);
 
     const canceladas = ativando ? 0 : cancelarReservasDoEspaco(espaco);
@@ -337,7 +341,7 @@ function abrirModalExcluirEspaco(id) {
 
 function excluirEspaco() {
     const espacos = obterEspacosSistema();
-    const espaco  = espacos.find(e => Number(e.id) === idParaExcluir);
+    const espaco = espacos.find(e => Number(e.id) === idParaExcluir);
     if (!espaco) { mostrarToast('Erro', 'Espaço não encontrado.', 'erro'); return; }
 
     const canceladas = cancelarReservasDoEspaco(espaco, true);
@@ -357,8 +361,8 @@ function excluirEspaco() {
 }
 
 function limparFormularioCadastro() {
-    ['cadastro-tipo-espaco','cadastro-nome-espaco','cadastro-capacidade-espaco',
-     'cadastro-recursos-espaco','cadastro-area-espaco','cadastro-imagem-espaco']
+    ['cadastro-tipo-espaco', 'cadastro-nome-espaco', 'cadastro-capacidade-espaco',
+        'cadastro-recursos-espaco', 'cadastro-area-espaco', 'cadastro-imagem-espaco']
         .forEach(id => { const c = document.getElementById(id); if (c) c.value = ''; });
 
     const status = document.getElementById('cadastro-status-espaco');
@@ -368,9 +372,9 @@ function limparFormularioCadastro() {
     if (nomeImagem) nomeImagem.textContent = 'Escolher imagem...';
 
     const container = document.getElementById('previa-cadastro');
-    const image     = document.getElementById('previa-cadastro-imagem');
+    const image = document.getElementById('previa-cadastro-imagem');
     if (container) container.style.display = 'none';
-    if (image)     image.src = '';
+    if (image) image.src = '';
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -385,25 +389,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnExcluirEditar = document.getElementById('btn-excluir-espaco-editar');
     if (btnExcluirEditar) {
         btnExcluirEditar.addEventListener('click', () => {
-            const id         = document.getElementById('editar-espaco-id').value;
+            const id = document.getElementById('editar-espaco-id').value;
             const modalEditar = document.getElementById('modal-editar-admin');
             if (modalEditar && modalEditar.open) modalEditar.close();
             setTimeout(() => abrirModalExcluirEspaco(id), 100);
         });
     }
 
-    const modalEditar      = document.getElementById('modal-editar-admin');
-    const btnFecharEditar  = document.getElementById('btn-fechar-editar-admin');
+    const modalEditar = document.getElementById('modal-editar-admin');
+    const btnFecharEditar = document.getElementById('btn-fechar-editar-admin');
     const btnCancelarEditar = document.getElementById('btn-cancelar-editar-admin');
-    const btnSalvarEditar  = document.getElementById('btn-salvar-editar-admin');
+    const btnSalvarEditar = document.getElementById('btn-salvar-editar-admin');
 
-    if (btnFecharEditar  && modalEditar) btnFecharEditar.addEventListener('click', () => modalEditar.close());
+    if (btnFecharEditar && modalEditar) btnFecharEditar.addEventListener('click', () => modalEditar.close());
     if (btnCancelarEditar && modalEditar) btnCancelarEditar.addEventListener('click', () => modalEditar.close());
     if (btnSalvarEditar) btnSalvarEditar.addEventListener('click', salvarEdicaoEspaco);
 
-    const tipoCadastro       = document.getElementById('cadastro-tipo-espaco');
-    const grupoSalaCadastro  = document.getElementById('grupo-sala-cadastro');
-    const camposCadastro     = document.getElementById('campos-cadastro-espaco');
+    const tipoCadastro = document.getElementById('cadastro-tipo-espaco');
+    const grupoSalaCadastro = document.getElementById('grupo-sala-cadastro');
+    const camposCadastro = document.getElementById('campos-cadastro-espaco');
 
     function atualizarCamposCadastro() {
         if (!tipoCadastro || !camposCadastro || !grupoSalaCadastro) return;
@@ -427,12 +431,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnConfirmarCadastro = document.getElementById('btn-confirmar-cadastro-espaco');
     if (btnConfirmarCadastro) {
         btnConfirmarCadastro.addEventListener('click', () => {
-            const tipo       = tipoCadastro.value;
-            const nome       = document.getElementById('cadastro-nome-espaco').value.trim();
+            const tipo = tipoCadastro.value;
+            const nome = document.getElementById('cadastro-nome-espaco').value.trim();
             const capacidade = document.getElementById('cadastro-capacidade-espaco').value.trim();
-            const recursos   = document.getElementById('cadastro-recursos-espaco').value.trim();
-            const area       = document.getElementById('cadastro-area-espaco').value.trim();
-            const status     = document.getElementById('cadastro-status-espaco').value;
+            const recursos = document.getElementById('cadastro-recursos-espaco').value.trim();
+            const area = document.getElementById('cadastro-area-espaco').value.trim();
+            const status = document.getElementById('cadastro-status-espaco').value;
             const imagemInput = document.getElementById('cadastro-imagem-espaco');
 
             const faltando = [];
@@ -465,14 +469,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const espacos = obterEspacosSistema();
                 const imagemFinal = imagemBase64 || (tipo === 'Sala de Reunião' ? 'assets/images/sala1.png' : 'assets/images/Mesa 01.png');
                 espacos.push({
-                    id:         Date.now(),
+                    id: Date.now(),
                     tipo,
                     nome,
                     capacidade: tipo === 'Sala de Reunião' ? Number(capacidade) : '-',
-                    recursos:   tipo === 'Sala de Reunião' ? recursos || '-'    : '-',
-                    area:       area || '-',
+                    recursos: tipo === 'Sala de Reunião' ? recursos || '-' : '-',
+                    area: area || '-',
                     status,
-                    imagem:     imagemFinal
+                    imagem: imagemFinal
                 });
                 salvarEspacosSistema(espacos);
                 carregarEspacosAdmin();

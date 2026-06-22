@@ -1,10 +1,14 @@
-const calendar  = document.getElementById('grade-calendario');
-const mesLabel   = document.getElementById('rotulo-mes');
+document.addEventListener('DOMContentLoaded', () => {
+    if (!exigirLogin()) return;
+});
+
+const calendar = document.getElementById('grade-calendario');
+const mesLabel = document.getElementById('rotulo-mes');
 
 let reservas = {};
-let mesAtual  = new Date().getMonth();
-let anoAtual  = new Date().getFullYear();
-const hoje    = new Date();
+let mesAtual = new Date().getMonth();
+let anoAtual = new Date().getFullYear();
+const hoje = new Date();
 
 function _chave(dia) {
     return `${anoAtual}-${mesAtual}-${dia}`;
@@ -27,14 +31,14 @@ function _separarNomeArea(espaco, tipo) {
 }
 
 function carregarReservas() {
-    const lista   = obterReservasSistema();
+    const lista = obterReservasSistema();
     const espacos = obterEspacosSistema();
     reservas = {};
 
     lista.forEach(reserva => {
         if (reserva.status === 'Cancelada') return;
 
-        const dadosEspaco    = _separarNomeArea(reserva.espaco, reserva.tipo);
+        const dadosEspaco = _separarNomeArea(reserva.espaco, reserva.tipo);
         const espacoOriginal = espacos.find(e =>
             e.nome === reserva.espaco || e.nome === dadosEspaco.nome
         );
@@ -45,14 +49,14 @@ function carregarReservas() {
 
         if (!reservas[key]) reservas[key] = [];
         reservas[key].push({
-            id:          reserva.id,
-            espaco:      reserva.espaco,
-            tipo:        reserva.tipo,
+            id: reserva.id,
+            espaco: reserva.espaco,
+            tipo: reserva.tipo,
             responsavel: reserva.usuario,
-            inicio:      reserva.inicio,
-            fim:         reserva.fim,
-            emails:      reserva.convidados || '',
-            status:      reserva.status || 'Confirmada',
+            inicio: reserva.inicio,
+            fim: reserva.fim,
+            emails: reserva.convidados || '',
+            status: reserva.status || 'Confirmada',
             key
         });
     });
@@ -63,7 +67,7 @@ function renderCalendar() {
     calendar.innerHTML = '';
 
     const primeiroDia = new Date(anoAtual, mesAtual, 1).getDay();
-    const totalDias   = new Date(anoAtual, mesAtual + 1, 0).getDate();
+    const totalDias = new Date(anoAtual, mesAtual + 1, 0).getDate();
 
     for (let i = 0; i < primeiroDia; i++) calendar.appendChild(document.createElement('div'));
 
@@ -81,7 +85,7 @@ function renderCalendar() {
             d.classList.add('has-event');
             reservas[key].forEach((reserva, index) => {
                 const dados = _separarNomeArea(reserva.espaco, reserva.tipo);
-                const ev    = document.createElement('div');
+                const ev = document.createElement('div');
                 ev.className = 'event';
                 ev.innerHTML = `
                     <strong>${dados.nome}</strong>
@@ -102,29 +106,29 @@ function renderCalendar() {
 
 function mudarMes(dir) {
     mesAtual += dir;
-    if (mesAtual < 0)  { mesAtual = 11; anoAtual--; }
-    if (mesAtual > 11) { mesAtual = 0;  anoAtual++; }
+    if (mesAtual < 0) { mesAtual = 11; anoAtual--; }
+    if (mesAtual > 11) { mesAtual = 0; anoAtual++; }
     renderCalendar();
 }
 
 function abrirView(dia, index) {
     const reserva = reservas[_chave(dia)][index];
-    const dados   = _separarNomeArea(reserva.espaco, reserva.tipo);
+    const dados = _separarNomeArea(reserva.espaco, reserva.tipo);
 
-    const espacos    = obterEspacosSistema();
+    const espacos = obterEspacosSistema();
     const infoOriginal = espacos.find(e => e.nome === dados.nome || e.nome === reserva.espaco);
     const capacidade = infoOriginal ? infoOriginal.capacidade : '-';
-    const area       = (infoOriginal && infoOriginal.area) || dados.area || '-';
+    const area = (infoOriginal && infoOriginal.area) || dados.area || '-';
 
     document.getElementById('titulo').innerHTML = `
         ${dados.nome}
         ${dados.area ? `<br><small style="color:var(--color-text-md);font-size:13px;font-weight:normal;">${dados.area}</small>` : ''}`;
 
-    document.getElementById('horario').innerText       = `${reserva.inicio} - ${reserva.fim}`;
-    document.getElementById('detalhe-responsavel').innerText      = reserva.responsavel || '-';
+    document.getElementById('horario').innerText = `${reserva.inicio} - ${reserva.fim}`;
+    document.getElementById('detalhe-responsavel').innerText = reserva.responsavel || '-';
     document.getElementById('detalhe-capacidade').innerText = `${capacidade} pessoas`;
-    document.getElementById('detalhe-area').innerText      = area;
-    document.getElementById('detalhe-status').innerText    = reserva.status;
+    document.getElementById('detalhe-area').innerText = area;
+    document.getElementById('detalhe-status').innerText = reserva.status;
 
     const listaEmails = document.getElementById('lista-convidados');
     listaEmails.innerHTML = '';
